@@ -1,15 +1,15 @@
 package de.github.propra13.controllers;
 
-import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
 
 import de.github.propra13.views.GameFieldView;
 
-public class GameController extends Controller {
+public class GameController extends Controller implements KeyListener {
 
     static final String CONTROLLERTAG = "gameController";
 
@@ -26,6 +26,10 @@ public class GameController extends Controller {
         button.setMnemonic(KeyEvent.VK_Z);
         button.setActionCommand(BACK);
 
+        game = new GameFieldView(500, 300);
+        game.addKeyListener(this);
+
+        view.add(game);
         addButton(button);
     }
 
@@ -39,5 +43,31 @@ public class GameController extends Controller {
     @Override
     protected String getTag() {
         return CONTROLLERTAG;
+    }
+
+    @Override
+    public void keyPressed(KeyEvent event) {
+        switch(event.getKeyCode()) {
+        case KeyEvent.VK_UP: game.setVy(-1); break;
+        case KeyEvent.VK_RIGHT: game.setVx(1); break;
+        case KeyEvent.VK_DOWN: game.setVy(1); break;
+        case KeyEvent.VK_LEFT: game.setVx(-1); break;
+        }
+    }
+
+    @Override
+    public void keyReleased(KeyEvent event) {
+        switch(event.getKeyCode()) {
+        case KeyEvent.VK_UP:
+        case KeyEvent.VK_DOWN:
+            game.setVy(0); break;
+        case KeyEvent.VK_RIGHT:
+        case KeyEvent.VK_LEFT:
+            game.setVx(0); break;
+        }
+    }
+
+    @Override
+    public void keyTyped(KeyEvent event) {
     }
 }
