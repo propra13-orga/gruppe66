@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 public class MenuController extends Controller {
 
@@ -13,11 +14,16 @@ public class MenuController extends Controller {
     private static final String NEWGAME = "newGame";
     private static final String CLOSE = "close";
 
+    private JPanel buttonPanel;
+
     public MenuController(JFrame rootWindow) {
         super(rootWindow);
     }
 
     protected void initialize() {
+        buttonPanel = new JPanel();
+        view.add(buttonPanel);
+
         JButton newGameButton = new JButton("Neues Spiel");
         newGameButton.setMnemonic(KeyEvent.VK_N);
         newGameButton.setActionCommand(NEWGAME);
@@ -28,6 +34,11 @@ public class MenuController extends Controller {
 
         addButton(newGameButton);
         addButton(closeButton);
+    }
+
+    protected void addButton(JButton button) {
+        button.addActionListener(this);
+        buttonPanel.add(button);
     }
 
     @Override
