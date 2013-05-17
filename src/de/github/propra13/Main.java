@@ -7,8 +7,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import de.github.propra13.views.GameView;
-import de.github.propra13.views.MenuView;
+import de.github.propra13.controllers.GameController;
+import de.github.propra13.controllers.MenuController;
 
 public class Main {
 
@@ -37,13 +37,11 @@ public class Main {
         });
     }
 
-
     private static JPanel createRootPanel() {
         JPanel panel = new JPanel(new CardLayout());
         panel.setOpaque(true);
         return panel;
     }
-
 
     private static void createRootWindow() {
         rootWindow = new JFrame();
@@ -53,10 +51,10 @@ public class Main {
     }
 
     private static void createViewsFor(JPanel panel) {
-        MenuView menuView = new MenuView(rootWindow);
-        panel.add(menuView, ROOTVIEW);
+        MenuController menuController = new MenuController(rootWindow);
+        menuController.appendTo(panel);
 
-        GameView gameView = new GameView(rootWindow);
-        panel.add(gameView, GAMEVIEW);
+        GameController gameController = new GameController(rootWindow);
+        gameController.appendTo(panel);
     }
 }
