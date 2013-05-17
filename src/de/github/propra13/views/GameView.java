@@ -1,35 +1,31 @@
-package de.github.propra13;
+package de.github.propra13.views;
 
-import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 
 import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.JFrame;
 
-public class Game extends JPanel implements ActionListener {
+public class GameView extends View {
 
     private static final long serialVersionUID = -8793507774953311269L;
 
-    private JPanel rootPanel;
+    public GameView(JFrame rootWindow) {
+        super(rootWindow);
+    }
 
-    public Game(JPanel panel) {
-        rootPanel = panel;
-        this.setOpaque(true);
-
+    protected void createGui() {
         JButton button = new JButton("Zurück");
-        button.setText("BLABLABAL");
-        button.addActionListener(this);
         button.setMnemonic(KeyEvent.VK_Z);
         button.setActionCommand("back");
-        add(button);
+
+        addButton(button);
     }
 
     @Override
     public void actionPerformed(ActionEvent event) {
         if ("back".equals(event.getActionCommand())) {
-            Main.showView("root_window");
+            showView("rootView");
         }
     }
 }
