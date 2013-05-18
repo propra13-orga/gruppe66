@@ -8,13 +8,17 @@ import java.awt.event.KeyListener;
 
 import javax.swing.JFrame;
 
+import de.github.propra13.objects.Player;
 import de.github.propra13.views.GameFieldView;
 
-public class GameController extends Controller implements KeyListener, ComponentListener {
+public class GameController extends Controller implements KeyListener,
+        ComponentListener {
 
     static final String CONTROLLERTAG = "gameController";
 
     private GameFieldView game;
+
+    private Player player;
 
     public GameController(JFrame rootWindow) {
         super(rootWindow);
@@ -28,6 +32,15 @@ public class GameController extends Controller implements KeyListener, Component
         view.addComponentListener(this);
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+        game.setPlayer(player);
+    }
+
     @Override
     public void actionPerformed(ActionEvent event) {
     }
@@ -39,36 +52,16 @@ public class GameController extends Controller implements KeyListener, Component
 
     @Override
     public void keyPressed(KeyEvent event) {
-        switch (event.getKeyCode()) {
-        case KeyEvent.VK_UP:
-            game.setVy(-1);
-            break;
-        case KeyEvent.VK_RIGHT:
-            game.setVx(1);
-            break;
-        case KeyEvent.VK_DOWN:
-            game.setVy(1);
-            break;
-        case KeyEvent.VK_LEFT:
-            game.setVx(-1);
-            break;
-        case KeyEvent.VK_ESCAPE:
+        if (event.getKeyCode() == KeyEvent.VK_ESCAPE) {
             showView(MenuController.CONTROLLERTAG);
+        } else {
+            player.keyPressed(event);
         }
     }
 
     @Override
     public void keyReleased(KeyEvent event) {
-        switch (event.getKeyCode()) {
-        case KeyEvent.VK_UP:
-        case KeyEvent.VK_DOWN:
-            game.setVy(0);
-            break;
-        case KeyEvent.VK_RIGHT:
-        case KeyEvent.VK_LEFT:
-            game.setVx(0);
-            break;
-        }
+        player.keyReleased(event);
     }
 
     @Override

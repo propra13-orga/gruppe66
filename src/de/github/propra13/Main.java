@@ -8,6 +8,7 @@ import javax.swing.SwingUtilities;
 
 import de.github.propra13.controllers.GameController;
 import de.github.propra13.controllers.MenuController;
+import de.github.propra13.objects.Player;
 
 public class Main extends JFrame {
 
@@ -45,7 +46,9 @@ public class Main extends JFrame {
         MenuController menuController = new MenuController(this);
         menuController.appendTo(panel);
 
+        Player player = new Player();
         GameController gameController = new GameController(this);
+        gameController.setPlayer(player);
         gameController.appendTo(panel);
     }
 }

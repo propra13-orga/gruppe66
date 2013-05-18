@@ -6,25 +6,23 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
-import java.awt.geom.Ellipse2D;
 
 import javax.swing.JPanel;
+
+import de.github.propra13.objects.Player;
 
 public class GameFieldView extends JPanel implements Runnable {
 
     private static final long serialVersionUID = 7383103785685757479L;
 
-    private int x = 0;
-    private int y = 0;
-    private int vx = 0;
-    private int vy = 0;
+    private Player player;
 
     /**
      * delay in ms between animation loops. Defaults to 40 ms which is 25 fps.
      */
     private int delay = 40;
 
-    private boolean running;
+    private volatile boolean running;
     private Thread animator;
 
     private RenderingHints rh;
@@ -52,10 +50,22 @@ public class GameFieldView extends JPanel implements Runnable {
                 RenderingHints.VALUE_RENDER_QUALITY);
     }
 
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
+    }
+
     @Override
     public void removeNotify() {
         super.removeNotify();
         stop();
+    }
+
+    public void turn() {
+        player.move();
     }
 
     @Override
@@ -70,34 +80,15 @@ public class GameFieldView extends JPanel implements Runnable {
 
         gfx.setRenderingHints(rh);
 
-        gfx.setPaint(Color.blue);
-
-        gfx.fill(new Ellipse2D.Double(x, y, 20, 20));
+        gfx.drawImage(player.getImage(), player.getX(), player.getY(), this);
 
         Toolkit.getDefaultToolkit().sync();
-
-        int cVx = vx, cVy = vy;
-        if (x + 20 + vx > dim.width || x + vx < 0)
-            cVx = 0;
-        if (y + 20 + vy > dim.height || y + vy < 0)
-            cVy = 0;
-
-        x += cVx;
-        y += cVy;
-
         g.dispose();
-    }
-
-    public void setVx(int vx) {
-        this.vx = vx;
-    }
-
-    public void setVy(int vy) {
-        this.vy = vy;
     }
 
     public void stop() {
         running = false;
+        animator.interrupt();
     }
 
     public void start() {
@@ -110,15 +101,16 @@ public class GameFieldView extends JPanel implements Runnable {
     public void run() {
         long wait, oldTime = System.currentTimeMillis();
         while (running) {
+            turn();
             repaint();
 
             wait = Math.max(delay - System.currentTimeMillis() - oldTime, 2);
+
+            oldTime = System.currentTimeMillis();
             try {
                 Thread.sleep(wait);
             } catch (InterruptedException e) {
             }
-
-            oldTime = System.currentTimeMillis();
         }
     }
 }
