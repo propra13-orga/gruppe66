@@ -36,8 +36,6 @@ public class GameFieldView extends JPanel implements Runnable {
     public GameFieldView() {
         super();
 
-        animator = new Thread(this);
-
         initComponent();
         initRenderingHints();
     }
@@ -131,12 +129,15 @@ public class GameFieldView extends JPanel implements Runnable {
 
     public void stop() {
         running = false;
-        animator.interrupt();
+        if (animator != null)
+            animator.interrupt();
     }
 
     public void start() {
         requestFocusInWindow();
         running = true;
+
+        animator = new Thread(this);
         animator.start();
     }
 
@@ -153,6 +154,7 @@ public class GameFieldView extends JPanel implements Runnable {
             try {
                 Thread.sleep(wait);
             } catch (InterruptedException e) {
+                return;
             }
         }
     }
