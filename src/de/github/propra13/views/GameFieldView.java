@@ -72,18 +72,22 @@ public class GameFieldView extends JPanel implements Runnable {
     public void paintComponent(Graphics g) {
         super.paintComponents(g);
 
-        Dimension dim = getSize();
         Graphics2D gfx = (Graphics2D) g;
 
-        gfx.setBackground(Color.white);
-        gfx.clearRect(0, 0, dim.width, dim.height);
-
-        gfx.setRenderingHints(rh);
+        clearAndSetRenderingHints(gfx);
 
         gfx.drawImage(player.getImage(), player.getX(), player.getY(), this);
 
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
+    }
+
+    private void clearAndSetRenderingHints(Graphics2D gfx) {
+        Dimension dim = getSize();
+        gfx.setBackground(Color.white);
+        gfx.clearRect(0, 0, dim.width, dim.height);
+
+        gfx.setRenderingHints(rh);
     }
 
     public void stop() {
