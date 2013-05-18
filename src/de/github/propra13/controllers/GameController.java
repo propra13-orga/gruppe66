@@ -5,9 +5,11 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import de.github.propra13.objects.Wall;
 import de.github.propra13.objects.Player;
 import de.github.propra13.views.GameFieldView;
 
@@ -20,12 +22,14 @@ public class GameController extends Controller implements KeyListener,
 
     private Player player;
 
+    private ArrayList<Wall> walls;
+
     public GameController(JFrame rootWindow) {
         super(rootWindow);
     }
 
     protected void initialize() {
-        game = new GameFieldView(800, 600);
+        game = new GameFieldView();
         game.addKeyListener(this);
 
         view.add(game);
@@ -39,6 +43,15 @@ public class GameController extends Controller implements KeyListener,
     public void setPlayer(Player player) {
         this.player = player;
         game.setPlayer(player);
+    }
+
+    public ArrayList<Wall> getWalls() {
+        return walls;
+    }
+
+    public void setWalls(ArrayList<Wall> walls) {
+        this.walls = walls;
+        game.setWalls(walls);
     }
 
     @Override

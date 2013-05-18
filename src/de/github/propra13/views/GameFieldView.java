@@ -4,18 +4,24 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 
+import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import de.github.propra13.objects.Player;
+import de.github.propra13.objects.Wall;
 
 public class GameFieldView extends JPanel implements Runnable {
 
     private static final long serialVersionUID = 7383103785685757479L;
 
     private Player player;
+
+    private ArrayList<Wall> walls;
 
     /**
      * delay in ms between animation loops. Defaults to 40 ms which is 25 fps.
@@ -27,17 +33,16 @@ public class GameFieldView extends JPanel implements Runnable {
 
     private RenderingHints rh;
 
-    public GameFieldView(int width, int height) {
+    public GameFieldView() {
         super();
 
         animator = new Thread(this);
 
-        initComponent(width, height);
+        initComponent();
         initRenderingHints();
     }
 
-    private void initComponent(int width, int height) {
-        setPreferredSize(new Dimension(width, height));
+    private void initComponent() {
         setFocusable(true);
         setDoubleBuffered(true);
     }
@@ -58,6 +63,14 @@ public class GameFieldView extends JPanel implements Runnable {
         this.player = player;
     }
 
+    public ArrayList<Wall> getWalls() {
+        return walls;
+    }
+
+    public void setWalls(ArrayList<Wall> walls) {
+        this.walls = walls;
+    }
+
     @Override
     public void removeNotify() {
         super.removeNotify();
@@ -65,7 +78,7 @@ public class GameFieldView extends JPanel implements Runnable {
     }
 
     public void turn() {
-        player.move();
+        player.move(walls);
     }
 
     @Override
@@ -75,8 +88,10 @@ public class GameFieldView extends JPanel implements Runnable {
         Graphics2D gfx = (Graphics2D) g;
 
         clearAndSetRenderingHints(gfx);
+        drawFloor(gfx);
 
-        gfx.drawImage(player.getImage(), player.getX(), player.getY(), this);
+        drawPlayer(gfx);
+        drawWalls(gfx);
 
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
@@ -88,6 +103,30 @@ public class GameFieldView extends JPanel implements Runnable {
         gfx.clearRect(0, 0, dim.width, dim.height);
 
         gfx.setRenderingHints(rh);
+    }
+
+    private void drawFloor(Graphics2D gfx) {
+        Dimension dim = getSize();
+        ImageIcon icon = new ImageIcon("res/floor.jpg");
+        Image image = icon.getImage();
+        int width = image.getWidth(this);
+        int height = image.getHeight(this);
+
+        for (int x = 0; x <= dim.width / width; x++) {
+            for (int y = 0; y <= dim.height / height; y++) {
+                gfx.drawImage(image, x * width, y * height, this);
+            }
+        }
+    }
+
+    private void drawPlayer(Graphics2D gfx) {
+        gfx.drawImage(player.getImage(), player.getX(), player.getY(), this);
+    }
+
+    private void drawWalls(Graphics2D gfx) {
+        for (Wall wall : walls) {
+            gfx.drawImage(wall.getImage(), wall.getX(), wall.getY(), this);
+        }
     }
 
     public void stop() {

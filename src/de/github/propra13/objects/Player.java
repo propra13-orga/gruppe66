@@ -1,41 +1,11 @@
 package de.github.propra13.objects;
 
-import java.awt.Image;
 import java.awt.event.KeyEvent;
 
-import javax.swing.ImageIcon;
+public class Player extends MoveableGameObject {
 
-public class Player {
-
-    private String player = "res/player.png";
-
-    private int vx;
-    private int vy;
-    private int x;
-    private int y;
-
-    private Image image;
-
-    public Player() {
-        ImageIcon icon = new ImageIcon(player);
-        image = icon.getImage();
-    }
-
-    public int getX() {
-        return x;
-    }
-
-    public int getY() {
-        return y;
-    }
-
-    public Image getImage() {
-        return image;
-    }
-
-    public void move() {
-        x += vx;
-        y += vy;
+    public Player(int x, int y) {
+        super("res/player.png", x, y);
     }
 
     public void keyPressed(KeyEvent event) {
