@@ -17,6 +17,8 @@ import de.github.propra13.objects.Wall;
 
 public class GameFieldView extends JPanel implements Runnable {
 
+    public static final int GRID = 50;
+
     private static final long serialVersionUID = 7383103785685757479L;
 
     private Player player;

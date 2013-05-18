@@ -5,6 +5,8 @@ import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
+import de.github.propra13.views.GameFieldView;
+
 public class GameObject {
     protected int x;
     protected int y;
@@ -25,8 +27,10 @@ public class GameObject {
         width = image.getWidth(null);
         height = image.getHeight(null);
 
-        this.x = x * width;
-        this.y = y * height;
+        this.x = Math
+                .max(scale(x), scale(x) - (width - GameFieldView.GRID) / 2);
+        this.y = Math.max(scale(y), scale(y) - (height - GameFieldView.GRID)
+                / 2);
     }
 
     public int getX() {
@@ -51,5 +55,9 @@ public class GameObject {
 
     public Rectangle getBounds() {
         return new Rectangle(x, y, width, height);
+    }
+
+    protected int scale(int x) {
+        return (x * GameFieldView.GRID);
     }
 }
