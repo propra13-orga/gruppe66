@@ -19,12 +19,19 @@ public abstract class Controller implements ActionListener {
 
     public Controller(JFrame root) {
         rootWindow = root;
-        view = new JViewport();
+
+        initView();
         initialize();
     }
 
     abstract protected void initialize();
+
     abstract protected String getTag();
+
+    protected void initView() {
+        view = new JViewport();
+        view.setFocusable(true);
+    }
 
     protected void dispose() {
         rootWindow.dispose();
