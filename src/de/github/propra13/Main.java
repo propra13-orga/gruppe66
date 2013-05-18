@@ -23,16 +23,14 @@ public class Main extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
                 new Main();
-
             }
         });
     }
 
     public Main() {
-        initRootWindow();
-        initRootPanel();
-
+        getContentPane().setLayout(new CardLayout());
         createViewsFor((JPanel) getContentPane());
+        initRootWindow();
     }
 
     private void initRootWindow() {
@@ -41,12 +39,6 @@ public class Main extends JFrame {
         setSize(Main.WIDTH, Main.HEIGHT);
         setResizable(false);
         setVisible(true);
-    }
-
-    private void initRootPanel() {
-        JPanel panel = new JPanel(new CardLayout());
-        panel.setOpaque(true);
-        setContentPane(panel);
     }
 
     private void createViewsFor(JPanel panel) {
