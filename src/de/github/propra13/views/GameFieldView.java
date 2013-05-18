@@ -27,43 +27,50 @@ public class GameFieldView extends JPanel implements Runnable {
     private boolean running;
     private Thread animator;
 
-    public GameFieldView() {
-        setFocusable(true);
-        setDoubleBuffered(true);
+    private RenderingHints rh;
+
+    public GameFieldView(int width, int height) {
+        super();
+
         animator = new Thread(this);
+
+        initComponent(width, height);
+        initRenderingHints();
     }
 
-    @Override
-    public void addNotify() {
-        super.addNotify();
-        running = true;
-        animator.start();
+    private void initComponent(int width, int height) {
+        setPreferredSize(new Dimension(width, height));
+        setFocusable(true);
+        setDoubleBuffered(true);
+    }
+
+    private void initRenderingHints() {
+        rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
+                RenderingHints.VALUE_ANTIALIAS_ON);
+
+        rh.put(RenderingHints.KEY_RENDERING,
+                RenderingHints.VALUE_RENDER_QUALITY);
     }
 
     @Override
     public void removeNotify() {
-        running = false;
+        super.removeNotify();
+        stop();
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponents(g);
-        requestFocusInWindow();
 
         Dimension dim = getSize();
         Graphics2D gfx = (Graphics2D) g;
 
-        RenderingHints rh = new RenderingHints(RenderingHints.KEY_ANTIALIASING,
-                RenderingHints.VALUE_ANTIALIAS_ON);
-
-        rh.put(RenderingHints.KEY_RENDERING,
-                RenderingHints.VALUE_RENDER_QUALITY);
+        gfx.setBackground(Color.white);
+        gfx.clearRect(0, 0, dim.width, dim.height);
 
         gfx.setRenderingHints(rh);
 
         gfx.setPaint(Color.blue);
-        gfx.setBackground(Color.white);
-        gfx.clearRect(0, 0, dim.width, dim.height);
 
         gfx.fill(new Ellipse2D.Double(x, y, 20, 20));
 
@@ -77,6 +84,8 @@ public class GameFieldView extends JPanel implements Runnable {
 
         x += cVx;
         y += cVy;
+
+        g.dispose();
     }
 
     public void setVx(int vx) {
@@ -89,6 +98,12 @@ public class GameFieldView extends JPanel implements Runnable {
 
     public void stop() {
         running = false;
+    }
+
+    public void start() {
+        requestFocusInWindow();
+        running = true;
+        animator.start();
     }
 
     @Override
