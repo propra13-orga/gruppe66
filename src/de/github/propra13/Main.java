@@ -1,7 +1,6 @@
 package de.github.propra13;
 
 import java.awt.CardLayout;
-import java.util.HashSet;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -10,9 +9,9 @@ import javax.swing.SwingUtilities;
 import de.github.propra13.controllers.GameController;
 import de.github.propra13.controllers.MenuController;
 
-public class Main {
+public class Main extends JFrame {
 
-    private static JFrame rootWindow;
+    private static final long serialVersionUID = -4373574916623551121L;
 
     public static final int WIDTH = 1024;
     public static final int HEIGHT = 768;
@@ -20,41 +19,41 @@ public class Main {
     public static final String ROOTVIEW = "rootView";
     public static final String GAMEVIEW = "gameView";
 
-    public static HashSet<String> views = new HashSet<String>();
-
     public static void main(String args[]) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                createRootWindow();
+                new Main();
 
-                JPanel panel = createRootPanel();
-                rootWindow.setContentPane(panel);
-
-                createViewsFor(panel);
-
-                rootWindow.setVisible(true);
             }
         });
     }
 
-    private static JPanel createRootPanel() {
+    public Main() {
+        initRootWindow();
+        initRootPanel();
+
+        createViewsFor((JPanel) getContentPane());
+    }
+
+    private void initRootWindow() {
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        setTitle("Keiler Crawler");
+        setSize(Main.WIDTH, Main.HEIGHT);
+        setResizable(false);
+        setVisible(true);
+    }
+
+    private void initRootPanel() {
         JPanel panel = new JPanel(new CardLayout());
         panel.setOpaque(true);
-        return panel;
+        setContentPane(panel);
     }
 
-    private static void createRootWindow() {
-        rootWindow = new JFrame();
-        rootWindow.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        rootWindow.setTitle("Keiler Crawler");
-        rootWindow.setSize(Main.WIDTH, Main.HEIGHT);
-    }
-
-    private static void createViewsFor(JPanel panel) {
-        MenuController menuController = new MenuController(rootWindow);
+    private void createViewsFor(JPanel panel) {
+        MenuController menuController = new MenuController(this);
         menuController.appendTo(panel);
 
-        GameController gameController = new GameController(rootWindow);
+        GameController gameController = new GameController(this);
         gameController.appendTo(panel);
     }
 }
