@@ -29,10 +29,7 @@ public class GameFieldView extends JPanel implements Runnable {
 
     private Room currentRoom;
 
-    /**
-     * delay in ms between animation loops. Defaults to 40 ms which is 25 fps.
-     */
-    private int delay = 40;
+    private int delay = 10;
 
     private volatile boolean running;
     private Thread animator;
@@ -163,7 +160,7 @@ public class GameFieldView extends JPanel implements Runnable {
             turn();
             repaint();
 
-            wait = Math.max(delay - System.currentTimeMillis() - oldTime, 2);
+            wait = Math.max(delay - (System.currentTimeMillis() - oldTime), 2);
 
             oldTime = System.currentTimeMillis();
             try {
