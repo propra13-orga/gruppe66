@@ -9,8 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import de.github.propra13.objects.Wall;
-import de.github.propra13.objects.Player;
+import de.github.propra13.models.Room;
 import de.github.propra13.views.GameFieldView;
 
 public class GameController extends Controller implements KeyListener,
@@ -20,9 +19,10 @@ public class GameController extends Controller implements KeyListener,
 
     private GameFieldView game;
 
-    private Player player;
+    private ArrayList<Room> rooms;
+    private int currentRoom;
 
-    private ArrayList<Wall> walls;
+    private boolean gameHasStarted = false;
 
     public GameController(JFrame rootWindow) {
         super(rootWindow);
@@ -32,26 +32,18 @@ public class GameController extends Controller implements KeyListener,
         game = new GameFieldView();
         game.addKeyListener(this);
 
+        rooms = new ArrayList<Room>();
+
         view.add(game);
         view.addComponentListener(this);
     }
 
-    public Player getPlayer() {
-        return player;
+    public ArrayList<Room> getRooms() {
+        return rooms;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-        game.setPlayer(player);
-    }
-
-    public ArrayList<Wall> getWalls() {
-        return walls;
-    }
-
-    public void setWalls(ArrayList<Wall> walls) {
-        this.walls = walls;
-        game.setWalls(walls);
+    public void addRoom(Room room) {
+        this.rooms.add(room);
     }
 
     @Override
@@ -68,13 +60,13 @@ public class GameController extends Controller implements KeyListener,
         if (event.getKeyCode() == KeyEvent.VK_ESCAPE) {
             showView(MenuController.CONTROLLERTAG);
         } else {
-            player.keyPressed(event);
+            rooms.get(currentRoom).getPlayer().keyPressed(event);
         }
     }
 
     @Override
     public void keyReleased(KeyEvent event) {
-        player.keyReleased(event);
+        rooms.get(currentRoom).getPlayer().keyReleased(event);
     }
 
     @Override
@@ -96,6 +88,11 @@ public class GameController extends Controller implements KeyListener,
 
     @Override
     public void componentShown(ComponentEvent event) {
+        if (!gameHasStarted) {
+            game.setCurrentRoom(rooms.get(currentRoom));
+            gameHasStarted = true;
+        }
+
         game.start();
     }
 }

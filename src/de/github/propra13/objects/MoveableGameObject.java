@@ -15,6 +15,11 @@ public class MoveableGameObject extends GameObject {
         super(imageName, x, y);
     }
 
+    public void moveTo(int x, int y) {
+        this.x = scale(x);
+        this.y = scale(y);
+    }
+
     public void move(ArrayList<Wall> walls) {
         int oldx = x, oldy = y;
 

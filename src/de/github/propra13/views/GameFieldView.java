@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import de.github.propra13.Main;
+import de.github.propra13.models.Room;
 import de.github.propra13.objects.Player;
 import de.github.propra13.objects.Wall;
 
@@ -25,6 +26,8 @@ public class GameFieldView extends JPanel implements Runnable {
     private Player player;
 
     private ArrayList<Wall> walls;
+
+    private Room currentRoom;
 
     /**
      * delay in ms between animation loops. Defaults to 40 ms which is 25 fps.
@@ -58,20 +61,14 @@ public class GameFieldView extends JPanel implements Runnable {
                 RenderingHints.VALUE_RENDER_QUALITY);
     }
 
-    public Player getPlayer() {
-        return player;
+    public Room getCurrentRoom() {
+        return currentRoom;
     }
 
-    public void setPlayer(Player player) {
-        this.player = player;
-    }
-
-    public ArrayList<Wall> getWalls() {
-        return walls;
-    }
-
-    public void setWalls(ArrayList<Wall> walls) {
-        this.walls = walls;
+    public void setCurrentRoom(Room room) {
+        this.currentRoom = room;
+        this.player = currentRoom.getPlayer();
+        this.walls = currentRoom.getWalls();
     }
 
     @Override
@@ -87,19 +84,20 @@ public class GameFieldView extends JPanel implements Runnable {
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponents(g);
+        if (running) {
+            Graphics2D gfx = (Graphics2D) g;
 
-        Graphics2D gfx = (Graphics2D) g;
+            clearAndSetRenderingHints(gfx);
+            drawFloor(gfx);
 
-        clearAndSetRenderingHints(gfx);
-        drawFloor(gfx);
+            drawPlayer(gfx);
+            drawWalls(gfx);
 
-        drawPlayer(gfx);
-        drawWalls(gfx);
+            if (drawsGrid)
+                drawGrid(gfx);
 
-        if (drawsGrid)
-            drawGrid(gfx);
-
-        Toolkit.getDefaultToolkit().sync();
+            Toolkit.getDefaultToolkit().sync();
+        }
         g.dispose();
     }
 
