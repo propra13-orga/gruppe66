@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
+import de.github.propra13.Main;
 import de.github.propra13.objects.Player;
 import de.github.propra13.objects.Wall;
 
@@ -34,6 +35,8 @@ public class GameFieldView extends JPanel implements Runnable {
     private Thread animator;
 
     private RenderingHints rh;
+
+    private boolean drawsGrid = false;
 
     public GameFieldView() {
         super();
@@ -93,6 +96,9 @@ public class GameFieldView extends JPanel implements Runnable {
         drawPlayer(gfx);
         drawWalls(gfx);
 
+        if (drawsGrid)
+            drawGrid(gfx);
+
         Toolkit.getDefaultToolkit().sync();
         g.dispose();
     }
@@ -127,6 +133,15 @@ public class GameFieldView extends JPanel implements Runnable {
         for (Wall wall : walls) {
             gfx.drawImage(wall.getImage(), wall.getX(), wall.getY(), this);
         }
+    }
+
+    private void drawGrid(Graphics2D gfx) {
+        gfx.setPaint(Color.WHITE);
+        Dimension dim = getSize();
+        for (int x = GRID; x < dim.width; x += GRID)
+            gfx.drawLine(x, 0, x, Main.HEIGHT);
+        for (int y = GRID; y < dim.height; y += GRID)
+            gfx.drawLine(0, y, Main.WIDTH, y);
     }
 
     public void stop() {
