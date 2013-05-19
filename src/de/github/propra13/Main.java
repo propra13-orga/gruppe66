@@ -1,6 +1,7 @@
 package de.github.propra13;
 
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
@@ -32,6 +33,7 @@ public class Main extends JFrame {
 
     public Main() {
         getContentPane().setLayout(new CardLayout());
+        getContentPane().setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
         createViewsFor((JPanel) getContentPane());
         initRootWindow();
     }
@@ -39,9 +41,10 @@ public class Main extends JFrame {
     private void initRootWindow() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Keiler Crawler");
-        setSize(Main.WIDTH, Main.HEIGHT);
+        setMinimumSize(new Dimension(Main.WIDTH, Main.HEIGHT));
         setResizable(false);
         setVisible(true);
+        pack();
     }
 
     private void createViewsFor(JPanel panel) {
