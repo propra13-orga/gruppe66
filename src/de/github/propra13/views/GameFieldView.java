@@ -101,7 +101,6 @@ public class GameFieldView extends JPanel implements Runnable {
             Graphics2D gfx = (Graphics2D) g;
 
             clearAndSetRenderingHints(gfx);
-            drawFloor(gfx);
 
             drawStart(gfx);
             drawGoal(gfx);
@@ -132,6 +131,8 @@ public class GameFieldView extends JPanel implements Runnable {
         gfx.clearRect(0, 0, dim.width, dim.height);
 
         gfx.setRenderingHints(rh);
+
+        drawFloor(gfx);
     }
 
     private void drawFloor(Graphics2D gfx) {
@@ -150,12 +151,13 @@ public class GameFieldView extends JPanel implements Runnable {
 
     private void drawPlayer(Graphics2D gfx) {
         drawGameObject(gfx, playerObject);
-        drawPlayerHealthBar(gfx, playerObject);
+        if (playerObject.getPlayer().isWounded())
+            drawPlayerHealthBar(gfx, playerObject);
     }
 
     private void drawPlayerHealthBar(Graphics2D gfx, PlayerObject playerObject) {
-        int health = playerObject.getPlayer().getHealth();
-        int width = (int) (playerObject.getWidth() * (health / 100.0));
+        double health = playerObject.getPlayer().getHealth();
+        int width = (int) (playerObject.getWidth() * (health / 100));
         int height = 2;
 
         gfx.setPaint(Color.black);
@@ -175,11 +177,11 @@ public class GameFieldView extends JPanel implements Runnable {
         Color red = Color.red;
 
         if (health >= 70) {
-            return mixColor(green, yellow, (health - 70) / (100-70));
+            return mixColor(green, yellow, (health - 70) / (100 - 70));
         }
 
         if (health < 70 && health >= 40) {
-            return mixColor(yellow, orange, (health - 30) / (70-40));
+            return mixColor(yellow, orange, (health - 30) / (70 - 40));
         }
 
         return mixColor(orange, red, health / 40);
