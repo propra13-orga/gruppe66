@@ -1,5 +1,7 @@
 package de.github.propra13.objects;
 
+import java.awt.Dimension;
+import java.awt.Rectangle;
 import java.util.ArrayList;
 
 public class MoveableGameObject extends GameObject {
@@ -20,11 +22,19 @@ public class MoveableGameObject extends GameObject {
         this.y = scale(y);
     }
 
-    public void move(ArrayList<Wall> walls) {
+    public void move(Dimension size, ArrayList<Wall> walls) {
         int oldx = x, oldy = y;
+        Rectangle field = new Rectangle(size);
 
         x += vx;
         y += vy;
+
+        if (!field.contains(new Rectangle(x, y, width, height))) {
+            if (x < 1 || x + width >= size.width)
+                x = oldx;
+            if (y < 1 || y + height >= size.height)
+                y = oldy;
+        }
 
         for (Wall wall : walls) {
             if (wall.getBounds().intersects(this.getBounds())) {

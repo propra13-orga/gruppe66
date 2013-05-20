@@ -82,7 +82,7 @@ public class GameFieldView extends JPanel implements Runnable {
     }
 
     public void turn() {
-        player.move(walls);
+        player.move(getSize(), walls);
     }
 
     @Override
