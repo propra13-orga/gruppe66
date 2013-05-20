@@ -13,8 +13,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import de.github.propra13.Main;
-import de.github.propra13.models.FireballObject;
 import de.github.propra13.models.Room;
+import de.github.propra13.objects.FireballObject;
 import de.github.propra13.objects.GameObject;
 import de.github.propra13.objects.GoalObject;
 import de.github.propra13.objects.PlayerObject;
@@ -29,7 +29,7 @@ public class GameFieldView extends JPanel implements Runnable {
 
     private StartObject start;
     private GoalObject goal;
-    private PlayerObject player;
+    private PlayerObject playerObject;
 
     private ArrayList<WallObject> walls;
     private ArrayList<FireballObject> balls;
@@ -73,11 +73,11 @@ public class GameFieldView extends JPanel implements Runnable {
         this.currentRoom = room;
         this.start = currentRoom.getStart();
         this.goal = currentRoom.getGoal();
-        this.player = currentRoom.getPlayer();
+        this.playerObject = currentRoom.getPlayerObject();
         this.walls = currentRoom.getWalls();
         this.balls = currentRoom.getBalls();
 
-        this.player.setMoved(false);
+        this.playerObject.setMoved(false);
     }
 
     @Override
@@ -87,10 +87,10 @@ public class GameFieldView extends JPanel implements Runnable {
     }
 
     public void turn() {
-        player.move(getSize(), currentRoom);
+        playerObject.move(getSize(), currentRoom);
 
         for (FireballObject ball : balls) {
-            ball.move(getSize(), currentRoom);
+            ball.move(getSize(), currentRoom, playerObject);
         }
     }
 
@@ -105,8 +105,9 @@ public class GameFieldView extends JPanel implements Runnable {
 
             drawStart(gfx);
             drawGoal(gfx);
-            drawPlayer(gfx);
             drawWalls(gfx);
+
+            drawPlayer(gfx);
             drawBalls(gfx);
 
             if (drawsGrid)
@@ -148,7 +149,49 @@ public class GameFieldView extends JPanel implements Runnable {
     }
 
     private void drawPlayer(Graphics2D gfx) {
-        drawGameObject(gfx, player);
+        drawGameObject(gfx, playerObject);
+        drawPlayerHealthBar(gfx, playerObject);
+    }
+
+    private void drawPlayerHealthBar(Graphics2D gfx, PlayerObject playerObject) {
+        int health = playerObject.getPlayer().getHealth();
+        int width = (int) (playerObject.getWidth() * (health / 100.0));
+        int height = 2;
+
+        gfx.setPaint(Color.black);
+        gfx.fillRect(playerObject.getX(), playerObject.getY() - height,
+                playerObject.getWidth(), height);
+
+        gfx.setPaint(healthColor(health));
+        gfx.fillRect(playerObject.getX(), playerObject.getY() - height, width,
+                height);
+    }
+
+    private Color healthColor(double health) {
+        health = Math.max(0, health);
+        Color green = Color.green;
+        Color yellow = Color.yellow;
+        Color orange = new Color(0xff, 0x99, 0x00);
+        Color red = Color.red;
+
+        if (health >= 70) {
+            return mixColor(green, yellow, (health - 70) / (100-70));
+        }
+
+        if (health < 70 && health >= 40) {
+            return mixColor(yellow, orange, (health - 30) / (70-40));
+        }
+
+        return mixColor(orange, red, health / 40);
+    }
+
+    private Color mixColor(Color c1, Color c2, double ratio) {
+
+        int r = (int) (c1.getRed() * ratio + c2.getRed() * (1 - ratio));
+        int g = (int) (c1.getGreen() * ratio + c2.getGreen() * (1 - ratio));
+        int b = (int) (c1.getBlue() * ratio + c2.getBlue() * (1 - ratio));
+
+        return new Color(r, g, b);
     }
 
     private void drawGameObject(Graphics2D gfx, GameObject o) {

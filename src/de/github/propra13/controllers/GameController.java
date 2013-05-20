@@ -44,7 +44,7 @@ public class GameController extends Controller implements KeyListener,
 
     public void addRoom(Room room) {
         this.rooms.add(room);
-        room.getPlayer().setController(this);
+        room.getPlayerObject().setController(this);
     }
 
     public void advanceLevel() {
@@ -61,8 +61,8 @@ public class GameController extends Controller implements KeyListener,
         Room current = rooms.get(currentRoom);
         Room next = rooms.get(room);
 
-        next.getPlayer().setVx(current.getPlayer().getVx());
-        next.getPlayer().setVy(current.getPlayer().getVy());
+        next.getPlayerObject().setVx(current.getPlayerObject().getVx());
+        next.getPlayerObject().setVy(current.getPlayerObject().getVy());
 
         currentRoom = room;
         game.setCurrentRoom(next);
@@ -82,13 +82,13 @@ public class GameController extends Controller implements KeyListener,
         if (event.getKeyCode() == KeyEvent.VK_ESCAPE) {
             showView(MenuController.CONTROLLERTAG);
         } else {
-            rooms.get(currentRoom).getPlayer().keyPressed(event);
+            rooms.get(currentRoom).getPlayerObject().keyPressed(event);
         }
     }
 
     @Override
     public void keyReleased(KeyEvent event) {
-        rooms.get(currentRoom).getPlayer().keyReleased(event);
+        rooms.get(currentRoom).getPlayerObject().keyReleased(event);
     }
 
     @Override

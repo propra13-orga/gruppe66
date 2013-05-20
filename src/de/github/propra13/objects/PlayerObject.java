@@ -4,6 +4,7 @@ import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 
 import de.github.propra13.controllers.GameController;
+import de.github.propra13.models.Player;
 import de.github.propra13.models.Room;
 
 public class PlayerObject extends MoveableGameObject {
@@ -11,8 +12,11 @@ public class PlayerObject extends MoveableGameObject {
     private boolean leftSpawnPoint = false;
     private GameController controller;
 
-    public PlayerObject(int x, int y) {
+    private Player player;
+
+    public PlayerObject(Player player, int x, int y) {
         super("res/player.png", x, y);
+        this.player = player;
     }
 
     public void move(Dimension size, Room room) {
@@ -41,6 +45,14 @@ public class PlayerObject extends MoveableGameObject {
 
     private boolean isOnStartIn(Room room) {
         return room.getStart().getBounds().contains(getBounds());
+    }
+
+    public Player getPlayer() {
+        return player;
+    }
+
+    public void setPlayer(Player player) {
+        this.player = player;
     }
 
     public void keyPressed(KeyEvent event) {

@@ -1,14 +1,29 @@
-package de.github.propra13.models;
+package de.github.propra13.objects;
 
-import de.github.propra13.objects.MoveableGameObject;
+import java.awt.Dimension;
+
+import de.github.propra13.models.Fireball;
+import de.github.propra13.models.Room;
 
 public class FireballObject extends MoveableGameObject {
 
-    public FireballObject(int x, int y) {
+    private Fireball fireball;
+
+    public FireballObject(Fireball fireball, int x, int y) {
         super("res/fireball.png", x, y);
+
+        this.fireball = fireball;
 
         vx = -2;
         vy = -2;
+    }
+
+    public void move(Dimension size, Room room, PlayerObject playerObject) {
+        move(size, room);
+
+        if (playerObject.getBounds().contains(getBounds()))
+            fireball.inflictDamageOn(playerObject.getPlayer());
+
     }
 
     @Override

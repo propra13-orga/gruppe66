@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import de.github.propra13.objects.FireballObject;
 import de.github.propra13.objects.GoalObject;
 import de.github.propra13.objects.PlayerObject;
 import de.github.propra13.objects.StartObject;
@@ -13,18 +14,22 @@ import de.github.propra13.objects.WallObject;
 
 public class Room {
 
+    private Player player;
+
     private StartObject start;
     private GoalObject goal;
-    private PlayerObject player;
+    private PlayerObject playerObject;
     private ArrayList<WallObject> walls;
     private ArrayList<FireballObject> balls;
 
-    public Room(PlayerObject player, ArrayList<WallObject> walls) {
-        this.player = player;
+    public Room(PlayerObject playerObject, ArrayList<WallObject> walls) {
+        this.playerObject = playerObject;
         this.walls = walls;
     }
 
-    public Room(String fileName) {
+    public Room(Player player, String fileName) {
+        this.player = player;
+
         ArrayList<WallObject> walls = new ArrayList<WallObject>();
         ArrayList<FireballObject> balls = new ArrayList<FireballObject>();
         try {
@@ -43,13 +48,13 @@ public class Room {
                         break;
                     case 'S':
                         start = new StartObject(x, y);
-                        player = new PlayerObject(x, y);
+                        playerObject = new PlayerObject(this.player, x, y);
                         break;
                     case 'G':
                         goal = new GoalObject(x, y);
                         break;
                     case 'F':
-                        balls.add(new FireballObject(x, y));
+                        balls.add(new FireballObject(new Fireball(), x, y));
                         break;
                     }
                     x++;
@@ -67,12 +72,12 @@ public class Room {
         }
     }
 
-    public PlayerObject getPlayer() {
-        return player;
+    public PlayerObject getPlayerObject() {
+        return playerObject;
     }
 
-    public void setPlayer(PlayerObject player) {
-        this.player = player;
+    public void setPlayerObject(PlayerObject playerObject) {
+        this.playerObject = playerObject;
     }
 
     public ArrayList<WallObject> getWalls() {
