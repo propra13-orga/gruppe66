@@ -31,23 +31,45 @@ public class MoveableGameObject extends GameObject {
         y += vy;
 
         if (!field.contains(new Rectangle(x, y, width, height))) {
-            if (x < 1 || x + width >= size.width)
-                x = oldx;
-            if (y < 1 || y + height >= size.height)
-                y = oldy;
+            if (x < 1)
+                collidedLeft(oldx);
+            if (x + width >= size.width)
+                collidedRight(oldx);
+            if (y < 1)
+                collidedTop(oldy);
+            if (y + height >= size.height)
+                collidedBottom(oldy);
         }
 
         for (WallObject wall : room.getWalls()) {
             if (wall.getBounds().intersects(this.getBounds())) {
-                if (vx != 0 && intersectsY(oldy, wall)) {
-                    x = oldx;
-                }
+                if (vx < 0 && intersectsY(oldy, wall))
+                    collidedLeft(oldx);
+                else if (vx > 0 && intersectsY(oldy, wall))
+                    collidedRight(oldx);
 
-                if (vy != 0 && intersectsX(oldx, wall)) {
-                    y = oldy;
-                }
+                if (vy < 0 && intersectsX(oldx, wall))
+                    collidedTop(oldy);
+                else if (vy > 0 && intersectsX(oldx, wall))
+                    collidedBottom(oldy);
             }
         }
+    }
+
+    protected void collidedLeft(int oldx) {
+        x = oldx;
+    }
+
+    protected void collidedRight(int oldx) {
+        x = oldx;
+    }
+
+    protected void collidedTop(int oldy) {
+        y = oldy;
+    }
+
+    protected void collidedBottom(int oldy) {
+        y = oldy;
     }
 
     protected boolean intersectsX(int x, GameObject o) {
