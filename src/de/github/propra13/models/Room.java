@@ -6,13 +6,16 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
+import de.github.propra13.objects.Goal;
 import de.github.propra13.objects.Player;
+import de.github.propra13.objects.Start;
 import de.github.propra13.objects.Wall;
 
 public class Room {
 
+    private Start start;
+    private Goal goal;
     private Player player;
-
     private ArrayList<Wall> walls;
 
     public Room(Player player, ArrayList<Wall> walls) {
@@ -33,12 +36,17 @@ public class Room {
                 char[] chars = line.toCharArray();
                 int x = 0;
                 for (char c : chars) {
-                    switch(c) {
+                    switch (c) {
                     case '#':
                         walls.add(new Wall(x, y));
                         break;
-                    case 'P':
+                    case 'S':
+                        start = new Start(x, y);
                         player.moveTo(x, y);
+                        break;
+                    case 'G':
+                        goal = new Goal(x, y);
+                        break;
                     }
                     x++;
                 }
@@ -68,6 +76,22 @@ public class Room {
 
     public void setWalls(ArrayList<Wall> walls) {
         this.walls = walls;
+    }
+
+    public Start getStart() {
+        return start;
+    }
+
+    public void setStart(Start start) {
+        this.start = start;
+    }
+
+    public Goal getGoal() {
+        return goal;
+    }
+
+    public void setGoal(Goal goal) {
+        this.goal = goal;
     }
 
 }

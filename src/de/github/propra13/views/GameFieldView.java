@@ -14,7 +14,10 @@ import javax.swing.JPanel;
 
 import de.github.propra13.Main;
 import de.github.propra13.models.Room;
+import de.github.propra13.objects.GameObject;
+import de.github.propra13.objects.Goal;
 import de.github.propra13.objects.Player;
+import de.github.propra13.objects.Start;
 import de.github.propra13.objects.Wall;
 
 public class GameFieldView extends JPanel implements Runnable {
@@ -23,6 +26,8 @@ public class GameFieldView extends JPanel implements Runnable {
 
     private static final long serialVersionUID = 7383103785685757479L;
 
+    private Start start;
+    private Goal goal;
     private Player player;
 
     private ArrayList<Wall> walls;
@@ -64,6 +69,8 @@ public class GameFieldView extends JPanel implements Runnable {
 
     public void setCurrentRoom(Room room) {
         this.currentRoom = room;
+        this.start = currentRoom.getStart();
+        this.goal = currentRoom.getGoal();
         this.player = currentRoom.getPlayer();
         this.walls = currentRoom.getWalls();
     }
@@ -87,6 +94,8 @@ public class GameFieldView extends JPanel implements Runnable {
             clearAndSetRenderingHints(gfx);
             drawFloor(gfx);
 
+            drawStart(gfx);
+            drawGoal(gfx);
             drawPlayer(gfx);
             drawWalls(gfx);
 
@@ -96,6 +105,14 @@ public class GameFieldView extends JPanel implements Runnable {
             Toolkit.getDefaultToolkit().sync();
         }
         g.dispose();
+    }
+
+    private void drawStart(Graphics2D gfx) {
+        drawGameObject(gfx, start);
+    }
+
+    private void drawGoal(Graphics2D gfx) {
+        drawGameObject(gfx, goal);
     }
 
     private void clearAndSetRenderingHints(Graphics2D gfx) {
@@ -121,7 +138,11 @@ public class GameFieldView extends JPanel implements Runnable {
     }
 
     private void drawPlayer(Graphics2D gfx) {
-        gfx.drawImage(player.getImage(), player.getX(), player.getY(), this);
+        drawGameObject(gfx, player);
+    }
+
+    private void drawGameObject(Graphics2D gfx, GameObject o) {
+        gfx.drawImage(o.getImage(), o.getX(), o.getY(), this);
     }
 
     private void drawWalls(Graphics2D gfx) {
