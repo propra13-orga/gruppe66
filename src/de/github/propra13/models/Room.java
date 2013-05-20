@@ -6,11 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import de.github.propra13.objects.FireballObject;
-import de.github.propra13.objects.GoalObject;
-import de.github.propra13.objects.PlayerObject;
-import de.github.propra13.objects.StartObject;
-import de.github.propra13.objects.WallObject;
+import de.github.propra13.views.objects.FireballObject;
+import de.github.propra13.views.objects.GoalObject;
+import de.github.propra13.views.objects.PlayerObject;
+import de.github.propra13.views.objects.StartObject;
+import de.github.propra13.views.objects.WallObject;
 
 public class Room {
 

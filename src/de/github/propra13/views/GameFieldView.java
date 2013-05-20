@@ -14,12 +14,12 @@ import javax.swing.JPanel;
 
 import de.github.propra13.Main;
 import de.github.propra13.models.Room;
-import de.github.propra13.objects.FireballObject;
-import de.github.propra13.objects.GameObject;
-import de.github.propra13.objects.GoalObject;
-import de.github.propra13.objects.PlayerObject;
-import de.github.propra13.objects.StartObject;
-import de.github.propra13.objects.WallObject;
+import de.github.propra13.views.objects.FireballObject;
+import de.github.propra13.views.objects.GameObject;
+import de.github.propra13.views.objects.GoalObject;
+import de.github.propra13.views.objects.PlayerObject;
+import de.github.propra13.views.objects.StartObject;
+import de.github.propra13.views.objects.WallObject;
 
 public class GameFieldView extends JPanel implements Runnable {
 

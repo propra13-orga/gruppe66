@@ -1,4 +1,4 @@
-package de.github.propra13.objects;
+package de.github.propra13.views.objects;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
