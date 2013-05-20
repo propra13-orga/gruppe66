@@ -15,10 +15,10 @@ import javax.swing.JPanel;
 import de.github.propra13.Main;
 import de.github.propra13.models.Room;
 import de.github.propra13.objects.GameObject;
-import de.github.propra13.objects.Goal;
-import de.github.propra13.objects.Player;
-import de.github.propra13.objects.Start;
-import de.github.propra13.objects.Wall;
+import de.github.propra13.objects.GoalObject;
+import de.github.propra13.objects.PlayerObject;
+import de.github.propra13.objects.StartObject;
+import de.github.propra13.objects.WallObject;
 
 public class GameFieldView extends JPanel implements Runnable {
 
@@ -26,11 +26,11 @@ public class GameFieldView extends JPanel implements Runnable {
 
     private static final long serialVersionUID = 7383103785685757479L;
 
-    private Start start;
-    private Goal goal;
-    private Player player;
+    private StartObject start;
+    private GoalObject goal;
+    private PlayerObject player;
 
-    private ArrayList<Wall> walls;
+    private ArrayList<WallObject> walls;
 
     private Room currentRoom;
 
@@ -73,6 +73,8 @@ public class GameFieldView extends JPanel implements Runnable {
         this.goal = currentRoom.getGoal();
         this.player = currentRoom.getPlayer();
         this.walls = currentRoom.getWalls();
+
+        this.player.setMoved(false);
     }
 
     @Override
@@ -82,7 +84,7 @@ public class GameFieldView extends JPanel implements Runnable {
     }
 
     public void turn() {
-        player.move(getSize(), walls);
+        player.move(getSize(), currentRoom);
     }
 
     @Override
@@ -146,7 +148,7 @@ public class GameFieldView extends JPanel implements Runnable {
     }
 
     private void drawWalls(Graphics2D gfx) {
-        for (Wall wall : walls) {
+        for (WallObject wall : walls) {
             gfx.drawImage(wall.getImage(), wall.getX(), wall.getY(), this);
         }
     }

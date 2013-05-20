@@ -10,7 +10,6 @@ import javax.swing.SwingUtilities;
 import de.github.propra13.controllers.GameController;
 import de.github.propra13.controllers.MenuController;
 import de.github.propra13.models.Room;
-import de.github.propra13.objects.Player;
 
 public class Main extends JFrame {
 
@@ -49,13 +48,14 @@ public class Main extends JFrame {
 
     private void createViewsFor(JPanel panel) {
         MenuController menuController = new MenuController(this);
-        menuController.appendTo(panel);
+        menuController.appendViewTo(panel);
 
-        Player player = new Player(1, 1);
         GameController gameController = new GameController(this);
-        Room room1 = new Room(player, "res/rooms/room1.krm");
 
-        gameController.addRoom(room1);
-        gameController.appendTo(panel);
+        gameController.addRoom(new Room("res/rooms/room1.krm"));
+        gameController.addRoom(new Room("res/rooms/room2.krm"));
+        gameController.addRoom(new Room("res/rooms/room3.krm"));
+
+        gameController.appendViewTo(panel);
     }
 }

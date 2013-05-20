@@ -44,6 +44,28 @@ public class GameController extends Controller implements KeyListener,
 
     public void addRoom(Room room) {
         this.rooms.add(room);
+        room.getPlayer().setController(this);
+    }
+
+    public void advanceLevel() {
+        if (currentRoom + 1 < rooms.size())
+            setRoom(currentRoom + 1);
+    }
+
+    public void retreatLevel() {
+        if (currentRoom > 0)
+            setRoom(currentRoom - 1);
+    }
+
+    private void setRoom(int room) {
+        Room current = rooms.get(currentRoom);
+        Room next = rooms.get(room);
+
+        next.getPlayer().setVx(current.getPlayer().getVx());
+        next.getPlayer().setVy(current.getPlayer().getVy());
+
+        currentRoom = room;
+        game.setCurrentRoom(next);
     }
 
     @Override

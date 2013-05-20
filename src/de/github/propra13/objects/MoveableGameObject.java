@@ -2,7 +2,8 @@ package de.github.propra13.objects;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
-import java.util.ArrayList;
+
+import de.github.propra13.models.Room;
 
 public class MoveableGameObject extends GameObject {
 
@@ -22,7 +23,7 @@ public class MoveableGameObject extends GameObject {
         this.y = scale(y);
     }
 
-    public void move(Dimension size, ArrayList<Wall> walls) {
+    public void move(Dimension size, Room room) {
         int oldx = x, oldy = y;
         Rectangle field = new Rectangle(size);
 
@@ -36,7 +37,7 @@ public class MoveableGameObject extends GameObject {
                 y = oldy;
         }
 
-        for (Wall wall : walls) {
+        for (WallObject wall : room.getWalls()) {
             if (wall.getBounds().intersects(this.getBounds())) {
                 if (vx != 0 && intersectsY(oldy, wall)) {
                     x = oldx;
@@ -56,4 +57,21 @@ public class MoveableGameObject extends GameObject {
     protected boolean intersectsY(int y, GameObject o) {
         return y + height > o.getY() && y < o.getY() + o.getHeight();
     }
+
+    public int getVx() {
+        return vx;
+    }
+
+    public void setVx(int vx) {
+        this.vx = vx;
+    }
+
+    public int getVy() {
+        return vy;
+    }
+
+    public void setVy(int vy) {
+        this.vy = vy;
+    }
+
 }

@@ -6,26 +6,25 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import de.github.propra13.objects.Goal;
-import de.github.propra13.objects.Player;
-import de.github.propra13.objects.Start;
-import de.github.propra13.objects.Wall;
+import de.github.propra13.objects.GoalObject;
+import de.github.propra13.objects.PlayerObject;
+import de.github.propra13.objects.StartObject;
+import de.github.propra13.objects.WallObject;
 
 public class Room {
 
-    private Start start;
-    private Goal goal;
-    private Player player;
-    private ArrayList<Wall> walls;
+    private StartObject start;
+    private GoalObject goal;
+    private PlayerObject player;
+    private ArrayList<WallObject> walls;
 
-    public Room(Player player, ArrayList<Wall> walls) {
+    public Room(PlayerObject player, ArrayList<WallObject> walls) {
         this.player = player;
         this.walls = walls;
     }
 
-    public Room(Player player, String fileName) {
-        this.player = player;
-        ArrayList<Wall> walls = new ArrayList<Wall>();
+    public Room(String fileName) {
+        ArrayList<WallObject> walls = new ArrayList<WallObject>();
         try {
             FileReader file = new FileReader(fileName);
             BufferedReader reader = new BufferedReader(file);
@@ -38,14 +37,14 @@ public class Room {
                 for (char c : chars) {
                     switch (c) {
                     case '#':
-                        walls.add(new Wall(x, y));
+                        walls.add(new WallObject(x, y));
                         break;
                     case 'S':
-                        start = new Start(x, y);
-                        player.moveTo(x, y);
+                        start = new StartObject(x, y);
+                        player = new PlayerObject(x, y);
                         break;
                     case 'G':
-                        goal = new Goal(x, y);
+                        goal = new GoalObject(x, y);
                         break;
                     }
                     x++;
@@ -62,35 +61,35 @@ public class Room {
         }
     }
 
-    public Player getPlayer() {
+    public PlayerObject getPlayer() {
         return player;
     }
 
-    public void setPlayer(Player player) {
+    public void setPlayer(PlayerObject player) {
         this.player = player;
     }
 
-    public ArrayList<Wall> getWalls() {
+    public ArrayList<WallObject> getWalls() {
         return walls;
     }
 
-    public void setWalls(ArrayList<Wall> walls) {
+    public void setWalls(ArrayList<WallObject> walls) {
         this.walls = walls;
     }
 
-    public Start getStart() {
+    public StartObject getStart() {
         return start;
     }
 
-    public void setStart(Start start) {
+    public void setStart(StartObject start) {
         this.start = start;
     }
 
-    public Goal getGoal() {
+    public GoalObject getGoal() {
         return goal;
     }
 
-    public void setGoal(Goal goal) {
+    public void setGoal(GoalObject goal) {
         this.goal = goal;
     }
 

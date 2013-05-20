@@ -43,7 +43,7 @@ public abstract class Controller implements ActionListener {
         layout.show(rootPanel, view);
     }
 
-    public void appendTo(JPanel panel) {
+    public void appendViewTo(JPanel panel) {
         panel.add(view, getTag());
     }
 }
