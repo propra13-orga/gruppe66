@@ -28,12 +28,20 @@ public class Player extends MoveableGameObject {
     public void keyReleased(KeyEvent event) {
         switch (event.getKeyCode()) {
         case KeyEvent.VK_UP:
+            if (vy == -1)
+                vy = 0;
+            break;
         case KeyEvent.VK_DOWN:
-            vy = 0;
+            if (vy == 1)
+                vy = 0;
             break;
         case KeyEvent.VK_RIGHT:
+            if (vx == 1)
+                vx = 0;
+            break;
         case KeyEvent.VK_LEFT:
-            vx = 0;
+            if (vx == -1)
+                vx = 0;
             break;
         }
     }
