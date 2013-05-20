@@ -17,6 +17,7 @@ public class Room {
     private GoalObject goal;
     private PlayerObject player;
     private ArrayList<WallObject> walls;
+    private ArrayList<FireballObject> balls;
 
     public Room(PlayerObject player, ArrayList<WallObject> walls) {
         this.player = player;
@@ -25,6 +26,7 @@ public class Room {
 
     public Room(String fileName) {
         ArrayList<WallObject> walls = new ArrayList<WallObject>();
+        ArrayList<FireballObject> balls = new ArrayList<FireballObject>();
         try {
             FileReader file = new FileReader(fileName);
             BufferedReader reader = new BufferedReader(file);
@@ -46,6 +48,9 @@ public class Room {
                     case 'G':
                         goal = new GoalObject(x, y);
                         break;
+                    case 'F':
+                        balls.add(new FireballObject(x, y));
+                        break;
                     }
                     x++;
                 }
@@ -53,6 +58,7 @@ public class Room {
             } while ((line = reader.readLine()) != null);
 
             this.walls = walls;
+            this.balls = balls;
             reader.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
@@ -75,6 +81,14 @@ public class Room {
 
     public void setWalls(ArrayList<WallObject> walls) {
         this.walls = walls;
+    }
+
+    public ArrayList<FireballObject> getBalls() {
+        return balls;
+    }
+
+    public void setBalls(ArrayList<FireballObject> balls) {
+        this.balls = balls;
     }
 
     public StartObject getStart() {

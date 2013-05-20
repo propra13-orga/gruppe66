@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import de.github.propra13.Main;
+import de.github.propra13.models.FireballObject;
 import de.github.propra13.models.Room;
 import de.github.propra13.objects.GameObject;
 import de.github.propra13.objects.GoalObject;
@@ -31,6 +32,7 @@ public class GameFieldView extends JPanel implements Runnable {
     private PlayerObject player;
 
     private ArrayList<WallObject> walls;
+    private ArrayList<FireballObject> balls;
 
     private Room currentRoom;
 
@@ -73,6 +75,7 @@ public class GameFieldView extends JPanel implements Runnable {
         this.goal = currentRoom.getGoal();
         this.player = currentRoom.getPlayer();
         this.walls = currentRoom.getWalls();
+        this.balls = currentRoom.getBalls();
 
         this.player.setMoved(false);
     }
@@ -85,6 +88,10 @@ public class GameFieldView extends JPanel implements Runnable {
 
     public void turn() {
         player.move(getSize(), currentRoom);
+
+        for (FireballObject ball : balls) {
+            ball.move(getSize(), currentRoom);
+        }
     }
 
     @Override
@@ -100,6 +107,7 @@ public class GameFieldView extends JPanel implements Runnable {
             drawGoal(gfx);
             drawPlayer(gfx);
             drawWalls(gfx);
+            drawBalls(gfx);
 
             if (drawsGrid)
                 drawGrid(gfx);
@@ -149,7 +157,13 @@ public class GameFieldView extends JPanel implements Runnable {
 
     private void drawWalls(Graphics2D gfx) {
         for (WallObject wall : walls) {
-            gfx.drawImage(wall.getImage(), wall.getX(), wall.getY(), this);
+            drawGameObject(gfx, wall);
+        }
+    }
+
+    private void drawBalls(Graphics2D gfx) {
+        for (FireballObject ball : balls) {
+            drawGameObject(gfx, ball);
         }
     }
 
