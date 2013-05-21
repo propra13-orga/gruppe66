@@ -1,5 +1,6 @@
 package de.github.propra13.controllers;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
@@ -14,7 +15,7 @@ public class MenuController extends Controller {
     private static final String NEWGAME = "newGame";
     private static final String CLOSE = "close";
 
-    private JPanel buttonPanel;
+    protected JPanel buttonPanel;
 
     public MenuController(JFrame rootWindow) {
         super(rootWindow);
@@ -22,6 +23,7 @@ public class MenuController extends Controller {
 
     protected void initialize() {
         buttonPanel = new JPanel();
+        buttonPanel.setBackground(Color.white);
         view.add(buttonPanel);
 
         JButton newGameButton = new JButton("Neues Spiel");

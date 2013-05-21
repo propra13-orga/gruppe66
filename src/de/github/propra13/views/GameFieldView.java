@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import de.github.propra13.Main;
+import de.github.propra13.controllers.GameController;
 import de.github.propra13.models.Room;
 import de.github.propra13.views.objects.FireballObject;
 import de.github.propra13.views.objects.GameObject;
@@ -45,11 +46,15 @@ public class GameFieldView extends JPanel implements Runnable {
 
     private boolean drawsGrid = false;
 
-    public GameFieldView() {
+    private GameController controller;
+
+    public GameFieldView(GameController controller) {
         super();
 
         initComponent();
         initRenderingHints();
+
+        this.controller = controller;
     }
 
     private void initComponent() {
@@ -241,6 +246,8 @@ public class GameFieldView extends JPanel implements Runnable {
         while (running) {
             turn();
             repaint();
+
+            controller.checkHealthOfPlayer();
 
             wait = Math.max(delay - (System.currentTimeMillis() - oldTime), 2);
 

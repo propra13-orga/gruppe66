@@ -8,9 +8,8 @@ import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
 import de.github.propra13.controllers.GameController;
+import de.github.propra13.controllers.LostController;
 import de.github.propra13.controllers.MenuController;
-import de.github.propra13.models.Player;
-import de.github.propra13.models.Room;
 
 public class Main extends JFrame {
 
@@ -52,12 +51,9 @@ public class Main extends JFrame {
         menuController.appendViewTo(panel);
 
         GameController gameController = new GameController(this);
-
-        Player player = new Player();
-        gameController.addRoom(new Room(player, "res/rooms/room1.krm"));
-        gameController.addRoom(new Room(player, "res/rooms/room2.krm"));
-        gameController.addRoom(new Room(player, "res/rooms/room3.krm"));
-
         gameController.appendViewTo(panel);
+
+        LostController lostController = new LostController(this);
+        lostController.appendViewTo(panel);
     }
 }

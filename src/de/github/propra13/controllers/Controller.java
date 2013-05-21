@@ -1,19 +1,19 @@
 package de.github.propra13.controllers;
 
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.JViewport;
 
 public abstract class Controller implements ActionListener {
 
     protected JFrame rootWindow;
 
-    protected JViewport view;
+    protected JPanel view;
 
-    public JViewport getView() {
+    public JPanel getView() {
         return view;
     }
 
@@ -29,8 +29,9 @@ public abstract class Controller implements ActionListener {
     abstract protected String getTag();
 
     protected void initView() {
-        view = new JViewport();
+        view = new JPanel();
         view.setFocusable(true);
+        view.setBackground(Color.white);
     }
 
     protected void dispose() {

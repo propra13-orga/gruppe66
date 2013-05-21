@@ -1,5 +1,6 @@
 package de.github.propra13.controllers;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
@@ -9,6 +10,8 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import de.github.propra13.Main;
+import de.github.propra13.models.Player;
 import de.github.propra13.models.Room;
 import de.github.propra13.views.GameFieldView;
 
@@ -24,18 +27,30 @@ public class GameController extends Controller implements KeyListener,
 
     private boolean gameHasStarted = false;
 
+    private Player player;
+
     public GameController(JFrame rootWindow) {
         super(rootWindow);
     }
 
     protected void initialize() {
-        game = new GameFieldView();
-        game.addKeyListener(this);
+        initPlayerAndRooms();
 
-        rooms = new ArrayList<Room>();
+        game = new GameFieldView(this);
+        game.addKeyListener(this);
+        game.setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
 
         view.add(game);
         view.addComponentListener(this);
+    }
+
+    private void initPlayerAndRooms() {
+        player = new Player();
+
+        rooms = new ArrayList<Room>();
+        addRoom(new Room(player, "res/rooms/room1.krm"));
+        addRoom(new Room(player, "res/rooms/room2.krm"));
+        addRoom(new Room(player, "res/rooms/room3.krm"));
     }
 
     public ArrayList<Room> getRooms() {
@@ -66,6 +81,15 @@ public class GameController extends Controller implements KeyListener,
 
         currentRoom = room;
         game.setCurrentRoom(next);
+    }
+
+    public void checkHealthOfPlayer() {
+        if (player.isDead()) {
+            game.stop();
+            gameHasStarted = false;
+            initPlayerAndRooms();
+            showView(LostController.CONTROLLERTAG);
+        }
     }
 
     @Override
