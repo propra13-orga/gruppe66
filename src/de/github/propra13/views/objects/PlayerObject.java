@@ -23,9 +23,9 @@ public class PlayerObject extends MoveableGameObject {
         super.move(size, room);
 
         if (isOnGoalIn(room) && leftSpawnPoint)
-            controller.advanceLevel();
+            controller.advanceRoom();
         if (isOnStartIn(room) && leftSpawnPoint)
-            controller.retreatLevel();
+            controller.retreatRoom();
 
         if (!leftSpawnPoint && !isOnStartIn(room) && !isOnGoalIn(room))
             leftSpawnPoint = true;

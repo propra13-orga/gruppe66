@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -22,6 +23,8 @@ public class MenuController extends Controller {
     }
 
     protected void initialize() {
+        view.setLayout(new BoxLayout(view, BoxLayout.Y_AXIS));
+
         buttonPanel = new JPanel();
         buttonPanel.setBackground(Color.white);
         view.add(buttonPanel);

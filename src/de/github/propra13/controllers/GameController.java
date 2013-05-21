@@ -62,12 +62,16 @@ public class GameController extends Controller implements KeyListener,
         room.getPlayerObject().setController(this);
     }
 
-    public void advanceLevel() {
+    public void advanceRoom() {
         if (currentRoom + 1 < rooms.size())
             setRoom(currentRoom + 1);
+        else {
+            resetGame();
+            showView(WinController.CONTROLLERTAG);
+        }
     }
 
-    public void retreatLevel() {
+    public void retreatRoom() {
         if (currentRoom > 0)
             setRoom(currentRoom - 1);
     }
@@ -85,11 +89,16 @@ public class GameController extends Controller implements KeyListener,
 
     public void checkHealthOfPlayer() {
         if (player.isDead()) {
-            game.stop();
-            gameHasStarted = false;
-            initPlayerAndRooms();
+            resetGame();
             showView(LostController.CONTROLLERTAG);
         }
+    }
+
+    private void resetGame() {
+        game.stop();
+        gameHasStarted = false;
+        initPlayerAndRooms();
+        currentRoom = 0;
     }
 
     @Override

@@ -6,11 +6,10 @@ import javax.swing.JFrame;
 
 import de.github.propra13.views.ImageView;
 
-public class LostController extends MenuController {
+public class WinController extends MenuController {
+    static final String CONTROLLERTAG = "winController";
 
-    static final String CONTROLLERTAG = "lostController";
-
-    public LostController(JFrame root) {
+    public WinController(JFrame root) {
         super(root);
     }
 
@@ -18,8 +17,8 @@ public class LostController extends MenuController {
     protected void initialize() {
         super.initialize();
 
-        ImageView image = new ImageView("res/problem.png");
-        image.setPreferredSize(new Dimension(500, 418));
+        ImageView image = new ImageView("res/win.jpg");
+        image.setPreferredSize(new Dimension(400, 398));
         view.add(image);
     }
 

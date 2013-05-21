@@ -10,6 +10,7 @@ import javax.swing.SwingUtilities;
 import de.github.propra13.controllers.GameController;
 import de.github.propra13.controllers.LostController;
 import de.github.propra13.controllers.MenuController;
+import de.github.propra13.controllers.WinController;
 
 public class Main extends JFrame {
 
@@ -55,5 +56,8 @@ public class Main extends JFrame {
 
         LostController lostController = new LostController(this);
         lostController.appendViewTo(panel);
+
+        WinController winController = new WinController(this);
+        winController.appendViewTo(panel);
     }
 }
