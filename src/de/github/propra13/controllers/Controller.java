@@ -2,6 +2,7 @@ package de.github.propra13.controllers;
 
 import java.awt.CardLayout;
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
@@ -32,6 +33,8 @@ public abstract class Controller implements ActionListener {
         view = new JPanel();
         view.setFocusable(true);
         view.setBackground(Color.white);
+        ((FlowLayout) view.getLayout()).setVgap(0);
+        ((FlowLayout) view.getLayout()).setHgap(0);
     }
 
     protected void dispose() {
