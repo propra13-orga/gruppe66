@@ -1,4 +1,4 @@
-package de.github.propra13.controllers;
+package de.propra13.controllers;
 
 import java.awt.CardLayout;
 import java.awt.Color;

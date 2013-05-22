@@ -1,4 +1,4 @@
-package de.github.propra13.models;
+package de.propra13.models;
 
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -6,11 +6,11 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import de.github.propra13.views.objects.FireballObject;
-import de.github.propra13.views.objects.GoalObject;
-import de.github.propra13.views.objects.PlayerObject;
-import de.github.propra13.views.objects.StartObject;
-import de.github.propra13.views.objects.WallObject;
+import de.propra13.views.objects.FireballObject;
+import de.propra13.views.objects.GoalObject;
+import de.propra13.views.objects.PlayerObject;
+import de.propra13.views.objects.StartObject;
+import de.propra13.views.objects.WallObject;
 
 public class Room {
 

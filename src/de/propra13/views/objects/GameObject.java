@@ -1,11 +1,11 @@
-package de.github.propra13.views.objects;
+package de.propra13.views.objects;
 
 import java.awt.Image;
 import java.awt.Rectangle;
 
 import javax.swing.ImageIcon;
 
-import de.github.propra13.views.GameFieldView;
+import de.propra13.views.GameFieldView;
 
 public class GameObject {
     protected int x;

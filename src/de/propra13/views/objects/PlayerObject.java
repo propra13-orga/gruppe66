@@ -1,11 +1,11 @@
-package de.github.propra13.views.objects;
+package de.propra13.views.objects;
 
 import java.awt.Dimension;
 import java.awt.event.KeyEvent;
 
-import de.github.propra13.controllers.GameController;
-import de.github.propra13.models.Player;
-import de.github.propra13.models.Room;
+import de.propra13.controllers.GameController;
+import de.propra13.models.Player;
+import de.propra13.models.Room;
 
 public class PlayerObject extends MoveableGameObject {
 

@@ -1,4 +1,4 @@
-package de.github.propra13.views;
+package de.propra13.views;
 
 import java.awt.Graphics;
 import java.awt.Image;

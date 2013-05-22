@@ -1,10 +1,10 @@
-package de.github.propra13.controllers;
+package de.propra13.controllers;
 
 import java.awt.Dimension;
 
 import javax.swing.JFrame;
 
-import de.github.propra13.views.ImageView;
+import de.propra13.views.ImageView;
 
 public class LostController extends MenuController {
 

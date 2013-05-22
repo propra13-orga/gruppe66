@@ -1,4 +1,4 @@
-package de.github.propra13.controllers;
+package de.propra13.controllers;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
@@ -10,10 +10,10 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
-import de.github.propra13.Main;
-import de.github.propra13.models.Player;
-import de.github.propra13.models.Room;
-import de.github.propra13.views.GameFieldView;
+import de.propra13.Main;
+import de.propra13.models.Player;
+import de.propra13.models.Room;
+import de.propra13.views.GameFieldView;
 
 public class GameController extends Controller implements KeyListener,
         ComponentListener {

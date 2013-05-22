@@ -1,9 +1,9 @@
-package de.github.propra13.views.objects;
+package de.propra13.views.objects;
 
 import java.awt.Dimension;
 
-import de.github.propra13.models.Fireball;
-import de.github.propra13.models.Room;
+import de.propra13.models.Fireball;
+import de.propra13.models.Room;
 
 public class FireballObject extends MoveableGameObject {
 

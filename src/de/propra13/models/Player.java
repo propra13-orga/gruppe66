@@ -1,4 +1,4 @@
-package de.github.propra13.models;
+package de.propra13.models;
 
 public class Player {
 

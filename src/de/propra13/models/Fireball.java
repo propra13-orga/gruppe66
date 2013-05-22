@@ -1,4 +1,4 @@
-package de.github.propra13.models;
+package de.propra13.models;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

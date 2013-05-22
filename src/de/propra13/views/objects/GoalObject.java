@@ -1,4 +1,4 @@
-package de.github.propra13.views.objects;
+package de.propra13.views.objects;
 
 public class GoalObject extends GameObject {
 

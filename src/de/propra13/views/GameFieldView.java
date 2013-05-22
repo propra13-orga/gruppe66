@@ -1,4 +1,4 @@
-package de.github.propra13.views;
+package de.propra13.views;
 
 import java.awt.Color;
 import java.awt.Dimension;
@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
-import de.github.propra13.Main;
-import de.github.propra13.controllers.GameController;
-import de.github.propra13.models.Room;
-import de.github.propra13.views.objects.FireballObject;
-import de.github.propra13.views.objects.GameObject;
-import de.github.propra13.views.objects.GoalObject;
-import de.github.propra13.views.objects.PlayerObject;
-import de.github.propra13.views.objects.StartObject;
-import de.github.propra13.views.objects.WallObject;
+import de.propra13.Main;
+import de.propra13.controllers.GameController;
+import de.propra13.models.Room;
+import de.propra13.views.objects.FireballObject;
+import de.propra13.views.objects.GameObject;
+import de.propra13.views.objects.GoalObject;
+import de.propra13.views.objects.PlayerObject;
+import de.propra13.views.objects.StartObject;
+import de.propra13.views.objects.WallObject;
 
 public class GameFieldView extends JPanel implements Runnable {
 

@@ -1,4 +1,4 @@
-package de.github.propra13;
+package de.propra13;
 
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -7,10 +7,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import de.github.propra13.controllers.GameController;
-import de.github.propra13.controllers.LostController;
-import de.github.propra13.controllers.MenuController;
-import de.github.propra13.controllers.WinController;
+import de.propra13.controllers.GameController;
+import de.propra13.controllers.LostController;
+import de.propra13.controllers.MenuController;
+import de.propra13.controllers.WinController;
 
 public class Main extends JFrame {
 

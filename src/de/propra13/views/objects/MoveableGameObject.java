@@ -1,9 +1,9 @@
-package de.github.propra13.views.objects;
+package de.propra13.views.objects;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
 
-import de.github.propra13.models.Room;
+import de.propra13.models.Room;
 
 public class MoveableGameObject extends GameObject {
 
