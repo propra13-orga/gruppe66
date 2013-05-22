@@ -8,7 +8,7 @@ import javax.swing.Timer;
 public class Fireball {
 
     private int reloadTime = 1;
-    private int damage = 10;
+    private int damage = 35;
 
     private boolean reloads = false;
 
