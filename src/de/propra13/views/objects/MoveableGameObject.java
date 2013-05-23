@@ -23,9 +23,9 @@ public class MoveableGameObject extends GameObject {
         this.y = scale(y);
     }
 
-    public void move(Dimension size, Room room) {
+    public void move(Dimension gameFieldSize, Room room) {
         int oldx = x, oldy = y;
-        Rectangle field = new Rectangle(size);
+        Rectangle field = new Rectangle(gameFieldSize);
 
         x += vx;
         y += vy;
@@ -33,11 +33,11 @@ public class MoveableGameObject extends GameObject {
         if (!field.contains(new Rectangle(x, y, width, height))) {
             if (x < 1)
                 collidedLeft(oldx);
-            if (x + width >= size.width)
+            if (x + width >= gameFieldSize.width)
                 collidedRight(oldx);
             if (y < 1)
                 collidedTop(oldy);
-            if (y + height >= size.height)
+            if (y + height >= gameFieldSize.height)
                 collidedBottom(oldy);
         }
 
