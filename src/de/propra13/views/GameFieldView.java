@@ -181,18 +181,16 @@ public class GameFieldView extends JPanel implements Runnable {
         Color orange = new Color(0xff, 0x99, 0x00);
         Color red = Color.red;
 
-        if (health >= 70) {
-            return mixColor(green, yellow, (health - 70) / (100 - 70));
-        }
+        if (health >= 70)
+            return mixColor(green, yellow, health, 100, 70);
+        if (health < 70 && health >= 40)
+            return mixColor(yellow, orange, health, 70, 40);
 
-        if (health < 70 && health >= 40) {
-            return mixColor(yellow, orange, (health - 40) / (70 - 40));
-        }
-
-        return mixColor(orange, red, health / 40);
+        return mixColor(orange, red, health, 40, 0);
     }
 
-    private Color mixColor(Color c1, Color c2, double ratio) {
+    private Color mixColor(Color c1, Color c2, double health, int high, int low) {
+    	double ratio = (health - low) / (high - low);
 
         int r = (int) (c1.getRed() * ratio + c2.getRed() * (1 - ratio));
         int g = (int) (c1.getGreen() * ratio + c2.getGreen() * (1 - ratio));
