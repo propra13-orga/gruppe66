@@ -110,4 +110,9 @@ public class Room extends Model {
         return name;
     }
 
+    public void movePlayerToStart() {
+        playerObject.setMoved(false);
+        playerObject.moveTo(start);
+    }
+
 }

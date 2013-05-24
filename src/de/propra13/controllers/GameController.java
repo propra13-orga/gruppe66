@@ -124,8 +124,13 @@ public class GameController extends Controller implements KeyListener,
 
     public void checkHealthOfPlayer() {
         if (player.isDead()) {
-            resetGame();
-            showView(LostController.CONTROLLERTAG);
+            if (player.hasLives()) {
+                player.die();
+                getCurrentRoom().movePlayerToStart();
+            } else {
+                resetGame();
+                showView(LostController.CONTROLLERTAG);
+            }
         }
     }
 

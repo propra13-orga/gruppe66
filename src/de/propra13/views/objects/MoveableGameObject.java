@@ -19,9 +19,9 @@ public class MoveableGameObject extends GameObject {
         super(image, x, y);
     }
 
-    public void moveTo(int x, int y) {
-        this.x = scale(x);
-        this.y = scale(y);
+    public void moveTo(GameObject ob) {
+        this.x = ob.getX();
+        this.y = ob.getY();
     }
 
     public void move(Dimension gameFieldSize, Room room) {
