@@ -150,6 +150,8 @@ public class GameController extends Controller implements KeyListener,
     public void keyPressed(KeyEvent event) {
         if (event.getKeyCode() == KeyEvent.VK_ESCAPE) {
             showView(MenuController.CONTROLLERTAG);
+        } else if (event.getKeyCode() == KeyEvent.VK_L) {
+            advanceLevel();
         } else {
             getCurrentRoom().getPlayerObject().keyPressed(event);
         }
