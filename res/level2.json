@@ -1,0 +1,9 @@
+{
+	"name": "Zombie's Crib",
+	"theme": "dungeon",
+	"rooms": [
+		{ "name": "Garage", "file": "room2.krm"},
+		{ "name": "Poolhouse", "file": "room3.krm"},
+		{ "name": "The Attic", "file": "room1.krm" }
+	]
+}

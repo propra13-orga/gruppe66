@@ -59,6 +59,7 @@ public class GameController extends Controller implements KeyListener,
         levels = new ArrayList<Level>();
         try {
             addLevel(new Level("level1.json", this, player));
+            addLevel(new Level("level2.json", this, player));
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
@@ -75,9 +76,17 @@ public class GameController extends Controller implements KeyListener,
     }
 
     public void advanceRoom() {
-        if (currentRoom + 1 < levels.get(currentLevel).getRooms().size())
+        if (currentRoom + 1 < getCurrentLevel().getRooms().size())
             setRoom(currentRoom + 1);
         else {
+            advanceLevel();
+        }
+    }
+
+    public void advanceLevel() {
+        if (currentLevel + 1 < levels.size()) {
+            setLevel(currentLevel + 1);
+        } else {
             resetGame();
             showView(WinController.CONTROLLERTAG);
         }
@@ -94,6 +103,11 @@ public class GameController extends Controller implements KeyListener,
 
     private Room getCurrentRoom() {
         return getCurrentLevel().getRooms().get(currentRoom);
+    }
+
+    private void setLevel(int level) {
+        currentLevel = level;
+        setRoom(0);
     }
 
     private void setRoom(int room) {
