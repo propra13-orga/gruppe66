@@ -1,0 +1,9 @@
+{
+	"name": "Slaughter House",
+	"theme": "dungeon",
+	"rooms": [
+		{ "name": "Counter", "file": "room1.krm" },
+		{ "name": "Butchers Office", "file": "room2.krm"},
+		{ "name": "Graveyard", "file": "room3.krm"}
+	]
+}

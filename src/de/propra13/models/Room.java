@@ -1,8 +1,5 @@
 package de.propra13.models;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -13,7 +10,9 @@ import de.propra13.views.objects.StartObject;
 import de.propra13.views.objects.Theme;
 import de.propra13.views.objects.WallObject;
 
-public class Room {
+public class Room extends Model {
+
+    private String name;
 
     private Player player;
 
@@ -28,51 +27,43 @@ public class Room {
         this.walls = walls;
     }
 
-    public Room(Player player, String fileName, Theme theme) {
+    public Room(Player player, String name, String fileName, Theme theme)
+            throws IOException {
+        this.name = name;
         this.player = player;
 
         ArrayList<WallObject> walls = new ArrayList<WallObject>();
         ArrayList<FireballObject> balls = new ArrayList<FireballObject>();
-        try {
-            FileReader file = new FileReader(fileName);
-            BufferedReader reader = new BufferedReader(file);
+        String roomString = readStringFromFile(fileName);
 
-            String line = reader.readLine();
-            int y = 0;
-            do {
-                char[] chars = line.toCharArray();
-                int x = 0;
-                for (char c : chars) {
-                    switch (c) {
-                    case '#':
-                        walls.add(new WallObject(x, y, theme));
-                        break;
-                    case 'S':
-                        start = new StartObject(x, y, theme);
-                        playerObject = new PlayerObject(this.player, x, y,
-                                theme);
-                        break;
-                    case 'G':
-                        goal = new GoalObject(x, y, theme);
-                        break;
-                    case 'F':
-                        balls.add(new FireballObject(new Fireball(), x, y,
-                                theme));
-                        break;
-                    }
-                    x++;
+        String[] lines = roomString.split("\\n");
+        int y = 0;
+        for (String line : lines) {
+            char[] chars = line.toCharArray();
+            int x = 0;
+            for (char c : chars) {
+                switch (c) {
+                case '#':
+                    walls.add(new WallObject(x, y, theme));
+                    break;
+                case 'S':
+                    start = new StartObject(x, y, theme);
+                    playerObject = new PlayerObject(this.player, x, y, theme);
+                    break;
+                case 'G':
+                    goal = new GoalObject(x, y, theme);
+                    break;
+                case 'F':
+                    balls.add(new FireballObject(new Fireball(), x, y, theme));
+                    break;
                 }
-                y++;
-            } while ((line = reader.readLine()) != null);
-
-            this.walls = walls;
-            this.balls = balls;
-            reader.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        } catch (IOException e) {
-            e.printStackTrace();
+                x++;
+            }
+            y++;
         }
+
+        this.walls = walls;
+        this.balls = balls;
     }
 
     public PlayerObject getPlayerObject() {
@@ -113,6 +104,10 @@ public class Room {
 
     public void setGoal(GoalObject goal) {
         this.goal = goal;
+    }
+
+    public String getName() {
+        return name;
     }
 
 }
