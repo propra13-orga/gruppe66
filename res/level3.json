@@ -1,0 +1,9 @@
+{
+	"name": "Sanatorium",
+	"theme": "dungeon",
+	"rooms": [
+		{ "name": "Rubber Room", "file": "room1.krm"},
+		{ "name": "Canteen", "file": "room3.krm"},
+		{ "name": "Bloody Cellar", "file": "room4.krm" }
+	]
+}

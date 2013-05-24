@@ -60,6 +60,7 @@ public class GameController extends Controller implements KeyListener,
         try {
             addLevel(new Level("level1.json", this, player));
             addLevel(new Level("level2.json", this, player));
+            addLevel(new Level("level3.json", this, player));
         } catch (JSONException e) {
             e.printStackTrace();
         } catch (IOException e) {
