@@ -16,7 +16,11 @@ public class Player {
     }
 
     public void setHealth(double health) {
-        this.health = health;
+        this.health = Math.min(MAXHEALTH, health);
+    }
+
+    public void addHealth(double health) {
+        setHealth(this.health + health);
     }
 
     public boolean isDead() {
