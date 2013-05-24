@@ -17,6 +17,7 @@ public class Model {
             buffer.append(line + "\n");
             line = reader.readLine();
         }
+        reader.close();
 
         return buffer.toString();
     }
