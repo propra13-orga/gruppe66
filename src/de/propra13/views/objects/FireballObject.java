@@ -21,6 +21,14 @@ public class FireballObject extends MoveableGameObject {
     public void move(Dimension size, Room room, PlayerObject playerObject) {
         move(size, room);
 
+        if (Math.random() > 0.9975) {
+            vx *= -1;
+        }
+
+        if (Math.random() > 0.9775) {
+            vy *= -1;
+        }
+
         if (playerObject.getBounds().contains(getBounds()))
             fireball.inflictDamageOn(playerObject.getPlayer());
 
