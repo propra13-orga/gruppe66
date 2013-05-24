@@ -1,9 +1,9 @@
 package de.propra13.views.objects;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.Rectangle;
-
-import javax.swing.ImageIcon;
+import java.awt.image.ImageObserver;
 
 import de.propra13.views.GameFieldView;
 
@@ -16,13 +16,12 @@ public class GameObject {
 
     protected Image image;
 
-    public GameObject(String imageName) {
-        this(imageName, 1, 1);
+    public GameObject(Image image) {
+        this(image, 1, 1);
     }
 
-    public GameObject(String imageName, int x, int y) {
-        ImageIcon icon = new ImageIcon(imageName);
-        image = icon.getImage();
+    public GameObject(Image image, int x, int y) {
+        this.image = image;
 
         width = image.getWidth(null);
         height = image.getHeight(null);

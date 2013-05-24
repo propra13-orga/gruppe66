@@ -1,6 +1,7 @@
 package de.propra13.views.objects;
 
 import java.awt.Dimension;
+import java.awt.Image;
 import java.awt.Rectangle;
 
 import de.propra13.models.Room;
@@ -10,12 +11,12 @@ public class MoveableGameObject extends GameObject {
     protected int vx;
     protected int vy;
 
-    public MoveableGameObject(String imageName) {
-        super(imageName);
+    public MoveableGameObject(Image image) {
+        super(image);
     }
 
-    public MoveableGameObject(String imageName, int x, int y) {
-        super(imageName, x, y);
+    public MoveableGameObject(Image image, int x, int y) {
+        super(image, x, y);
     }
 
     public void moveTo(int x, int y) {

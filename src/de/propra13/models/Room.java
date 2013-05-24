@@ -10,6 +10,7 @@ import de.propra13.views.objects.FireballObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.PlayerObject;
 import de.propra13.views.objects.StartObject;
+import de.propra13.views.objects.Theme;
 import de.propra13.views.objects.WallObject;
 
 public class Room {
@@ -27,7 +28,7 @@ public class Room {
         this.walls = walls;
     }
 
-    public Room(Player player, String fileName) {
+    public Room(Player player, String fileName, Theme theme) {
         this.player = player;
 
         ArrayList<WallObject> walls = new ArrayList<WallObject>();
@@ -44,17 +45,19 @@ public class Room {
                 for (char c : chars) {
                     switch (c) {
                     case '#':
-                        walls.add(new WallObject(x, y));
+                        walls.add(new WallObject(x, y, theme));
                         break;
                     case 'S':
-                        start = new StartObject(x, y);
-                        playerObject = new PlayerObject(this.player, x, y);
+                        start = new StartObject(x, y, theme);
+                        playerObject = new PlayerObject(this.player, x, y,
+                                theme);
                         break;
                     case 'G':
-                        goal = new GoalObject(x, y);
+                        goal = new GoalObject(x, y, theme);
                         break;
                     case 'F':
-                        balls.add(new FireballObject(new Fireball(), x, y));
+                        balls.add(new FireballObject(new Fireball(), x, y,
+                                theme));
                         break;
                     }
                     x++;

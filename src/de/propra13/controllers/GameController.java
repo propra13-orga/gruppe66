@@ -14,6 +14,7 @@ import de.propra13.Main;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
+import de.propra13.views.objects.Theme;
 
 public class GameController extends Controller implements KeyListener,
         ComponentListener {
@@ -21,6 +22,8 @@ public class GameController extends Controller implements KeyListener,
     static final String CONTROLLERTAG = "gameController";
 
     private GameFieldView game;
+
+    private Theme theme;
 
     private ArrayList<Room> rooms;
     private int currentRoom;
@@ -34,9 +37,10 @@ public class GameController extends Controller implements KeyListener,
     }
 
     protected void initialize() {
+        theme = new Theme("dungeon");
         initPlayerAndRooms();
 
-        game = new GameFieldView(this);
+        game = new GameFieldView(this, theme);
         game.addKeyListener(this);
         game.setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
 
@@ -48,9 +52,12 @@ public class GameController extends Controller implements KeyListener,
         player = new Player();
 
         rooms = new ArrayList<Room>();
-        addRoom(new Room(player, "res/rooms/room1.krm"));
-        addRoom(new Room(player, "res/rooms/room2.krm"));
-        addRoom(new Room(player, "res/rooms/room3.krm"));
+        addRoom(new Room(player, "res/leveltheme/dungeon/rooms/room1.krm",
+                theme));
+        addRoom(new Room(player, "res/leveltheme/dungeon/rooms/room2.krm",
+                theme));
+        addRoom(new Room(player, "res/leveltheme/dungeon/rooms/room3.krm",
+                theme));
     }
 
     public ArrayList<Room> getRooms() {

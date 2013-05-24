@@ -9,7 +9,6 @@ import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.util.ArrayList;
 
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 import de.propra13.Main;
@@ -19,6 +18,7 @@ import de.propra13.views.objects.FireballObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.PlayerObject;
 import de.propra13.views.objects.StartObject;
+import de.propra13.views.objects.Theme;
 import de.propra13.views.objects.WallObject;
 
 public class GameFieldView extends JPanel implements Runnable {
@@ -35,6 +35,7 @@ public class GameFieldView extends JPanel implements Runnable {
     private ArrayList<FireballObject> balls;
 
     private Room currentRoom;
+    private Theme theme;
 
     private int delay = 10;
 
@@ -47,9 +48,9 @@ public class GameFieldView extends JPanel implements Runnable {
 
     private GameController controller;
 
-    public GameFieldView(GameController controller) {
+    public GameFieldView(GameController controller, Theme theme) {
         super();
-
+        this.theme = theme;
         initComponent();
         initRenderingHints();
 
@@ -141,8 +142,7 @@ public class GameFieldView extends JPanel implements Runnable {
 
     private void drawFloor(Graphics2D gfx) {
         Dimension dim = getSize();
-        ImageIcon icon = new ImageIcon("res/floor.jpg");
-        Image image = icon.getImage();
+        Image image = theme.getFloorImage();
         int width = image.getWidth(this);
         int height = image.getHeight(this);
 
