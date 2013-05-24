@@ -33,6 +33,10 @@ public class GameObject {
                 / 2);
     }
 
+    public void draw(Graphics2D gfx, ImageObserver ob) {
+        gfx.drawImage(getImage(), getX(), getY(), ob);
+    }
+
     public int getX() {
         return x;
     }

@@ -16,7 +16,6 @@ import de.propra13.Main;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Room;
 import de.propra13.views.objects.FireballObject;
-import de.propra13.views.objects.GameObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.PlayerObject;
 import de.propra13.views.objects.StartObject;
@@ -123,11 +122,11 @@ public class GameFieldView extends JPanel implements Runnable {
     }
 
     private void drawStart(Graphics2D gfx) {
-        drawGameObject(gfx, start);
+        start.draw(gfx, this);
     }
 
     private void drawGoal(Graphics2D gfx) {
-        drawGameObject(gfx, goal);
+        goal.draw(gfx, this);
     }
 
     private void clearAndSetRenderingHints(Graphics2D gfx) {
@@ -155,63 +154,19 @@ public class GameFieldView extends JPanel implements Runnable {
     }
 
     private void drawPlayer(Graphics2D gfx) {
-        drawGameObject(gfx, playerObject);
-        if (playerObject.getPlayer().isWounded())
-            drawPlayerHealthBar(gfx, playerObject);
-    }
+        playerObject.draw(gfx, this);
 
-    private void drawPlayerHealthBar(Graphics2D gfx, PlayerObject playerObject) {
-        double health = playerObject.getPlayer().getHealth();
-        int width = (int) (playerObject.getWidth() * (health / 100));
-        int height = 2;
-
-        gfx.setPaint(Color.black);
-        gfx.fillRect(playerObject.getX(), playerObject.getY() - height,
-                playerObject.getWidth(), height);
-
-        gfx.setPaint(healthColor(health));
-        gfx.fillRect(playerObject.getX(), playerObject.getY() - height, width,
-                height);
-    }
-
-    private Color healthColor(double health) {
-        health = Math.max(0, health);
-        Color green = Color.green;
-        Color yellow = Color.yellow;
-        Color orange = new Color(0xff, 0x99, 0x00);
-        Color red = Color.red;
-
-        if (health >= 70)
-            return mixColor(green, yellow, health, 100, 70);
-        if (health < 70 && health >= 40)
-            return mixColor(yellow, orange, health, 70, 40);
-
-        return mixColor(orange, red, health, 40, 0);
-    }
-
-    private Color mixColor(Color c1, Color c2, double health, int high, int low) {
-    	double ratio = (health - low) / (high - low);
-
-        int r = (int) (c1.getRed() * ratio + c2.getRed() * (1 - ratio));
-        int g = (int) (c1.getGreen() * ratio + c2.getGreen() * (1 - ratio));
-        int b = (int) (c1.getBlue() * ratio + c2.getBlue() * (1 - ratio));
-
-        return new Color(r, g, b);
-    }
-
-    private void drawGameObject(Graphics2D gfx, GameObject o) {
-        gfx.drawImage(o.getImage(), o.getX(), o.getY(), this);
     }
 
     private void drawWalls(Graphics2D gfx) {
         for (WallObject wall : walls) {
-            drawGameObject(gfx, wall);
+            wall.draw(gfx, this);
         }
     }
 
     private void drawBalls(Graphics2D gfx) {
         for (FireballObject ball : balls) {
-            drawGameObject(gfx, ball);
+            ball.draw(gfx, this);
         }
     }
 
