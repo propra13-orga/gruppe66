@@ -1,9 +1,9 @@
 {
-	"name": "Sanatorium",
-	"theme": "dungeon",
+	"name": "Graveyard",
+	"theme": "graveyard",
 	"rooms": [
-		{ "name": "Rubber Room", "file": "room1.krm"},
-		{ "name": "Canteen", "file": "room3.krm"},
-		{ "name": "Bloody Cellar", "file": "room4.krm" }
+		{ "name": "Open Field", "file": "room1.krm"},
+		{ "name": "Grave", "file": "room3.krm"},
+		{ "name": "Tomb", "file": "room4.krm" }
 	]
 }
