@@ -1,5 +1,7 @@
 package de.propra13.views.objects;
 
+import de.propra13.models.Theme;
+
 public class GoalObject extends GameObject {
 
     public GoalObject(int x, int y, Theme theme) {

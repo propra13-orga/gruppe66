@@ -9,6 +9,7 @@ import java.awt.image.ImageObserver;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
+import de.propra13.models.Theme;
 
 public class PlayerObject extends MoveableGameObject {
 

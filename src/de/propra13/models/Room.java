@@ -7,7 +7,6 @@ import de.propra13.views.objects.FireballObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.PlayerObject;
 import de.propra13.views.objects.StartObject;
-import de.propra13.views.objects.Theme;
 import de.propra13.views.objects.WallObject;
 
 public class Room extends Model {

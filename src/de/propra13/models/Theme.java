@@ -1,4 +1,4 @@
-package de.propra13.views.objects;
+package de.propra13.models;
 
 import java.awt.Image;
 

@@ -14,11 +14,11 @@ import javax.swing.JPanel;
 import de.propra13.Main;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Room;
+import de.propra13.models.Theme;
 import de.propra13.views.objects.FireballObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.PlayerObject;
 import de.propra13.views.objects.StartObject;
-import de.propra13.views.objects.Theme;
 import de.propra13.views.objects.WallObject;
 
 public class GameFieldView extends JPanel {
