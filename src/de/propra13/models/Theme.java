@@ -1,4 +1,4 @@
-package de.propra13.views.objects;
+package de.propra13.models;
 
 import java.awt.Image;
 
@@ -12,6 +12,7 @@ public class Theme {
     private Image fireballImage;
     private Image wallImage;
     private Image floorImage;
+    private Image weaponImage;
 
     private String themeName;
 
@@ -23,6 +24,7 @@ public class Theme {
         fireballImage = initImage("fireball.png");
         wallImage = initImage("wall1.jpg");
         floorImage = initImage("floor.jpg");
+        weaponImage = initImage("sword.png");
     }
 
     private Image initImage(String fileName) {
@@ -53,6 +55,10 @@ public class Theme {
 
     public Image getWallImage() {
         return wallImage;
+    }
+
+    public Image getWeaponImage() {
+        return weaponImage;
     }
 
 }

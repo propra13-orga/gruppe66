@@ -5,10 +5,11 @@ import java.util.ArrayList;
 
 import de.propra13.views.objects.FireballObject;
 import de.propra13.views.objects.GoalObject;
+import de.propra13.views.objects.ItemObject;
 import de.propra13.views.objects.PlayerObject;
 import de.propra13.views.objects.StartObject;
-import de.propra13.views.objects.Theme;
 import de.propra13.views.objects.WallObject;
+import de.propra13.views.objects.WeaponObject;
 
 public class Room extends Model {
 
@@ -21,6 +22,7 @@ public class Room extends Model {
     private PlayerObject playerObject;
     private ArrayList<WallObject> walls;
     private ArrayList<FireballObject> balls;
+    private ArrayList<ItemObject> items;
 
     public Room(PlayerObject playerObject, ArrayList<WallObject> walls) {
         this.playerObject = playerObject;
@@ -34,6 +36,7 @@ public class Room extends Model {
 
         ArrayList<WallObject> walls = new ArrayList<WallObject>();
         ArrayList<FireballObject> balls = new ArrayList<FireballObject>();
+        ArrayList<ItemObject> items = new ArrayList<ItemObject>();
         String roomString = readStringFromFile(fileName);
 
         String[] lines = roomString.split("\\n");
@@ -56,6 +59,8 @@ public class Room extends Model {
                 case 'F':
                     balls.add(new FireballObject(new Fireball(), x, y, theme));
                     break;
+                case 'W':
+                    items.add(new WeaponObject(new Weapon(), x, y, theme));
                 }
                 x++;
             }
@@ -64,6 +69,7 @@ public class Room extends Model {
 
         this.walls = walls;
         this.balls = balls;
+        this.items = items;
     }
 
     public PlayerObject getPlayerObject() {
@@ -90,6 +96,10 @@ public class Room extends Model {
         this.balls = balls;
     }
 
+    public ArrayList<ItemObject> getItems() {
+        return items;
+    }
+
     public StartObject getStart() {
         return start;
     }
@@ -113,6 +123,10 @@ public class Room extends Model {
     public void movePlayerToStart() {
         playerObject.setMoved(false);
         playerObject.moveTo(start);
+    }
+
+    public void removeItem(ItemObject item) {
+        items.remove(item);
     }
 
 }

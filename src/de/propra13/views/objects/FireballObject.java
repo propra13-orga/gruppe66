@@ -4,6 +4,7 @@ import java.awt.Dimension;
 
 import de.propra13.models.Fireball;
 import de.propra13.models.Room;
+import de.propra13.models.Theme;
 
 public class FireballObject extends MoveableGameObject {
 

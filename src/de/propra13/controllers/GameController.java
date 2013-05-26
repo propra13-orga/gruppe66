@@ -18,9 +18,9 @@ import de.propra13.Main;
 import de.propra13.models.Level;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
+import de.propra13.models.Theme;
 import de.propra13.views.GameFieldView;
 import de.propra13.views.objects.FireballObject;
-import de.propra13.views.objects.Theme;
 
 public class GameController extends Controller implements KeyListener,
         ComponentListener, Runnable {
@@ -240,9 +240,7 @@ public class GameController extends Controller implements KeyListener,
                 public void run() {
                     turn();
                     game.repaint();
-
                     checkHealthOfPlayer();
-
                 }
 
             });

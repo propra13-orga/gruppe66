@@ -5,10 +5,12 @@ import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.event.KeyEvent;
 import java.awt.image.ImageObserver;
+import java.util.ArrayList;
 
 import de.propra13.controllers.GameController;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
+import de.propra13.models.Theme;
 
 public class PlayerObject extends MoveableGameObject {
 
@@ -32,6 +34,23 @@ public class PlayerObject extends MoveableGameObject {
 
         if (!leftSpawnPoint && !isOnStartIn(room) && !isOnGoalIn(room))
             leftSpawnPoint = true;
+
+        ArrayList<ItemObject> items = searchItemsIn(room);
+        for (ItemObject item : items) {
+            player.pickUpItem(item.getItem());
+        }
+    }
+
+    private ArrayList<ItemObject> searchItemsIn(Room room) {
+        ArrayList<ItemObject> items = new ArrayList<ItemObject>();
+        for (ItemObject item : room.getItems()) {
+            if (item.getBounds().intersects(getBounds())) {
+                items.add(item);
+            }
+        }
+
+        room.getItems().removeAll(items);
+        return items;
     }
 
     @Override

@@ -14,11 +14,12 @@ import javax.swing.JPanel;
 import de.propra13.Main;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Room;
+import de.propra13.models.Theme;
 import de.propra13.views.objects.FireballObject;
 import de.propra13.views.objects.GoalObject;
+import de.propra13.views.objects.ItemObject;
 import de.propra13.views.objects.PlayerObject;
 import de.propra13.views.objects.StartObject;
-import de.propra13.views.objects.Theme;
 import de.propra13.views.objects.WallObject;
 
 public class GameFieldView extends JPanel {
@@ -33,6 +34,7 @@ public class GameFieldView extends JPanel {
 
     private ArrayList<WallObject> walls;
     private ArrayList<FireballObject> balls;
+    private ArrayList<ItemObject> items;
 
     private Room currentRoom;
     private Theme theme;
@@ -76,6 +78,7 @@ public class GameFieldView extends JPanel {
         this.playerObject = currentRoom.getPlayerObject();
         this.walls = currentRoom.getWalls();
         this.balls = currentRoom.getBalls();
+        this.items = currentRoom.getItems();
 
         this.playerObject.setMoved(false);
     }
@@ -100,6 +103,7 @@ public class GameFieldView extends JPanel {
 
             drawPlayer(gfx);
             drawBalls(gfx);
+            drawItems(gfx);
 
             if (drawsGrid)
                 drawGrid(gfx);
@@ -157,6 +161,12 @@ public class GameFieldView extends JPanel {
         }
     }
 
+    private void drawItems(Graphics2D gfx) {
+        for (ItemObject item : items) {
+            item.draw(gfx, this);
+        }
+    }
+
     private void drawGrid(Graphics2D gfx) {
         gfx.setPaint(Color.WHITE);
         Dimension dim = getSize();
@@ -165,11 +175,11 @@ public class GameFieldView extends JPanel {
         for (int y = GRID; y < dim.height; y += GRID)
             gfx.drawLine(0, y, Main.WIDTH, y);
     }
-    
+
     public ArrayList<FireballObject> getBalls() {
         return balls;
     }
-    
+
     public PlayerObject getPlayerObject() {
         return playerObject;
     }
