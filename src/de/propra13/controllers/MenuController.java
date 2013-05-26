@@ -13,6 +13,7 @@ public class MenuController extends Controller {
 
     private static final String NEWGAME = "newGame";
     private static final String CLOSE = "close";
+    private static final String NEWNETWORK = "newNetworkGame";
 
     protected JPanel buttonPanel;
 
@@ -31,12 +32,17 @@ public class MenuController extends Controller {
         newGameButton.setMnemonic(KeyEvent.VK_N);
         newGameButton.setActionCommand(NEWGAME);
 
+        JButton networkGameButton = new JButton("Neues Netzwerkspiel");
+        networkGameButton.setMnemonic(KeyEvent.VK_S);
+        networkGameButton.setActionCommand(NEWNETWORK);
+
         JButton closeButton = new JButton("Beenden");
         closeButton.setMnemonic(KeyEvent.VK_B);
         closeButton.setActionCommand(CLOSE);
 
         addButton(newGameButton);
         addButton(closeButton);
+        addButton(networkGameButton);
     }
 
     protected void addButton(JButton button) {
@@ -52,6 +58,9 @@ public class MenuController extends Controller {
             break;
         case NEWGAME:
             transitionTo(GameController.class.getSimpleName());
+            break;
+        case NEWNETWORK:
+            transitionTo(NetworkGameMenuController.class.getSimpleName());
             break;
         }
     }
