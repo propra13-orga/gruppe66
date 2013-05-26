@@ -7,10 +7,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.SwingUtilities;
 
-import de.propra13.controllers.GameController;
-import de.propra13.controllers.LostController;
-import de.propra13.controllers.MenuController;
-import de.propra13.controllers.WinController;
+import de.propra13.controllers.ControllerFactory;
 
 public class Main extends JFrame {
 
@@ -25,16 +22,19 @@ public class Main extends JFrame {
     public static void main(String args[]) {
         SwingUtilities.invokeLater(new Runnable() {
             public void run() {
-                new Main();
+                new Main(new ControllerFactory());
             }
         });
     }
 
-    public Main() {
+    public Main(ControllerFactory factory) {
         getContentPane().setLayout(new CardLayout());
         getContentPane().setPreferredSize(
                 new Dimension(Main.WIDTH, Main.HEIGHT));
-        createViewsFor((JPanel) getContentPane());
+
+        factory.initControllers(this);
+        factory.appendAllToPanel((JPanel) getContentPane());
+
         initRootWindow();
     }
 
@@ -45,19 +45,5 @@ public class Main extends JFrame {
         setResizable(false);
         setVisible(true);
         pack();
-    }
-
-    private void createViewsFor(JPanel panel) {
-        MenuController menuController = new MenuController(this);
-        menuController.appendViewTo(panel);
-
-        GameController gameController = new GameController(this);
-        gameController.appendViewTo(panel);
-
-        LostController lostController = new LostController(this);
-        lostController.appendViewTo(panel);
-
-        WinController winController = new WinController(this);
-        winController.appendViewTo(panel);
     }
 }

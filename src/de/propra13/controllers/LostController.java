@@ -8,10 +8,8 @@ import de.propra13.views.ImageView;
 
 public class LostController extends MenuController {
 
-    static final String CONTROLLERTAG = "lostController";
-
-    public LostController(JFrame root) {
-        super(root);
+    public LostController(ControllerFactory cf, JFrame root) {
+        super(cf, root);
     }
 
     @Override
@@ -21,10 +19,5 @@ public class LostController extends MenuController {
         ImageView image = new ImageView("res/problem.png");
         image.setPreferredSize(new Dimension(500, 418));
         view.add(image);
-    }
-
-    @Override
-    protected String getTag() {
-        return CONTROLLERTAG;
     }
 }

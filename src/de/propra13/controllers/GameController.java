@@ -25,8 +25,6 @@ import de.propra13.views.objects.Theme;
 public class GameController extends Controller implements KeyListener,
         ComponentListener, Runnable {
 
-    static final String CONTROLLERTAG = "gameController";
-
     private GameFieldView game;
 
     private Theme theme;
@@ -44,8 +42,8 @@ public class GameController extends Controller implements KeyListener,
     private volatile boolean running;
     private Thread animator;
 
-    public GameController(JFrame rootWindow) {
-        super(rootWindow);
+    public GameController(ControllerFactory cf, JFrame rootWindow) {
+        super(cf, rootWindow);
     }
 
     protected void initialize() {
@@ -96,7 +94,7 @@ public class GameController extends Controller implements KeyListener,
             setLevel(currentLevel + 1);
         } else {
             resetGame();
-            showView(WinController.CONTROLLERTAG);
+            transitionTo(WinController.class.getSimpleName());
         }
     }
 
@@ -138,7 +136,7 @@ public class GameController extends Controller implements KeyListener,
                 getCurrentRoom().movePlayerToStart();
             } else {
                 resetGame();
-                showView(LostController.CONTROLLERTAG);
+                transitionTo(LostController.class.getSimpleName());
             }
         }
     }
@@ -160,15 +158,10 @@ public class GameController extends Controller implements KeyListener,
     }
 
     @Override
-    protected String getTag() {
-        return CONTROLLERTAG;
-    }
-
-    @Override
     public void keyPressed(KeyEvent event) {
         switch (event.getKeyCode()) {
         case KeyEvent.VK_ESCAPE:
-            showView(MenuController.CONTROLLERTAG);
+            transitionTo(MenuController.class.getSimpleName());
             break;
         case KeyEvent.VK_L:
             advanceLevel();

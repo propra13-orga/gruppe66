@@ -11,15 +11,13 @@ import javax.swing.JPanel;
 
 public class MenuController extends Controller {
 
-    static final String CONTROLLERTAG = "menuController";
-
     private static final String NEWGAME = "newGame";
     private static final String CLOSE = "close";
 
     protected JPanel buttonPanel;
 
-    public MenuController(JFrame rootWindow) {
-        super(rootWindow);
+    public MenuController(ControllerFactory cf, JFrame rootWindow) {
+        super(cf, rootWindow);
     }
 
     protected void initialize() {
@@ -48,15 +46,13 @@ public class MenuController extends Controller {
 
     @Override
     public void actionPerformed(ActionEvent event) {
-        if (CLOSE.equals(event.getActionCommand())) {
+        switch (event.getActionCommand()) {
+        case CLOSE:
             dispose();
-        } else if (NEWGAME.equals(event.getActionCommand())) {
-            showView(GameController.CONTROLLERTAG);
+            break;
+        case NEWGAME:
+            transitionTo(GameController.class.getSimpleName());
+            break;
         }
-    }
-
-    @Override
-    protected String getTag() {
-        return CONTROLLERTAG;
     }
 }

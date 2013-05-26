@@ -10,6 +10,8 @@ import javax.swing.JPanel;
 
 public abstract class Controller implements ActionListener {
 
+    private ControllerFactory controllerFactory;
+
     protected JFrame rootWindow;
 
     protected JPanel view;
@@ -18,7 +20,8 @@ public abstract class Controller implements ActionListener {
         return view;
     }
 
-    public Controller(JFrame root) {
+    public Controller(ControllerFactory controllerFactory, JFrame root) {
+        this.controllerFactory = controllerFactory;
         rootWindow = root;
 
         initView();
@@ -26,8 +29,6 @@ public abstract class Controller implements ActionListener {
     }
 
     abstract protected void initialize();
-
-    abstract protected String getTag();
 
     protected void initView() {
         view = new JPanel();
@@ -37,17 +38,31 @@ public abstract class Controller implements ActionListener {
         ((FlowLayout) view.getLayout()).setHgap(0);
     }
 
+    public ControllerFactory getControllerFactory() {
+        return controllerFactory;
+    }
+
     protected void dispose() {
         rootWindow.dispose();
     }
 
-    protected void showView(String view) {
+    protected void willAppear(Object... params) {
+    }
+
+    protected void willDisappear() {
+
+    }
+
+    protected void transitionTo(String controller, Object... params) {
         JPanel rootPanel = (JPanel) rootWindow.getContentPane();
         CardLayout layout = (CardLayout) rootPanel.getLayout();
-        layout.show(rootPanel, view);
+        willDisappear();
+        getControllerFactory().get(controller).willAppear(params);
+        layout.show(rootPanel, controller);
     }
 
     public void appendViewTo(JPanel panel) {
-        panel.add(view, getTag());
+        panel.add(view, getClass().getSimpleName());
+    }
     }
 }
