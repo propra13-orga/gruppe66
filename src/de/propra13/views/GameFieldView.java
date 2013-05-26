@@ -174,4 +174,8 @@ public class GameFieldView extends JPanel {
         return playerObject;
     }
 
+    public void setTheme(Theme theme) {
+        this.theme = theme;
+    }
+
 }

@@ -68,4 +68,8 @@ public class Level extends Model {
         return rooms;
     }
 
+    public Theme getTheme() {
+        return theme;
+    }
+
 }

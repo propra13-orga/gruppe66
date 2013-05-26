@@ -115,6 +115,8 @@ public class GameController extends Controller implements KeyListener,
 
     private void setLevel(int level) {
         currentLevel = level;
+
+        game.setTheme(getCurrentLevel().getTheme());
         setRoom(0);
     }
 
