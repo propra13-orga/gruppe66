@@ -125,4 +125,8 @@ public class Room extends Model {
         playerObject.moveTo(start);
     }
 
+    public void removeItem(ItemObject item) {
+        items.remove(item);
+    }
+
 }

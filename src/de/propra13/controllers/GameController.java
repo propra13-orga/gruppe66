@@ -247,9 +247,7 @@ public class GameController extends Controller implements KeyListener,
                 public void run() {
                     turn();
                     game.repaint();
-
                     checkHealthOfPlayer();
-
                 }
 
             });
