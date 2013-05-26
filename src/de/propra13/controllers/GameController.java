@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import org.json.JSONException;
 
@@ -18,10 +19,11 @@ import de.propra13.models.Level;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
+import de.propra13.views.objects.FireballObject;
 import de.propra13.views.objects.Theme;
 
 public class GameController extends Controller implements KeyListener,
-        ComponentListener {
+        ComponentListener, Runnable {
 
     static final String CONTROLLERTAG = "gameController";
 
@@ -36,6 +38,11 @@ public class GameController extends Controller implements KeyListener,
     private boolean gameHasStarted = false;
 
     private Player player;
+
+    private int delay = 10;
+
+    private volatile boolean running;
+    private Thread animator;
 
     public GameController(JFrame rootWindow) {
         super(rootWindow);
@@ -134,8 +141,12 @@ public class GameController extends Controller implements KeyListener,
         }
     }
 
+    public boolean isRunning() {
+        return running;
+    }
+
     private void resetGame() {
-        game.stop();
+        stop();
         gameHasStarted = false;
         initPlayerAndLevels();
         currentLevel = 0;
@@ -182,7 +193,7 @@ public class GameController extends Controller implements KeyListener,
 
     @Override
     public void componentHidden(ComponentEvent event) {
-        game.stop();
+        stop();
     }
 
     @Override
@@ -200,6 +211,55 @@ public class GameController extends Controller implements KeyListener,
             gameHasStarted = true;
         }
 
-        game.start();
+        start();
+    }
+
+    public void stop() {
+        running = false;
+        if (animator != null)
+            animator.interrupt();
+    }
+
+    public void start() {
+        game.requestFocusInWindow();
+        running = true;
+
+        animator = new Thread(this);
+        animator.start();
+    }
+
+    public void turn() {
+        game.getPlayerObject().move(game.getSize(), getCurrentRoom());
+
+        for (FireballObject ball : game.getBalls()) {
+            ball.move(game.getSize(), getCurrentRoom(), game.getPlayerObject());
+        }
+    }
+
+    @Override
+    public void run() {
+        long wait, oldTime = System.currentTimeMillis();
+        while (running) {
+            SwingUtilities.invokeLater(new Runnable() {
+                @Override
+                public void run() {
+                    turn();
+                    game.repaint();
+
+                    checkHealthOfPlayer();
+
+                }
+
+            });
+
+            wait = Math.max(delay - (System.currentTimeMillis() - oldTime), 2);
+
+            oldTime = System.currentTimeMillis();
+            try {
+                Thread.sleep(wait);
+            } catch (InterruptedException e) {
+                return;
+            }
+        }
     }
 }

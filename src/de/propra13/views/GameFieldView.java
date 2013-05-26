@@ -21,7 +21,7 @@ import de.propra13.views.objects.StartObject;
 import de.propra13.views.objects.Theme;
 import de.propra13.views.objects.WallObject;
 
-public class GameFieldView extends JPanel implements Runnable {
+public class GameFieldView extends JPanel {
 
     public static final int GRID = 50;
 
@@ -36,11 +36,6 @@ public class GameFieldView extends JPanel implements Runnable {
 
     private Room currentRoom;
     private Theme theme;
-
-    private int delay = 10;
-
-    private volatile boolean running;
-    private Thread animator;
 
     private RenderingHints rh;
 
@@ -88,21 +83,13 @@ public class GameFieldView extends JPanel implements Runnable {
     @Override
     public void removeNotify() {
         super.removeNotify();
-        stop();
-    }
-
-    public void turn() {
-        playerObject.move(getSize(), currentRoom);
-
-        for (FireballObject ball : balls) {
-            ball.move(getSize(), currentRoom, playerObject);
-        }
+        controller.stop();
     }
 
     @Override
     public void paintComponent(Graphics g) {
         super.paintComponents(g);
-        if (running) {
+        if (controller.isRunning()) {
             Graphics2D gfx = (Graphics2D) g;
 
             clearAndSetRenderingHints(gfx);
@@ -178,38 +165,13 @@ public class GameFieldView extends JPanel implements Runnable {
         for (int y = GRID; y < dim.height; y += GRID)
             gfx.drawLine(0, y, Main.WIDTH, y);
     }
-
-    public void stop() {
-        running = false;
-        if (animator != null)
-            animator.interrupt();
+    
+    public ArrayList<FireballObject> getBalls() {
+        return balls;
+    }
+    
+    public PlayerObject getPlayerObject() {
+        return playerObject;
     }
 
-    public void start() {
-        requestFocusInWindow();
-        running = true;
-
-        animator = new Thread(this);
-        animator.start();
-    }
-
-    @Override
-    public void run() {
-        long wait, oldTime = System.currentTimeMillis();
-        while (running) {
-            turn();
-            repaint();
-
-            controller.checkHealthOfPlayer();
-
-            wait = Math.max(delay - (System.currentTimeMillis() - oldTime), 2);
-
-            oldTime = System.currentTimeMillis();
-            try {
-                Thread.sleep(wait);
-            } catch (InterruptedException e) {
-                return;
-            }
-        }
-    }
 }
