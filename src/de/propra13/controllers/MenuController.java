@@ -64,4 +64,12 @@ public class MenuController extends Controller {
             break;
         }
     }
+
+    @Override
+    protected void willAppear(Object... params) {
+    }
+
+    @Override
+    protected void willDisappear() {
+    }
 }

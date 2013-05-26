@@ -39,7 +39,7 @@ public class NetworkGameMenuController extends Controller {
         JButton clientButton = new JButton("Am Spiel teilnehmen");
         clientButton.setActionCommand(JOIN);
 
-        JButton backButton = new JButton("Zurück");
+        JButton backButton = new JButton("Zum Startbildschirm");
         backButton.setActionCommand(BACK);
 
         backButton.addActionListener(this);
@@ -49,5 +49,13 @@ public class NetworkGameMenuController extends Controller {
         view.add(serverButton);
         view.add(clientButton);
         view.add(backButton);
+    }
+
+    @Override
+    protected void willAppear(Object... params) {
+    }
+
+    @Override
+    protected void willDisappear() {
     }
 }

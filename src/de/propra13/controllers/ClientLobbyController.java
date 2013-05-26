@@ -19,16 +19,20 @@ public class ClientLobbyController extends Controller {
     }
 
     @Override
+    protected void initialize() {
+
+        addressLabel = new JLabel();
+
+        view.add(addressLabel);
+    }
+
+    @Override
     protected void willAppear(Object... params) {
         if (params.length > 0)
             addressLabel.setText(params[0].toString());
     }
 
     @Override
-    protected void initialize() {
-
-        addressLabel = new JLabel();
-
-        view.add(addressLabel);
+    protected void willDisappear() {
     }
 }

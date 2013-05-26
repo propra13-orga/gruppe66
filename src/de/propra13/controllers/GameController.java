@@ -255,4 +255,12 @@ public class GameController extends Controller implements KeyListener,
             }
         }
     }
+
+    @Override
+    protected void willAppear(Object... params) {
+    }
+
+    @Override
+    protected void willDisappear() {
+    }
 }
