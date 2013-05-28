@@ -151,6 +151,8 @@ public class GameController extends Controller implements KeyListener,
         initPlayerAndLevels();
         currentLevel = 0;
         currentRoom = 0;
+
+        game.setTheme(getCurrentLevel().getTheme());
     }
 
     @Override
