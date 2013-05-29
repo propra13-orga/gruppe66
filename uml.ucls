@@ -1,44 +1,44 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <class-diagram version="1.1.2" icons="true" always-add-relationships="false" generalizations="true" realizations="true" 
   associations="true" dependencies="false" nesting-relationships="true">  
-  <class id="1" language="java" name="de.propra13.Main" project="propra13" file="/propra13/src/de/propra13/Main.java" 
+  <class id="1" language="java" name="de.propra13.Main" project="gruppe66" file="/gruppe66/src/de/propra13/Main.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3692" y="224"/>    
+    <position height="-1" width="-1" x="3916" y="144"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="2" language="java" name="de.propra13.controllers.WinController" project="propra13" 
-    file="/propra13/src/de/propra13/controllers/WinController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="780" y="1783"/>    
+  <class id="2" language="java" name="de.propra13.controllers.WinController" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/controllers/WinController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="672" y="1101"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="3" language="java" name="de.propra13.controllers.NetworkGameMenuController" project="propra13" 
-    file="/propra13/src/de/propra13/controllers/NetworkGameMenuController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="245" y="1085"/>    
+  <class id="3" language="java" name="de.propra13.controllers.NetworkGameMenuController" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/controllers/NetworkGameMenuController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="243" y="837"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="4" language="java" name="de.propra13.controllers.ClientLobbyController" project="propra13" 
-    file="/propra13/src/de/propra13/controllers/ClientLobbyController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="-152" y="1075"/>    
+  <class id="4" language="java" name="de.propra13.controllers.ClientLobbyController" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/controllers/ClientLobbyController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="-87" y="819"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="5" language="java" name="de.propra13.controllers.Controller" project="propra13" 
-    file="/propra13/src/de/propra13/controllers/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="5" language="java" name="de.propra13.controllers.Controller" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/controllers/Controller.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="263" y="450"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -46,116 +46,116 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="6" language="java" name="de.propra13.controllers.MenuController" project="propra13" 
-    file="/propra13/src/de/propra13/controllers/MenuController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="565" y="1115"/>    
+  <class id="6" language="java" name="de.propra13.controllers.MenuController" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/controllers/MenuController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="564" y="855"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="7" language="java" name="de.propra13.controllers.LostController" project="propra13" 
-    file="/propra13/src/de/propra13/controllers/LostController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="352" y="1807"/>    
+  <class id="7" language="java" name="de.propra13.controllers.LostController" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/controllers/LostController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="411" y="1101"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="8" language="java" name="de.propra13.controllers.GameController" project="propra13" 
-    file="/propra13/src/de/propra13/controllers/GameController.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1056" y="932"/>    
+  <class id="8" language="java" name="de.propra13.controllers.GameController" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/controllers/GameController.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="960" y="842"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="9" language="java" name="de.propra13.controllers.ControllerFactory" project="propra13" 
-    file="/propra13/src/de/propra13/controllers/ControllerFactory.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="258" y="81"/>    
+  <class id="9" language="java" name="de.propra13.controllers.ControllerFactory" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/controllers/ControllerFactory.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="263" y="104"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="de.propra13.models.Weapon" project="propra13" 
-    file="/propra13/src/de/propra13/models/Weapon.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2303" y="1042"/>    
+  <class id="10" language="java" name="de.propra13.models.Weapon" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/models/Weapon.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2450" y="536"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="11" language="java" name="de.propra13.models.Theme" project="propra13" 
-    file="/propra13/src/de/propra13/models/Theme.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1651" y="1432"/>    
+  <class id="11" language="java" name="de.propra13.models.Theme" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/models/Theme.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="960" y="1464"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="12" language="java" name="de.propra13.models.Room" project="propra13" 
-    file="/propra13/src/de/propra13/models/Room.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="4420" y="712"/>    
+  <class id="12" language="java" name="de.propra13.models.Room" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/models/Room.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3656" y="402"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="13" language="java" name="de.propra13.models.Item" project="propra13" 
-    file="/propra13/src/de/propra13/models/Item.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2427" y="891"/>    
+  <class id="13" language="java" name="de.propra13.models.Item" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/models/Item.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2450" y="307"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="14" language="java" name="de.propra13.models.Player" project="propra13" 
-    file="/propra13/src/de/propra13/models/Player.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1654" y="816"/>    
+  <class id="14" language="java" name="de.propra13.models.Player" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/models/Player.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1385" y="842"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="15" language="java" name="de.propra13.models.Model" project="propra13" 
-    file="/propra13/src/de/propra13/models/Model.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2972" y="2355"/>    
+  <class id="15" language="java" name="de.propra13.models.Model" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/models/Model.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2704" y="1187"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="de.propra13.models.Fireball" project="propra13" 
-    file="/propra13/src/de/propra13/models/Fireball.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="4087" y="1817"/>    
+  <class id="16" language="java" name="de.propra13.models.Fireball" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/models/Fireball.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3291" y="1273"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="17" language="java" name="de.propra13.models.Level" project="propra13" 
-    file="/propra13/src/de/propra13/models/Level.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="1988" y="1253"/>    
+  <class id="17" language="java" name="de.propra13.models.Level" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/models/Level.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1376" y="1187"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="18" language="java" name="de.propra13.views.ImageView" project="propra13" 
-    file="/propra13/src/de/propra13/views/ImageView.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="18" language="java" name="de.propra13.views.ImageView" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/ImageView.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="4158" y="178"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -163,90 +163,90 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="19" language="java" name="de.propra13.views.GameFieldView" project="propra13" 
-    file="/propra13/src/de/propra13/views/GameFieldView.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2037" y="2275"/>    
+  <class id="19" language="java" name="de.propra13.views.GameFieldView" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/GameFieldView.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1989" y="1005"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="de.propra13.views.objects.FireballObject" project="propra13" 
-    file="/propra13/src/de/propra13/views/objects/FireballObject.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="4430" y="1511"/>    
+  <class id="20" language="java" name="de.propra13.views.objects.FireballObject" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/objects/FireballObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3291" y="899"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="21" language="java" name="de.propra13.views.objects.PlayerObject" project="propra13" 
-    file="/propra13/src/de/propra13/views/objects/PlayerObject.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2308" y="237"/>    
+  <class id="21" language="java" name="de.propra13.views.objects.PlayerObject" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/objects/PlayerObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1698" y="489"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="22" language="java" name="de.propra13.views.objects.ItemObject" project="propra13" 
-    file="/propra13/src/de/propra13/views/objects/ItemObject.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2712" y="929"/>    
+  <class id="22" language="java" name="de.propra13.views.objects.ItemObject" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/objects/ItemObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2451" y="145"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="23" language="java" name="de.propra13.views.objects.GoalObject" project="propra13" 
-    file="/propra13/src/de/propra13/views/objects/GoalObject.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3045" y="1232"/>    
+  <class id="23" language="java" name="de.propra13.views.objects.GoalObject" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/objects/GoalObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3290" y="276"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="24" language="java" name="de.propra13.views.objects.StartObject" project="propra13" 
-    file="/propra13/src/de/propra13/views/objects/StartObject.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3346" y="1272"/>    
+  <class id="24" language="java" name="de.propra13.views.objects.StartObject" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/objects/StartObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3291" y="142"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="de.propra13.views.objects.WeaponObject" project="propra13" 
-    file="/propra13/src/de/propra13/views/objects/WeaponObject.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2722" y="1278"/>    
+  <class id="25" language="java" name="de.propra13.views.objects.WeaponObject" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/objects/WeaponObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2680" y="305"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="26" language="java" name="de.propra13.views.objects.WallObject" project="propra13" 
-    file="/propra13/src/de/propra13/views/objects/WallObject.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="4277" y="1132"/>    
+  <class id="26" language="java" name="de.propra13.views.objects.WallObject" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/objects/WallObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="3665" y="1005"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="27" language="java" name="de.propra13.views.objects.MoveableGameObject" project="propra13" 
-    file="/propra13/src/de/propra13/views/objects/MoveableGameObject.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="2676" y="491"/>    
+  <class id="27" language="java" name="de.propra13.views.objects.MoveableGameObject" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/objects/MoveableGameObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="1970" y="84"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="28" language="java" name="de.propra13.views.objects.GameObject" project="propra13" 
-    file="/propra13/src/de/propra13/views/objects/GameObject.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3395" y="254"/>    
+  <class id="28" language="java" name="de.propra13.views.objects.GameObject" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/objects/GameObject.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="-1" width="-1" x="2917" y="84"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
       <attributes public="true" package="true" protected="true" private="true"/>      
@@ -254,155 +254,158 @@
     </display>  
   </class>  
   <association id="29">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="30" name="walls"/>      
+    <bendpoint x="2796" y="258"/>    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="30" name="items"/>      
       <multiplicity id="31" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="26" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="32">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="33" name="start"/>      
-      <multiplicity id="34" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="35">    
-    <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="36" name="player"/>      
-      <multiplicity id="37" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="38">    
-    <end type="SOURCE" refId="27"/>    
-    <end type="TARGET" refId="28"/>  
-  </generalization>  
-  <generalization id="39">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="27"/>  
-  </generalization>  
-  <generalization id="40">    
-    <end type="SOURCE" refId="3"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <association id="41">    
-    <end type="SOURCE" refId="9" navigable="false">      
-      <attribute id="42" name="controllers"/>      
-      <multiplicity id="43" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="44">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="45" name="player"/>      
-      <multiplicity id="46" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="47">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="48" name="items"/>      
-      <multiplicity id="49" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="50">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="51" name="theme"/>      
-      <multiplicity id="52" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="53">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="54" name="playerObject"/>      
-      <multiplicity id="55" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="56">    
-    <end type="SOURCE" refId="26"/>    
-    <end type="TARGET" refId="28"/>  
-  </generalization>  
-  <generalization id="57">    
-    <end type="SOURCE" refId="12"/>    
-    <end type="TARGET" refId="15"/>  
-  </generalization>  
-  <generalization id="58">    
-    <end type="SOURCE" refId="10"/>    
-    <end type="TARGET" refId="13"/>  
-  </generalization>  
-  <association id="59">    
-    <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="60" name="theme"/>      
-      <multiplicity id="61" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="62">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="63" name="goal"/>      
-      <multiplicity id="64" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="23" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="65">    
-    <end type="SOURCE" refId="2"/>    
-    <end type="TARGET" refId="6"/>  
-  </generalization>  
-  <association id="66">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="67" name="balls"/>      
-      <multiplicity id="68" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="69">    
-    <end type="SOURCE" refId="14" navigable="false">      
-      <attribute id="70" name="weapon"/>      
-      <multiplicity id="71" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="10" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="72">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="73" name="item"/>      
-      <multiplicity id="74" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="13" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="75">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="28"/>  
-  </generalization>  
-  <generalization id="76">    
-    <end type="SOURCE" refId="23"/>    
-    <end type="TARGET" refId="28"/>  
-  </generalization>  
-  <association id="77">    
-    <end type="SOURCE" refId="12" navigable="false">      
-      <attribute id="78" name="items"/>      
-      <multiplicity id="79" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="22" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="80">    
+  <association id="32">    
+    <bendpoint x="1232" y="1020"/>    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="33" name="game"/>      
+      <multiplicity id="34" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="19" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="35">    
+    <end type="SOURCE" refId="25"/>    
+    <end type="TARGET" refId="22"/>  
+  </generalization>  
+  <generalization id="36">    
+    <end type="SOURCE" refId="7"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="37">    
+    <bendpoint x="239" y="247"/>    
+    <end type="SOURCE" refId="9" navigable="false">      
+      <attribute id="38" name="controllers"/>      
+      <multiplicity id="39" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="40">    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="41">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="42" name="start"/>      
+      <multiplicity id="43" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="44">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="45" name="start"/>      
+      <multiplicity id="46" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="24" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="47">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="48" name="balls"/>      
+      <multiplicity id="49" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="50">    
+    <bendpoint x="1852" y="1278"/>    
+    <bendpoint x="2122" y="1278"/>    
+    <end type="SOURCE" refId="17"/>    
+    <end type="TARGET" refId="15"/>  
+  </generalization>  
+  <association id="51">    
     <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="52" name="player"/>      
+      <multiplicity id="53" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="54">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="55" name="player"/>      
+      <multiplicity id="56" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="14" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="57">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="58" name="currentRoom"/>      
+      <multiplicity id="59" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="60">    
+    <bendpoint x="1882" y="682"/>    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="61" name="items"/>      
+      <multiplicity id="62" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="63">    
+    <bendpoint x="1500" y="1328"/>    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="64" name="theme"/>      
+      <multiplicity id="65" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="66">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <association id="67">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="68" name="balls"/>      
+      <multiplicity id="69" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="20" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="71" name="item"/>      
+      <multiplicity id="72" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="13" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="21" navigable="false">      
+      <attribute id="74" name="controller"/>      
+      <multiplicity id="75" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="8" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="77" name="goal"/>      
+      <multiplicity id="78" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="23" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="79">    
+    <end type="SOURCE" refId="23"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <association id="80">    
+    <end type="SOURCE" refId="12" navigable="false">      
       <attribute id="81" name="player"/>      
       <multiplicity id="82" minimum="0" maximum="1"/>    
     </end>    
@@ -410,23 +413,23 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="83">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="84" name="levels"/>      
-      <multiplicity id="85" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="17" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="86">    
     <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="87" name="goal"/>      
-      <multiplicity id="88" minimum="0" maximum="1"/>    
+      <attribute id="84" name="goal"/>      
+      <multiplicity id="85" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="23" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="86">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="87" name="theme"/>      
+      <multiplicity id="88" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <association id="89">    
-    <end type="SOURCE" refId="12" navigable="false">      
+    <end type="SOURCE" refId="19" navigable="false">      
       <attribute id="90" name="walls"/>      
       <multiplicity id="91" minimum="0" maximum="2147483647"/>    
     </end>    
@@ -434,55 +437,55 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <generalization id="92">    
-    <end type="SOURCE" refId="22"/>    
+    <end type="SOURCE" refId="27"/>    
     <end type="TARGET" refId="28"/>  
   </generalization>  
-  <association id="93">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="94" name="player"/>      
-      <multiplicity id="95" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="14" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="96">    
+  <generalization id="93">    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="94">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <association id="95">    
     <end type="SOURCE" refId="20" navigable="false">      
-      <attribute id="97" name="fireball"/>      
-      <multiplicity id="98" minimum="0" maximum="1"/>    
+      <attribute id="96" name="fireball"/>      
+      <multiplicity id="97" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="16" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="99">    
+  <association id="98">    
+    <end type="SOURCE" refId="14" navigable="false">      
+      <attribute id="99" name="weapon"/>      
+      <multiplicity id="100" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="10" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="101">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="100" name="game"/>      
-      <multiplicity id="101" minimum="0" maximum="1"/>    
+      <attribute id="102" name="player"/>      
+      <multiplicity id="103" minimum="0" maximum="1"/>    
     </end>    
-    <end type="TARGET" refId="19" navigable="true"/>    
+    <end type="TARGET" refId="14" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="102">    
-    <end type="SOURCE" refId="21"/>    
-    <end type="TARGET" refId="27"/>  
+  <generalization id="104">    
+    <end type="SOURCE" refId="10"/>    
+    <end type="TARGET" refId="13"/>  
   </generalization>  
-  <generalization id="103">    
-    <end type="SOURCE" refId="8"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
-  <association id="104">    
-    <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="105" name="controller"/>      
-      <multiplicity id="106" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="8" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="107">    
-    <end type="SOURCE" refId="17"/>    
-    <end type="TARGET" refId="15"/>  
-  </generalization>  
-  <association id="108">    
+  <association id="105">    
     <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="106" name="walls"/>      
+      <multiplicity id="107" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="26" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="108">    
+    <end type="SOURCE" refId="19" navigable="false">      
       <attribute id="109" name="playerObject"/>      
       <multiplicity id="110" minimum="0" maximum="1"/>    
     </end>    
@@ -490,93 +493,100 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="111">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="112" name="start"/>      
-      <multiplicity id="113" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="24" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="114">    
-    <end type="SOURCE" refId="25"/>    
-    <end type="TARGET" refId="22"/>  
-  </generalization>  
-  <association id="115">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="116" name="theme"/>      
-      <multiplicity id="117" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="11" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="118">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="119" name="currentRoom"/>      
-      <multiplicity id="120" minimum="0" maximum="1"/>    
+    <bendpoint x="1726" y="758"/>    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="112" name="rooms"/>      
+      <multiplicity id="113" minimum="0" maximum="2147483647"/>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="121">    
+  <association id="114">    
+    <bendpoint x="1240" y="1052"/>    
     <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="122" name="controller"/>      
-      <multiplicity id="123" minimum="0" maximum="1"/>    
+      <attribute id="115" name="controller"/>      
+      <multiplicity id="116" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="124">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="125" name="items"/>      
-      <multiplicity id="126" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="22" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="127">    
-    <end type="SOURCE" refId="19" navigable="false">      
-      <attribute id="128" name="balls"/>      
-      <multiplicity id="129" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="20" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="130">    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="5"/>  
+  <generalization id="117">    
+    <end type="SOURCE" refId="12"/>    
+    <end type="TARGET" refId="15"/>  
   </generalization>  
-  <association id="131">    
+  <association id="118">    
+    <end type="SOURCE" refId="12" navigable="false">      
+      <attribute id="119" name="playerObject"/>      
+      <multiplicity id="120" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="121">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <generalization id="122">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="28"/>  
+  </generalization>  
+  <generalization id="123">    
+    <end type="SOURCE" refId="2"/>    
+    <end type="TARGET" refId="6"/>  
+  </generalization>  
+  <association id="124">    
+    <bendpoint x="288" y="245"/>    
     <end type="SOURCE" refId="5" navigable="false">      
-      <attribute id="132" name="controllerFactory"/>      
-      <multiplicity id="133" minimum="0" maximum="1"/>    
+      <attribute id="125" name="controllerFactory"/>      
+      <multiplicity id="126" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="9" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="134">    
+  <generalization id="127">    
+    <end type="SOURCE" refId="8"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <generalization id="128">    
+    <end type="SOURCE" refId="3"/>    
+    <end type="TARGET" refId="5"/>  
+  </generalization>  
+  <association id="129">    
     <end type="SOURCE" refId="17" navigable="false">      
-      <attribute id="135" name="rooms"/>      
-      <multiplicity id="136" minimum="0" maximum="2147483647"/>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="137">    
-    <end type="SOURCE" refId="21" navigable="false">      
-      <attribute id="138" name="controller"/>      
-      <multiplicity id="139" minimum="0" maximum="1"/>    
+      <attribute id="130" name="controller"/>      
+      <multiplicity id="131" minimum="0" maximum="1"/>    
     </end>    
     <end type="TARGET" refId="8" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="140">    
-    <end type="SOURCE" refId="7"/>    
-    <end type="TARGET" refId="6"/>  
+  <association id="132">    
+    <end type="SOURCE" refId="17" navigable="false">      
+      <attribute id="133" name="theme"/>      
+      <multiplicity id="134" minimum="0" maximum="1"/>    
+    </end>    
+    <end type="TARGET" refId="11" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="135">    
+    <end type="SOURCE" refId="21"/>    
+    <end type="TARGET" refId="27"/>  
   </generalization>  
-  <generalization id="141">    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="5"/>  
-  </generalization>  
+  <association id="136">    
+    <end type="SOURCE" refId="19" navigable="false">      
+      <attribute id="137" name="items"/>      
+      <multiplicity id="138" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="22" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="139">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="140" name="levels"/>      
+      <multiplicity id="141" minimum="0" maximum="2147483647"/>    
+    </end>    
+    <end type="TARGET" refId="17" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true"/>    
