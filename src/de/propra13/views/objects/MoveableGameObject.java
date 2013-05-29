@@ -1,22 +1,45 @@
 package de.propra13.views.objects;
 
 import java.awt.Dimension;
-import java.awt.Image;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 
+import javax.swing.Timer;
+
+import de.propra13.assets.Bluna;
 import de.propra13.models.Room;
 
-public class MoveableGameObject extends GameObject {
+public abstract class MoveableGameObject extends GameObject {
 
     protected int vx;
     protected int vy;
 
-    public MoveableGameObject(Image image) {
-        super(image);
+    private Bluna bluna;
+    private int frames;
+    private int currentFrame = -1;
+
+    public MoveableGameObject(BufferedImage image, int x, int y,
+            int directions, int frames) {
+        super(x, y, image.getWidth(null) / frames, image.getHeight(null)
+                / directions);
+        this.frames = frames;
+        bluna = new Bluna(image, directions, frames);
+
+        this.image = bluna.getBluna(1, 0, 0);
+
+        startAnimator(frames);
     }
 
-    public MoveableGameObject(Image image, int x, int y) {
-        super(image, x, y);
+    private void startAnimator(int frames) {
+        Timer t = new Timer(100, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                animate();
+            }
+        });
+        t.start();
     }
 
     public void moveTo(GameObject ob) {
@@ -55,6 +78,11 @@ public class MoveableGameObject extends GameObject {
                     collidedBottom(oldy);
             }
         }
+    }
+
+    public void animate() {
+        currentFrame = ++currentFrame % frames;
+        image = bluna.getBluna(vx, vy, currentFrame);
     }
 
     protected void collidedLeft(int oldx) {

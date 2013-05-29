@@ -11,7 +11,7 @@ public class FireballObject extends MoveableGameObject {
     private Fireball fireball;
 
     public FireballObject(Fireball fireball, int x, int y, Theme theme) {
-        super(theme.getFireballImage(), x, y);
+        super(theme.getFireballBluna(), x, y, 8, 10);
 
         this.fireball = fireball;
 

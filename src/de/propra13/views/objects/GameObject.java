@@ -16,20 +16,18 @@ public class GameObject {
 
     protected Image image;
 
-    public GameObject(Image image) {
-        this(image, 1, 1);
-    }
-
-    public GameObject(Image image, int x, int y) {
-        this.image = image;
-
-        width = image.getWidth(null);
-        height = image.getHeight(null);
-
+    public GameObject(int x, int y, int width, int height) {
         this.x = Math
                 .max(scale(x), scale(x) - (width - GameFieldView.GRID) / 2);
         this.y = Math.max(scale(y), scale(y) - (height - GameFieldView.GRID)
                 / 2);
+        this.width = width;
+        this.height = height;
+    }
+
+    public GameObject(Image image, int x, int y) {
+        this(x, y, image.getWidth(null), image.getHeight(null));
+        this.image = image;
     }
 
     public void draw(Graphics2D gfx, ImageObserver ob) {

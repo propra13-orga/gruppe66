@@ -20,7 +20,7 @@ public class PlayerObject extends MoveableGameObject {
     private Player player;
 
     public PlayerObject(Player player, int x, int y, Theme theme) {
-        super(theme.getPlayerImage(), x, y);
+        super(theme.getPlayerBluna(), x, y, 8, 10);
         this.player = player;
     }
 
