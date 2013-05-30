@@ -80,7 +80,9 @@ public abstract class MoveableGameObject extends GameObject {
             currentDirection.setVx(vx);
             currentDirection.setVy(vy);
         }
-        currentBluna = getBluna(currentDirection, currentFrame);
+
+        Bluna bluna = getBluna(currentDirection, currentFrame);
+        currentBluna = bluna;
     }
 
     private int abstractNumber(int x) {

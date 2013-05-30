@@ -85,11 +85,14 @@ public class GameObject {
     }
 
     public HashSet<Point> getPointMask() {
-        HashSet<Point> mask = new HashSet<>(currentBluna.getPointMask());
-        for (Point p : mask) {
-            p.x += x;
-            p.y += y;
+        return getPointMaskFrom(currentBluna);
+    }
+
+    protected HashSet<Point> getPointMaskFrom(Bluna bluna) {
+        HashSet<Point> mask = new HashSet<>(bluna.getPointMask().size());
+        for (Point p : bluna.getPointMask()) {
+            mask.add(new Point(p.x + x, p.y + y));
         }
-        return currentBluna.getPointMask();
+        return mask;
     }
 }
