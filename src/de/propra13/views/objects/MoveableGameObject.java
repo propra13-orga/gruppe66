@@ -1,14 +1,11 @@
 package de.propra13.views.objects;
 
 import java.awt.Dimension;
+import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
+import java.util.HashSet;
 
-import javax.swing.Timer;
-
-import de.propra13.assets.Bluna;
 import de.propra13.models.Room;
 
 public abstract class MoveableGameObject extends GameObject {
@@ -16,30 +13,14 @@ public abstract class MoveableGameObject extends GameObject {
     protected int vx;
     protected int vy;
 
-    private Bluna bluna;
-    private int frames;
-    private int currentFrame = -1;
+    protected Direction currentDirection;
 
     public MoveableGameObject(BufferedImage image, int x, int y,
             int directions, int frames) {
-        super(x, y, image.getWidth(null) / frames, image.getHeight(null)
-                / directions);
-        this.frames = frames;
-        bluna = new Bluna(image, directions, frames);
+        super(image, x, y, directions, frames);
 
-        this.image = bluna.getBluna(1, 0, 0);
-
-        startAnimator(frames);
-    }
-
-    private void startAnimator(int frames) {
-        Timer t = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                animate();
-            }
-        });
-        t.start();
+        currentDirection = new Direction(1, 0);
+        currentBluna = blunaCrate.getBluna(currentDirection);
     }
 
     public void moveTo(GameObject ob) {
@@ -54,35 +35,51 @@ public abstract class MoveableGameObject extends GameObject {
         x += vx;
         y += vy;
 
+        collideWithGameField(field, oldx, oldy);
+        collideWithWalls(room, oldx, oldy);
+    }
+
+    private void collideWithGameField(Rectangle field, int oldx, int oldy) {
         if (!field.contains(new Rectangle(x, y, width, height))) {
             if (x < 1)
                 collidedLeft(oldx);
-            if (x + width >= gameFieldSize.width)
+            if (x + width >= field.width)
                 collidedRight(oldx);
             if (y < 1)
                 collidedTop(oldy);
-            if (y + height >= gameFieldSize.height)
+            if (y + height >= field.height)
                 collidedBottom(oldy);
         }
+    }
 
+    private void collideWithWalls(Room room, int oldx, int oldy) {
         for (WallObject wall : room.getWalls()) {
             if (wall.getBounds().intersects(this.getBounds())) {
-                if (vx < 0 && intersectsY(oldy, wall))
-                    collidedLeft(oldx);
-                else if (vx > 0 && intersectsY(oldy, wall))
-                    collidedRight(oldx);
+                HashSet<Point> myPointMask = getPointMask();
+                myPointMask.retainAll(wall.getPointMask());
 
-                if (vy < 0 && intersectsX(oldx, wall))
-                    collidedTop(oldy);
-                else if (vy > 0 && intersectsX(oldx, wall))
-                    collidedBottom(oldy);
+                if (myPointMask.size() > 0) {
+                    if (vx < 0 && intersectsY(oldy, wall))
+                        collidedLeft(oldx);
+                    else if (vx > 0 && intersectsY(oldy, wall))
+                        collidedRight(oldx);
+
+                    if (vy < 0 && intersectsX(oldx, wall))
+                        collidedTop(oldy);
+                    else if (vy > 0 && intersectsX(oldx, wall))
+                        collidedBottom(oldy);
+                }
             }
         }
     }
 
     public void animate() {
-        currentFrame = ++currentFrame % frames;
-        image = bluna.getBluna(vx, vy, currentFrame);
+        increaseFrame();
+        if (vx != 0 || vy != 0) {
+            currentDirection.setVx(vx);
+            currentDirection.setVy(vy);
+        }
+        currentBluna = blunaCrate.getBluna(currentDirection, currentFrame);
     }
 
     protected void collidedLeft(int oldx) {

@@ -1,10 +1,18 @@
 package de.propra13.views.objects;
 
 import java.awt.Graphics2D;
-import java.awt.Image;
+import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.util.HashSet;
 
+import javax.swing.Timer;
+
+import de.propra13.assets.Bluna;
+import de.propra13.assets.BlunaCrate;
 import de.propra13.views.GameFieldView;
 
 public class GameObject {
@@ -14,7 +22,11 @@ public class GameObject {
     protected int width;
     protected int height;
 
-    protected Image image;
+    protected BlunaCrate blunaCrate;
+    protected int frames;
+    protected int currentFrame = -1;
+
+    protected Bluna currentBluna;
 
     public GameObject(int x, int y, int width, int height) {
         this.x = Math
@@ -25,9 +37,36 @@ public class GameObject {
         this.height = height;
     }
 
-    public GameObject(Image image, int x, int y) {
-        this(x, y, image.getWidth(null), image.getHeight(null));
-        this.image = image;
+    public GameObject(BufferedImage image, int x, int y, int directions,
+            int frames) {
+        this(x, y, image.getWidth() / frames, image.getHeight() / directions);
+        this.frames = frames;
+
+        blunaCrate = new BlunaCrate(image, directions, frames);
+
+        currentBluna = blunaCrate.getFirstBluna();
+
+        if (frames > 1 || directions > 1)
+            startAnimator(frames);
+    }
+
+    private void startAnimator(final int frames) {
+        Timer t = new Timer(100, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent arg0) {
+                animate();
+            }
+        });
+        t.start();
+    }
+
+    public void animate() {
+        increaseFrame();
+        currentBluna = blunaCrate.getBluna(currentFrame);
+    }
+
+    protected void increaseFrame() {
+        currentFrame = ++currentFrame % frames;
     }
 
     public void draw(Graphics2D gfx, ImageObserver ob) {
@@ -50,8 +89,8 @@ public class GameObject {
         return height;
     }
 
-    public Image getImage() {
-        return image;
+    public BufferedImage getImage() {
+        return currentBluna.getImage();
     }
 
     public Rectangle getBounds() {
@@ -60,5 +99,14 @@ public class GameObject {
 
     protected int scale(int x) {
         return (x * GameFieldView.GRID);
+    }
+
+    public HashSet<Point> getPointMask() {
+        HashSet<Point> mask = new HashSet<>(currentBluna.getPointMask());
+        for (Point p : mask) {
+            p.x += x;
+            p.y += y;
+        }
+        return currentBluna.getPointMask();
     }
 }

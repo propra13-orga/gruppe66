@@ -5,7 +5,7 @@ import de.propra13.models.Theme;
 public class GoalObject extends GameObject {
 
     public GoalObject(int x, int y, Theme theme) {
-        super(theme.getGoalImage(), x, y);
+        super(theme.getGoalImage(), x, y, 1, 1);
     }
 
 }

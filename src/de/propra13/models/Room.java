@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import de.propra13.views.objects.FireballObject;
 import de.propra13.views.objects.GoalObject;
+import de.propra13.views.objects.HerbObject;
 import de.propra13.views.objects.ItemObject;
 import de.propra13.views.objects.PlayerObject;
 import de.propra13.views.objects.StartObject;
@@ -61,6 +62,9 @@ public class Room extends Model {
                     break;
                 case 'W':
                     items.add(new WeaponObject(new Weapon(), x, y, theme));
+                    break;
+                case 'H':
+                    items.add(new HerbObject(x, y, theme));
                 }
                 x++;
             }

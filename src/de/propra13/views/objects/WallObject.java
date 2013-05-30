@@ -5,7 +5,7 @@ import de.propra13.models.Theme;
 public class WallObject extends GameObject {
 
     public WallObject(int x, int y, Theme theme) {
-        super(theme.getWallImage(), x, y);
+        super(theme.getWallImage(), x, y, 1, 1);
     }
 
 }

@@ -1,35 +1,35 @@
 package de.propra13.models;
 
-import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 public class Theme {
 
-    private Image goalImage;
-    private Image startImage;
+    private BufferedImage goalImage;
+    private BufferedImage startImage;
     private BufferedImage playerImage;
     private BufferedImage fireballImage;
-    private Image wallImage;
-    private Image floorImage;
-    private Image weaponImage;
+    private BufferedImage wallImage;
+    private BufferedImage floorImage;
+    private BufferedImage weaponImage;
+    private BufferedImage herbImage;
 
     private String themeName;
 
     public Theme(String dirName) {
         try {
             this.themeName = dirName;
-            goalImage = initImage("goal.jpg");
-            startImage = initImage("start.jpg");
-            playerImage = initBluna("player.png");
-            fireballImage = initBluna("skull.png");
-            wallImage = initImage("wall1.jpg");
-            floorImage = initImage("floor.jpg");
-            weaponImage = initImage("sword.png");
+            goalImage = initBluna("goal.jpg");
+            startImage = initBluna("start.jpg");
+            playerImage = initBluna("bluna/player.png");
+            fireballImage = initBluna("bluna/skull.png");
+            wallImage = initBluna("wall1.jpg");
+            floorImage = initBluna("floor.jpg");
+            weaponImage = initBluna("sword.png");
+            herbImage = initBluna("bluna/herbitem.png");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("dun dun dun");
@@ -37,36 +37,30 @@ public class Theme {
         }
     }
 
-    private Image initImage(String fileName) {
-        ImageIcon icon = new ImageIcon("res/leveltheme/" + themeName
-                + "/images/" + fileName);
-        return icon.getImage();
-    }
-
     private BufferedImage initBluna(String fileName) throws IOException {
-        File url = new File("res/leveltheme/" + themeName + "/images/bluna/"
+        File url = new File("res/leveltheme/" + themeName + "/images/"
                 + fileName);
         BufferedImage bluna = ImageIO.read(url);
         return bluna;
     }
 
-    public Image getGoalImage() {
+    public BufferedImage getGoalImage() {
         return goalImage;
     }
 
-    public Image getFloorImage() {
+    public BufferedImage getFloorImage() {
         return floorImage;
     }
 
-    public Image getStartImage() {
+    public BufferedImage getStartImage() {
         return startImage;
     }
 
-    public Image getWallImage() {
+    public BufferedImage getWallImage() {
         return wallImage;
     }
 
-    public Image getWeaponImage() {
+    public BufferedImage getWeaponImage() {
         return weaponImage;
     }
 
@@ -76,6 +70,10 @@ public class Theme {
 
     public BufferedImage getPlayerBluna() {
         return playerImage;
+    }
+
+    public BufferedImage getHerbImage() {
+        return herbImage;
     }
 
 }
