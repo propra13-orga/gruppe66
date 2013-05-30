@@ -3,13 +3,9 @@ package de.propra13.views.objects;
 import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.util.HashSet;
-
-import javax.swing.Timer;
 
 import de.propra13.assets.Bluna;
 import de.propra13.assets.BlunaCrate;
@@ -45,19 +41,6 @@ public class GameObject {
         blunaCrate = new BlunaCrate(image, directions, frames);
 
         currentBluna = blunaCrate.getFirstBluna();
-
-        if (frames > 1 || directions > 1)
-            startAnimator(frames);
-    }
-
-    private void startAnimator(final int frames) {
-        Timer t = new Timer(100, new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent arg0) {
-                animate();
-            }
-        });
-        t.start();
     }
 
     public void animate() {

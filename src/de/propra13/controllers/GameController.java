@@ -2,6 +2,7 @@ package de.propra13.controllers;
 
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
@@ -11,6 +12,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
+import javax.swing.Timer;
 
 import org.json.JSONException;
 
@@ -21,6 +23,7 @@ import de.propra13.models.Room;
 import de.propra13.models.Theme;
 import de.propra13.views.GameFieldView;
 import de.propra13.views.objects.FireballObject;
+import de.propra13.views.objects.ItemObject;
 
 public class GameController extends Controller implements KeyListener,
         ComponentListener, Runnable {
@@ -37,10 +40,12 @@ public class GameController extends Controller implements KeyListener,
 
     private Player player;
 
-    private int delay = 10;
-
     private volatile boolean running;
-    private Thread animator;
+    private Thread gameRunner;
+    private Timer objectAnimator;
+
+    private final int runningDelay = 10;
+    private final int animationDelay = 100;
 
     public GameController(ControllerFactory cf, JFrame rootWindow) {
         super(cf, rootWindow);
@@ -213,16 +218,27 @@ public class GameController extends Controller implements KeyListener,
 
     public void stop() {
         running = false;
-        if (animator != null)
-            animator.interrupt();
+        if (gameRunner != null)
+            gameRunner.interrupt();
+
+        if (objectAnimator != null)
+            objectAnimator.stop();
     }
 
     public void start() {
         game.requestFocusInWindow();
         running = true;
 
-        animator = new Thread(this);
-        animator.start();
+        gameRunner = new Thread(this);
+        gameRunner.start();
+
+        objectAnimator = new Timer(animationDelay, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                animate();
+            }
+        });
+        objectAnimator.start();
     }
 
     public void turn() {
@@ -230,6 +246,28 @@ public class GameController extends Controller implements KeyListener,
 
         for (FireballObject ball : game.getBalls()) {
             ball.move(game.getSize(), getCurrentRoom(), game.getPlayerObject());
+        }
+    }
+
+    public void animate() {
+        animatePlayer();
+        animateItems();
+        animateBalls();
+    }
+
+    private void animatePlayer() {
+        getCurrentRoom().getPlayerObject().animate();
+    }
+
+    private void animateItems() {
+        for (ItemObject item : getCurrentRoom().getItems()) {
+            item.animate();
+        }
+    }
+
+    private void animateBalls() {
+        for (FireballObject item : getCurrentRoom().getBalls()) {
+            item.animate();
         }
     }
 
@@ -247,7 +285,8 @@ public class GameController extends Controller implements KeyListener,
 
             });
 
-            wait = Math.max(delay - (System.currentTimeMillis() - oldTime), 2);
+            wait = Math.max(runningDelay
+                    - (System.currentTimeMillis() - oldTime), 2);
 
             oldTime = System.currentTimeMillis();
             try {
