@@ -15,8 +15,8 @@ public class FireballObject extends MoveableGameObject {
 
         this.fireball = fireball;
 
-        vx = -2;
-        vy = -2;
+        vx = 0;
+        vy = 0;
     }
 
     public void move(Dimension size, Room room, PlayerObject playerObject) {

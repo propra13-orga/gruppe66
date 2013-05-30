@@ -1,12 +1,9 @@
 package de.propra13.views.objects;
 
 import java.awt.Dimension;
-import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.util.HashSet;
 
-import de.propra13.assets.Bluna;
 import de.propra13.models.Room;
 
 public abstract class MoveableGameObject extends GameObject {
@@ -56,20 +53,18 @@ public abstract class MoveableGameObject extends GameObject {
     private void collideWithWalls(Room room, int oldx, int oldy) {
         for (WallObject wall : room.getWalls()) {
             if (wall.getBounds().intersects(this.getBounds())) {
-                HashSet<Point> myPointMask = getPointMask();
-                myPointMask.retainAll(wall.getPointMask());
 
-                if (myPointMask.size() > 0) {
-                    if (vx < 0 && intersectsY(oldy, wall))
-                        collidedLeft(oldx);
-                    else if (vx > 0 && intersectsY(oldy, wall))
-                        collidedRight(oldx);
+                if (vx < 0 && intersectsY(oldy, wall))
+                    collidedLeft(oldx);
 
-                    if (vy < 0 && intersectsX(oldx, wall))
-                        collidedTop(oldy);
-                    else if (vy > 0 && intersectsX(oldx, wall))
-                        collidedBottom(oldy);
-                }
+                else if (vx > 0 && intersectsY(oldy, wall))
+                    collidedRight(oldx);
+
+                if (vy < 0 && intersectsX(oldx, wall))
+                    collidedTop(oldy);
+                else if (vy > 0 && intersectsX(oldx, wall))
+                    collidedBottom(oldy);
+
             }
         }
     }
@@ -81,7 +76,7 @@ public abstract class MoveableGameObject extends GameObject {
             currentDirection.setVy(vy);
         }
 
-        Bluna bluna = getBluna(currentDirection, currentFrame);
+        BufferedImage bluna = getBluna(currentDirection, currentFrame);
         currentBluna = bluna;
     }
 
@@ -91,7 +86,7 @@ public abstract class MoveableGameObject extends GameObject {
         return Math.abs(x) / x;
     }
 
-    private Bluna getBluna(Direction direction, int frameIndex) {
+    private BufferedImage getBluna(Direction direction, int frameIndex) {
         int vx3 = abstractNumber(direction.getVx()) + 1;
         int vy3 = abstractNumber(direction.getVy()) + 1;
         int v3 = 3 * vx3 + vy3;
@@ -100,7 +95,7 @@ public abstract class MoveableGameObject extends GameObject {
         return blunaCrate.getBluna(v3 * frames + frameIndex);
     }
 
-    private Bluna getBluna(Direction direction) {
+    private BufferedImage getBluna(Direction direction) {
         return getBluna(direction, 0);
     }
 
@@ -121,11 +116,13 @@ public abstract class MoveableGameObject extends GameObject {
     }
 
     protected boolean intersectsX(int x, GameObject o) {
-        return x + width > o.getX() && x < o.getX() + o.getWidth();
+        Rectangle objectBounds = o.getBounds();
+        return objectBounds.intersects(getBoundsFromOldX(x));
     }
 
     protected boolean intersectsY(int y, GameObject o) {
-        return y + height > o.getY() && y < o.getY() + o.getHeight();
+        Rectangle objectBounds = o.getBounds();
+        return objectBounds.intersects(getBoundsFromOldY(y));
     }
 
     public int getVx() {

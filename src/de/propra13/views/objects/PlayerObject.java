@@ -58,6 +58,10 @@ public class PlayerObject extends MoveableGameObject {
         super.draw(gfx, ob);
         if (getPlayer().isWounded())
             drawPlayerHealthBar(gfx);
+
+        gfx.setPaint(Color.white);
+        gfx.drawRect(getBounds().x, getBounds().y, getBounds().width,
+                getBounds().height);
     }
 
     private void drawPlayerHealthBar(Graphics2D gfx) {
