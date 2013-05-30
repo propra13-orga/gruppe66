@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
 
+import de.propra13.assets.Bluna;
 import de.propra13.models.Room;
 
 public abstract class MoveableGameObject extends GameObject {
@@ -20,7 +21,7 @@ public abstract class MoveableGameObject extends GameObject {
         super(image, x, y, directions, frames);
 
         currentDirection = new Direction(1, 0);
-        currentBluna = blunaCrate.getBluna(currentDirection);
+        currentBluna = getBluna(currentDirection);
     }
 
     public void moveTo(GameObject ob) {
@@ -79,7 +80,26 @@ public abstract class MoveableGameObject extends GameObject {
             currentDirection.setVx(vx);
             currentDirection.setVy(vy);
         }
-        currentBluna = blunaCrate.getBluna(currentDirection, currentFrame);
+        currentBluna = getBluna(currentDirection, currentFrame);
+    }
+
+    private int abstractNumber(int x) {
+        if (x == 0)
+            return 0;
+        return Math.abs(x) / x;
+    }
+
+    private Bluna getBluna(Direction direction, int frameIndex) {
+        int vx3 = abstractNumber(direction.getVx()) + 1;
+        int vy3 = abstractNumber(direction.getVy()) + 1;
+        int v3 = 3 * vx3 + vy3;
+        if (v3 > 4)
+            v3--;
+        return blunaCrate.getBluna(v3 * frames + frameIndex);
+    }
+
+    private Bluna getBluna(Direction direction) {
+        return getBluna(direction, 0);
     }
 
     protected void collidedLeft(int oldx) {
