@@ -70,7 +70,7 @@ public class GameController extends Controller implements KeyListener,
     }
 
     private void initPlayerAndLevels() {
-        player = new Player();
+        player = new Player(100);
 
         levels = new ArrayList<Level>();
         try {

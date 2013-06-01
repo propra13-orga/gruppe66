@@ -5,13 +5,18 @@ import java.awt.geom.Point2D;
 
 import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
+import de.propra13.models.Agressor;
+import de.propra13.models.Dragon;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
 
 public class DragonObject extends EnemyObject {
 
-    public DragonObject(int x, int y, Theme theme) {
+    private Dragon dragon;
+
+    public DragonObject(Dragon dragon, int x, int y, Theme theme) {
         super(new Animation(theme.getDragonBluna(), 9, 9, 0x1f160d), x, y);
+        this.dragon = dragon;
     }
 
     @Override
@@ -36,6 +41,8 @@ public class DragonObject extends EnemyObject {
             if (!currentDirection.equals(newDirection))
                 getAnimationManager().getCurrentAnimation().animate(
                         newDirection);
+
+            dragon.inflictDamageOn(room.getPlayerObject().getPlayer());
         }
     }
 
@@ -43,6 +50,11 @@ public class DragonObject extends EnemyObject {
     public void animate() {
         if (vx != 0 || vy != 0)
             super.animate();
+    }
+
+    @Override
+    protected Agressor getAgressor() {
+        return dragon;
     }
 
 }

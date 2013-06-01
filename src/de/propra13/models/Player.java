@@ -2,18 +2,33 @@ package de.propra13.models;
 
 import java.util.ArrayList;
 
-public class Player {
+public class Player extends Agressor {
 
-    private final int MAXHEALTH = 100;
+    public Player(int maxhealth) {
+        super(maxhealth);
+    }
 
-    private double health = MAXHEALTH;
     private int lives = 3;
 
     private Weapon weapon;
+    private int baseDamage = 5;
     private ArrayList<Item> items = new ArrayList<Item>();
 
-    public void inflictDamage(int damage) {
+    @Override
+    public void sufferDamage(double damage) {
         health -= damage;
+    }
+
+    @Override
+    public void inflictDamageOn(Agressor opponent) {
+        opponent.sufferDamage(getDamage());
+    }
+
+    private double getDamage() {
+        if (null != weapon)
+            return weapon.getDamage();
+
+        return baseDamage;
     }
 
     public double getHealth() {
