@@ -4,11 +4,12 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import de.propra13.assets.Theme;
-import de.propra13.views.objects.SkullObject;
+import de.propra13.views.objects.GameObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.HerbObject;
 import de.propra13.views.objects.ItemObject;
 import de.propra13.views.objects.PlayerObject;
+import de.propra13.views.objects.SkullObject;
 import de.propra13.views.objects.StartObject;
 import de.propra13.views.objects.WallObject;
 import de.propra13.views.objects.WeaponObject;
@@ -134,4 +135,23 @@ public class Room extends Model {
         items.remove(item);
     }
 
+    public ArrayList<GameObject> getAllObjects() {
+        ArrayList<GameObject> objects = new ArrayList<>();
+        objects.add(start);
+        objects.add(goal);
+        objects.add(playerObject);
+        objects.addAll(balls);
+        objects.addAll(walls);
+        objects.addAll(items);
+        return objects;
+    }
+
+    public ArrayList<GameObject> getObjectsAt(int x, int y) {
+        ArrayList<GameObject> objects = new ArrayList<>();
+        for (GameObject object : getAllObjects()) {
+            if (object.getBounds().contains(x, y))
+                objects.add(object);
+        }
+        return objects;
+    }
 }

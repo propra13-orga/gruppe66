@@ -17,12 +17,11 @@ public class GameObject {
 
     protected AnimationManager animationManager;
 
-    private boolean debug = true;
+    private boolean debug = false;
 
     public GameObject(int x, int y, int width, int height) {
         this.x = (scale(x) - (width - GameFieldView.GRID) / 2);
-        this.y = (scale(y) - (height - GameFieldView.GRID)
-                / 2);
+        this.y = (scale(y) - (height - GameFieldView.GRID) / 2);
     }
 
     public GameObject(Animation defaultAnimation, int x, int y) {
@@ -53,6 +52,10 @@ public class GameObject {
 
     public void setDebug(boolean debug) {
         this.debug = debug;
+    }
+
+    public void toggleDebug() {
+        debug = !debug;
     }
 
     public int getX() {

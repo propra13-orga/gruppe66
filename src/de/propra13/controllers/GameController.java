@@ -7,6 +7,8 @@ import java.awt.event.ComponentEvent;
 import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
 
@@ -22,12 +24,13 @@ import de.propra13.models.Level;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
+import de.propra13.views.objects.GameObject;
+import de.propra13.views.objects.ItemObject;
 import de.propra13.views.objects.MoveableGameObject;
 import de.propra13.views.objects.SkullObject;
-import de.propra13.views.objects.ItemObject;
 
 public class GameController extends Controller implements KeyListener,
-        ComponentListener, Runnable {
+        ComponentListener, MouseListener, Runnable {
 
     private GameFieldView game;
 
@@ -58,6 +61,7 @@ public class GameController extends Controller implements KeyListener,
 
         game = new GameFieldView(this, theme);
         game.addKeyListener(this);
+        game.addMouseListener(this);
         game.setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
 
         view.add(game);
@@ -302,5 +306,28 @@ public class GameController extends Controller implements KeyListener,
 
     @Override
     protected void willDisappear() {
+    }
+
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        for (GameObject object : getCurrentRoom().getObjectsAt(e.getX(),
+                e.getY()))
+            object.toggleDebug();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
     }
 }
