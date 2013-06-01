@@ -2,8 +2,8 @@ package de.propra13.views.objects;
 
 import java.awt.Dimension;
 import java.awt.Rectangle;
-import java.awt.image.BufferedImage;
 
+import de.propra13.assets.animations.Animation;
 import de.propra13.models.Room;
 
 public abstract class MoveableGameObject extends GameObject {
@@ -11,14 +11,8 @@ public abstract class MoveableGameObject extends GameObject {
     protected int vx;
     protected int vy;
 
-    protected Direction currentDirection;
-
-    public MoveableGameObject(BufferedImage image, int x, int y,
-            int directions, int frames) {
-        super(image, x, y, directions, frames);
-
-        currentDirection = new Direction(1, 0);
-        currentBluna = getBluna(currentDirection);
+    public MoveableGameObject(Animation defaultAnimation, int x, int y) {
+        super(defaultAnimation, x, y);
     }
 
     public void moveTo(GameObject ob) {
@@ -68,36 +62,6 @@ public abstract class MoveableGameObject extends GameObject {
         }
     }
 
-    public void animate() {
-        increaseFrame();
-        if (vx != 0 || vy != 0) {
-            currentDirection.setVx(vx);
-            currentDirection.setVy(vy);
-        }
-
-        BufferedImage bluna = getBluna(currentDirection, currentFrame);
-        currentBluna = bluna;
-    }
-
-    private int abstractNumber(int x) {
-        if (x == 0)
-            return 0;
-        return Math.abs(x) / x;
-    }
-
-    private BufferedImage getBluna(Direction direction, int frameIndex) {
-        int vx3 = abstractNumber(direction.getVx()) + 1;
-        int vy3 = abstractNumber(direction.getVy()) + 1;
-        int v3 = 3 * vx3 + vy3;
-        if (v3 > 4)
-            v3--;
-        return blunaCrate.getBluna(v3 * frames + frameIndex);
-    }
-
-    private BufferedImage getBluna(Direction direction) {
-        return getBluna(direction, 0);
-    }
-
     protected void collidedLeft(int oldx) {
         x = oldx;
     }
@@ -115,15 +79,21 @@ public abstract class MoveableGameObject extends GameObject {
     }
 
     protected boolean intersectsX(int x, GameObject o) {
-        int scaledX = (x + blunaCrate.getBounds().x);
+        int scaledX = (x + animationManager.getDefaultBounds().x);
         return scaledX + getWidth() > o.getX()
                 && scaledX < o.getX() + o.getWidth();
     }
 
     protected boolean intersectsY(int y, GameObject o) {
-        int scaledY = (y + blunaCrate.getBounds().y);
+        int scaledY = (y + animationManager.getDefaultBounds().y);
         return scaledY + getHeight() > o.getY()
                 && scaledY < o.getY() + o.getHeight();
+    }
+
+    @Override
+    public void animate() {
+        getAnimationManager().getCurrentAnimation().animate(
+                new Direction(vx, vy));
     }
 
     public int getVx() {

@@ -6,7 +6,8 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
-import de.propra13.assets.BlunaCrate;
+import de.propra13.assets.animations.Animation;
+import de.propra13.assets.animations.AnimationManager;
 import de.propra13.views.GameFieldView;
 
 public class GameObject {
@@ -14,12 +15,9 @@ public class GameObject {
     protected int x;
     protected int y;
 
-    protected BlunaCrate blunaCrate;
-    protected int frames;
-    protected int currentFrame = -1;
+    protected AnimationManager animationManager;
 
-    protected BufferedImage currentBluna;
-    private boolean debug;
+    private boolean debug = true;
 
     public GameObject(int x, int y, int width, int height) {
         this.x = Math
@@ -28,23 +26,18 @@ public class GameObject {
                 / 2);
     }
 
-    public GameObject(BufferedImage image, int x, int y, int directions,
-            int frames) {
-        this(x, y, image.getWidth() / frames, image.getHeight() / directions);
-        this.frames = frames;
-
-        blunaCrate = new BlunaCrate(image, directions, frames);
-
-        currentBluna = blunaCrate.getFirstBluna();
+    public GameObject(Animation defaultAnimation, int x, int y) {
+        this(x, y, defaultAnimation.getBlunaCrate().getSpriteWidth(),
+                defaultAnimation.getBlunaCrate().getSpriteHeight());
+        animationManager = new AnimationManager(defaultAnimation);
     }
 
     public void animate() {
-        increaseFrame();
-        currentBluna = blunaCrate.getBluna(currentFrame);
+        getAnimationManager().getCurrentAnimation().animate();
     }
 
-    protected void increaseFrame() {
-        currentFrame = ++currentFrame % frames;
+    public AnimationManager getAnimationManager() {
+        return animationManager;
     }
 
     public void draw(Graphics2D gfx, ImageObserver ob) {
@@ -80,13 +73,11 @@ public class GameObject {
     }
 
     public BufferedImage getImage() {
-        return currentBluna;
+        return animationManager.getCurrentBluna();
     }
 
     public Rectangle getBounds() {
-        Rectangle blunaRect = blunaCrate.getBounds();
-        return new Rectangle(x + blunaRect.x, y + blunaRect.y, blunaRect.width,
-                blunaRect.height);
+        return animationManager.getDefaultBounds(x, y);
     }
 
     public Rectangle getBoundsFromOldX(int x) {

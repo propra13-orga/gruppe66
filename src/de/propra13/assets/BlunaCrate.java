@@ -7,12 +7,29 @@ import java.util.HashSet;
 
 public class BlunaCrate {
 
+    private int spriteWidth, spriteHeight;
     private BufferedImage[] blunas;
+    private int frames;
     private Rectangle bounds;
 
-    public BlunaCrate(BufferedImage image, int subsets, int frames) {
-        blunas = readBlunas(image, subsets, frames);
+    public BlunaCrate(BufferedImage image, int directions, int frames) {
+        blunas = readBlunas(image, directions, frames);
+        spriteWidth = image.getWidth() / frames;
+        spriteHeight = image.getHeight() / directions;
+        this.frames = frames;
         initBounds();
+    }
+
+    public int getSpriteHeight() {
+        return spriteHeight;
+    }
+
+    public int getSpriteWidth() {
+        return spriteWidth;
+    }
+
+    public int getFrames() {
+        return frames;
     }
 
     public void initBounds() {

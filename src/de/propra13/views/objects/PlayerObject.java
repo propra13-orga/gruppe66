@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
+import de.propra13.assets.animations.Animation;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
@@ -20,7 +21,7 @@ public class PlayerObject extends MoveableGameObject {
     private Player player;
 
     public PlayerObject(Player player, int x, int y, Theme theme) {
-        super(theme.getPlayerBluna(), x, y, 8, 10);
+        super(new Animation(theme.getPlayerBluna(), 8, 10), x, y);
         this.player = player;
     }
 

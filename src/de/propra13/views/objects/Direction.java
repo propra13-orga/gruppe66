@@ -25,4 +25,13 @@ public class Direction {
     public void setVy(int vy) {
         this.vy = vy;
     }
+
+    public boolean isMoving() {
+        return vx != 0 || vy != 0;
+    }
+
+    public void setFrom(Direction direction) {
+        vx = direction.vx;
+        vy = direction.vy;
+    }
 }
