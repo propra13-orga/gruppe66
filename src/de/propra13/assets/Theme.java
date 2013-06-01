@@ -16,6 +16,7 @@ public class Theme {
     private BufferedImage floorImage;
     private BufferedImage weaponImage;
     private BufferedImage herbImage;
+    private BufferedImage dragonImage;
 
     private String themeName;
 
@@ -30,6 +31,7 @@ public class Theme {
             floorImage = initBluna("floor.jpg");
             weaponImage = initBluna("sword.png");
             herbImage = initBluna("bluna/herbitem.png");
+            dragonImage = initBluna("bluna/dragon.png");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("dun dun dun");
@@ -74,6 +76,10 @@ public class Theme {
 
     public BufferedImage getHerbImage() {
         return herbImage;
+    }
+
+    public BufferedImage getDragonBluna() {
+        return dragonImage;
     }
 
 }

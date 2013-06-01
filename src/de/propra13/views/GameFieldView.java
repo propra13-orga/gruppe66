@@ -16,6 +16,7 @@ import de.propra13.Main;
 import de.propra13.assets.Theme;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Room;
+import de.propra13.views.objects.EnemyObject;
 import de.propra13.views.objects.ItemObject;
 import de.propra13.views.objects.MoveableGameObject;
 import de.propra13.views.objects.SkullObject;
@@ -50,6 +51,7 @@ public class GameFieldView extends JPanel {
 
         list.add(currentRoom.getPlayerObject());
         list.addAll(currentRoom.getBalls());
+        list.addAll(currentRoom.getEnemies());
 
         return list;
     }
@@ -97,6 +99,7 @@ public class GameFieldView extends JPanel {
             drawPlayer(gfx);
             drawBalls(gfx);
             drawItems(gfx);
+            drawEnemies(gfx);
 
             if (drawsGrid)
                 drawGrid(gfx);
@@ -157,6 +160,12 @@ public class GameFieldView extends JPanel {
     private void drawItems(Graphics2D gfx) {
         for (ItemObject item : currentRoom.getItems()) {
             item.draw(gfx, this);
+        }
+    }
+
+    private void drawEnemies(Graphics2D gfx) {
+        for (EnemyObject enemy : currentRoom.getEnemies()) {
+            enemy.draw(gfx, this);
         }
     }
 

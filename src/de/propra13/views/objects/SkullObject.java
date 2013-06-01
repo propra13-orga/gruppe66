@@ -16,14 +16,14 @@ public class SkullObject extends MoveableGameObject {
 
         this.skull = skull;
 
-        vx = 0;
-        vy = 0;
+        vx = -1;
+        vy = -1;
     }
 
     public void move(Dimension size, Room room) {
         super.move(size, room);
 
-        if (Math.random() > 0.9975) {
+        if (Math.random() > 0.9995) {
             vx *= -1;
         }
 

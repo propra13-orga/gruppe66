@@ -3,6 +3,7 @@ package de.propra13.views.objects;
 import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 
@@ -82,16 +83,9 @@ public class GameObject {
         return animationManager.getDefaultBounds(x, y);
     }
 
-    public Rectangle getBoundsFromOldX(int x) {
-        Rectangle bounds = getBounds();
-        bounds.x = x;
-        return bounds;
-    }
-
-    public Rectangle getBoundsFromOldY(int y) {
-        Rectangle bounds = getBounds();
-        bounds.y = y;
-        return bounds;
+    public Point2D.Double getCenter() {
+        return new Point2D.Double(getBounds().getCenterX(), getBounds()
+                .getCenterY());
     }
 
     protected int scale(int x) {

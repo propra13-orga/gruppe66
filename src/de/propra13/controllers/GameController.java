@@ -24,6 +24,7 @@ import de.propra13.models.Level;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
+import de.propra13.views.objects.EnemyObject;
 import de.propra13.views.objects.GameObject;
 import de.propra13.views.objects.ItemObject;
 import de.propra13.views.objects.MoveableGameObject;
@@ -256,6 +257,7 @@ public class GameController extends Controller implements KeyListener,
         animatePlayer();
         animateItems();
         animateBalls();
+        animateEnemies();
     }
 
     private void animatePlayer() {
@@ -271,6 +273,12 @@ public class GameController extends Controller implements KeyListener,
     private void animateBalls() {
         for (SkullObject item : getCurrentRoom().getBalls()) {
             item.animate();
+        }
+    }
+
+    private void animateEnemies() {
+        for (EnemyObject enemy : getCurrentRoom().getEnemies()) {
+            enemy.animate();
         }
     }
 

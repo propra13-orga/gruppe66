@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import de.propra13.assets.Theme;
+import de.propra13.views.objects.DragonObject;
+import de.propra13.views.objects.EnemyObject;
 import de.propra13.views.objects.GameObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.HerbObject;
@@ -26,6 +28,7 @@ public class Room extends Model {
     private ArrayList<WallObject> walls;
     private ArrayList<SkullObject> balls;
     private ArrayList<ItemObject> items;
+    private ArrayList<EnemyObject> enemies;
 
     public Room(PlayerObject playerObject, ArrayList<WallObject> walls) {
         this.playerObject = playerObject;
@@ -37,9 +40,11 @@ public class Room extends Model {
         this.name = name;
         this.player = player;
 
-        ArrayList<WallObject> walls = new ArrayList<WallObject>();
-        ArrayList<SkullObject> balls = new ArrayList<SkullObject>();
-        ArrayList<ItemObject> items = new ArrayList<ItemObject>();
+        walls = new ArrayList<>();
+        balls = new ArrayList<>();
+        items = new ArrayList<>();
+        enemies = new ArrayList<>();
+
         String roomString = readStringFromFile(fileName);
 
         String[] lines = roomString.split("\\n");
@@ -67,15 +72,15 @@ public class Room extends Model {
                     break;
                 case 'H':
                     items.add(new HerbObject(x, y, theme));
+                    break;
+                case 'D':
+                    enemies.add(new DragonObject(x, y, theme));
+                    break;
                 }
                 x++;
             }
             y++;
         }
-
-        this.walls = walls;
-        this.balls = balls;
-        this.items = items;
     }
 
     public PlayerObject getPlayerObject() {
@@ -104,6 +109,10 @@ public class Room extends Model {
 
     public ArrayList<ItemObject> getItems() {
         return items;
+    }
+
+    public ArrayList<EnemyObject> getEnemies() {
+        return enemies;
     }
 
     public StartObject getStart() {
@@ -140,6 +149,7 @@ public class Room extends Model {
         objects.add(start);
         objects.add(goal);
         objects.add(playerObject);
+        objects.addAll(enemies);
         objects.addAll(balls);
         objects.addAll(walls);
         objects.addAll(items);

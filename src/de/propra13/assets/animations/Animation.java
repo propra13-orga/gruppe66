@@ -47,18 +47,24 @@ public class Animation {
         currentBluna = getBluna();
     }
 
-    private int abstractNumber(int x) {
-        if (x == 0)
-            return 0;
-        return Math.abs(x) / x;
-    }
-
     public BufferedImage getBluna() {
-        int vx3 = abstractNumber(currentDirection.getVx()) + 1;
-        int vy3 = abstractNumber(currentDirection.getVy()) + 1;
+        int vx3 = currentDirection.getNormalizedVx() + 1;
+        int vy3 = currentDirection.getNormalizedVy() + 1;
         int v3 = 3 * vx3 + vy3;
         if (v3 > 4)
             v3--;
         return blunaCrate.getBluna(v3 * blunaCrate.getFrames() + currentFrame);
+    }
+
+    public int getFrameNumber() {
+        return currentFrame;
+    }
+
+    public void setDirection(Direction direction) {
+        currentDirection = direction;
+    }
+
+    public Direction getDirection() {
+        return currentDirection;
     }
 }
