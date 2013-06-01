@@ -5,7 +5,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.Timer;
 
-public class Fireball {
+public class Skull {
 
     private int reloadTime = 1;
     private int damage = 35;

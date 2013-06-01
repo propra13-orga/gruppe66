@@ -3,18 +3,18 @@ package de.propra13.views.objects;
 import java.awt.Dimension;
 
 import de.propra13.assets.animations.Animation;
-import de.propra13.models.Fireball;
 import de.propra13.models.Room;
+import de.propra13.models.Skull;
 import de.propra13.models.Theme;
 
-public class FireballObject extends MoveableGameObject {
+public class SkullObject extends MoveableGameObject {
 
-    private Fireball fireball;
+    private Skull skull;
 
-    public FireballObject(Fireball fireball, int x, int y, Theme theme) {
+    public SkullObject(Skull skull, int x, int y, Theme theme) {
         super(new Animation(theme.getFireballBluna(), 8, 10, 0x1f160d), x, y);
 
-        this.fireball = fireball;
+        this.skull = skull;
 
         vx = 0;
         vy = 0;
@@ -32,7 +32,7 @@ public class FireballObject extends MoveableGameObject {
         }
 
         if (playerObject.getBounds().contains(getBounds()))
-            fireball.inflictDamageOn(playerObject.getPlayer());
+            skull.inflictDamageOn(playerObject.getPlayer());
 
     }
 
