@@ -43,14 +43,6 @@ public class Player extends Agressor {
         setHealth(this.health + health);
     }
 
-    public boolean isDead() {
-        return health <= 0;
-    }
-
-    public boolean isWounded() {
-        return health < MAXHEALTH;
-    }
-
     public boolean hasLives() {
         return lives > 1;
     }

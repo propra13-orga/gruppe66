@@ -164,4 +164,8 @@ public class Room extends Model {
         }
         return objects;
     }
+
+    public void removeEnemy(EnemyObject enemy) {
+        enemies.remove(enemy);
+    }
 }

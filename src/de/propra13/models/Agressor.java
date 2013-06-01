@@ -31,7 +31,7 @@ public abstract class Agressor {
     }
 
     public boolean isDead() {
-        return health > 0;
+        return health <= 0;
     }
 
     public double getHealth() {

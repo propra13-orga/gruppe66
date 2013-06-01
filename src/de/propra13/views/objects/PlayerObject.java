@@ -11,6 +11,7 @@ import de.propra13.controllers.GameController;
 import de.propra13.models.Agressor;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
+import de.propra13.views.GameFieldView;
 
 public class PlayerObject extends AgressorObject {
 
@@ -128,5 +129,13 @@ public class PlayerObject extends AgressorObject {
     @Override
     protected Agressor getAgressor() {
         return player;
+    }
+
+    public void inflictDamageOn(ArrayList<EnemyObject> enemies) {
+        for (EnemyObject enemy : enemies) {
+            if (enemy.getCenter().distance(getCenter()) < 2 * GameFieldView.GRID)
+                player.inflictDamageOn(enemy.getAgressor());
+
+        }
     }
 }

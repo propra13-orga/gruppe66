@@ -185,6 +185,10 @@ public class GameController extends Controller implements KeyListener,
         case KeyEvent.VK_H:
             player.addHealth(10);
             break;
+        case KeyEvent.VK_SPACE:
+            getCurrentRoom().getPlayerObject().inflictDamageOn(
+                    getCurrentRoom().getEnemies());
+            break;
         default:
             getCurrentRoom().getPlayerObject().keyPressed(event);
         }

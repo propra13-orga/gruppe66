@@ -23,6 +23,11 @@ public class DragonObject extends EnemyObject {
     public void move(Dimension gameFieldSize, Room room) {
         super.move(gameFieldSize, room);
 
+        if (getAgressor().isDead()) {
+            room.removeEnemy(this);
+            return;
+        }
+
         Point2D.Double p = room.getPlayerObject().getCenter();
         Direction d = new Direction((int) (p.x - getCenter().x),
                 (int) (p.y - getCenter().y));

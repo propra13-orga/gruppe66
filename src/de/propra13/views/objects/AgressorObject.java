@@ -25,33 +25,37 @@ public abstract class AgressorObject extends MoveableGameObject {
 
     private void drawAgressorHealthBar(Graphics2D gfx) {
         double health = getAgressor().getHealth();
-        int width = (int) (getWidth() * (health / 100));
+        int width = (int) (getWidth() * (health / getAgressor().MAXHEALTH));
         int height = 2;
 
         gfx.setPaint(Color.black);
         gfx.fillRect(getX(), getY() - height, getWidth(), height);
 
-        gfx.setPaint(healthColor(health));
+        gfx.setPaint(healthColor(health, getAgressor().MAXHEALTH));
         gfx.fillRect(getX(), getY() - height, width, height);
     }
 
-    private static Color healthColor(double health) {
+    private static Color healthColor(double health, double maxhealth) {
         health = Math.max(0, health);
         Color green = Color.green;
         Color yellow = Color.yellow;
         Color orange = new Color(0xff, 0x99, 0x00);
         Color red = Color.red;
 
-        if (health >= 70)
-            return mixColor(green, yellow, health, 100, 70);
-        if (health < 70 && health >= 40)
-            return mixColor(yellow, orange, health, 70, 40);
+        double step = maxhealth / 3;
+        double step1 = maxhealth - step;
+        double step2 = maxhealth - 2 * step;
 
-        return mixColor(orange, red, health, 40, 0);
+        if (health >= step1)
+            return mixColor(green, yellow, health, maxhealth, maxhealth - step);
+        if (health < step1 && health >= step2)
+            return mixColor(yellow, orange, health, step1, step2);
+
+        return mixColor(orange, red, health, step2, 0);
     }
 
-    private static Color mixColor(Color c1, Color c2, double health, int high,
-            int low) {
+    private static Color mixColor(Color c1, Color c2, double health,
+            double high, double low) {
         double ratio = (health - low) / (high - low);
 
         int r = (int) (c1.getRed() * ratio + c2.getRed() * (1 - ratio));
