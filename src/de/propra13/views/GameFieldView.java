@@ -15,7 +15,7 @@ import de.propra13.Main;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Room;
 import de.propra13.models.Theme;
-import de.propra13.views.objects.FireballObject;
+import de.propra13.views.objects.SkullObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.ItemObject;
 import de.propra13.views.objects.PlayerObject;
@@ -33,7 +33,7 @@ public class GameFieldView extends JPanel {
     private PlayerObject playerObject;
 
     private ArrayList<WallObject> walls;
-    private ArrayList<FireballObject> balls;
+    private ArrayList<SkullObject> balls;
     private ArrayList<ItemObject> items;
 
     private Room currentRoom;
@@ -156,7 +156,7 @@ public class GameFieldView extends JPanel {
     }
 
     private void drawBalls(Graphics2D gfx) {
-        for (FireballObject ball : balls) {
+        for (SkullObject ball : balls) {
             ball.draw(gfx, this);
         }
     }
@@ -176,7 +176,7 @@ public class GameFieldView extends JPanel {
             gfx.drawLine(0, y, Main.WIDTH, y);
     }
 
-    public ArrayList<FireballObject> getBalls() {
+    public ArrayList<SkullObject> getBalls() {
         return balls;
     }
 

@@ -3,7 +3,7 @@ package de.propra13.models;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import de.propra13.views.objects.FireballObject;
+import de.propra13.views.objects.SkullObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.HerbObject;
 import de.propra13.views.objects.ItemObject;
@@ -22,7 +22,7 @@ public class Room extends Model {
     private GoalObject goal;
     private PlayerObject playerObject;
     private ArrayList<WallObject> walls;
-    private ArrayList<FireballObject> balls;
+    private ArrayList<SkullObject> balls;
     private ArrayList<ItemObject> items;
 
     public Room(PlayerObject playerObject, ArrayList<WallObject> walls) {
@@ -36,7 +36,7 @@ public class Room extends Model {
         this.player = player;
 
         ArrayList<WallObject> walls = new ArrayList<WallObject>();
-        ArrayList<FireballObject> balls = new ArrayList<FireballObject>();
+        ArrayList<SkullObject> balls = new ArrayList<SkullObject>();
         ArrayList<ItemObject> items = new ArrayList<ItemObject>();
         String roomString = readStringFromFile(fileName);
 
@@ -58,7 +58,7 @@ public class Room extends Model {
                     goal = new GoalObject(x, y, theme);
                     break;
                 case 'F':
-                    balls.add(new FireballObject(new Fireball(), x, y, theme));
+                    balls.add(new SkullObject(new Skull(), x, y, theme));
                     break;
                 case 'W':
                     items.add(new WeaponObject(new Weapon(), x, y, theme));
@@ -92,11 +92,11 @@ public class Room extends Model {
         this.walls = walls;
     }
 
-    public ArrayList<FireballObject> getBalls() {
+    public ArrayList<SkullObject> getBalls() {
         return balls;
     }
 
-    public void setBalls(ArrayList<FireballObject> balls) {
+    public void setBalls(ArrayList<SkullObject> balls) {
         this.balls = balls;
     }
 

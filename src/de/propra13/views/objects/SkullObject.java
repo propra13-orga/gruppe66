@@ -2,15 +2,15 @@ package de.propra13.views.objects;
 
 import java.awt.Dimension;
 
-import de.propra13.models.Fireball;
 import de.propra13.models.Room;
+import de.propra13.models.Skull;
 import de.propra13.models.Theme;
 
-public class FireballObject extends MoveableGameObject {
+public class SkullObject extends MoveableGameObject {
 
-    private Fireball fireball;
+    private Skull fireball;
 
-    public FireballObject(Fireball fireball, int x, int y, Theme theme) {
+    public SkullObject(Skull fireball, int x, int y, Theme theme) {
         super(theme.getFireballBluna(), x, y, 8, 10);
 
         this.fireball = fireball;

@@ -136,8 +136,8 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="16" language="java" name="de.propra13.models.Fireball" project="gruppe66" 
-    file="/gruppe66/src/de/propra13/models/Fireball.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="16" language="java" name="de.propra13.models.Skull" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/models/Skull.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3291" y="1273"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -172,8 +172,8 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="20" language="java" name="de.propra13.views.objects.FireballObject" project="gruppe66" 
-    file="/gruppe66/src/de/propra13/views/objects/FireballObject.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="20" language="java" name="de.propra13.views.objects.SkullObject" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/objects/SkullObject.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="3291" y="899"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
