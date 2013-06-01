@@ -1,5 +1,6 @@
 package de.propra13.views.objects;
 
+import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -9,25 +10,22 @@ import de.propra13.assets.BlunaCrate;
 import de.propra13.views.GameFieldView;
 
 public class GameObject {
+
     protected int x;
     protected int y;
-
-    protected int width;
-    protected int height;
 
     protected BlunaCrate blunaCrate;
     protected int frames;
     protected int currentFrame = -1;
 
     protected BufferedImage currentBluna;
+    private boolean debug;
 
     public GameObject(int x, int y, int width, int height) {
         this.x = Math
                 .max(scale(x), scale(x) - (width - GameFieldView.GRID) / 2);
         this.y = Math.max(scale(y), scale(y) - (height - GameFieldView.GRID)
                 / 2);
-        this.width = width;
-        this.height = height;
     }
 
     public GameObject(BufferedImage image, int x, int y, int directions,
@@ -50,28 +48,35 @@ public class GameObject {
     }
 
     public void draw(Graphics2D gfx, ImageObserver ob) {
-        gfx.drawImage(getImage(), getX(), getY(), ob);
-        /*
-         * Polygon shape = new Polygon(); for (Point p : getPointMask()) {
-         * shape.addPoint(p.x, p.y); } gfx.setPaint(Color.white);
-         * gfx.drawPolygon(shape);
-         */
+        gfx.drawImage(getImage(), x, y, ob);
+        if (debug)
+            drawDebug(gfx, ob);
+    }
+
+    public void drawDebug(Graphics2D gfx, ImageObserver ob) {
+        gfx.setPaint(Color.white);
+        gfx.drawRect(getBounds().x, getBounds().y, getBounds().width,
+                getBounds().height);
+    }
+
+    public void setDebug(boolean debug) {
+        this.debug = debug;
     }
 
     public int getX() {
-        return x;
+        return getBounds().x;
     }
 
     public int getY() {
-        return y;
+        return getBounds().y;
     }
 
     public int getWidth() {
-        return width;
+        return getBounds().width;
     }
 
     public int getHeight() {
-        return height;
+        return getBounds().height;
     }
 
     public BufferedImage getImage() {
@@ -80,9 +85,7 @@ public class GameObject {
 
     public Rectangle getBounds() {
         Rectangle blunaRect = blunaCrate.getBounds();
-        int xdiff = (this.width - blunaRect.width) / 2;
-        int ydiff = (this.height - blunaRect.height) / 2;
-        return new Rectangle(x + xdiff, y + ydiff, blunaRect.width,
+        return new Rectangle(x + blunaRect.x, y + blunaRect.y, blunaRect.width,
                 blunaRect.height);
     }
 
@@ -101,23 +104,4 @@ public class GameObject {
     protected int scale(int x) {
         return (x * GameFieldView.GRID);
     }
-    /*
-     * public HashSet<Point> getPointMask() { return
-     * getPointMaskFrom(blunaCrate.getPointMask()); }
-     */
-    /*
-     * protected HashSet<Point> getPointMaskFrom(HashSet<Point> originalMask) {
-     * HashSet<Point> mask = new HashSet<>(originalMask.size()); for (Point p :
-     * originalMask) { mask.add(new Point(p.x + x, p.y + y)); } return mask; }
-     * 
-     * protected HashSet<Point> getPointMaskFromOldX(HashSet<Point>
-     * originalMask, int diff) { HashSet<Point> mask = new
-     * HashSet<>(originalMask.size()); for (Point p : originalMask) {
-     * mask.add(new Point(p.x + diff, p.y)); } return mask; }
-     * 
-     * protected HashSet<Point> getPointMaskFromOldY(HashSet<Point>
-     * originalMask, int diff) { HashSet<Point> mask = new
-     * HashSet<>(originalMask.size()); for (Point p : originalMask) {
-     * mask.add(new Point(p.x, p.y + diff)); } return mask; }
-     */
 }

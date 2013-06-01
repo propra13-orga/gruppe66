@@ -38,14 +38,14 @@ public abstract class MoveableGameObject extends GameObject {
     }
 
     private void collideWithGameField(Rectangle field, int oldx, int oldy) {
-        if (!field.contains(new Rectangle(x, y, width, height))) {
-            if (x < 1)
+        if (!field.contains(getBounds())) {
+            if (getX() < 1)
                 collidedLeft(oldx);
-            if (x + width >= field.width)
+            if (getX() + getWidth() >= field.width)
                 collidedRight(oldx);
-            if (y < 1)
+            if (getY() < 1)
                 collidedTop(oldy);
-            if (y + height >= field.height)
+            if (getY() + getHeight() >= field.height)
                 collidedBottom(oldy);
         }
     }
@@ -56,7 +56,6 @@ public abstract class MoveableGameObject extends GameObject {
 
                 if (vx < 0 && intersectsY(oldy, wall))
                     collidedLeft(oldx);
-
                 else if (vx > 0 && intersectsY(oldy, wall))
                     collidedRight(oldx);
 
@@ -116,13 +115,15 @@ public abstract class MoveableGameObject extends GameObject {
     }
 
     protected boolean intersectsX(int x, GameObject o) {
-        Rectangle objectBounds = o.getBounds();
-        return objectBounds.intersects(getBoundsFromOldX(x));
+        int scaledX = (x + blunaCrate.getBounds().x);
+        return scaledX + getWidth() > o.getX()
+                && scaledX < o.getX() + o.getWidth();
     }
 
     protected boolean intersectsY(int y, GameObject o) {
-        Rectangle objectBounds = o.getBounds();
-        return objectBounds.intersects(getBoundsFromOldY(y));
+        int scaledY = (y + blunaCrate.getBounds().y);
+        return scaledY + getHeight() > o.getY()
+                && scaledY < o.getY() + o.getHeight();
     }
 
     public int getVx() {

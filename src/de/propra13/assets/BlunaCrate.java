@@ -1,7 +1,6 @@
 package de.propra13.assets;
 
 import java.awt.Point;
-import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.HashSet;
@@ -9,16 +8,22 @@ import java.util.HashSet;
 public class BlunaCrate {
 
     private BufferedImage[] blunas;
-    private HashSet<Point> pointMask;
     private Rectangle bounds;
 
     public BlunaCrate(BufferedImage image, int subsets, int frames) {
-        pointMask = new HashSet<>();
         blunas = readBlunas(image, subsets, frames);
-        createBounds();
+        initBounds();
     }
 
-    private BufferedImage[] readBlunas(BufferedImage image, int subsets,
+    public void initBounds() {
+        HashSet<Point> pointMask = new HashSet<>();
+        for (BufferedImage bluna : blunas) {
+            pointMask.addAll(createPointMaskFrom(bluna));
+        }
+        bounds = createBoundsFrom(pointMask);
+    }
+
+    private static BufferedImage[] readBlunas(BufferedImage image, int subsets,
             int frames) {
         BufferedImage[] blunas = new BufferedImage[frames * subsets];
 
@@ -29,13 +34,12 @@ public class BlunaCrate {
             int x = (i % frames) * width;
             int y = (i / frames) * height;
             BufferedImage subImage = image.getSubimage(x, y, width, height);
-            pointMask.addAll(createPointMaskFrom(subImage));
             blunas[i] = subImage;
         }
         return blunas;
     }
 
-    private HashSet<Point> createPointMaskFrom(BufferedImage image) {
+    private static HashSet<Point> createPointMaskFrom(BufferedImage image) {
         HashSet<Point> pointMask = new HashSet<>();
         int pixel, alpha, i, j;
         long rgb;
@@ -62,12 +66,22 @@ public class BlunaCrate {
         return getBluna(0);
     }
 
-    public void createBounds() {
-        Polygon shape = new Polygon();
+    public static Rectangle createBoundsFrom(HashSet<Point> pointMask) {
+        int xmin = Integer.MAX_VALUE;
+        int ymin = Integer.MAX_VALUE;
+        int xmax = -1;
+        int ymax = -1;
         for (Point p : pointMask) {
-            shape.addPoint(p.x, p.y);
+            if (p.x < xmin)
+                xmin = p.x;
+            if (p.y < ymin)
+                ymin = p.y;
+            if (p.x > xmax)
+                xmax = p.x;
+            if (p.y > ymax)
+                ymax = p.y;
         }
-        bounds = shape.getBounds();
+        return new Rectangle(xmin, ymin, xmax - xmin, ymax - ymin);
     }
 
     public Rectangle getBounds() {
