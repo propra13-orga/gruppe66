@@ -6,7 +6,7 @@ import de.propra13.models.Theme;
 public class StartObject extends GameObject {
 
     public StartObject(int x, int y, Theme theme) {
-        super(new Animation(theme.getStartImage(), 1, 1), x, y);
+        super(new Animation(theme.getStartImage(), 1, 1, 0x1f160d), x, y);
     }
 
 }

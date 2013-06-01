@@ -16,8 +16,8 @@ public abstract class MoveableGameObject extends GameObject {
     }
 
     public void moveTo(GameObject ob) {
-        this.x = ob.getX();
-        this.y = ob.getY();
+        this.x = ob.getX() + (this.x - getX());
+        this.y = ob.getY() + (this.y - getY());
     }
 
     public void move(Dimension gameFieldSize, Room room) {

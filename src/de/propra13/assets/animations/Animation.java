@@ -13,8 +13,9 @@ public class Animation {
 
     private int currentFrame = -1;
 
-    public Animation(BufferedImage image, int directions, int frames) {
-        this(new BlunaCrate(image, directions, frames));
+    public Animation(BufferedImage image, int directions, int frames,
+            int shadowRGB) {
+        this(new BlunaCrate(image, directions, frames, shadowRGB));
     }
 
     public Animation(BlunaCrate blunaCrate) {

@@ -3,6 +3,7 @@ package de.propra13.views.objects;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
@@ -21,7 +22,7 @@ public class PlayerObject extends MoveableGameObject {
     private Player player;
 
     public PlayerObject(Player player, int x, int y, Theme theme) {
-        super(new Animation(theme.getPlayerBluna(), 8, 10), x, y);
+        super(new Animation(theme.getPlayerBluna(), 9, 9, 0x271b11), x, y);
         this.player = player;
     }
 
@@ -108,11 +109,15 @@ public class PlayerObject extends MoveableGameObject {
     }
 
     private boolean isOnGoalIn(Room room) {
-        return room.getGoal().getBounds().contains(getBounds());
+        Rectangle biggerGoal = room.getGoal().getBounds();
+        biggerGoal.grow(2, 2);
+        return biggerGoal.contains(getBounds());
     }
 
     private boolean isOnStartIn(Room room) {
-        return room.getStart().getBounds().contains(getBounds());
+        Rectangle biggerStart = room.getStart().getBounds();
+        biggerStart.grow(2, 2);
+        return biggerStart.contains(getBounds());
     }
 
     public Player getPlayer() {

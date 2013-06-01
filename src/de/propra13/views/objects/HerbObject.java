@@ -6,6 +6,6 @@ import de.propra13.models.Theme;
 public class HerbObject extends ItemObject {
 
     public HerbObject(int x, int y, Theme theme) {
-        super(new Animation(theme.getHerbImage(), 1, 8), x, y);
+        super(new Animation(theme.getHerbImage(), 1, 8, 0x1f160d), x, y);
     }
 }

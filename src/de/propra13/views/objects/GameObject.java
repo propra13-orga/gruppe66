@@ -20,9 +20,8 @@ public class GameObject {
     private boolean debug = true;
 
     public GameObject(int x, int y, int width, int height) {
-        this.x = Math
-                .max(scale(x), scale(x) - (width - GameFieldView.GRID) / 2);
-        this.y = Math.max(scale(y), scale(y) - (height - GameFieldView.GRID)
+        this.x = (scale(x) - (width - GameFieldView.GRID) / 2);
+        this.y = (scale(y) - (height - GameFieldView.GRID)
                 / 2);
     }
 
