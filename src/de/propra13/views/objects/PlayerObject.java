@@ -63,6 +63,12 @@ public class PlayerObject extends MoveableGameObject {
 
     }
 
+    @Override
+    public void animate() {
+        if (vx != 0 || vy != 0)
+            super.animate();
+    }
+
     private void drawPlayerHealthBar(Graphics2D gfx) {
         double health = getPlayer().getHealth();
         int width = (int) (getWidth() * (health / 100));

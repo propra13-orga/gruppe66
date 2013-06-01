@@ -45,7 +45,7 @@ public class GameController extends Controller implements KeyListener,
     private Timer objectAnimator;
 
     private final int runningDelay = 10;
-    private final int animationDelay = 100;
+    private final int animationDelay = 45;
 
     public GameController(ControllerFactory cf, JFrame rootWindow) {
         super(cf, rootWindow);
