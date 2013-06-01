@@ -22,6 +22,7 @@ import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.models.Theme;
 import de.propra13.views.GameFieldView;
+import de.propra13.views.objects.MoveableGameObject;
 import de.propra13.views.objects.SkullObject;
 import de.propra13.views.objects.ItemObject;
 
@@ -242,10 +243,8 @@ public class GameController extends Controller implements KeyListener,
     }
 
     public void turn() {
-        game.getPlayerObject().move(game.getSize(), getCurrentRoom());
-
-        for (SkullObject ball : game.getBalls()) {
-            ball.move(game.getSize(), getCurrentRoom(), game.getPlayerObject());
+        for (MoveableGameObject object : game.getMoveableGameObjects()) {
+            object.move(game.getSize(), getCurrentRoom());
         }
     }
 

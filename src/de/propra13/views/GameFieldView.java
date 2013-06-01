@@ -8,6 +8,7 @@ import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.Toolkit;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JPanel;
 
@@ -15,11 +16,9 @@ import de.propra13.Main;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Room;
 import de.propra13.models.Theme;
-import de.propra13.views.objects.SkullObject;
-import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.ItemObject;
-import de.propra13.views.objects.PlayerObject;
-import de.propra13.views.objects.StartObject;
+import de.propra13.views.objects.MoveableGameObject;
+import de.propra13.views.objects.SkullObject;
 import de.propra13.views.objects.WallObject;
 
 public class GameFieldView extends JPanel {
@@ -27,14 +26,6 @@ public class GameFieldView extends JPanel {
     public static final int GRID = 50;
 
     private static final long serialVersionUID = 7383103785685757479L;
-
-    private StartObject start;
-    private GoalObject goal;
-    private PlayerObject playerObject;
-
-    private ArrayList<WallObject> walls;
-    private ArrayList<SkullObject> balls;
-    private ArrayList<ItemObject> items;
 
     private Room currentRoom;
     private Theme theme;
@@ -52,6 +43,15 @@ public class GameFieldView extends JPanel {
         initRenderingHints();
 
         this.controller = controller;
+    }
+
+    public List<MoveableGameObject> getMoveableGameObjects() {
+        List<MoveableGameObject> list = new ArrayList<>();
+
+        list.add(currentRoom.getPlayerObject());
+        list.addAll(currentRoom.getBalls());
+
+        return list;
     }
 
     private void initComponent() {
@@ -73,14 +73,7 @@ public class GameFieldView extends JPanel {
 
     public void setCurrentRoom(Room room) {
         this.currentRoom = room;
-        this.start = currentRoom.getStart();
-        this.goal = currentRoom.getGoal();
-        this.playerObject = currentRoom.getPlayerObject();
-        this.walls = currentRoom.getWalls();
-        this.balls = currentRoom.getBalls();
-        this.items = currentRoom.getItems();
-
-        this.playerObject.setMoved(false);
+        currentRoom.getPlayerObject().setMoved(false);
     }
 
     @Override
@@ -114,11 +107,11 @@ public class GameFieldView extends JPanel {
     }
 
     private void drawStart(Graphics2D gfx) {
-        start.draw(gfx, this);
+        currentRoom.getStart().draw(gfx, this);
     }
 
     private void drawGoal(Graphics2D gfx) {
-        goal.draw(gfx, this);
+        currentRoom.getGoal().draw(gfx, this);
     }
 
     private void clearAndSetRenderingHints(Graphics2D gfx) {
@@ -145,24 +138,24 @@ public class GameFieldView extends JPanel {
     }
 
     private void drawPlayer(Graphics2D gfx) {
-        playerObject.draw(gfx, this);
+        currentRoom.getPlayerObject().draw(gfx, this);
 
     }
 
     private void drawWalls(Graphics2D gfx) {
-        for (WallObject wall : walls) {
+        for (WallObject wall : currentRoom.getWalls()) {
             wall.draw(gfx, this);
         }
     }
 
     private void drawBalls(Graphics2D gfx) {
-        for (SkullObject ball : balls) {
+        for (SkullObject ball : currentRoom.getBalls()) {
             ball.draw(gfx, this);
         }
     }
 
     private void drawItems(Graphics2D gfx) {
-        for (ItemObject item : items) {
+        for (ItemObject item : currentRoom.getItems()) {
             item.draw(gfx, this);
         }
     }
@@ -176,16 +169,7 @@ public class GameFieldView extends JPanel {
             gfx.drawLine(0, y, Main.WIDTH, y);
     }
 
-    public ArrayList<SkullObject> getBalls() {
-        return balls;
-    }
-
-    public PlayerObject getPlayerObject() {
-        return playerObject;
-    }
-
     public void setTheme(Theme theme) {
         this.theme = theme;
     }
-
 }
