@@ -2,10 +2,10 @@ package de.propra13.views.objects;
 
 import java.awt.Dimension;
 
+import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
 import de.propra13.models.Room;
 import de.propra13.models.Skull;
-import de.propra13.models.Theme;
 
 public class SkullObject extends MoveableGameObject {
 

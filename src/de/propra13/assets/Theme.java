@@ -1,4 +1,4 @@
-package de.propra13.models;
+package de.propra13.assets;
 
 import java.awt.image.BufferedImage;
 import java.io.File;

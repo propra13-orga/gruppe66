@@ -17,10 +17,10 @@ import javax.swing.Timer;
 import org.json.JSONException;
 
 import de.propra13.Main;
+import de.propra13.assets.Theme;
 import de.propra13.models.Level;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
-import de.propra13.models.Theme;
 import de.propra13.views.GameFieldView;
 import de.propra13.views.objects.MoveableGameObject;
 import de.propra13.views.objects.SkullObject;

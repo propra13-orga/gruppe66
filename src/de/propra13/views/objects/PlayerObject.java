@@ -8,11 +8,11 @@ import java.awt.event.KeyEvent;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
+import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
-import de.propra13.models.Theme;
 
 public class PlayerObject extends MoveableGameObject {
 

@@ -7,6 +7,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import de.propra13.assets.Theme;
 import de.propra13.controllers.GameController;
 
 public class Level extends Model {

@@ -13,9 +13,9 @@ import java.util.List;
 import javax.swing.JPanel;
 
 import de.propra13.Main;
+import de.propra13.assets.Theme;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Room;
-import de.propra13.models.Theme;
 import de.propra13.views.objects.ItemObject;
 import de.propra13.views.objects.MoveableGameObject;
 import de.propra13.views.objects.SkullObject;
