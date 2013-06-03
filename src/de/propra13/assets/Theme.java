@@ -11,6 +11,7 @@ public class Theme {
     private BufferedImage goalImage;
     private BufferedImage startImage;
     private BufferedImage playerImage;
+    private BufferedImage playerWalksImage;
     private BufferedImage fireballImage;
     private BufferedImage wallImage;
     private BufferedImage floorImage;
@@ -26,6 +27,7 @@ public class Theme {
             goalImage = initBluna("goal.jpg");
             startImage = initBluna("start.jpg");
             playerImage = initBluna("bluna/player.png");
+            playerWalksImage = initBluna("bluna/player_walks.png");
             fireballImage = initBluna("bluna/skull.png");
             wallImage = initBluna("wall1.jpg");
             floorImage = initBluna("floor.jpg");
@@ -72,6 +74,10 @@ public class Theme {
 
     public BufferedImage getPlayerBluna() {
         return playerImage;
+    }
+    
+    public BufferedImage getPlayerWalksBluna() {
+        return playerWalksImage;
     }
 
     public BufferedImage getHerbImage() {

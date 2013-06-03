@@ -21,7 +21,7 @@ public class PlayerObject extends AgressorObject {
     private Player player;
 
     public PlayerObject(Player player, int x, int y, Theme theme) {
-        super(new Animation(theme.getPlayerBluna(), 9, 9, 0x271b11), x, y);
+        super(new Animation(theme.getPlayerBluna(), 8, 1, 0x271b11), x, y);
         this.player = player;
     }
 
