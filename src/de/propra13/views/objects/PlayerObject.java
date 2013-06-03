@@ -60,12 +60,6 @@ public class PlayerObject extends AgressorObject {
         return items;
     }
 
-    @Override
-    public void animate() {
-        if (vx != 0 || vy != 0)
-            super.animate();
-    }
-
     public void setController(GameController controller) {
         this.controller = controller;
     }
@@ -134,7 +128,6 @@ public class PlayerObject extends AgressorObject {
             break;
         }
 
-        animationManager.setDirection(new Direction(vx, vy));
         if (!isMoving())
             animationManager
                     .setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
