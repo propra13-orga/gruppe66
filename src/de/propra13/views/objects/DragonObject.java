@@ -5,6 +5,7 @@ import java.awt.geom.Point2D;
 
 import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
+import de.propra13.assets.animations.AnimationManager;
 import de.propra13.models.Agressor;
 import de.propra13.models.Dragon;
 import de.propra13.models.Room;
@@ -14,9 +15,14 @@ public class DragonObject extends EnemyObject {
 
     private Dragon dragon;
 
+    private static final int SHADOW = 0x1f160d;
+
     public DragonObject(Dragon dragon, int x, int y, Theme theme) {
-        super(new Animation(theme.getDragonBluna(), 9, 9, 0x1f160d), x, y);
+        super(new Animation(theme.getDragonBluna(), 8, 1, SHADOW), x, y);
         this.dragon = dragon;
+
+        animationManager.addAnimation("walking",
+                new Animation(theme.getDragonWalksBluna(), 8, 9, SHADOW));
     }
 
     @Override
@@ -29,32 +35,20 @@ public class DragonObject extends EnemyObject {
         }
 
         Point2D.Double p = room.getPlayerObject().getCenter();
-        Direction d = new Direction((int) (p.x - getCenter().x),
+        Direction newDirection = new Direction((int) (p.x - getCenter().x),
                 (int) (p.y - getCenter().y));
 
         if (p.distance(getCenter()) > GameFieldView.GRID * 2) {
-            vx = d.getNormalizedVx();
-            vy = d.getNormalizedVy();
+            vx = newDirection.getNormalizedVx();
+            vy = newDirection.getNormalizedVy();
+            getAnimationManager().setCurrentAnimation("walking");
         } else {
             vx = vy = 0;
-
-            double diffx = p.x - getCenter().x, diffy = p.y - getCenter().y;
-            Direction currentDirection = getAnimationManager()
-                    .getCurrentAnimation().getDirection();
-            Direction newDirection = new Direction((int) diffx, (int) diffy);
-
-            if (!currentDirection.equals(newDirection))
-                getAnimationManager().getCurrentAnimation().animate(
-                        newDirection);
-
             dragon.inflictDamageOn(room.getPlayerObject().getPlayer());
+            getAnimationManager().setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
         }
-    }
 
-    @Override
-    public void animate() {
-        if (vx != 0 || vy != 0)
-            super.animate();
+        getAnimationManager().setDirection(newDirection);
     }
 
     @Override

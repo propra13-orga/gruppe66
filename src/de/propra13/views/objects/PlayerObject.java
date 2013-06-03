@@ -7,6 +7,7 @@ import java.util.ArrayList;
 
 import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
+import de.propra13.assets.animations.AnimationManager;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Agressor;
 import de.propra13.models.Player;
@@ -18,11 +19,16 @@ public class PlayerObject extends AgressorObject {
     private boolean leftSpawnPoint = false;
     private GameController controller;
 
+    private static final int SHADOW = 0x271b11;
+
     private Player player;
 
     public PlayerObject(Player player, int x, int y, Theme theme) {
-        super(new Animation(theme.getPlayerBluna(), 8, 1, 0x271b11), x, y);
+        super(new Animation(theme.getPlayerBluna(), 8, 1, SHADOW), x, y);
         this.player = player;
+
+        animationManager.addAnimation("walking",
+                new Animation(theme.getPlayerWalksBluna(), 8, 9, SHADOW));
     }
 
     public void move(Dimension size, Room room) {
@@ -103,6 +109,9 @@ public class PlayerObject extends AgressorObject {
             vx = -1;
             break;
         }
+
+        animationManager.setDirection(new Direction(vx, vy));
+        animationManager.setCurrentAnimation("walking");
     }
 
     public void keyReleased(KeyEvent event) {
@@ -124,6 +133,11 @@ public class PlayerObject extends AgressorObject {
                 vx = 0;
             break;
         }
+
+        animationManager.setDirection(new Direction(vx, vy));
+        if (!isMoving())
+            animationManager
+                    .setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
     }
 
     @Override

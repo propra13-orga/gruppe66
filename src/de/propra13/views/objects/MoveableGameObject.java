@@ -92,8 +92,9 @@ public abstract class MoveableGameObject extends GameObject {
 
     @Override
     public void animate() {
-        getAnimationManager().getCurrentAnimation().animate(
-                new Direction(vx, vy));
+        if (isMoving())
+            animationManager.setDirection(new Direction(vx, vy));
+        super.animate();
     }
 
     public int getVx() {
@@ -110,6 +111,14 @@ public abstract class MoveableGameObject extends GameObject {
 
     public void setVy(int vy) {
         this.vy = vy;
+    }
+
+    protected boolean isMoving() {
+        return vx != 0 || vy != 0;
+    }
+
+    public Direction getDirection() {
+        return new Direction(vx, vy);
     }
 
 }

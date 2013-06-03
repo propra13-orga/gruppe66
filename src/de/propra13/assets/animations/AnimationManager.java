@@ -5,6 +5,8 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
+import de.propra13.views.objects.Direction;
+
 public class AnimationManager {
 
     public static final String DEFAULT_ANIMATION = "default";
@@ -12,7 +14,10 @@ public class AnimationManager {
     private Map<String, Animation> animations = new HashMap<>();
     private String currentAnimation = DEFAULT_ANIMATION;
 
+    private Direction currentDirection = new Direction(0, 0);
+
     public AnimationManager(Animation defaultAnimation) {
+        defaultAnimation.setAnimationManager(this);
         animations.put(DEFAULT_ANIMATION, defaultAnimation);
     }
 
@@ -20,8 +25,10 @@ public class AnimationManager {
         if (key.equals(DEFAULT_ANIMATION))
             throw new IllegalArgumentException(
                     "You cannot replace the default animation");
-        else if (animation != null)
+        else if (animation != null) {
+            animation.setAnimationManager(this);
             animations.put(key, animation);
+        }
     }
 
     public void removeAnimation(String key) {
@@ -32,10 +39,12 @@ public class AnimationManager {
     }
 
     public void setCurrentAnimation(String key) {
-        if (animations.containsKey(key)) {
-            currentAnimation = key;
-        } else
-            throw new IllegalArgumentException("Wrong animation key");
+        if (!key.equals(currentAnimation)) {
+            if (animations.containsKey(key)) {
+                currentAnimation = key;
+            } else
+                throw new IllegalArgumentException("Wrong animation key");
+        }
     }
 
     public Animation getCurrentAnimation() {
@@ -62,5 +71,13 @@ public class AnimationManager {
         Rectangle blunaRect = getBounds();
         return new Rectangle(x + blunaRect.x, y + blunaRect.y, blunaRect.width,
                 blunaRect.height);
+    }
+
+    public void setDirection(Direction direction) {
+        currentDirection = direction;
+    }
+
+    public Direction getCurrentDirection() {
+        return currentDirection;
     }
 }
