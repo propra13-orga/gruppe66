@@ -10,15 +10,25 @@ import de.propra13.views.objects.Direction;
 public class AnimationManager {
 
     public static final String DEFAULT_ANIMATION = "default";
+    public static final String DEFAULT_ANIMATION_TYPE = "default";
 
     private Map<String, Animation> animations = new HashMap<>();
     private String currentAnimation = DEFAULT_ANIMATION;
+    private String currentAnimationType = DEFAULT_ANIMATION_TYPE;
 
     private Direction currentDirection = new Direction(0, 0);
 
     public AnimationManager(Animation defaultAnimation) {
         defaultAnimation.setAnimationManager(this);
         animations.put(DEFAULT_ANIMATION, defaultAnimation);
+    }
+
+    public void setCurrentAnimationType(String currentAnimationType) {
+        this.currentAnimationType = currentAnimationType;
+    }
+
+    public String getCurrentAnimationType() {
+        return currentAnimationType;
     }
 
     public void addAnimation(String key, Animation animation) {
@@ -60,7 +70,7 @@ public class AnimationManager {
     }
 
     private Rectangle getBounds() {
-        return getDefaultAnimation().getBlunaCrate().getBounds();
+        return getDefaultAnimation().getBounds();
     }
 
     public Rectangle getDefaultBounds() {

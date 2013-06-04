@@ -2,6 +2,7 @@ package de.propra13.models;
 
 public class Weapon extends Item {
 
+    public static final String SWORD = "schwoard";
     public double damage = 100;
 
     public void useOn(Player player) {

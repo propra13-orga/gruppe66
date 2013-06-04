@@ -68,4 +68,12 @@ public class Player extends Agressor {
         return items;
     }
 
+    public String getWeaponType() {
+        if (weapon != null) {
+            return Weapon.SWORD;
+        } else {
+            return "";
+        }
+    }
+
 }

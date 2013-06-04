@@ -1,33 +1,54 @@
 package de.propra13.assets.animations;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 import de.propra13.assets.BlunaCrate;
 
 public class Animation {
 
-    private BlunaCrate blunaCrate;
     private BufferedImage currentBluna;
     private AnimationManager animationManager;
 
-    private int currentFrame = -1;
+    private HashMap<String, BlunaCrate> blunaSet;
 
-    public Animation(BufferedImage image, int directions, int frames,
-            int shadowRGB) {
-        this(new BlunaCrate(image, directions, frames, shadowRGB));
+    private int currentFrame = -1;
+    private final int frames;
+    private final Rectangle bounds;
+    private final int spriteWidth;
+    private final int spriteHeight;
+
+    public Animation(BufferedImage defaultAnimation,
+            HashMap<String, BufferedImage> imageSet, int directions,
+            int frames, int shadowRGB) {
+        this(defaultAnimation, directions, frames, shadowRGB);
+
+        for (String key : imageSet.keySet()) {
+            blunaSet.put(key, new BlunaCrate(imageSet.get(key), directions,
+                    frames, shadowRGB));
+        }
+
     }
 
-    public Animation(BlunaCrate blunaCrate) {
-        this.blunaCrate = blunaCrate;
-        currentBluna = blunaCrate.getFirstBluna();
+    public Animation(BufferedImage defaultAnimation, int directions,
+            int frames, int shadowRGB) {
+        this(new BlunaCrate(defaultAnimation, directions, frames, shadowRGB));
+    }
+
+    public Animation(BlunaCrate defaultAnimation) {
+        frames = defaultAnimation.getFrames();
+        bounds = defaultAnimation.getBounds();
+        spriteWidth = defaultAnimation.getSpriteWidth();
+        spriteHeight = defaultAnimation.getSpriteHeight();
+
+        currentBluna = defaultAnimation.getFirstBluna();
+        blunaSet = new HashMap<>();
+        blunaSet.put(AnimationManager.DEFAULT_ANIMATION_TYPE, defaultAnimation);
     }
 
     private void increaseFrame() {
-        currentFrame = ++currentFrame % blunaCrate.getFrames();
-    }
-
-    public BlunaCrate getBlunaCrate() {
-        return blunaCrate;
+        currentFrame = ++currentFrame % frames;
     }
 
     public BufferedImage getCurrentBluna() {
@@ -39,7 +60,7 @@ public class Animation {
         if (animationManager.getCurrentDirection().isMoving())
             currentBluna = getBluna();
         else
-            currentBluna = blunaCrate.getBluna(currentFrame);
+            currentBluna = getBluna(currentFrame);
     }
 
     public BufferedImage getBluna() {
@@ -48,7 +69,12 @@ public class Animation {
         int v3 = 3 * vx3 + vy3;
         if (v3 > 4)
             v3--;
-        return blunaCrate.getBluna(v3 * blunaCrate.getFrames() + currentFrame);
+        return getBluna(v3 * frames + currentFrame);
+    }
+
+    public BufferedImage getBluna(int frame) {
+        return blunaSet.get(animationManager.getCurrentAnimationType())
+                .getBluna(frame);
     }
 
     public int getFrameNumber() {
@@ -61,5 +87,17 @@ public class Animation {
 
     public AnimationManager getAnimationManager() {
         return animationManager;
+    }
+
+    public Rectangle getBounds() {
+        return bounds;
+    }
+
+    public int getSpriteWidth() {
+        return spriteWidth;
+    }
+
+    public int getSpriteHeight() {
+        return spriteHeight;
     }
 }

@@ -12,6 +12,7 @@ import de.propra13.controllers.GameController;
 import de.propra13.models.Agressor;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
+import de.propra13.models.Weapon;
 import de.propra13.views.GameFieldView;
 
 public class PlayerObject extends AgressorObject {
@@ -24,11 +25,14 @@ public class PlayerObject extends AgressorObject {
     private Player player;
 
     public PlayerObject(Player player, int x, int y, Theme theme) {
-        super(new Animation(theme.getPlayerBluna(), 8, 1, SHADOW), x, y);
+        super(new Animation(theme.getPlayerBluna(), theme.getPlayerBlunaSet(),
+                8, 1, SHADOW), x, y);
         this.player = player;
 
-        animationManager.addAnimation("walking",
-                new Animation(theme.getPlayerWalksBluna(), 8, 9, SHADOW));
+        animationManager.addAnimation(
+                "walking",
+                new Animation(theme.getPlayerWalksBluna(), theme
+                        .getPlayerWalksBlunaSet(), 8, 9, SHADOW));
     }
 
     public void move(Dimension size, Room room) {
@@ -46,6 +50,19 @@ public class PlayerObject extends AgressorObject {
         for (ItemObject item : items) {
             player.pickUpItem(item.getItem());
         }
+    }
+
+    @Override
+    public void animate() {
+        switch (player.getWeaponType()) {
+        case Weapon.SWORD:
+            animationManager.setCurrentAnimationType(Weapon.SWORD);
+            break;
+        default:
+            animationManager
+                    .setCurrentAnimationType(AnimationManager.DEFAULT_ANIMATION_TYPE);
+        }
+        super.animate();
     }
 
     private ArrayList<ItemObject> searchItemsIn(Room room) {

@@ -3,8 +3,11 @@ package de.propra13.assets;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.util.HashMap;
 
 import javax.imageio.ImageIO;
+
+import de.propra13.models.Weapon;
 
 public class Theme {
 
@@ -12,6 +15,8 @@ public class Theme {
     private BufferedImage startImage;
     private BufferedImage playerImage;
     private BufferedImage playerWalksImage;
+    private BufferedImage swordPlayerImage;
+    private BufferedImage swordPlayerWalksImage;
     private BufferedImage fireballImage;
     private BufferedImage wallImage;
     private BufferedImage floorImage;
@@ -29,6 +34,8 @@ public class Theme {
             startImage = initBluna("start.jpg");
             playerImage = initBluna("bluna/player.png");
             playerWalksImage = initBluna("bluna/player_walks.png");
+            swordPlayerImage = initBluna("bluna/sword_player.png");
+            swordPlayerWalksImage = initBluna("bluna/sword_player_walks.png");
             fireballImage = initBluna("bluna/skull.png");
             wallImage = initBluna("wall1.jpg");
             floorImage = initBluna("floor.jpg");
@@ -77,7 +84,7 @@ public class Theme {
     public BufferedImage getPlayerBluna() {
         return playerImage;
     }
-    
+
     public BufferedImage getPlayerWalksBluna() {
         return playerWalksImage;
     }
@@ -89,9 +96,29 @@ public class Theme {
     public BufferedImage getDragonBluna() {
         return dragonImage;
     }
-    
+
     public BufferedImage getDragonWalksBluna() {
         return dragonWalksImage;
+    }
+
+    public BufferedImage getSwordPlayerImage() {
+        return swordPlayerImage;
+    }
+
+    public BufferedImage getSwordPlayerWalksImage() {
+        return swordPlayerWalksImage;
+    }
+
+    public HashMap<String, BufferedImage> getPlayerBlunaSet() {
+        HashMap<String, BufferedImage> set = new HashMap<>();
+        set.put(Weapon.SWORD, swordPlayerImage);
+        return set;
+    }
+
+    public HashMap<String, BufferedImage> getPlayerWalksBlunaSet() {
+        HashMap<String, BufferedImage> set = new HashMap<>();
+        set.put(Weapon.SWORD, swordPlayerWalksImage);
+        return set;
     }
 
 }

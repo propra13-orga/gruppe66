@@ -26,8 +26,8 @@ public class GameObject {
     }
 
     public GameObject(Animation defaultAnimation, int x, int y) {
-        this(x, y, defaultAnimation.getBlunaCrate().getSpriteWidth(),
-                defaultAnimation.getBlunaCrate().getSpriteHeight());
+        this(x, y, defaultAnimation.getSpriteWidth(), defaultAnimation
+                .getSpriteHeight());
         animationManager = new AnimationManager(defaultAnimation);
     }
 
