@@ -26,6 +26,7 @@ public class Theme {
     private BufferedImage herbImage;
     private BufferedImage dragonImage;
     private BufferedImage dragonWalksImage;
+    private BufferedImage dragonDiesImage;
 
     private String themeName;
 
@@ -47,6 +48,7 @@ public class Theme {
             herbImage = initBluna("bluna/herbitem.png");
             dragonImage = initBluna("bluna/dragon.png");
             dragonWalksImage = initBluna("bluna/dragon_walks.png");
+            dragonDiesImage = initBluna("bluna/dragon_dies.png");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("dun dun dun");
@@ -115,6 +117,10 @@ public class Theme {
 
     public BufferedImage getSwordPlayerWalksImage() {
         return swordPlayerWalksImage;
+    }
+
+    public BufferedImage getDragonDiesBluna() {
+        return dragonDiesImage;
     }
 
     public HashMap<String, BufferedImage> getPlayerBlunaSet() {

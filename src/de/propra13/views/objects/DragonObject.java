@@ -3,9 +3,12 @@ package de.propra13.views.objects;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
+import javax.swing.SwingUtilities;
+
 import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
 import de.propra13.assets.animations.AnimationManager;
+import de.propra13.assets.animations.AnimationStateListener;
 import de.propra13.models.Agressor;
 import de.propra13.models.Dragon;
 import de.propra13.models.Room;
@@ -15,6 +18,8 @@ public class DragonObject extends EnemyObject {
 
     private Dragon dragon;
 
+    private boolean dies = false;
+
     private static final int SHADOW = 0x1f160d;
 
     public DragonObject(Dragon dragon, int x, int y, Theme theme) {
@@ -23,14 +28,40 @@ public class DragonObject extends EnemyObject {
 
         animationManager.addAnimation("walking",
                 new Animation(theme.getDragonWalksBluna(), 8, 9, SHADOW));
+        getAnimationManager().addAnimation("dies",
+                new Animation(theme.getDragonDiesBluna(), 8, 11, SHADOW));
     }
 
     @Override
-    public void move(Dimension gameFieldSize, Room room) {
+    public void move(Dimension gameFieldSize, final Room room) {
         super.move(gameFieldSize, room);
 
         if (getAgressor().isDead()) {
-            room.removeEnemy(this);
+            if (!dies) {
+                dies = true;
+                final DragonObject me = this;
+                getAnimationManager().triggerAnimation("dies",
+                        new AnimationStateListener() {
+                            private boolean died = false;
+
+                            @Override
+                            public void willStart() {
+                            }
+
+                            @Override
+                            public void didEnd() {
+                                if (!died) {
+                                    SwingUtilities.invokeLater(new Runnable() {
+                                        @Override
+                                        public void run() {
+                                            room.removeEnemy(me);
+                                        }
+                                    });
+                                    died = true;
+                                }
+                            }
+                        });
+            }
             return;
         }
 
@@ -45,7 +76,8 @@ public class DragonObject extends EnemyObject {
         } else {
             vx = vy = 0;
             dragon.inflictDamageOn(room.getPlayerObject().getPlayer());
-            getAnimationManager().setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
+            getAnimationManager().setCurrentAnimation(
+                    AnimationManager.DEFAULT_ANIMATION);
         }
 
         getAnimationManager().setDirection(newDirection);

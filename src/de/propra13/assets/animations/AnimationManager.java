@@ -50,14 +50,19 @@ public class AnimationManager {
     }
 
     public void setCurrentAnimation(String key) {
+        setCurrentAnimation(key, true);
+    }
+
+    public void setCurrentAnimation(String key, boolean trigger) {
         if (!key.equals(currentAnimation)) {
             if (animations.containsKey(key)) {
-                if (null != listener)
+                if (trigger && null != listener)
                     listener.didEnd();
                 currentAnimation = key;
             } else
                 throw new IllegalArgumentException("Wrong animation key");
         }
+
     }
 
     public Animation getCurrentAnimation() {
@@ -98,7 +103,7 @@ public class AnimationManager {
         final String oldAnimation = DEFAULT_ANIMATION;
         if (null != listener)
             listener.willStart();
-        setCurrentAnimation(animation);
+        setCurrentAnimation(animation, false);
         getCurrentAnimation().reset();
         getCurrentAnimation().setListener(new AnimationPhaseListener() {
             @Override
