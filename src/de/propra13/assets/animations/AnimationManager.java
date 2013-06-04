@@ -17,6 +17,7 @@ public class AnimationManager {
     private String currentAnimationType = DEFAULT_ANIMATION_TYPE;
 
     private Direction currentDirection = new Direction(0, 0);
+    private AnimationStateListener listener;
 
     public AnimationManager(Animation defaultAnimation) {
         defaultAnimation.setAnimationManager(this);
@@ -51,6 +52,8 @@ public class AnimationManager {
     public void setCurrentAnimation(String key) {
         if (!key.equals(currentAnimation)) {
             if (animations.containsKey(key)) {
+                if (null != listener)
+                    listener.didEnd();
                 currentAnimation = key;
             } else
                 throw new IllegalArgumentException("Wrong animation key");
@@ -89,5 +92,31 @@ public class AnimationManager {
 
     public Direction getCurrentDirection() {
         return currentDirection;
+    }
+
+    public void triggerAnimation(String animation) {
+        final String oldAnimation = DEFAULT_ANIMATION;
+        if (null != listener)
+            listener.willStart();
+        setCurrentAnimation(animation);
+        getCurrentAnimation().reset();
+        getCurrentAnimation().setListener(new AnimationPhaseListener() {
+            @Override
+            public void didLoop() {
+                setCurrentAnimation(oldAnimation);
+                if (null != listener)
+                    listener.didEnd();
+            }
+        });
+    }
+
+    public void setListener(AnimationStateListener listener) {
+        this.listener = listener;
+    }
+
+    public void triggerAnimation(String animation,
+            AnimationStateListener animationStateListener) {
+        setListener(animationStateListener);
+        triggerAnimation(animation);
     }
 }

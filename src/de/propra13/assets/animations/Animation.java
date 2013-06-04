@@ -18,6 +18,7 @@ public class Animation {
     private final Rectangle bounds;
     private final int spriteWidth;
     private final int spriteHeight;
+    private AnimationPhaseListener listener;
 
     public Animation(BufferedImage defaultAnimation,
             HashMap<String, BufferedImage> imageSet, int directions,
@@ -49,6 +50,8 @@ public class Animation {
 
     private void increaseFrame() {
         currentFrame = ++currentFrame % frames;
+        if (currentFrame + 1 == frames && null != listener)
+            listener.didLoop();
     }
 
     public BufferedImage getCurrentBluna() {
@@ -100,4 +103,13 @@ public class Animation {
     public int getSpriteHeight() {
         return spriteHeight;
     }
+
+    public void reset() {
+        currentFrame = 0;
+    }
+
+    public void setListener(AnimationPhaseListener listener) {
+        this.listener = listener;
+    }
+
 }

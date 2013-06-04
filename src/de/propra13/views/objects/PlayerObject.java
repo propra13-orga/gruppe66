@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
 import de.propra13.assets.animations.AnimationManager;
+import de.propra13.assets.animations.AnimationStateListener;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Agressor;
 import de.propra13.models.Player;
@@ -23,6 +24,7 @@ public class PlayerObject extends AgressorObject {
     private static final int SHADOW = 0x271b11;
 
     private Player player;
+    private boolean reloads;
 
     public PlayerObject(Player player, int x, int y, Theme theme) {
         super(new Animation(theme.getPlayerBluna(), theme.getPlayerBlunaSet(),
@@ -33,6 +35,10 @@ public class PlayerObject extends AgressorObject {
                 "walking",
                 new Animation(theme.getPlayerWalksBluna(), theme
                         .getPlayerWalksBlunaSet(), 8, 9, SHADOW));
+        animationManager.addAnimation(
+                "attacks",
+                new Animation(theme.getPlayerAttacksBluna(), theme
+                        .getPlayerAttacksBlunaSet(), 8, 13, SHADOW));
     }
 
     public void move(Dimension size, Room room) {
@@ -156,10 +162,26 @@ public class PlayerObject extends AgressorObject {
     }
 
     public void inflictDamageOn(ArrayList<EnemyObject> enemies) {
-        for (EnemyObject enemy : enemies) {
-            if (enemy.getCenter().distance(getCenter()) < 2 * GameFieldView.GRID)
-                player.inflictDamageOn(enemy.getAgressor());
+        if (!reloads) {
+            animationManager.triggerAnimation("attacks",
+                    new AnimationStateListener() {
 
+                        @Override
+                        public void willStart() {
+                        }
+
+                        @Override
+                        public void didEnd() {
+                            reloads = false;
+                        }
+                    });
+
+            for (EnemyObject enemy : enemies) {
+                if (enemy.getCenter().distance(getCenter()) <= 1.5 * GameFieldView.GRID)
+                    player.inflictDamageOn(enemy.getAgressor());
+            }
+
+            reloads = true;
         }
     }
 }

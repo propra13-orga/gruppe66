@@ -196,7 +196,13 @@ public class GameController extends Controller implements KeyListener,
 
     @Override
     public void keyReleased(KeyEvent event) {
-        getCurrentRoom().getPlayerObject().keyReleased(event);
+        switch (event.getKeyCode()) {
+        case KeyEvent.VK_SPACE:
+            break;
+        default:
+            getCurrentRoom().getPlayerObject().keyReleased(event);
+        }
+
     }
 
     @Override

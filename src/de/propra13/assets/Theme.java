@@ -15,8 +15,10 @@ public class Theme {
     private BufferedImage startImage;
     private BufferedImage playerImage;
     private BufferedImage playerWalksImage;
+    private BufferedImage playerAttacksImage;
     private BufferedImage swordPlayerImage;
     private BufferedImage swordPlayerWalksImage;
+    private BufferedImage swordPlayerAttacksImage;
     private BufferedImage fireballImage;
     private BufferedImage wallImage;
     private BufferedImage floorImage;
@@ -34,7 +36,9 @@ public class Theme {
             startImage = initBluna("start.jpg");
             playerImage = initBluna("bluna/player.png");
             playerWalksImage = initBluna("bluna/player_walks.png");
+            playerAttacksImage = initBluna("bluna/player_attacks.png");
             swordPlayerImage = initBluna("bluna/sword_player.png");
+            swordPlayerAttacksImage = initBluna("bluna/sword_player_attacks.png");
             swordPlayerWalksImage = initBluna("bluna/sword_player_walks.png");
             fireballImage = initBluna("bluna/skull.png");
             wallImage = initBluna("wall1.jpg");
@@ -89,6 +93,10 @@ public class Theme {
         return playerWalksImage;
     }
 
+    public BufferedImage getPlayerAttacksBluna() {
+        return playerAttacksImage;
+    }
+
     public BufferedImage getHerbImage() {
         return herbImage;
     }
@@ -118,6 +126,12 @@ public class Theme {
     public HashMap<String, BufferedImage> getPlayerWalksBlunaSet() {
         HashMap<String, BufferedImage> set = new HashMap<>();
         set.put(Weapon.SWORD, swordPlayerWalksImage);
+        return set;
+    }
+
+    public HashMap<String, BufferedImage> getPlayerAttacksBlunaSet() {
+        HashMap<String, BufferedImage> set = new HashMap<>();
+        set.put(Weapon.SWORD, swordPlayerAttacksImage);
         return set;
     }
 
