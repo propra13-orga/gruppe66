@@ -26,13 +26,18 @@ public abstract class AgressorObject extends MoveableGameObject {
     private void drawAgressorHealthBar(Graphics2D gfx) {
         double health = getAgressor().getHealth();
         int width = (int) (getWidth() * (health / getAgressor().MAXHEALTH));
-        int height = 2;
 
+        drawBar(gfx, 1, width, healthColor(health, getAgressor().MAXHEALTH));
+    }
+
+    protected void drawBar(Graphics2D gfx, int level, int width, Color color) {
+        int height = 2, offset = 5;
         gfx.setPaint(Color.black);
-        gfx.fillRect(getX(), getY() - height, getWidth(), height);
+        gfx.fillRect(getX(), getY() - height * level - offset, getWidth(),
+                height);
 
-        gfx.setPaint(healthColor(health, getAgressor().MAXHEALTH));
-        gfx.fillRect(getX(), getY() - height, width, height);
+        gfx.setPaint(color);
+        gfx.fillRect(getX(), getY() - height * level - offset, width, height);
     }
 
     private static Color healthColor(double health, double maxhealth) {

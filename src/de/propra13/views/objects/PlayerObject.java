@@ -1,8 +1,11 @@
 package de.propra13.views.objects;
 
+import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
 import de.propra13.assets.Theme;
@@ -41,6 +44,7 @@ public class PlayerObject extends AgressorObject {
                         .getPlayerAttacksBlunaSet(), 8, 13, SHADOW));
     }
 
+    @Override
     public void move(Dimension size, Room room) {
         super.move(size, room);
 
@@ -69,6 +73,20 @@ public class PlayerObject extends AgressorObject {
                     .setCurrentAnimationType(AnimationManager.DEFAULT_ANIMATION_TYPE);
         }
         super.animate();
+    }
+
+    @Override
+    public void draw(Graphics2D gfx, ImageObserver ob) {
+        super.draw(gfx, ob);
+        drawArmorBar(gfx);
+    }
+
+    private void drawArmorBar(Graphics2D gfx) {
+        double armor = ((Player) getAgressor()).getArmor();
+        int width = (int) (getWidth() * (armor / getAgressor().MAXHEALTH));
+
+        if (armor < Player.MAXARMOR)
+            drawBar(gfx, 2, width, Color.cyan);
     }
 
     private ArrayList<ItemObject> searchItemsIn(Room room) {

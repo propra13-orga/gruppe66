@@ -4,11 +4,14 @@ import java.util.ArrayList;
 
 public class Player extends Agressor {
 
+    public final static int MAXARMOR = 100;
+
     public Player(int maxhealth) {
         super(maxhealth);
     }
 
     private int lives = 3;
+    private double armor = MAXARMOR;
 
     private Weapon weapon;
     private int baseDamage = 5;
@@ -16,7 +19,12 @@ public class Player extends Agressor {
 
     @Override
     public void sufferDamage(double damage) {
-        health -= damage;
+        if (armor <= 0) {
+            health -= damage;
+        } else {
+            armor -= 2 * damage / 3;
+            health -= damage / 3;
+        }
     }
 
     @Override
@@ -31,6 +39,7 @@ public class Player extends Agressor {
         return baseDamage;
     }
 
+    @Override
     public double getHealth() {
         return health;
     }
@@ -50,11 +59,16 @@ public class Player extends Agressor {
     public void die() {
         lives--;
         health = MAXHEALTH;
+        armor = MAXARMOR;
     }
 
     public void pickUpItem(Item item) {
         this.items.add(item);
         item.useOn(this);
+    }
+
+    public double getArmor() {
+        return armor;
     }
 
     public void equip(Weapon weapon) {
