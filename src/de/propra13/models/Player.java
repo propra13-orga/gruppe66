@@ -13,6 +13,8 @@ public class Player extends Agressor {
     private int lives = 3;
     private double armor = MAXARMOR;
 
+    private int money;
+
     private Weapon weapon;
     private int baseDamage = 5;
     private ArrayList<Item> items = new ArrayList<Item>();
@@ -88,6 +90,14 @@ public class Player extends Agressor {
         } else {
             return "";
         }
+    }
+
+    public void gainMoney(int amount) {
+        money += amount;
+    }
+
+    public int getMoney() {
+        return money;
     }
 
 }

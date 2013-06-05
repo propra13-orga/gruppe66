@@ -10,6 +10,7 @@ import de.propra13.views.objects.GameObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.HerbObject;
 import de.propra13.views.objects.ItemObject;
+import de.propra13.views.objects.MoneyObject;
 import de.propra13.views.objects.PlayerObject;
 import de.propra13.views.objects.SkullObject;
 import de.propra13.views.objects.StartObject;
@@ -76,6 +77,8 @@ public class Room extends Model {
                 case 'D':
                     enemies.add(new DragonObject(new Dragon(1000), x, y, theme));
                     break;
+                case 'M':
+                    items.add(new MoneyObject(new Money(100), x, y, theme));
                 }
                 x++;
             }
