@@ -42,6 +42,10 @@ public class PlayerObject extends AgressorObject {
                 "attacks",
                 new Animation(theme.getPlayerAttacksBluna(), theme
                         .getPlayerAttacksBlunaSet(), 8, 13, SHADOW));
+        getAnimationManager().addAnimation(
+                "dies",
+                new Animation(theme.getPlayerDiesBluna(), theme
+                        .getPlayerDiesBlunaSet(), 8, 9, SHADOW));
     }
 
     @Override
@@ -201,5 +205,9 @@ public class PlayerObject extends AgressorObject {
 
             reloads = true;
         }
+    }
+
+    public void triggerDeath(AnimationStateListener listener) {
+        getAnimationManager().triggerAnimation("dies", listener);
     }
 }

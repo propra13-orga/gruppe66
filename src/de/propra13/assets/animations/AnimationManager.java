@@ -54,6 +54,7 @@ public class AnimationManager {
     }
 
     public void setCurrentAnimation(String key, boolean trigger) {
+
         if (!key.equals(currentAnimation)) {
             if (animations.containsKey(key)) {
                 if (trigger && null != listener)
@@ -108,9 +109,11 @@ public class AnimationManager {
         getCurrentAnimation().setListener(new AnimationPhaseListener() {
             @Override
             public void didLoop() {
-                setCurrentAnimation(oldAnimation);
                 if (null != listener)
                     listener.didEnd();
+                setListener(null);
+
+                setCurrentAnimation(oldAnimation);
             }
         });
     }
