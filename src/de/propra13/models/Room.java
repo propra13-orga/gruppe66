@@ -71,7 +71,7 @@ public class Room extends Model {
                     items.add(new WeaponObject(new Weapon(), x, y, theme));
                     break;
                 case 'H':
-                    items.add(new HerbObject(x, y, theme));
+                    items.add(new HerbObject(new Herb(25), x, y, theme));
                     break;
                 case 'D':
                     enemies.add(new DragonObject(new Dragon(1000), x, y, theme));

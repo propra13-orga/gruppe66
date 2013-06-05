@@ -49,4 +49,8 @@ public abstract class Agressor {
         t.setRepeats(false);
         t.start();
     }
+
+    public void heal(int health) {
+        this.health = Math.min(this.health + health, MAXHEALTH);
+    }
 }
