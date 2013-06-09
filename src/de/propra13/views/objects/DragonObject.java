@@ -35,8 +35,8 @@ public class DragonObject extends EnemyObject {
     }
 
     @Override
-    public void move(Dimension gameFieldSize, final Room room) {
-        super.move(gameFieldSize, room);
+    public void act(Dimension gameFieldSize, final Room room) {
+        super.act(gameFieldSize, room);
 
         if (getAgressor().isDead()) {
             triggerAnimation("dies", new AnimationStateListener() {
