@@ -45,13 +45,36 @@ public class GameObject {
         animationManager.getCurrentAnimation().animate();
     }
 
+    public void triggerAnimation(String animation) {
+        triggerAnimation(animation, null);
+    }
+
     public void triggerAnimation(String animation,
-            AnimationStateListener listener) {
-        animationManager.triggerAnimation(animation, listener);
+            final AnimationStateListener listener) {
+        if (canAct) {
+            canAct = false;
+            animationManager.triggerAnimation(animation,
+                    new AnimationStateListener() {
+
+                        @Override
+                        public void willStart() {
+                            if (listener != null)
+                                listener.willStart();
+                        }
+
+                        @Override
+                        public void didEnd() {
+                            canAct = true;
+                            if (listener != null)
+                                listener.didEnd();
+                        }
+                    });
+        }
     }
 
     public void setCurrentAnimationType(String typ) {
-        animationManager.setCurrentAnimationType(typ);
+        if (canAct)
+            animationManager.setCurrentAnimationType(typ);
     }
 
     public void addAnimation(String key, Animation animation) {
@@ -63,11 +86,13 @@ public class GameObject {
     }
 
     public void setDirection(Direction direction) {
-        animationManager.setDirection(direction);
+        if (canAct)
+            animationManager.setDirection(direction);
     }
 
     public void setCurrentAnimation(String animation) {
-        animationManager.setCurrentAnimation(animation);
+        if (canAct)
+            animationManager.setCurrentAnimation(animation);
     }
 
     public void draw(Graphics2D gfx, ImageObserver ob) {

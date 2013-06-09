@@ -3,8 +3,6 @@ package de.propra13.views.objects;
 import java.awt.Dimension;
 import java.awt.geom.Point2D;
 
-import javax.swing.SwingUtilities;
-
 import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
 import de.propra13.assets.animations.AnimationManager;
@@ -18,18 +16,22 @@ public class DragonObject extends EnemyObject {
 
     private Dragon dragon;
 
-    private boolean dies = false;
-
     private static final int SHADOW = 0x1f160d;
 
     public DragonObject(Dragon dragon, int x, int y, Theme theme) {
         super(new Animation(theme.getDragonBluna(), 8, 1, SHADOW), x, y);
         this.dragon = dragon;
 
-        addAnimation("walking",
-                new Animation(theme.getDragonWalksBluna(), 8, 9, SHADOW));
-        addAnimation("dies",
-                new Animation(theme.getDragonDiesBluna(), 8, 11, SHADOW));
+        initAnimations(theme);
+    }
+
+    private void initAnimations(Theme theme) {
+        addAnimation("walking", new Animation(theme.getDragonWalksBluna(), 8,
+                9, SHADOW));
+        addAnimation("dies", new Animation(theme.getDragonDiesBluna(), 8, 11,
+                SHADOW));
+        addAnimation("dead", new Animation(theme.getDragonDeadBluna(), 8, 1,
+                SHADOW));
     }
 
     @Override
@@ -37,31 +39,19 @@ public class DragonObject extends EnemyObject {
         super.move(gameFieldSize, room);
 
         if (getAgressor().isDead()) {
-            if (!dies) {
-                dies = true;
-                final DragonObject me = this;
-                triggerAnimation("dies",
-                        new AnimationStateListener() {
-                            private boolean died = false;
+            triggerAnimation("dies", new AnimationStateListener() {
 
-                            @Override
-                            public void willStart() {
-                            }
+                @Override
+                public void willStart() {
+                }
 
-                            @Override
-                            public void didEnd() {
-                                if (!died) {
-                                    SwingUtilities.invokeLater(new Runnable() {
-                                        @Override
-                                        public void run() {
-                                            room.removeEnemy(me);
-                                        }
-                                    });
-                                    died = true;
-                                }
-                            }
-                        });
-            }
+                @Override
+                public void didEnd() {
+                    setCurrentAnimation("dead");
+                    setCanAct(false);
+                }
+            });
+
             return;
         }
 
@@ -76,8 +66,7 @@ public class DragonObject extends EnemyObject {
         } else {
             vx = vy = 0;
             dragon.inflictDamageOn(room.getPlayerObject().getPlayer());
-            setCurrentAnimation(
-                    AnimationManager.DEFAULT_ANIMATION);
+            setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
         }
 
         setDirection(newDirection);

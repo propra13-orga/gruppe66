@@ -27,21 +27,16 @@ public class PlayerObject extends AgressorObject {
     private static final int SHADOW = 0x271b11;
 
     private Player player;
-    private boolean reloads;
 
     public PlayerObject(Player player, int x, int y, Theme theme) {
         super(new Animation(theme.getPlayerBluna(), theme.getPlayerBlunaSet(),
                 8, 1, SHADOW), x, y);
         this.player = player;
 
-        addAnimation(
-                "walking",
-                new Animation(theme.getPlayerWalksBluna(), theme
-                        .getPlayerWalksBlunaSet(), 8, 9, SHADOW));
-        addAnimation(
-                "attacks",
-                new Animation(theme.getPlayerAttacksBluna(), theme
-                        .getPlayerAttacksBlunaSet(), 8, 13, SHADOW));
+        addAnimation("walking", new Animation(theme.getPlayerWalksBluna(),
+                theme.getPlayerWalksBlunaSet(), 8, 9, SHADOW));
+        addAnimation("attacks", new Animation(theme.getPlayerAttacksBluna(),
+                theme.getPlayerAttacksBlunaSet(), 8, 13, SHADOW));
         addAnimation(
                 "dies",
                 new Animation(theme.getPlayerDiesBluna(), theme
@@ -183,30 +178,17 @@ public class PlayerObject extends AgressorObject {
     }
 
     public void inflictDamageOn(ArrayList<EnemyObject> enemies) {
-        if (!reloads) {
-            triggerAnimation("attacks",
-                    new AnimationStateListener() {
-
-                        @Override
-                        public void willStart() {
-                        }
-
-                        @Override
-                        public void didEnd() {
-                            reloads = false;
-                        }
-                    });
+        if (canAct()) {
+            triggerAnimation("attacks");
 
             for (EnemyObject enemy : enemies) {
                 if (enemy.getCenter().distance(getCenter()) <= 1.5 * GameFieldView.GRID)
                     player.inflictDamageOn(enemy.getAgressor());
             }
-
-            reloads = true;
         }
     }
 
     public void triggerDeath(AnimationStateListener listener) {
-       triggerAnimation("dies", listener);
+        triggerAnimation("dies", listener);
     }
 }
