@@ -20,6 +20,7 @@ public class SkullObject extends MoveableGameObject {
         vy = -1;
     }
 
+    @Override
     public void move(Dimension size, Room room) {
         super.move(size, room);
 
