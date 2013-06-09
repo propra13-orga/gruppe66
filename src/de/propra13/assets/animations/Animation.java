@@ -8,12 +8,10 @@ import de.propra13.assets.BlunaCrate;
 
 public class Animation {
 
-    private BufferedImage currentBluna;
     private AnimationManager animationManager;
-
     private HashMap<String, BlunaCrate> blunaSet;
 
-    private int currentFrame = -1;
+    private int currentFrame = 0;
     private final int frames;
     private final Rectangle bounds;
     private final int spriteWidth;
@@ -43,27 +41,28 @@ public class Animation {
         spriteWidth = defaultAnimation.getSpriteWidth();
         spriteHeight = defaultAnimation.getSpriteHeight();
 
-        currentBluna = defaultAnimation.getFirstBluna();
         blunaSet = new HashMap<>();
         blunaSet.put(AnimationManager.DEFAULT_ANIMATION_TYPE, defaultAnimation);
     }
 
     private void increaseFrame() {
-        currentFrame = ++currentFrame % frames;
-        if (currentFrame + 1 == frames && null != listener)
-            listener.didLoop();
+        currentFrame++;
+        if (currentFrame >= frames) {
+            currentFrame = 0;
+            if (null != listener)
+                listener.didLoop();
+        }
     }
 
     public BufferedImage getCurrentBluna() {
-        return currentBluna;
+        if (animationManager.getCurrentDirection().isMoving())
+            return getBluna();
+        else
+            return getBluna(currentFrame);
     }
 
     public void animate() {
         increaseFrame();
-        if (animationManager.getCurrentDirection().isMoving())
-            currentBluna = getBluna();
-        else
-            currentBluna = getBluna(currentFrame);
     }
 
     public BufferedImage getBluna() {
