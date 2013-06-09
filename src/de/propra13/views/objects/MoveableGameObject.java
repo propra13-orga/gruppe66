@@ -20,15 +20,21 @@ public abstract class MoveableGameObject extends GameObject {
         this.y = ob.getY() + (this.y - getY());
     }
 
-    public void move(Dimension gameFieldSize, Room room) {
+    public void act(Dimension gameFieldSize, Room room) {
         int oldx = x, oldy = y;
         Rectangle field = new Rectangle(gameFieldSize);
 
-        x += vx;
-        y += vy;
+        if (canAct())
+            move(gameFieldSize, room);
 
         collideWithGameField(field, oldx, oldy);
         collideWithWalls(room, oldx, oldy);
+
+    }
+
+    public void move(Dimension gameFieldSize, Room room) {
+        x += vx;
+        y += vy;
     }
 
     private void collideWithGameField(Rectangle field, int oldx, int oldy) {

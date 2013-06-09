@@ -279,7 +279,7 @@ public class GameController extends Controller implements KeyListener,
 
     public void turn() {
         for (MoveableGameObject object : game.getMoveableGameObjects()) {
-            object.move(game.getSize(), getCurrentRoom());
+            object.act(game.getSize(), getCurrentRoom());
         }
     }
 

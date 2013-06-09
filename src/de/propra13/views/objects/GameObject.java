@@ -19,6 +19,7 @@ public class GameObject {
 
     private AnimationManager animationManager;
 
+    private boolean canAct = true;
     private boolean debug = false;
 
     public GameObject(int x, int y, int width, int height) {
@@ -30,6 +31,14 @@ public class GameObject {
         this(x, y, defaultAnimation.getSpriteWidth(), defaultAnimation
                 .getSpriteHeight());
         animationManager = new AnimationManager(defaultAnimation);
+    }
+
+    public boolean canAct() {
+        return canAct;
+    }
+
+    public void setCanAct(boolean canAct) {
+        this.canAct = canAct;
     }
 
     public void animate() {
