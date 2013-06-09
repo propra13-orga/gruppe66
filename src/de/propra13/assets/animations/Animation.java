@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 import de.propra13.assets.BlunaCrate;
+import de.propra13.assets.BlunaCrateFactory;
 
 public class Animation {
 
@@ -24,15 +25,16 @@ public class Animation {
         this(defaultAnimation, directions, frames, shadowRGB);
 
         for (String key : imageSet.keySet()) {
-            blunaSet.put(key, new BlunaCrate(imageSet.get(key), directions,
-                    frames, shadowRGB));
+            blunaSet.put(key, BlunaCrateFactory.getBlunaCrate(
+                    imageSet.get(key), directions, frames, shadowRGB));
         }
 
     }
 
     public Animation(BufferedImage defaultAnimation, int directions,
             int frames, int shadowRGB) {
-        this(new BlunaCrate(defaultAnimation, directions, frames, shadowRGB));
+        this(BlunaCrateFactory.getBlunaCrate(defaultAnimation, directions,
+                frames, shadowRGB));
     }
 
     public Animation(BlunaCrate defaultAnimation) {
