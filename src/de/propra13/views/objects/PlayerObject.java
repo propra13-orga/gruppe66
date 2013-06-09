@@ -44,8 +44,8 @@ public class PlayerObject extends AgressorObject {
     }
 
     @Override
-    public void move(Dimension size, Room room) {
-        super.move(size, room);
+    public void act(Dimension size, Room room) {
+        super.act(size, room);
 
         if (isOnGoalIn(room) && leftSpawnPoint)
             controller.advanceRoom();
@@ -59,6 +59,11 @@ public class PlayerObject extends AgressorObject {
         for (ItemObject item : items) {
             player.pickUpItem(item.getItem());
         }
+
+        if (isMoving())
+            setCurrentAnimation("walking");
+        else
+            setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
     }
 
     @Override
@@ -142,9 +147,6 @@ public class PlayerObject extends AgressorObject {
             vx = -1;
             break;
         }
-
-        setDirection(new Direction(vx, vy));
-        setCurrentAnimation("walking");
     }
 
     public void keyReleased(KeyEvent event) {
@@ -166,10 +168,6 @@ public class PlayerObject extends AgressorObject {
                 vx = 0;
             break;
         }
-
-        if (!isMoving())
-            
-                    setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
     }
 
     @Override
