@@ -26,9 +26,9 @@ public class DragonObject extends EnemyObject {
         super(new Animation(theme.getDragonBluna(), 8, 1, SHADOW), x, y);
         this.dragon = dragon;
 
-        animationManager.addAnimation("walking",
+        addAnimation("walking",
                 new Animation(theme.getDragonWalksBluna(), 8, 9, SHADOW));
-        getAnimationManager().addAnimation("dies",
+        addAnimation("dies",
                 new Animation(theme.getDragonDiesBluna(), 8, 11, SHADOW));
     }
 
@@ -40,7 +40,7 @@ public class DragonObject extends EnemyObject {
             if (!dies) {
                 dies = true;
                 final DragonObject me = this;
-                getAnimationManager().triggerAnimation("dies",
+                triggerAnimation("dies",
                         new AnimationStateListener() {
                             private boolean died = false;
 
@@ -72,15 +72,15 @@ public class DragonObject extends EnemyObject {
         if (p.distance(getCenter()) > GameFieldView.GRID * 2) {
             vx = newDirection.getNormalizedVx();
             vy = newDirection.getNormalizedVy();
-            getAnimationManager().setCurrentAnimation("walking");
+            setCurrentAnimation("walking");
         } else {
             vx = vy = 0;
             dragon.inflictDamageOn(room.getPlayerObject().getPlayer());
-            getAnimationManager().setCurrentAnimation(
+            setCurrentAnimation(
                     AnimationManager.DEFAULT_ANIMATION);
         }
 
-        getAnimationManager().setDirection(newDirection);
+        setDirection(newDirection);
     }
 
     @Override

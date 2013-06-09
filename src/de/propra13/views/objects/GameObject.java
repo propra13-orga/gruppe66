@@ -9,6 +9,7 @@ import java.awt.image.ImageObserver;
 
 import de.propra13.assets.animations.Animation;
 import de.propra13.assets.animations.AnimationManager;
+import de.propra13.assets.animations.AnimationStateListener;
 import de.propra13.views.GameFieldView;
 
 public class GameObject {
@@ -16,7 +17,7 @@ public class GameObject {
     protected int x;
     protected int y;
 
-    protected AnimationManager animationManager;
+    private AnimationManager animationManager;
 
     private boolean debug = false;
 
@@ -32,11 +33,32 @@ public class GameObject {
     }
 
     public void animate() {
-        getAnimationManager().getCurrentAnimation().animate();
+        animationManager.getCurrentAnimation().animate();
     }
 
-    public AnimationManager getAnimationManager() {
-        return animationManager;
+    public void triggerAnimation(String animation,
+            AnimationStateListener listener) {
+        animationManager.triggerAnimation(animation, listener);
+    }
+
+    public void setCurrentAnimationType(String typ) {
+        animationManager.setCurrentAnimationType(typ);
+    }
+
+    public void addAnimation(String key, Animation animation) {
+        animationManager.addAnimation(key, animation);
+    }
+
+    public Rectangle getDefaultBounds() {
+        return animationManager.getDefaultBounds();
+    }
+
+    public void setDirection(Direction direction) {
+        animationManager.setDirection(direction);
+    }
+
+    public void setCurrentAnimation(String animation) {
+        animationManager.setCurrentAnimation(animation);
     }
 
     public void draw(Graphics2D gfx, ImageObserver ob) {

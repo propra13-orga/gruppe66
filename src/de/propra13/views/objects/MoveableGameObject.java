@@ -79,13 +79,13 @@ public abstract class MoveableGameObject extends GameObject {
     }
 
     protected boolean intersectsX(int x, GameObject o) {
-        int scaledX = (x + animationManager.getDefaultBounds().x);
+        int scaledX = (x + getDefaultBounds().x);
         return scaledX + getWidth() > o.getX()
                 && scaledX < o.getX() + o.getWidth();
     }
 
     protected boolean intersectsY(int y, GameObject o) {
-        int scaledY = (y + animationManager.getDefaultBounds().y);
+        int scaledY = (y + getDefaultBounds().y);
         return scaledY + getHeight() > o.getY()
                 && scaledY < o.getY() + o.getHeight();
     }
@@ -93,7 +93,7 @@ public abstract class MoveableGameObject extends GameObject {
     @Override
     public void animate() {
         if (isMoving())
-            animationManager.setDirection(new Direction(vx, vy));
+            setDirection(new Direction(vx, vy));
         super.animate();
     }
 

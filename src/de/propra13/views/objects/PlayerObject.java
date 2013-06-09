@@ -34,15 +34,15 @@ public class PlayerObject extends AgressorObject {
                 8, 1, SHADOW), x, y);
         this.player = player;
 
-        animationManager.addAnimation(
+        addAnimation(
                 "walking",
                 new Animation(theme.getPlayerWalksBluna(), theme
                         .getPlayerWalksBlunaSet(), 8, 9, SHADOW));
-        animationManager.addAnimation(
+        addAnimation(
                 "attacks",
                 new Animation(theme.getPlayerAttacksBluna(), theme
                         .getPlayerAttacksBlunaSet(), 8, 13, SHADOW));
-        getAnimationManager().addAnimation(
+        addAnimation(
                 "dies",
                 new Animation(theme.getPlayerDiesBluna(), theme
                         .getPlayerDiesBlunaSet(), 8, 9, SHADOW));
@@ -70,11 +70,10 @@ public class PlayerObject extends AgressorObject {
     public void animate() {
         switch (player.getWeaponType()) {
         case Weapon.SWORD:
-            animationManager.setCurrentAnimationType(Weapon.SWORD);
+            setCurrentAnimationType(Weapon.SWORD);
             break;
         default:
-            animationManager
-                    .setCurrentAnimationType(AnimationManager.DEFAULT_ANIMATION_TYPE);
+            setCurrentAnimationType(AnimationManager.DEFAULT_ANIMATION_TYPE);
         }
         super.animate();
     }
@@ -149,8 +148,8 @@ public class PlayerObject extends AgressorObject {
             break;
         }
 
-        animationManager.setDirection(new Direction(vx, vy));
-        animationManager.setCurrentAnimation("walking");
+        setDirection(new Direction(vx, vy));
+        setCurrentAnimation("walking");
     }
 
     public void keyReleased(KeyEvent event) {
@@ -174,8 +173,8 @@ public class PlayerObject extends AgressorObject {
         }
 
         if (!isMoving())
-            animationManager
-                    .setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
+            
+                    setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
     }
 
     @Override
@@ -185,7 +184,7 @@ public class PlayerObject extends AgressorObject {
 
     public void inflictDamageOn(ArrayList<EnemyObject> enemies) {
         if (!reloads) {
-            animationManager.triggerAnimation("attacks",
+            triggerAnimation("attacks",
                     new AnimationStateListener() {
 
                         @Override
@@ -208,6 +207,6 @@ public class PlayerObject extends AgressorObject {
     }
 
     public void triggerDeath(AnimationStateListener listener) {
-        getAnimationManager().triggerAnimation("dies", listener);
+       triggerAnimation("dies", listener);
     }
 }
