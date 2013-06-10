@@ -1,7 +1,9 @@
 package de.propra13.views.objects;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.RadialGradientPaint;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
@@ -21,6 +23,7 @@ public class GameObject {
 
     private boolean canAct = true;
     private boolean debug = false;
+    private int glowRadius = 0;
 
     public GameObject(int x, int y, int width, int height) {
         this.x = (scale(x) - (width - GameFieldView.GRID) / 2);
@@ -31,6 +34,14 @@ public class GameObject {
         this(x, y, defaultAnimation.getSpriteWidth(), defaultAnimation
                 .getSpriteHeight());
         animationManager = new AnimationManager(defaultAnimation);
+    }
+
+    public int getGlowRadius() {
+        return glowRadius;
+    }
+
+    public void setGlowRadius(int glowRadius) {
+        this.glowRadius = glowRadius;
     }
 
     public boolean canAct() {
@@ -146,5 +157,24 @@ public class GameObject {
 
     protected int scale(int x) {
         return (x * GameFieldView.GRID);
+    }
+
+    public void glow(Graphics2D translatedGfx) {
+
+        RadialGradientPaint gradient = new RadialGradientPaint(0, 0,
+                getGlowRadius(), new float[] { 0, 1 }, new Color[] {
+                        new Color(0, 0, 0, 0), Color.black });
+
+        translatedGfx.setPaint(gradient);
+        AlphaComposite composite = AlphaComposite.getInstance(
+                AlphaComposite.DST_IN, 1);
+
+        translatedGfx.setComposite(composite);
+        int radius = getGlowRadius();
+        translatedGfx.fillArc(-radius, -radius, 2 * radius, 2 * radius, 0, 360);
+    }
+
+    public boolean glows() {
+        return glowRadius > 0;
     }
 }

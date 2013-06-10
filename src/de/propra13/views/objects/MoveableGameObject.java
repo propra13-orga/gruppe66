@@ -29,7 +29,6 @@ public abstract class MoveableGameObject extends GameObject {
 
         collideWithGameField(field, oldx, oldy);
         collideWithWalls(room, oldx, oldy);
-
     }
 
     public void move(Dimension gameFieldSize, Room room) {

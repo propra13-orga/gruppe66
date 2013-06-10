@@ -11,6 +11,8 @@ public abstract class AgressorObject extends MoveableGameObject {
 
     public AgressorObject(Animation defaultAnimation, int x, int y) {
         super(defaultAnimation, x, y);
+
+        setGlowRadius(100);
     }
 
     @Override

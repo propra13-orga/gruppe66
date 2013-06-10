@@ -3,7 +3,10 @@ package de.propra13.views;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.Transparency;
+import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +14,7 @@ import de.propra13.Main;
 import de.propra13.assets.Theme;
 import de.propra13.controllers.GameController;
 import de.propra13.views.objects.EnemyObject;
+import de.propra13.views.objects.GameObject;
 import de.propra13.views.objects.ItemObject;
 import de.propra13.views.objects.MoveableGameObject;
 import de.propra13.views.objects.SkullObject;
@@ -21,6 +25,7 @@ public class GameFieldView extends AbstractGameView {
     public static final int GRID = 50;
     private static final long serialVersionUID = 7383103785685757479L;
     private boolean drawsGrid = false;
+    private BufferedImage lightMap = null;
 
     public GameFieldView(GameController controller, Theme theme) {
         super(controller, theme);
@@ -36,8 +41,28 @@ public class GameFieldView extends AbstractGameView {
         return list;
     }
 
+    private static BufferedImage createCompatibleImage(int width, int height) {
+        return GraphicsEnvironment.getLocalGraphicsEnvironment()
+                .getDefaultScreenDevice().getDefaultConfiguration()
+                .createCompatibleImage(width, height, Transparency.TRANSLUCENT);
+    }
+
+    private BufferedImage getLightMap() {
+        if (lightMapIsGarbage()) {
+            lightMap = createCompatibleImage(getWidth(), getHeight());
+        }
+
+        return lightMap;
+    }
+
+    private boolean lightMapIsGarbage() {
+        return lightMap == null || lightMap.getWidth() != getWidth()
+                || lightMap.getHeight() != getHeight();
+    }
+
     @Override
     protected void render(Graphics2D gfx) {
+
         drawFloor(gfx);
 
         drawStart(gfx);
@@ -51,6 +76,41 @@ public class GameFieldView extends AbstractGameView {
 
         if (drawsGrid)
             drawGrid(gfx);
+
+        drawLightMap(gfx);
+    }
+
+    private void drawLightMap(Graphics2D gfx) {
+        BufferedImage lightMap = getLightMap();
+
+        Graphics2D lightGfx = lightMap.createGraphics();
+        try {
+            lightGfx.setBackground(Color.black);
+            lightGfx.clearRect(0, 0, lightMap.getWidth(), lightMap.getHeight());
+
+            for (GameObject gameObject : currentRoom.getAllObjects()) {
+                if (gameObject.glows())
+                    drawLight(lightGfx, gameObject);
+            }
+
+        } finally {
+            lightGfx.dispose();
+        }
+
+        gfx.drawImage(lightMap, 0, 0, null);
+    }
+
+    private void drawLight(Graphics2D gfx, GameObject gameObject) {
+        Graphics2D copyGfx = (Graphics2D) gfx.create();
+        try {
+            int px = gameObject.getX();
+            int py = gameObject.getY();
+            copyGfx.translate(px + gameObject.getWidth() / 2,
+                    py + gameObject.getHeight() / 2);
+            gameObject.glow(copyGfx);
+        } finally {
+            copyGfx.dispose();
+        }
     }
 
     private void drawStart(Graphics2D gfx) {
