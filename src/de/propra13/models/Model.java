@@ -6,7 +6,8 @@ import java.io.IOException;
 
 public class Model {
 
-    protected String readStringFromFile(String fileName) throws IOException {
+    protected static String readStringFromFile(String fileName)
+            throws IOException {
         FileReader file = new FileReader("res/" + fileName);
         BufferedReader reader = new BufferedReader(file);
 

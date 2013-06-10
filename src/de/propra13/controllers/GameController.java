@@ -11,7 +11,6 @@ import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
@@ -74,42 +73,22 @@ public class GameController extends Controller implements KeyListener,
         view.addComponentListener(this);
     }
 
-    private void initLevels() {
-        if (levels == null) {
-            levels = new ArrayList<Level>();
-            try {
-                addLevel(new Level("level1.json", this, player));
-                addLevel(new Level("level2.json", this, player));
-                addLevel(new Level("level3.json", this, player));
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-
-            /*
-             * If we have already a levels-list we should use the other
-             * constructor of the level class which essentially recreates a
-             * level in a cheaper way by re-using loaded images and blunas.
-             */
-            try {
-                List<Level> oldLevels = new ArrayList<>(levels);
-                levels = new ArrayList<Level>();
-                for (Level level : oldLevels) {
-                    addLevel(new Level(level, this, player));
-                }
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-    }
-
     private void initPlayerAndLevels() {
         player = new Player(100);
         initLevels();
+    }
+
+    private void initLevels() {
+        try {
+            levels = new ArrayList<Level>();
+            addLevel(new Level("level1.json", this, player));
+            addLevel(new Level("level2.json", this, player));
+            addLevel(new Level("level3.json", this, player));
+        } catch (JSONException | IOException e) {
+            e.printStackTrace();
+            System.out.println("Could not parse json level files");
+            System.exit(1);
+        }
     }
 
     public ArrayList<Level> getLevels() {
