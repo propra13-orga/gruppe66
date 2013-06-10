@@ -25,6 +25,7 @@ import de.propra13.models.Level;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
+import de.propra13.views.HUDView;
 import de.propra13.views.objects.EnemyObject;
 import de.propra13.views.objects.GameObject;
 import de.propra13.views.objects.ItemObject;
@@ -35,6 +36,7 @@ public class GameController extends Controller implements KeyListener,
         ComponentListener, MouseListener, Runnable {
 
     private GameFieldView game;
+    private HUDView hud;
 
     private Theme theme;
 
@@ -67,8 +69,13 @@ public class GameController extends Controller implements KeyListener,
         game = new GameFieldView(this, theme);
         game.addKeyListener(this);
         game.addMouseListener(this);
-        game.setPreferredSize(new Dimension(Main.WIDTH, Main.HEIGHT));
+        game.setPreferredSize(new Dimension(Main.GAMEFIELDWIDTH,
+                Main.GAMEFIELDHEIGHT));
 
+        hud = new HUDView(this, theme);
+        hud.setPreferredSize(new Dimension(Main.GAMEFIELDWIDTH, Main.HUDHEIGHT));
+
+        view.add(hud);
         view.add(game);
         view.addComponentListener(this);
     }
@@ -132,7 +139,9 @@ public class GameController extends Controller implements KeyListener,
     private void setLevel(int level) {
         currentLevel = level;
 
+        hud.setTheme(getCurrentLevel().getTheme());
         game.setTheme(getCurrentLevel().getTheme());
+
         setRoom(0);
     }
 
@@ -144,6 +153,8 @@ public class GameController extends Controller implements KeyListener,
         next.getPlayerObject().setVy(current.getPlayerObject().getVy());
 
         currentRoom = room;
+
+        hud.setCurrentRoom(next);
         game.setCurrentRoom(next);
     }
 
@@ -159,7 +170,7 @@ public class GameController extends Controller implements KeyListener,
 
                         @Override
                         public void didEnd() {
-                            if (player.hasLives()) {
+                            if (player.hasLifes()) {
                                 player.die();
                                 getCurrentRoom().movePlayerToStart();
                                 playerDies = false;
@@ -187,6 +198,7 @@ public class GameController extends Controller implements KeyListener,
         currentRoom = 0;
 
         game.setTheme(getCurrentLevel().getTheme());
+        hud.setTheme(getCurrentLevel().getTheme());
     }
 
     @Override
@@ -249,6 +261,7 @@ public class GameController extends Controller implements KeyListener,
     public void componentShown(ComponentEvent event) {
         if (!gameHasStarted) {
             game.setCurrentRoom(getCurrentRoom());
+            hud.setCurrentRoom(getCurrentRoom());
             gameHasStarted = true;
         }
 
@@ -323,6 +336,7 @@ public class GameController extends Controller implements KeyListener,
                 @Override
                 public void run() {
                     turn();
+                    hud.repaint();
                     game.repaint();
                     checkHealthOfPlayer();
                 }

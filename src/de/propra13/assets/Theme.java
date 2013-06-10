@@ -13,6 +13,9 @@ public class Theme {
 
     private BufferedImage goalImage;
     private BufferedImage startImage;
+    private BufferedImage heartFullImage;
+    private BufferedImage heartDamagedImage;
+    private BufferedImage heartRiscImage;
     private BufferedImage playerImage;
     private BufferedImage playerWalksImage;
     private BufferedImage playerAttacksImage;
@@ -39,6 +42,9 @@ public class Theme {
             this.themeName = dirName;
             goalImage = initBluna("goal.jpg");
             startImage = initBluna("start.jpg");
+            heartFullImage = initBluna("heart1.png");
+            heartDamagedImage = initBluna("heart2.png");
+            heartRiscImage = initBluna("heart3.png");
             playerImage = initBluna("bluna/player.png");
             playerWalksImage = initBluna("bluna/player_walks.png");
             playerAttacksImage = initBluna("bluna/player_attacks.png");
@@ -69,6 +75,18 @@ public class Theme {
                 + fileName);
         BufferedImage bluna = ImageIO.read(url);
         return bluna;
+    }
+
+    public BufferedImage getHeartDamagedImage() {
+        return heartDamagedImage;
+    }
+
+    public BufferedImage getHeartFullImage() {
+        return heartFullImage;
+    }
+
+    public BufferedImage getHeartRiscImage() {
+        return heartRiscImage;
     }
 
     public BufferedImage getGoalImage() {

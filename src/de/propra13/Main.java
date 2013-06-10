@@ -13,8 +13,10 @@ public class Main extends JFrame {
 
     private static final long serialVersionUID = -4373574916623551121L;
 
-    public static final int WIDTH = 800;
-    public static final int HEIGHT = 600;
+    public static final int GAMEFIELDWIDTH = 800;
+    public static final int GAMEFIELDHEIGHT = 600;
+    public static final int HUDHEIGHT = 50;
+    public static final int HEIGHT = GAMEFIELDHEIGHT + HUDHEIGHT;
 
     public static final String ROOTVIEW = "rootView";
     public static final String GAMEVIEW = "gameView";
@@ -30,7 +32,7 @@ public class Main extends JFrame {
     public Main(ControllerFactory factory) {
         getContentPane().setLayout(new CardLayout());
         getContentPane().setPreferredSize(
-                new Dimension(Main.WIDTH, Main.HEIGHT));
+                new Dimension(Main.GAMEFIELDWIDTH, Main.HEIGHT));
 
         factory.initControllers(this);
         factory.appendAllToPanel((JPanel) getContentPane());
@@ -41,7 +43,7 @@ public class Main extends JFrame {
     private void initRootWindow() {
         setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         setTitle("Keiler Crawler");
-        setMinimumSize(new Dimension(Main.WIDTH, Main.HEIGHT));
+        setMinimumSize(new Dimension(Main.GAMEFIELDWIDTH, Main.HEIGHT));
         setResizable(false);
         setVisible(true);
         pack();

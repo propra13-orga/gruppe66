@@ -10,7 +10,7 @@ public class Player extends Agressor {
         super(maxhealth);
     }
 
-    private int lives = 3;
+    private int lifes = 3;
     private double armor = MAXARMOR;
 
     private int money;
@@ -54,12 +54,16 @@ public class Player extends Agressor {
         setHealth(this.health + health);
     }
 
-    public boolean hasLives() {
-        return lives > 1;
+    public boolean hasLifes() {
+        return lifes > 1;
+    }
+
+    public int getLifes() {
+        return lifes;
     }
 
     public void die() {
-        lives--;
+        lifes--;
         health = MAXHEALTH;
         armor = MAXARMOR;
     }
