@@ -16,7 +16,7 @@ public abstract class AgressorObject extends MoveableGameObject {
     @Override
     public void draw(Graphics2D gfx, ImageObserver ob) {
         super.draw(gfx, ob);
-        if (getAgressor().isWounded())
+        if (getAgressor().isWounded() && !getAgressor().isDead())
             drawAgressorHealthBar(gfx);
 
     }

@@ -44,10 +44,10 @@ public class GameFieldView extends AbstractGameView {
         drawGoal(gfx);
         drawWalls(gfx);
 
-        drawPlayer(gfx);
         drawBalls(gfx);
         drawItems(gfx);
         drawEnemies(gfx);
+        drawPlayer(gfx);
 
         if (drawsGrid)
             drawGrid(gfx);
