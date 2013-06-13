@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
 import java.util.ArrayList;
 
@@ -208,11 +209,13 @@ public class PlayerObject extends AgressorObject {
     }
 
     public void performMagicIn(Room room, int x, int y) {
-        Point center = getGridCenter();
+        Point gridCenter = getGridCenter();
+        Point2D center = getCenter();
         MagicFireball magicFireball = player.createFireball();
-        Direction direction = new Direction(x - this.x, y - this.y);
+        Direction direction = new Direction(x - center.getX(), y
+                - center.getY());
         MagicFireballObject magicFireballObject = new MagicFireballObject(
-                magicFireball, direction, center.x, center.y, theme);
+                magicFireball, direction, gridCenter.x, gridCenter.y, theme);
         room.addMagic(magicFireballObject);
     }
 }
