@@ -15,14 +15,14 @@ import de.propra13.assets.animations.Animation;
 import de.propra13.assets.animations.AnimationManager;
 import de.propra13.assets.animations.AnimationStateListener;
 import de.propra13.controllers.GameController;
-import de.propra13.models.Agressor;
+import de.propra13.models.BioAgressor;
 import de.propra13.models.MagicFireball;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.models.Weapon;
 import de.propra13.views.GameFieldView;
 
-public class PlayerObject extends AgressorObject {
+public class PlayerObject extends BioAgressorObject {
 
     private boolean leftSpawnPoint = false;
     private GameController controller;
@@ -189,7 +189,7 @@ public class PlayerObject extends AgressorObject {
     }
 
     @Override
-    protected Agressor getAgressor() {
+    protected BioAgressor getAgressor() {
         return player;
     }
 

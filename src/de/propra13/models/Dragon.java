@@ -1,6 +1,6 @@
 package de.propra13.models;
 
-public class Dragon extends Agressor {
+public class Dragon extends BioAgressor {
 
     private int damage = 50;
 
@@ -15,7 +15,7 @@ public class Dragon extends Agressor {
     }
 
     @Override
-    public void inflictDamageOn(Agressor opponent) {
+    public void inflictDamageOn(BioAgressor opponent) {
         if (!reloads) {
             opponent.sufferDamage(damage);
             reload();

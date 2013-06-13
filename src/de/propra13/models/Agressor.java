@@ -7,36 +7,10 @@ import javax.swing.Timer;
 
 public abstract class Agressor {
 
-    public final double MAXHEALTH;
-
-    protected double health;
-
     protected int reloadTime = 1;
     protected boolean reloads = false;
 
-    public Agressor() {
-        MAXHEALTH = Double.POSITIVE_INFINITY;
-    }
-
-    public Agressor(int maxhealth) {
-        MAXHEALTH = health = maxhealth;
-    }
-
-    public abstract void sufferDamage(double damage);
-
-    public abstract void inflictDamageOn(Agressor opponent);
-
-    public boolean isWounded() {
-        return health < MAXHEALTH;
-    }
-
-    public boolean isDead() {
-        return health <= 0;
-    }
-
-    public double getHealth() {
-        return health;
-    }
+    public abstract void inflictDamageOn(BioAgressor opponent);
 
     protected void reload() {
         reloads = true;
@@ -48,9 +22,5 @@ public abstract class Agressor {
         });
         t.setRepeats(false);
         t.start();
-    }
-
-    public void heal(int health) {
-        this.health = Math.min(this.health + health, MAXHEALTH);
     }
 }

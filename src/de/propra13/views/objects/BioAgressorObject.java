@@ -5,11 +5,11 @@ import java.awt.Graphics2D;
 import java.awt.image.ImageObserver;
 
 import de.propra13.assets.animations.Animation;
-import de.propra13.models.Agressor;
+import de.propra13.models.BioAgressor;
 
-public abstract class AgressorObject extends MoveableGameObject {
+public abstract class BioAgressorObject extends MoveableGameObject {
 
-    public AgressorObject(Animation defaultAnimation, int x, int y) {
+    public BioAgressorObject(Animation defaultAnimation, int x, int y) {
         super(defaultAnimation, x, y);
         velocity = 0;
     }
@@ -22,7 +22,7 @@ public abstract class AgressorObject extends MoveableGameObject {
 
     }
 
-    protected abstract Agressor getAgressor();
+    protected abstract BioAgressor getAgressor();
 
     private void drawAgressorHealthBar(Graphics2D gfx) {
         double health = getAgressor().getHealth();

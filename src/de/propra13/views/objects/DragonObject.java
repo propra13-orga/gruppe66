@@ -7,7 +7,7 @@ import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
 import de.propra13.assets.animations.AnimationManager;
 import de.propra13.assets.animations.AnimationStateListener;
-import de.propra13.models.Agressor;
+import de.propra13.models.BioAgressor;
 import de.propra13.models.Dragon;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
@@ -71,7 +71,7 @@ public class DragonObject extends EnemyObject {
     }
 
     @Override
-    protected Agressor getAgressor() {
+    protected BioAgressor getAgressor() {
         return dragon;
     }
 

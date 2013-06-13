@@ -280,8 +280,8 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="32" language="java" name="de.propra13.models.Agressor" project="gruppe66" 
-    file="/gruppe66/src/de/propra13/models/Agressor.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="32" language="java" name="de.propra13.models.BioAgressor" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/models/BioAgressor.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="824" y="1992"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -325,8 +325,8 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="37" language="java" name="de.propra13.views.objects.AgressorObject" project="gruppe66" 
-    file="/gruppe66/src/de/propra13/views/objects/AgressorObject.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="37" language="java" name="de.propra13.views.objects.BioAgressorObject" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/objects/BioAgressorObject.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="543" y="974"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      

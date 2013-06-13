@@ -2,7 +2,7 @@ package de.propra13.models;
 
 import java.util.ArrayList;
 
-public class Player extends Agressor {
+public class Player extends BioAgressor {
 
     public final static int MAXARMOR = 100;
 
@@ -30,7 +30,7 @@ public class Player extends Agressor {
     }
 
     @Override
-    public void inflictDamageOn(Agressor opponent) {
+    public void inflictDamageOn(BioAgressor opponent) {
         opponent.sufferDamage(getDamage());
     }
 

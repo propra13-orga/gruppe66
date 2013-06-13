@@ -13,15 +13,11 @@ public class Skull extends Agressor {
     }
 
     @Override
-    public void inflictDamageOn(Agressor opponent) {
+    public void inflictDamageOn(BioAgressor opponent) {
         if (!reloads) {
             opponent.sufferDamage(damage);
             reload();
         }
-    }
-
-    @Override
-    public void sufferDamage(double damage) {
     }
 
 }
