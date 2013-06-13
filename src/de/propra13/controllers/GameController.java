@@ -149,8 +149,7 @@ public class GameController extends Controller implements KeyListener,
         Room current = getCurrentRoom();
         Room next = getCurrentLevel().getRooms().get(room);
 
-        next.getPlayerObject().setVx(current.getPlayerObject().getVx());
-        next.getPlayerObject().setVy(current.getPlayerObject().getVy());
+        next.getPlayerObject().setDirection(current.getPlayerObject().getDirection());
 
         currentRoom = room;
 

@@ -22,6 +22,7 @@ public class DragonObject extends EnemyObject {
         super(new Animation(theme.getDragonBluna(), 8, 1, SHADOW), x, y);
         this.dragon = dragon;
 
+        direction = new Direction(0, 0);
         initAnimations(theme);
     }
 
@@ -55,21 +56,18 @@ public class DragonObject extends EnemyObject {
             return;
         }
 
-        Point2D.Double p = room.getPlayerObject().getCenter();
-        Direction newDirection = new Direction((int) (p.x - getCenter().x),
-                (int) (p.y - getCenter().y));
+        Point2D.Double playerCenter = room.getPlayerObject().getCenter();
+        direction = new Direction(playerCenter.x - getCenter().x,
+                playerCenter.y - getCenter().y);
 
-        if (p.distance(getCenter()) > GameFieldView.GRID * 2) {
-            vx = newDirection.getNormalizedVx();
-            vy = newDirection.getNormalizedVy();
+        if (direction.length() > GameFieldView.GRID * 2) {
+            velocity = 1;
             setCurrentAnimation("walking");
         } else {
-            vx = vy = 0;
+            velocity = 0;
             dragon.inflictDamageOn(room.getPlayerObject().getPlayer());
             setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
         }
-
-        setDirection(newDirection);
     }
 
     @Override

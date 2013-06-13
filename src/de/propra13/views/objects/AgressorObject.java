@@ -11,6 +11,7 @@ public abstract class AgressorObject extends MoveableGameObject {
 
     public AgressorObject(Animation defaultAnimation, int x, int y) {
         super(defaultAnimation, x, y);
+        velocity = 0;
     }
 
     @Override
@@ -33,11 +34,12 @@ public abstract class AgressorObject extends MoveableGameObject {
     protected void drawBar(Graphics2D gfx, int level, int width, Color color) {
         int height = 2, offset = 5;
         gfx.setPaint(Color.black);
-        gfx.fillRect(getX(), getY() - height * level - offset, getWidth(),
-                height);
+        gfx.fillRect((int) getX(), (int) (getY() - height * level - offset),
+                (int) getWidth(), height);
 
         gfx.setPaint(color);
-        gfx.fillRect(getX(), getY() - height * level - offset, width, height);
+        gfx.fillRect((int) getX(), (int) (getY() - height * level - offset),
+                width, height);
     }
 
     private static Color healthColor(double health, double maxhealth) {

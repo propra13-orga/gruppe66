@@ -8,8 +8,8 @@ import de.propra13.models.Room;
 
 public abstract class MoveableGameObject extends GameObject {
 
-    protected int vx;
-    protected int vy;
+    protected Direction direction;
+    protected double velocity = 1;
 
     public MoveableGameObject(Animation defaultAnimation, int x, int y) {
         super(defaultAnimation, x, y);
@@ -21,7 +21,7 @@ public abstract class MoveableGameObject extends GameObject {
     }
 
     public void act(Dimension gameFieldSize, Room room) {
-        int oldx = x, oldy = y;
+        double oldx = x, oldy = y;
         Rectangle field = new Rectangle(gameFieldSize);
 
         if (canAct())
@@ -33,11 +33,13 @@ public abstract class MoveableGameObject extends GameObject {
     }
 
     public void move(Dimension gameFieldSize, Room room) {
-        x += vx;
-        y += vy;
+        Direction.VelocityVector velocityVector = direction
+                .getVelocityVector(velocity);
+        x += velocityVector.vx;
+        y += velocityVector.vy;
     }
 
-    private void collideWithGameField(Rectangle field, int oldx, int oldy) {
+    private void collideWithGameField(Rectangle field, double oldx, double oldy) {
         if (!field.contains(getBounds())) {
             if (getX() < 1)
                 collidedLeft(oldx);
@@ -50,48 +52,50 @@ public abstract class MoveableGameObject extends GameObject {
         }
     }
 
-    private void collideWithWalls(Room room, int oldx, int oldy) {
+    private void collideWithWalls(Room room, double oldx, double oldy) {
+        Direction.VelocityVector velocityVector = direction
+                .getVelocityVector(velocity);
         for (WallObject wall : room.getWalls()) {
             if (wall.getBounds().intersects(this.getBounds())) {
 
-                if (vx < 0 && intersectsY(oldy, wall))
+                if (velocityVector.vx < 0 && intersectsY(oldy, wall))
                     collidedLeft(oldx);
-                else if (vx > 0 && intersectsY(oldy, wall))
+                else if (velocityVector.vx > 0 && intersectsY(oldy, wall))
                     collidedRight(oldx);
 
-                if (vy < 0 && intersectsX(oldx, wall))
+                if (velocityVector.vy < 0 && intersectsX(oldx, wall))
                     collidedTop(oldy);
-                else if (vy > 0 && intersectsX(oldx, wall))
+                else if (velocityVector.vy > 0 && intersectsX(oldx, wall))
                     collidedBottom(oldy);
 
             }
         }
     }
 
-    protected void collidedLeft(int oldx) {
+    protected void collidedLeft(double oldx) {
         x = oldx;
     }
 
-    protected void collidedRight(int oldx) {
+    protected void collidedRight(double oldx) {
         x = oldx;
     }
 
-    protected void collidedTop(int oldy) {
+    protected void collidedTop(double oldy) {
         y = oldy;
     }
 
-    protected void collidedBottom(int oldy) {
+    protected void collidedBottom(double oldy) {
         y = oldy;
     }
 
-    protected boolean intersectsX(int x, GameObject o) {
-        int scaledX = (x + getDefaultBounds().x);
+    protected boolean intersectsX(double x, GameObject o) {
+        double scaledX = (x + getDefaultBounds().x);
         return scaledX + getWidth() > o.getX()
                 && scaledX < o.getX() + o.getWidth();
     }
 
-    protected boolean intersectsY(int y, GameObject o) {
-        int scaledY = (y + getDefaultBounds().y);
+    protected boolean intersectsY(double y, GameObject o) {
+        double scaledY = (y + getDefaultBounds().y);
         return scaledY + getHeight() > o.getY()
                 && scaledY < o.getY() + o.getHeight();
     }
@@ -99,32 +103,28 @@ public abstract class MoveableGameObject extends GameObject {
     @Override
     public void animate() {
         if (isMoving())
-            setDirection(new Direction(vx, vy));
+            setAnimationDirection(new Direction(direction));
         super.animate();
     }
 
-    public int getVx() {
-        return vx;
+    public double getVx() {
+        return direction.getVelocityVector(velocity).vx;
     }
 
-    public void setVx(int vx) {
-        this.vx = vx;
-    }
-
-    public int getVy() {
-        return vy;
-    }
-
-    public void setVy(int vy) {
-        this.vy = vy;
+    public double getVy() {
+        return direction.getVelocityVector(velocity).vy;
     }
 
     protected boolean isMoving() {
-        return vx != 0 || vy != 0;
+        return direction.isMoving();
     }
 
     public Direction getDirection() {
-        return new Direction(vx, vy);
+        return direction;
+    }
+
+    public void setDirection(Direction direction) {
+        this.direction = direction;
     }
 
 }

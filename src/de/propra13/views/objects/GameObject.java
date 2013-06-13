@@ -14,8 +14,8 @@ import de.propra13.views.GameFieldView;
 
 public class GameObject {
 
-    protected int x;
-    protected int y;
+    protected double x;
+    protected double y;
 
     private AnimationManager animationManager;
 
@@ -85,7 +85,7 @@ public class GameObject {
         return animationManager.getDefaultBounds();
     }
 
-    public void setDirection(Direction direction) {
+    public void setAnimationDirection(Direction direction) {
         if (canAct)
             animationManager.setDirection(direction);
     }
@@ -96,15 +96,15 @@ public class GameObject {
     }
 
     public void draw(Graphics2D gfx, ImageObserver ob) {
-        gfx.drawImage(getImage(), x, y, ob);
+        gfx.drawImage(getImage(), (int) x, (int) y, ob);
         if (debug)
             drawDebug(gfx, ob);
     }
 
     public void drawDebug(Graphics2D gfx, ImageObserver ob) {
         gfx.setPaint(Color.white);
-        gfx.drawRect(getBounds().x, getBounds().y, getBounds().width,
-                getBounds().height);
+        gfx.drawRect((int) getBounds().x, (int) getBounds().y,
+                (int) getBounds().width, (int) getBounds().height);
     }
 
     public void setDebug(boolean debug) {
@@ -115,19 +115,19 @@ public class GameObject {
         debug = !debug;
     }
 
-    public int getX() {
+    public double getX() {
         return getBounds().x;
     }
 
-    public int getY() {
+    public double getY() {
         return getBounds().y;
     }
 
-    public int getWidth() {
+    public double getWidth() {
         return getBounds().width;
     }
 
-    public int getHeight() {
+    public double getHeight() {
         return getBounds().height;
     }
 
@@ -135,7 +135,7 @@ public class GameObject {
         return animationManager.getCurrentBluna();
     }
 
-    public Rectangle getBounds() {
+    public Rectangle.Double getBounds() {
         return animationManager.getDefaultBounds(x, y);
     }
 
@@ -144,7 +144,7 @@ public class GameObject {
                 .getCenterY());
     }
 
-    protected int scale(int x) {
+    protected static double scale(double x) {
         return (x * GameFieldView.GRID);
     }
 }

@@ -33,6 +33,8 @@ public class PlayerObject extends AgressorObject {
                 8, 1, SHADOW), x, y);
         this.player = player;
 
+        direction = new Direction(0, 0);
+
         addAnimation("walking", new Animation(theme.getPlayerWalksBluna(),
                 theme.getPlayerWalksBlunaSet(), 8, 9, SHADOW));
         addAnimation("attacks", new Animation(theme.getPlayerAttacksBluna(),
@@ -113,14 +115,20 @@ public class PlayerObject extends AgressorObject {
     }
 
     private boolean isOnGoalIn(Room room) {
-        Rectangle biggerGoal = room.getGoal().getBounds();
-        biggerGoal.grow(2, 2);
+        Rectangle.Double biggerGoal = room.getGoal().getBounds();
+        biggerGoal.x -= 1;
+        biggerGoal.y -= 1;
+        biggerGoal.width += 2;
+        biggerGoal.height += 2;
         return biggerGoal.contains(getBounds());
     }
 
     private boolean isOnStartIn(Room room) {
-        Rectangle biggerStart = room.getStart().getBounds();
-        biggerStart.grow(2, 2);
+        Rectangle.Double biggerStart = room.getStart().getBounds();
+        biggerStart.x -= 1;
+        biggerStart.y -= 1;
+        biggerStart.width += 2;
+        biggerStart.height += 2;
         return biggerStart.contains(getBounds());
     }
 
@@ -135,38 +143,43 @@ public class PlayerObject extends AgressorObject {
     public void keyPressed(KeyEvent event) {
         switch (event.getKeyCode()) {
         case KeyEvent.VK_UP:
-            vy = -1;
+            direction.setVy(-1);
             break;
         case KeyEvent.VK_RIGHT:
-            vx = 1;
+            direction.setVx(1);
             break;
         case KeyEvent.VK_DOWN:
-            vy = 1;
+            direction.setVy(1);
             break;
         case KeyEvent.VK_LEFT:
-            vx = -1;
+            direction.setVx(-1);
             break;
         }
+        velocity = 1;
     }
 
     public void keyReleased(KeyEvent event) {
         switch (event.getKeyCode()) {
         case KeyEvent.VK_UP:
-            if (vy == -1)
-                vy = 0;
+            if (direction.getVy() == -1)
+                direction.setVy(0);
             break;
         case KeyEvent.VK_DOWN:
-            if (vy == 1)
-                vy = 0;
+            if (direction.getVy() == 1)
+                direction.setVy(0);
             break;
         case KeyEvent.VK_RIGHT:
-            if (vx == 1)
-                vx = 0;
+            if (direction.getVx() == 1)
+                direction.setVx(0);
             break;
         case KeyEvent.VK_LEFT:
-            if (vx == -1)
-                vx = 0;
+            if (direction.getVx() == -1)
+                direction.setVx(0);
             break;
+        }
+
+        if (!isMoving()) {
+            velocity = 0;
         }
     }
 

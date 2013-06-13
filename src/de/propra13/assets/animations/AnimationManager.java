@@ -79,10 +79,10 @@ public class AnimationManager {
         return new Rectangle(getBounds());
     }
 
-    public Rectangle getDefaultBounds(int x, int y) {
+    public Rectangle.Double getDefaultBounds(double x, double y) {
         Rectangle blunaRect = getBounds();
-        return new Rectangle(x + blunaRect.x, y + blunaRect.y, blunaRect.width,
-                blunaRect.height);
+        return new Rectangle.Double(x + blunaRect.x, y + blunaRect.y,
+                blunaRect.width, blunaRect.height);
     }
 
     public void setDirection(Direction direction) {

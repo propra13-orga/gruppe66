@@ -16,8 +16,7 @@ public class SkullObject extends MoveableGameObject {
 
         this.skull = skull;
 
-        vx = -1;
-        vy = -1;
+        direction = new Direction(-1, -1);
     }
 
     @Override
@@ -25,11 +24,11 @@ public class SkullObject extends MoveableGameObject {
         super.move(size, room);
 
         if (Math.random() > 0.9995) {
-            vx *= -1;
+            direction.bounceX();
         }
 
         if (Math.random() > 0.9775) {
-            vy *= -1;
+            direction.bounceY();
         }
 
         if (room.getPlayerObject().getBounds().contains(getBounds()))
@@ -37,30 +36,30 @@ public class SkullObject extends MoveableGameObject {
     }
 
     @Override
-    protected void collidedLeft(int oldx) {
+    protected void collidedLeft(double oldx) {
         super.collidedLeft(oldx);
 
-        vx *= -1;
+        direction.bounceX();
     }
 
     @Override
-    protected void collidedRight(int oldx) {
+    protected void collidedRight(double oldx) {
         super.collidedRight(oldx);
 
-        vx *= -1;
+        direction.bounceX();
     }
 
     @Override
-    protected void collidedTop(int oldy) {
+    protected void collidedTop(double oldy) {
         super.collidedTop(oldy);
 
-        vy *= -1;
+        direction.bounceY();
     }
 
     @Override
-    protected void collidedBottom(int oldy) {
+    protected void collidedBottom(double oldy) {
         super.collidedBottom(oldy);
 
-        vy *= -1;
+        direction.bounceY();
     }
 }
