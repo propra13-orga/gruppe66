@@ -4,8 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.util.ArrayList;
-import java.util.List;
 
 import de.propra13.Main;
 import de.propra13.assets.Theme;
@@ -26,16 +24,6 @@ public class GameFieldView extends AbstractGameView {
         super(controller, theme);
     }
 
-    public List<MoveableGameObject> getMoveableGameObjects() {
-        List<MoveableGameObject> list = new ArrayList<>();
-
-        list.add(currentRoom.getPlayerObject());
-        list.addAll(currentRoom.getBalls());
-        list.addAll(currentRoom.getEnemies());
-
-        return list;
-    }
-
     @Override
     protected void render(Graphics2D gfx) {
         drawFloor(gfx);
@@ -47,10 +35,17 @@ public class GameFieldView extends AbstractGameView {
         drawBalls(gfx);
         drawItems(gfx);
         drawEnemies(gfx);
+        drawMagics(gfx);
         drawPlayer(gfx);
 
         if (drawsGrid)
             drawGrid(gfx);
+    }
+
+    private void drawMagics(Graphics2D gfx) {
+        for (MoveableGameObject magics : currentRoom.getMagics()) {
+            magics.draw(gfx, this);
+        }
     }
 
     private void drawStart(Graphics2D gfx) {

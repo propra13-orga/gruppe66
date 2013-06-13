@@ -31,10 +31,27 @@ public class Animation {
 
     }
 
+    public Animation(BufferedImage defaultAnimation,
+            HashMap<String, BufferedImage> imageSet, int directions,
+            int frames, Rectangle bounds) {
+        this(defaultAnimation, directions, frames, bounds);
+
+        for (String key : imageSet.keySet()) {
+            blunaSet.put(key, BlunaCrateFactory.getBlunaCrate(
+                    imageSet.get(key), directions, frames, bounds));
+        }
+    }
+
     public Animation(BufferedImage defaultAnimation, int directions,
             int frames, int shadowRGB) {
         this(BlunaCrateFactory.getBlunaCrate(defaultAnimation, directions,
                 frames, shadowRGB));
+    }
+
+    public Animation(BufferedImage defaultAnimation, int directions,
+            int frames, Rectangle bounds) {
+        this(BlunaCrateFactory.getBlunaCrate(defaultAnimation, directions,
+                frames, bounds));
     }
 
     public Animation(BlunaCrate defaultAnimation) {

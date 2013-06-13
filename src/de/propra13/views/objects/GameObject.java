@@ -2,6 +2,7 @@ package de.propra13.views.objects;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
@@ -142,6 +143,12 @@ public class GameObject {
     public Point2D.Double getCenter() {
         return new Point2D.Double(getBounds().getCenterX(), getBounds()
                 .getCenterY());
+    }
+
+    public Point getGridCenter() {
+        Point2D.Double center = getCenter();
+        return new Point((int) (center.x / GameFieldView.GRID),
+                (int) (center.y / GameFieldView.GRID));
     }
 
     protected static double scale(double x) {

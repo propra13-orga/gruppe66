@@ -12,13 +12,11 @@ public class BlunaCrate {
     private int frames;
     private Rectangle bounds;
 
-    public BlunaCrate(BufferedImage image, int directions, int frames,
-            int shadowRGB) {
+    BlunaCrate(BufferedImage image, int directions, int frames) {
         blunas = readBlunas(image, directions, frames);
         spriteWidth = image.getWidth() / frames;
         spriteHeight = image.getHeight() / directions;
         this.frames = frames;
-        initBounds(shadowRGB);
     }
 
     public int getSpriteHeight() {
@@ -33,7 +31,11 @@ public class BlunaCrate {
         return frames;
     }
 
-    public void initBounds(int shadowRGB) {
+    public void setBounds(Rectangle bounds) {
+        this.bounds = bounds;
+    }
+
+    public void calculateBounds(int shadowRGB) {
         HashSet<Point> pointMask = new HashSet<>();
         for (BufferedImage bluna : blunas) {
             pointMask.addAll(createPointMaskFrom(bluna, shadowRGB));

@@ -20,10 +20,13 @@ public class Theme {
     private BufferedImage playerWalksImage;
     private BufferedImage playerAttacksImage;
     private BufferedImage playerDiesImage;
+    private BufferedImage playerMagicsImage;
+    private BufferedImage flyingMagicImage;
     private BufferedImage swordPlayerImage;
     private BufferedImage swordPlayerWalksImage;
     private BufferedImage swordPlayerAttacksImage;
     private BufferedImage swordPlayerDiesImage;
+    private BufferedImage swordPlayerMagicsImage;
     private BufferedImage fireballImage;
     private BufferedImage wallImage;
     private BufferedImage floorImage;
@@ -37,7 +40,7 @@ public class Theme {
 
     private String themeName;
 
-    public Theme(String dirName) {
+    Theme(String dirName) {
         try {
             this.themeName = dirName;
             goalImage = initBluna("goal.jpg");
@@ -49,10 +52,13 @@ public class Theme {
             playerWalksImage = initBluna("bluna/player_walks.png");
             playerAttacksImage = initBluna("bluna/player_attacks.png");
             playerDiesImage = initBluna("bluna/player_dies.png");
+            playerMagicsImage = initBluna("bluna/player_magics.png");
+            flyingMagicImage = initBluna("bluna/flying_magic.png");
             swordPlayerImage = initBluna("bluna/sword_player.png");
             swordPlayerAttacksImage = initBluna("bluna/sword_player_attacks.png");
             swordPlayerWalksImage = initBluna("bluna/sword_player_walks.png");
             swordPlayerDiesImage = initBluna("bluna/sword_player_dies.png");
+            swordPlayerMagicsImage = initBluna("bluna/sword_player_magics.png");
             fireballImage = initBluna("bluna/skull.png");
             wallImage = initBluna("wall1.jpg");
             floorImage = initBluna("floor.jpg");
@@ -129,6 +135,10 @@ public class Theme {
         return playerDiesImage;
     }
 
+    public BufferedImage getPlayerMagicsImage() {
+        return playerMagicsImage;
+    }
+
     public BufferedImage getHerbImage() {
         return herbImage;
     }
@@ -157,6 +167,10 @@ public class Theme {
         return swordPlayerWalksImage;
     }
 
+    public BufferedImage getSwordPlayerMagicsImage() {
+        return swordPlayerMagicsImage;
+    }
+
     public BufferedImage getDragonDiesBluna() {
         return dragonDiesImage;
     }
@@ -183,6 +197,10 @@ public class Theme {
         HashMap<String, BufferedImage> set = new HashMap<>();
         set.put(Weapon.SWORD, swordPlayerDiesImage);
         return set;
+    }
+
+    public BufferedImage getFlyingMagicImage() {
+        return flyingMagicImage;
     }
 
 }

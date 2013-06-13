@@ -104,4 +104,8 @@ public class Player extends Agressor {
         return money;
     }
 
+    public MagicFireball createFireball() {
+        return new MagicFireball();
+    }
+
 }

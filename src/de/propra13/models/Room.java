@@ -2,6 +2,7 @@ package de.propra13.models;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import de.propra13.assets.Theme;
 import de.propra13.views.objects.DragonObject;
@@ -10,7 +11,9 @@ import de.propra13.views.objects.GameObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.HerbObject;
 import de.propra13.views.objects.ItemObject;
+import de.propra13.views.objects.MagicFireballObject;
 import de.propra13.views.objects.MoneyObject;
+import de.propra13.views.objects.MoveableGameObject;
 import de.propra13.views.objects.PlayerObject;
 import de.propra13.views.objects.SkullObject;
 import de.propra13.views.objects.StartObject;
@@ -30,6 +33,7 @@ public class Room extends Model {
     private ArrayList<SkullObject> balls;
     private ArrayList<ItemObject> items;
     private ArrayList<EnemyObject> enemies;
+    private ArrayList<MoveableGameObject> magics;
 
     public Room(PlayerObject playerObject, ArrayList<WallObject> walls) {
         this.playerObject = playerObject;
@@ -45,6 +49,7 @@ public class Room extends Model {
         balls = new ArrayList<>();
         items = new ArrayList<>();
         enemies = new ArrayList<>();
+        magics = new ArrayList<>();
 
         String roomString = readStringFromFile(fileName);
 
@@ -138,6 +143,10 @@ public class Room extends Model {
         return name;
     }
 
+    public ArrayList<MoveableGameObject> getMagics() {
+        return magics;
+    }
+
     public void movePlayerToStart() {
         playerObject.setMoved(false);
         playerObject.moveTo(start);
@@ -156,7 +165,17 @@ public class Room extends Model {
         objects.addAll(balls);
         objects.addAll(walls);
         objects.addAll(items);
+        objects.addAll(magics);
         return objects;
+    }
+
+    public List<MoveableGameObject> getMoveableGameObjects() {
+        List<MoveableGameObject> list = new ArrayList<>();
+        list.add(getPlayerObject());
+        list.addAll(getBalls());
+        list.addAll(getEnemies());
+        list.addAll(getMagics());
+        return list;
     }
 
     public ArrayList<GameObject> getObjectsAt(int x, int y) {
@@ -170,5 +189,9 @@ public class Room extends Model {
 
     public void removeEnemy(EnemyObject enemy) {
         enemies.remove(enemy);
+    }
+
+    public void addMagic(MagicFireballObject magicFireballObject) {
+        magics.add(magicFireballObject);
     }
 }

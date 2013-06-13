@@ -3,6 +3,7 @@ package de.propra13.views.objects;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Point;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.image.ImageObserver;
@@ -14,6 +15,7 @@ import de.propra13.assets.animations.AnimationManager;
 import de.propra13.assets.animations.AnimationStateListener;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Agressor;
+import de.propra13.models.MagicFireball;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.models.Weapon;
@@ -27,11 +29,13 @@ public class PlayerObject extends AgressorObject {
     private static final int SHADOW = 0x271b11;
 
     private Player player;
+    private Theme theme;
 
     public PlayerObject(Player player, int x, int y, Theme theme) {
         super(new Animation(theme.getPlayerBluna(), theme.getPlayerBlunaSet(),
                 8, 1, SHADOW), x, y);
         this.player = player;
+        this.theme = theme;
 
         direction = new Direction(0, 0);
 
@@ -201,5 +205,14 @@ public class PlayerObject extends AgressorObject {
 
     public void triggerDeath(AnimationStateListener listener) {
         triggerAnimation("dies", listener);
+    }
+
+    public void performMagicIn(Room room, int x, int y) {
+        Point center = getGridCenter();
+        MagicFireball magicFireball = player.createFireball();
+        Direction direction = new Direction(x - this.x, y - this.y);
+        MagicFireballObject magicFireballObject = new MagicFireballObject(
+                magicFireball, direction, center.x, center.y, theme);
+        room.addMagic(magicFireballObject);
     }
 }

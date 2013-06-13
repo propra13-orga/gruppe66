@@ -20,6 +20,7 @@ import org.json.JSONException;
 
 import de.propra13.Main;
 import de.propra13.assets.Theme;
+import de.propra13.assets.ThemeFactory;
 import de.propra13.assets.animations.AnimationStateListener;
 import de.propra13.models.Level;
 import de.propra13.models.Player;
@@ -63,7 +64,7 @@ public class GameController extends Controller implements KeyListener,
 
     @Override
     protected void initialize() {
-        theme = new Theme("dungeon");
+        theme = ThemeFactory.getTheme("dungeon");
         initPlayerAndLevels();
 
         game = new GameFieldView(this, theme);
@@ -149,7 +150,8 @@ public class GameController extends Controller implements KeyListener,
         Room current = getCurrentRoom();
         Room next = getCurrentLevel().getRooms().get(room);
 
-        next.getPlayerObject().setDirection(current.getPlayerObject().getDirection());
+        next.getPlayerObject().setDirection(
+                current.getPlayerObject().getDirection());
 
         currentRoom = room;
 
@@ -293,7 +295,8 @@ public class GameController extends Controller implements KeyListener,
     }
 
     public void turn() {
-        for (MoveableGameObject object : game.getMoveableGameObjects()) {
+        for (MoveableGameObject object : getCurrentRoom()
+                .getMoveableGameObjects()) {
             object.act(game.getSize(), getCurrentRoom());
         }
     }
@@ -303,6 +306,7 @@ public class GameController extends Controller implements KeyListener,
         animateItems();
         animateBalls();
         animateEnemies();
+        animateMagics();
     }
 
     private void animatePlayer() {
@@ -324,6 +328,12 @@ public class GameController extends Controller implements KeyListener,
     private void animateEnemies() {
         for (EnemyObject enemy : getCurrentRoom().getEnemies()) {
             enemy.animate();
+        }
+    }
+
+    private void animateMagics() {
+        for (MoveableGameObject magic : getCurrentRoom().getMagics()) {
+            magic.animate();
         }
     }
 
@@ -367,6 +377,9 @@ public class GameController extends Controller implements KeyListener,
         for (GameObject object : getCurrentRoom().getObjectsAt(e.getX(),
                 e.getY()))
             object.toggleDebug();
+
+        getCurrentRoom().getPlayerObject().performMagicIn(getCurrentRoom(),
+                e.getX(), e.getY());
     }
 
     @Override
