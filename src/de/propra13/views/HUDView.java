@@ -45,6 +45,21 @@ public class HUDView extends AbstractGameView {
         drawMana(gfx);
         drawLevelAndRoomName(gfx);
         drawUsedWeapon(gfx);
+        drawCurrentGold(gfx);
+    }
+
+    private void drawCurrentGold(Graphics2D gfx) {
+        Player player = controller.getCurrentRoom().getPlayerObject()
+                .getPlayer();
+        BufferedImage currentGold = theme.getGoldImage();
+
+        gfx.drawImage(currentGold, controller.getView().getWidth() - 140, 10,
+                this);
+        gfx.setPaint(Color.white);
+        gfx.setFont(font);
+        gfx.drawString("x" + String.valueOf(player.getMoney()), controller
+                .getView().getWidth() - 100, 35);
+
     }
 
     private void drawUsedWeapon(Graphics2D gfx) {
