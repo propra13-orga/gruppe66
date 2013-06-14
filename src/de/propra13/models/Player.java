@@ -1,14 +1,26 @@
 package de.propra13.models;
 
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Player extends BioAgressor {
+import javax.swing.Timer;
+
+public class Player extends BioAgressor implements ActionListener {
 
     public final static int MAXARMOR = 100;
-    public final static int MAXMANA = 100;
+    public final static int MAXMANA = 99;
+
+    private int manaIncreaseDelay = 2;
+    private int manaIncreaseRate = 7;
+
+    private Timer manaTimer;
 
     public Player(int maxhealth) {
         super(maxhealth);
+
+        manaTimer = new Timer(manaIncreaseDelay * 1000, this);
+        manaTimer.start();
     }
 
     private int lifes = 3;
@@ -69,6 +81,7 @@ public class Player extends BioAgressor {
         lifes--;
         health = MAXHEALTH;
         armor = MAXARMOR;
+        mana = MAXMANA;
     }
 
     public void pickUpItem(Item item) {
@@ -107,9 +120,15 @@ public class Player extends BioAgressor {
         return money;
     }
 
+    public double getMana() {
+        return mana;
+    }
+
     public MagicFireball createFireball() {
         if (canConjure()) {
             mana -= MagicFireball.getManaCost();
+            if (!manaTimer.isRunning())
+                manaTimer.start();
             return new MagicFireball();
         } else {
             return null;
@@ -118,6 +137,13 @@ public class Player extends BioAgressor {
 
     private boolean canConjure() {
         return mana - MagicFireball.getManaCost() > 0;
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        mana = Math.min(MAXMANA, mana + manaIncreaseRate);
+        if (mana == MAXMANA)
+            manaTimer.stop();
     }
 
 }
