@@ -11,7 +11,6 @@ import de.propra13.views.objects.GameObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.HerbObject;
 import de.propra13.views.objects.ItemObject;
-import de.propra13.views.objects.MagicFireballObject;
 import de.propra13.views.objects.MoneyObject;
 import de.propra13.views.objects.MoveableGameObject;
 import de.propra13.views.objects.PlayerObject;
@@ -191,7 +190,11 @@ public class Room extends Model {
         enemies.remove(enemy);
     }
 
-    public void addMagic(MagicFireballObject magicFireballObject) {
-        magics.add(magicFireballObject);
+    public void addMagic(MoveableGameObject magic) {
+        magics.add(magic);
+    }
+
+    public void removeMagics(MoveableGameObject magic) {
+        magics.remove(magic);
     }
 }

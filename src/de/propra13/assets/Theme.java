@@ -21,7 +21,7 @@ public class Theme {
     private BufferedImage playerAttacksImage;
     private BufferedImage playerDiesImage;
     private BufferedImage playerMagicsImage;
-    private BufferedImage flyingMagicImage;
+    private BufferedImage magicFireballImage;
     private BufferedImage swordPlayerImage;
     private BufferedImage swordPlayerWalksImage;
     private BufferedImage swordPlayerAttacksImage;
@@ -53,7 +53,7 @@ public class Theme {
             playerAttacksImage = initBluna("bluna/player_attacks.png");
             playerDiesImage = initBluna("bluna/player_dies.png");
             playerMagicsImage = initBluna("bluna/player_magics.png");
-            flyingMagicImage = initBluna("bluna/flying_magic.png");
+            magicFireballImage = initBluna("bluna/magic_fireball.png");
             swordPlayerImage = initBluna("bluna/sword_player.png");
             swordPlayerAttacksImage = initBluna("bluna/sword_player_attacks.png");
             swordPlayerWalksImage = initBluna("bluna/sword_player_walks.png");
@@ -199,8 +199,8 @@ public class Theme {
         return set;
     }
 
-    public BufferedImage getFlyingMagicImage() {
-        return flyingMagicImage;
+    public BufferedImage getMagicFireballImage() {
+        return magicFireballImage;
     }
 
 }

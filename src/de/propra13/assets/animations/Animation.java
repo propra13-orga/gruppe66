@@ -17,6 +17,7 @@ public class Animation {
     private final Rectangle bounds;
     private final int spriteWidth;
     private final int spriteHeight;
+    private boolean directable;
     private AnimationPhaseListener listener;
 
     public Animation(BufferedImage defaultAnimation,
@@ -46,12 +47,18 @@ public class Animation {
             int frames, int shadowRGB) {
         this(BlunaCrateFactory.getBlunaCrate(defaultAnimation, directions,
                 frames, shadowRGB));
+        directable = checkDirectable(directions);
     }
 
     public Animation(BufferedImage defaultAnimation, int directions,
             int frames, Rectangle bounds) {
         this(BlunaCrateFactory.getBlunaCrate(defaultAnimation, directions,
                 frames, bounds));
+        directable = checkDirectable(directions);
+    }
+
+    private boolean checkDirectable(int directions) {
+        return directions == 8;
     }
 
     public Animation(BlunaCrate defaultAnimation) {
@@ -74,7 +81,7 @@ public class Animation {
     }
 
     public BufferedImage getCurrentBluna() {
-        if (animationManager.getCurrentDirection().isMoving())
+        if (directable && animationManager.getCurrentDirection().isMoving())
             return getBluna();
         else
             return getBluna(currentFrame);
