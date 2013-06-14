@@ -96,4 +96,15 @@ public class Direction {
     public double length() {
         return Math.sqrt(vx * vx + vy * vy);
     }
+
+    public Direction getAnimationDirection() {
+        double cosinus = Math.abs(vx / length());
+
+        if (cosinus > 0.92)
+            return new Direction(vx, 0);
+        else if (cosinus <= 0.39)
+            return new Direction(0, vy);
+
+        return new Direction(vx, vy);
+    }
 }

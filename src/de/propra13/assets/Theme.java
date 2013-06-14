@@ -135,7 +135,7 @@ public class Theme {
         return playerDiesImage;
     }
 
-    public BufferedImage getPlayerMagicsImage() {
+    public BufferedImage getPlayerMagicsBluna() {
         return playerMagicsImage;
     }
 
@@ -167,7 +167,7 @@ public class Theme {
         return swordPlayerWalksImage;
     }
 
-    public BufferedImage getSwordPlayerMagicsImage() {
+    public BufferedImage getSwordPlayerMagicsBluna() {
         return swordPlayerMagicsImage;
     }
 
@@ -196,6 +196,12 @@ public class Theme {
     public HashMap<String, BufferedImage> getPlayerDiesBlunaSet() {
         HashMap<String, BufferedImage> set = new HashMap<>();
         set.put(Weapon.SWORD, swordPlayerDiesImage);
+        return set;
+    }
+
+    public HashMap<String, BufferedImage> getPlayerMagicsBlunaSet() {
+        HashMap<String, BufferedImage> set = new HashMap<>();
+        set.put(Weapon.SWORD, swordPlayerMagicsImage);
         return set;
     }
 

@@ -48,6 +48,8 @@ public class PlayerObject extends BioAgressorObject {
                 "dies",
                 new Animation(theme.getPlayerDiesBluna(), theme
                         .getPlayerDiesBlunaSet(), 8, 9, SHADOW));
+        addAnimation("magics", new Animation(theme.getPlayerMagicsBluna(),
+                theme.getPlayerMagicsBlunaSet(), 8, 7, SHADOW));
     }
 
     @Override
@@ -209,15 +211,21 @@ public class PlayerObject extends BioAgressorObject {
     }
 
     public void performMagicIn(Room room, int x, int y) {
-        MagicFireball magicFireball = player.createFireball();
-        if (magicFireball != null) {
-            Point gridCenter = getGridCenter();
-            Point2D center = getCenter();
-            Direction direction = new Direction(x - center.getX(), y
-                    - center.getY());
-            MagicFireballObject magicFireballObject = new MagicFireballObject(
-                    magicFireball, direction, gridCenter.x, gridCenter.y, theme);
-            room.addMagic(magicFireballObject);
+        if (canAct()) {
+            MagicFireball magicFireball = player.createFireball();
+            if (magicFireball != null) {
+                Point gridCenter = getGridCenter();
+                Point2D center = getCenter();
+                Direction direction = new Direction(x - center.getX(), y
+                        - center.getY());
+                setAnimationDirection(direction.getAnimationDirection());
+                MagicFireballObject magicFireballObject = new MagicFireballObject(
+                        magicFireball, direction, gridCenter.x, gridCenter.y,
+                        theme);
+                room.addMagic(magicFireballObject);
+
+                triggerAnimation("magics");
+            }
         }
     }
 }
