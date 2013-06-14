@@ -22,6 +22,7 @@ import de.propra13.Main;
 import de.propra13.assets.Theme;
 import de.propra13.assets.ThemeFactory;
 import de.propra13.assets.animations.AnimationStateListener;
+import de.propra13.models.Club;
 import de.propra13.models.Level;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
@@ -87,7 +88,7 @@ public class GameController extends Controller implements KeyListener,
     }
 
     private void initPlayerAndLevels() {
-        player = new Player(100);
+        player = new Player(new Club(5), 100);
         initLevels();
     }
 

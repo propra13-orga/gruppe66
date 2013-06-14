@@ -16,13 +16,6 @@ public class Player extends BioAgressor implements ActionListener {
 
     private Timer manaTimer;
 
-    public Player(int maxhealth) {
-        super(maxhealth);
-
-        manaTimer = new Timer(manaIncreaseDelay * 1000, this);
-        manaTimer.start();
-    }
-
     private int lifes = 3;
     private double armor = MAXARMOR;
 
@@ -31,8 +24,17 @@ public class Player extends BioAgressor implements ActionListener {
     private int money;
 
     private Weapon weapon;
-    private int baseDamage = 5;
+
     private ArrayList<Item> items = new ArrayList<Item>();
+
+    public Player(Weapon defaultWeapon, int maxhealth) {
+        super(maxhealth);
+
+        manaTimer = new Timer(manaIncreaseDelay * 1000, this);
+        manaTimer.start();
+
+        pickUpItem(defaultWeapon);
+    }
 
     @Override
     public void sufferDamage(double damage) {
@@ -50,10 +52,7 @@ public class Player extends BioAgressor implements ActionListener {
     }
 
     private double getDamage() {
-        if (null != weapon)
-            return weapon.getDamage();
-
-        return baseDamage;
+        return weapon.getDamage();
     }
 
     @Override
@@ -104,12 +103,8 @@ public class Player extends BioAgressor implements ActionListener {
         return items;
     }
 
-    public String getWeaponType() {
-        if (weapon != null) {
-            return Weapon.SWORD;
-        } else {
-            return "";
-        }
+    public Weapon getWeapon() {
+        return weapon;
     }
 
     public void gainMoney(int amount) {

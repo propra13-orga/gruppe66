@@ -10,65 +10,65 @@ import de.propra13.assets.BlunaCrateFactory;
 public class Animation {
 
     private AnimationManager animationManager;
-    private HashMap<String, BlunaCrate> blunaSet;
+    private HashMap<String, BlunaCrate> blunaSet = new HashMap<>();
 
     private int currentFrame = 0;
-    private final int frames;
-    private final Rectangle bounds;
-    private final int spriteWidth;
-    private final int spriteHeight;
+    private int frames;
+    private Rectangle bounds;
+    private int spriteWidth;
+    private int spriteHeight;
     private boolean directable;
     private AnimationPhaseListener listener;
 
-    public Animation(BufferedImage defaultAnimation,
+    public Animation(String defaultAnimationType,
             HashMap<String, BufferedImage> imageSet, int directions,
             int frames, int shadowRGB) {
-        this(defaultAnimation, directions, frames, shadowRGB);
-
         for (String key : imageSet.keySet()) {
             blunaSet.put(key, BlunaCrateFactory.getBlunaCrate(
                     imageSet.get(key), directions, frames, shadowRGB));
         }
-
+        directable = checkDirectable(directions);
+        setDefaultAnimationType(defaultAnimationType);
     }
 
-    public Animation(BufferedImage defaultAnimation,
+    public Animation(String defaultAnimationType,
+            BufferedImage defaultAnimation,
             HashMap<String, BufferedImage> imageSet, int directions,
             int frames, Rectangle bounds) {
-        this(defaultAnimation, directions, frames, bounds);
-
         for (String key : imageSet.keySet()) {
             blunaSet.put(key, BlunaCrateFactory.getBlunaCrate(
                     imageSet.get(key), directions, frames, bounds));
         }
+        directable = checkDirectable(directions);
+        setDefaultAnimationType(defaultAnimationType);
     }
 
-    public Animation(BufferedImage defaultAnimation, int directions,
-            int frames, int shadowRGB) {
-        this(BlunaCrateFactory.getBlunaCrate(defaultAnimation, directions,
-                frames, shadowRGB));
+    public Animation(BufferedImage bluna, int directions, int frames,
+            int shadowRGB) {
+        blunaSet.put("default", BlunaCrateFactory.getBlunaCrate(bluna,
+                directions, frames, shadowRGB));
         directable = checkDirectable(directions);
+        setDefaultAnimationType("default");
     }
 
-    public Animation(BufferedImage defaultAnimation, int directions,
-            int frames, Rectangle bounds) {
-        this(BlunaCrateFactory.getBlunaCrate(defaultAnimation, directions,
-                frames, bounds));
+    public Animation(BufferedImage bluna, int directions, int frames,
+            Rectangle bounds) {
+        blunaSet.put("default", BlunaCrateFactory.getBlunaCrate(bluna,
+                directions, frames, bounds));
         directable = checkDirectable(directions);
+        setDefaultAnimationType("default");
     }
 
     private boolean checkDirectable(int directions) {
         return directions == 8;
     }
 
-    public Animation(BlunaCrate defaultAnimation) {
+    public void setDefaultAnimationType(String defaultAnimationName) {
+        BlunaCrate defaultAnimation = blunaSet.get(defaultAnimationName);
         frames = defaultAnimation.getFrames();
         bounds = defaultAnimation.getBounds();
         spriteWidth = defaultAnimation.getSpriteWidth();
         spriteHeight = defaultAnimation.getSpriteHeight();
-
-        blunaSet = new HashMap<>();
-        blunaSet.put(AnimationManager.DEFAULT_ANIMATION_TYPE, defaultAnimation);
     }
 
     private void increaseFrame() {

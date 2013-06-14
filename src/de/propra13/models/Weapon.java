@@ -1,17 +1,20 @@
 package de.propra13.models;
 
-public class Weapon extends Item {
+public abstract class Weapon extends Item {
 
-    public static final String SWORD = "schwoard";
-    public double damage = 100;
+    private double damage;
 
-    @Override
-    public void useOn(Player player) {
-        player.equip(this);
+    public Weapon(double damage) {
+        this.damage = damage;
     }
 
     public double getDamage() {
         return damage;
+    }
+
+    @Override
+    public void useOn(Player player) {
+        player.equip(this);
     }
 
 }

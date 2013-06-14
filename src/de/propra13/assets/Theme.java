@@ -7,7 +7,8 @@ import java.util.HashMap;
 
 import javax.imageio.ImageIO;
 
-import de.propra13.models.Weapon;
+import de.propra13.models.Club;
+import de.propra13.models.Sword;
 
 public class Theme {
 
@@ -177,31 +178,36 @@ public class Theme {
 
     public HashMap<String, BufferedImage> getPlayerBlunaSet() {
         HashMap<String, BufferedImage> set = new HashMap<>();
-        set.put(Weapon.SWORD, swordPlayerImage);
+        set.put(Club.class.getSimpleName(), playerImage);
+        set.put(Sword.class.getSimpleName(), swordPlayerImage);
         return set;
     }
 
     public HashMap<String, BufferedImage> getPlayerWalksBlunaSet() {
         HashMap<String, BufferedImage> set = new HashMap<>();
-        set.put(Weapon.SWORD, swordPlayerWalksImage);
+        set.put(Club.class.getSimpleName(), playerWalksImage);
+        set.put(Sword.class.getSimpleName(), swordPlayerWalksImage);
         return set;
     }
 
     public HashMap<String, BufferedImage> getPlayerAttacksBlunaSet() {
         HashMap<String, BufferedImage> set = new HashMap<>();
-        set.put(Weapon.SWORD, swordPlayerAttacksImage);
+        set.put(Club.class.getSimpleName(), playerAttacksImage);
+        set.put(Sword.class.getSimpleName(), swordPlayerAttacksImage);
         return set;
     }
 
     public HashMap<String, BufferedImage> getPlayerDiesBlunaSet() {
         HashMap<String, BufferedImage> set = new HashMap<>();
-        set.put(Weapon.SWORD, swordPlayerDiesImage);
+        set.put(Club.class.getSimpleName(), playerDiesImage);
+        set.put(Sword.class.getSimpleName(), swordPlayerDiesImage);
         return set;
     }
 
     public HashMap<String, BufferedImage> getPlayerMagicsBlunaSet() {
         HashMap<String, BufferedImage> set = new HashMap<>();
-        set.put(Weapon.SWORD, swordPlayerMagicsImage);
+        set.put(Club.class.getSimpleName(), playerMagicsImage);
+        set.put(Sword.class.getSimpleName(), swordPlayerMagicsImage);
         return set;
     }
 

@@ -16,8 +16,8 @@ import de.propra13.views.objects.MoveableGameObject;
 import de.propra13.views.objects.PlayerObject;
 import de.propra13.views.objects.SkullObject;
 import de.propra13.views.objects.StartObject;
+import de.propra13.views.objects.SwordObject;
 import de.propra13.views.objects.WallObject;
-import de.propra13.views.objects.WeaponObject;
 
 public class Room extends Model {
 
@@ -73,7 +73,7 @@ public class Room extends Model {
                     balls.add(new SkullObject(new Skull(), x, y, theme));
                     break;
                 case 'W':
-                    items.add(new WeaponObject(new Weapon(), x, y, theme));
+                    items.add(new SwordObject(new Sword(100), x, y, theme));
                     break;
                 case 'H':
                     items.add(new HerbObject(new Herb(25), x, y, theme));

@@ -10,11 +10,10 @@ import de.propra13.views.objects.Direction;
 public class AnimationManager {
 
     public static final String DEFAULT_ANIMATION = "default";
-    public static final String DEFAULT_ANIMATION_TYPE = "default";
 
     private Map<String, Animation> animations = new HashMap<>();
     private String currentAnimation = DEFAULT_ANIMATION;
-    private String currentAnimationType = DEFAULT_ANIMATION_TYPE;
+    private String currentAnimationType = "default";
 
     private Direction currentDirection = new Direction(0, 0);
     private AnimationStateListener listener;

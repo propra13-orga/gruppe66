@@ -82,8 +82,8 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="10" language="java" name="de.propra13.models.Weapon" project="gruppe66" 
-    file="/gruppe66/src/de/propra13/models/Weapon.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="10" language="java" name="de.propra13.models.Sword" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/models/Sword.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="593" y="3383"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      
@@ -217,8 +217,8 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="25" language="java" name="de.propra13.views.objects.WeaponObject" project="gruppe66" 
-    file="/gruppe66/src/de/propra13/views/objects/WeaponObject.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="25" language="java" name="de.propra13.views.objects.SwordObject" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/objects/SwordObject.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1320" y="1893"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      

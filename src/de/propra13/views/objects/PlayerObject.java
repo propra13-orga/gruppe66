@@ -16,13 +16,16 @@ import de.propra13.assets.animations.AnimationManager;
 import de.propra13.assets.animations.AnimationStateListener;
 import de.propra13.controllers.GameController;
 import de.propra13.models.BioAgressor;
+import de.propra13.models.Club;
 import de.propra13.models.MagicFireball;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
-import de.propra13.models.Weapon;
 import de.propra13.views.GameFieldView;
 
 public class PlayerObject extends BioAgressorObject {
+
+    private final static String DEFAULTANIMATIONTYPE = Club.class
+            .getSimpleName();
 
     private boolean leftSpawnPoint = false;
     private GameController controller;
@@ -33,23 +36,30 @@ public class PlayerObject extends BioAgressorObject {
     private Theme theme;
 
     public PlayerObject(Player player, int x, int y, Theme theme) {
-        super(new Animation(theme.getPlayerBluna(), theme.getPlayerBlunaSet(),
-                8, 1, SHADOW), x, y);
+        super(new Animation(DEFAULTANIMATIONTYPE, theme.getPlayerBlunaSet(), 8,
+                1, SHADOW), x, y);
         this.player = player;
         this.theme = theme;
 
         direction = new Direction(0, 0);
 
-        addAnimation("walking", new Animation(theme.getPlayerWalksBluna(),
-                theme.getPlayerWalksBlunaSet(), 8, 9, SHADOW));
-        addAnimation("attacks", new Animation(theme.getPlayerAttacksBluna(),
-                theme.getPlayerAttacksBlunaSet(), 8, 13, SHADOW));
+        addAnimation(
+                "walking",
+                new Animation(DEFAULTANIMATIONTYPE, theme
+                        .getPlayerWalksBlunaSet(), 8, 9, SHADOW));
+        addAnimation(
+                "attacks",
+                new Animation(DEFAULTANIMATIONTYPE, theme
+                        .getPlayerAttacksBlunaSet(), 8, 13, SHADOW));
         addAnimation(
                 "dies",
-                new Animation(theme.getPlayerDiesBluna(), theme
+                new Animation(DEFAULTANIMATIONTYPE, theme
                         .getPlayerDiesBlunaSet(), 8, 9, SHADOW));
-        addAnimation("magics", new Animation(theme.getPlayerMagicsBluna(),
-                theme.getPlayerMagicsBlunaSet(), 8, 7, SHADOW));
+        addAnimation(
+                "magics",
+                new Animation(DEFAULTANIMATIONTYPE, theme
+                        .getPlayerMagicsBlunaSet(), 8, 7, SHADOW));
+        setCurrentAnimationType(DEFAULTANIMATIONTYPE);
     }
 
     @Override
@@ -77,13 +87,7 @@ public class PlayerObject extends BioAgressorObject {
 
     @Override
     public void animate() {
-        switch (player.getWeaponType()) {
-        case Weapon.SWORD:
-            setCurrentAnimationType(Weapon.SWORD);
-            break;
-        default:
-            setCurrentAnimationType(AnimationManager.DEFAULT_ANIMATION_TYPE);
-        }
+        setCurrentAnimationType(player.getWeapon().getClass().getSimpleName());
         super.animate();
     }
 
