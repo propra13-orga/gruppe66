@@ -11,22 +11,18 @@ public class MagicFireballObject extends MoveableGameObject {
 
     private MagicFireball magicFireball;
 
-    private long birthTime;
-
     public MagicFireballObject(MagicFireball magicFireball,
             Direction direction, int x, int y, Theme theme) {
         super(new Animation(theme.getMagicFireballImage(), 1, 16, 0), x, y);
 
         this.magicFireball = magicFireball;
         this.direction = direction;
-
-        birthTime = System.currentTimeMillis();
     }
 
     @Override
     public void act(Dimension gameFieldSize, Room room) {
         super.act(gameFieldSize, room);
-        if (System.currentTimeMillis() - birthTime < 3000) {
+        if (magicFireball.isAlive()) {
             for (EnemyObject enemyObject : room.getEnemies()) {
                 if (enemyObject.getBounds().contains(getBounds()))
                     magicFireball.inflictDamageOn(enemyObject.getAgressor());

@@ -6,8 +6,13 @@ public class MagicFireball extends Agressor {
 
     private double power;
 
+    private long birthTime;
+    private int lifeSpan = 3;
+
     public MagicFireball(double power) {
         this.power = power;
+
+        birthTime = System.currentTimeMillis();
     }
 
     public MagicFireball() {
@@ -20,6 +25,10 @@ public class MagicFireball extends Agressor {
             enemy.sufferDamage(power);
             reload();
         }
+    }
+
+    public boolean isAlive() {
+        return System.currentTimeMillis() - birthTime < lifeSpan * 1000;
     }
 
 }
