@@ -3,6 +3,7 @@ package de.propra13.views;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +41,34 @@ public class HUDView extends AbstractGameView {
 
         drawLifes(gfx);
         drawMana(gfx);
+        drawLevelAndRoomName(gfx);
+    }
+
+    private void drawLevelAndRoomName(Graphics2D gfx) {
+        Font levelFont = font;
+        Font roomFont = new Font("Verdana", Font.ITALIC, 14);
+
+        String levelName = controller.getCurrentLevel().getName();
+        String roomName = controller.getCurrentRoom().getName();
+
+        Rectangle2D levelNameBounds = gfx.getFontMetrics(levelFont)
+                .getStringBounds(levelName, gfx);
+        Rectangle2D roomNameBounds = gfx.getFontMetrics(roomFont)
+                .getStringBounds(roomName, gfx);
+
+        int levelx = (int) (controller.getView().getWidth() / 2 - levelNameBounds
+                .getWidth() / 2);
+        int roomx = (int) (controller.getView().getWidth() / 2 - roomNameBounds
+                .getWidth() / 2);
+
+        gfx.setPaint(Color.white);
+        gfx.setFont(levelFont);
+        gfx.drawString(levelName, levelx, 20);
+
+        gfx.setPaint(Color.gray);
+        gfx.setFont(roomFont);
+        gfx.drawString(roomName, roomx,
+                (int) (22 + levelNameBounds.getHeight()));
     }
 
     private void drawMana(Graphics2D gfx) {
