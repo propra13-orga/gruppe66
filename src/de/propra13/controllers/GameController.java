@@ -73,7 +73,12 @@ public class GameController extends Controller implements KeyListener,
         game.setPreferredSize(new Dimension(Main.GAMEFIELDWIDTH,
                 Main.GAMEFIELDHEIGHT));
 
-        hud = new HUDView(this, theme);
+        try {
+            hud = new HUDView(this, theme);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(1);
+        }
         hud.setPreferredSize(new Dimension(Main.GAMEFIELDWIDTH, Main.HUDHEIGHT));
 
         view.add(hud);
