@@ -7,7 +7,7 @@ import de.propra13.models.Sword;
 public class SwordObject extends ItemObject {
 
     public SwordObject(Sword weapon, int x, int y, Theme theme) {
-        super(new Animation(theme.getWeaponImage(), 1, 1, 0x1f160d), x, y);
+        super(new Animation(theme.getSwordImage(), 1, 1, 0x1f160d), x, y);
         this.item = weapon;
     }
 

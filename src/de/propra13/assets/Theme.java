@@ -31,7 +31,8 @@ public class Theme {
     private BufferedImage fireballImage;
     private BufferedImage wallImage;
     private BufferedImage floorImage;
-    private BufferedImage weaponImage;
+    private BufferedImage swordImage;
+    private BufferedImage clubImage;
     private BufferedImage herbImage;
     private BufferedImage onehundretImage;
     private BufferedImage dragonImage;
@@ -63,7 +64,8 @@ public class Theme {
             fireballImage = initBluna("bluna/skull.png");
             wallImage = initBluna("wall1.jpg");
             floorImage = initBluna("floor.jpg");
-            weaponImage = initBluna("sword.png");
+            swordImage = initBluna("sword.png");
+            clubImage = initBluna("club.png");
             herbImage = initBluna("bluna/herbitem.png");
             onehundretImage = initBluna("bluna/onehundret.png");
             dragonImage = initBluna("bluna/dragon.png");
@@ -112,8 +114,12 @@ public class Theme {
         return wallImage;
     }
 
-    public BufferedImage getWeaponImage() {
-        return weaponImage;
+    public BufferedImage getSwordImage() {
+        return swordImage;
+    }
+
+    public BufferedImage getClubImage() {
+        return clubImage;
     }
 
     public BufferedImage getFireballBluna() {

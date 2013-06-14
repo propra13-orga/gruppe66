@@ -13,6 +13,8 @@ import javax.imageio.ImageIO;
 import de.propra13.assets.Theme;
 import de.propra13.controllers.GameController;
 import de.propra13.models.Player;
+import de.propra13.models.Sword;
+import de.propra13.models.Weapon;
 
 public class HUDView extends AbstractGameView {
 
@@ -42,6 +44,21 @@ public class HUDView extends AbstractGameView {
         drawLifes(gfx);
         drawMana(gfx);
         drawLevelAndRoomName(gfx);
+        drawUsedWeapon(gfx);
+    }
+
+    private void drawUsedWeapon(Graphics2D gfx) {
+        Player player = controller.getCurrentRoom().getPlayerObject()
+                .getPlayer();
+        BufferedImage currentUsedWeapon;
+        Weapon playerWeapon = player.getWeapon();
+        if (playerWeapon instanceof Sword) {
+            currentUsedWeapon = theme.getSwordImage();
+        } else {
+            currentUsedWeapon = theme.getClubImage();
+        }
+        gfx.drawImage(currentUsedWeapon, controller.getView().getWidth() - 30,
+                6, this);
     }
 
     private void drawLevelAndRoomName(Graphics2D gfx) {
