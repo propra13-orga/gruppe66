@@ -5,6 +5,7 @@ import java.util.ArrayList;
 public class Player extends BioAgressor {
 
     public final static int MAXARMOR = 100;
+    public final static int MAXMANA = 100;
 
     public Player(int maxhealth) {
         super(maxhealth);
@@ -12,6 +13,8 @@ public class Player extends BioAgressor {
 
     private int lifes = 3;
     private double armor = MAXARMOR;
+
+    private double mana = MAXMANA;
 
     private int money;
 
@@ -105,7 +108,16 @@ public class Player extends BioAgressor {
     }
 
     public MagicFireball createFireball() {
-        return new MagicFireball();
+        if (canConjure()) {
+            mana -= MagicFireball.getManaCost();
+            return new MagicFireball();
+        } else {
+            return null;
+        }
+    }
+
+    private boolean canConjure() {
+        return mana - MagicFireball.getManaCost() > 0;
     }
 
 }

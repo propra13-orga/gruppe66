@@ -209,13 +209,15 @@ public class PlayerObject extends BioAgressorObject {
     }
 
     public void performMagicIn(Room room, int x, int y) {
-        Point gridCenter = getGridCenter();
-        Point2D center = getCenter();
         MagicFireball magicFireball = player.createFireball();
-        Direction direction = new Direction(x - center.getX(), y
-                - center.getY());
-        MagicFireballObject magicFireballObject = new MagicFireballObject(
-                magicFireball, direction, gridCenter.x, gridCenter.y, theme);
-        room.addMagic(magicFireballObject);
+        if (magicFireball != null) {
+            Point gridCenter = getGridCenter();
+            Point2D center = getCenter();
+            Direction direction = new Direction(x - center.getX(), y
+                    - center.getY());
+            MagicFireballObject magicFireballObject = new MagicFireballObject(
+                    magicFireball, direction, gridCenter.x, gridCenter.y, theme);
+            room.addMagic(magicFireballObject);
+        }
     }
 }

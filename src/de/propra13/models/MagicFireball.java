@@ -5,6 +5,7 @@ public class MagicFireball extends Agressor {
     public static final double DEFAULTPOWER = 50;
 
     private double power;
+    private static double manaCost = 33;
 
     private long birthTime;
     private int lifeSpan = 3;
@@ -29,6 +30,10 @@ public class MagicFireball extends Agressor {
 
     public boolean isAlive() {
         return System.currentTimeMillis() - birthTime < lifeSpan * 1000;
+    }
+
+    public static double getManaCost() {
+        return manaCost;
     }
 
 }
