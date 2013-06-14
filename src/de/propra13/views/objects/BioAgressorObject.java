@@ -12,6 +12,8 @@ public abstract class BioAgressorObject extends MoveableGameObject {
     public BioAgressorObject(Animation defaultAnimation, int x, int y) {
         super(defaultAnimation, x, y);
         velocity = 0;
+
+        setGlowRadius(100);
     }
 
     @Override
