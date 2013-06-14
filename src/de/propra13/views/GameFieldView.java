@@ -77,7 +77,8 @@ public class GameFieldView extends AbstractGameView {
             lightGfx.setBackground(Color.black);
             lightGfx.clearRect(0, 0, lightMap.getWidth(), lightMap.getHeight());
 
-            for (GameObject gameObject : currentRoom.getAllObjects()) {
+            for (GameObject gameObject : controller.getCurrentRoom()
+                    .getAllObjects()) {
                 if (gameObject.glows())
                     drawLight(lightGfx, gameObject);
             }
@@ -103,17 +104,18 @@ public class GameFieldView extends AbstractGameView {
     }
 
     private void drawMagics(Graphics2D gfx) {
-        for (MoveableGameObject magics : currentRoom.getMagics()) {
+        for (MoveableGameObject magics : controller.getCurrentRoom()
+                .getMagics()) {
             magics.draw(gfx, this);
         }
     }
 
     private void drawStart(Graphics2D gfx) {
-        currentRoom.getStart().draw(gfx, this);
+        controller.getCurrentRoom().getStart().draw(gfx, this);
     }
 
     private void drawGoal(Graphics2D gfx) {
-        currentRoom.getGoal().draw(gfx, this);
+        controller.getCurrentRoom().getGoal().draw(gfx, this);
     }
 
     private void drawFloor(Graphics2D gfx) {
@@ -130,30 +132,30 @@ public class GameFieldView extends AbstractGameView {
     }
 
     private void drawPlayer(Graphics2D gfx) {
-        currentRoom.getPlayerObject().draw(gfx, this);
+        controller.getCurrentRoom().getPlayerObject().draw(gfx, this);
 
     }
 
     private void drawWalls(Graphics2D gfx) {
-        for (WallObject wall : currentRoom.getWalls()) {
+        for (WallObject wall : controller.getCurrentRoom().getWalls()) {
             wall.draw(gfx, this);
         }
     }
 
     private void drawBalls(Graphics2D gfx) {
-        for (SkullObject ball : currentRoom.getBalls()) {
+        for (SkullObject ball : controller.getCurrentRoom().getBalls()) {
             ball.draw(gfx, this);
         }
     }
 
     private void drawItems(Graphics2D gfx) {
-        for (ItemObject item : currentRoom.getItems()) {
+        for (ItemObject item : controller.getCurrentRoom().getItems()) {
             item.draw(gfx, this);
         }
     }
 
     private void drawEnemies(Graphics2D gfx) {
-        for (EnemyObject enemy : currentRoom.getEnemies()) {
+        for (EnemyObject enemy : controller.getCurrentRoom().getEnemies()) {
             enemy.draw(gfx, this);
         }
     }

@@ -11,13 +11,11 @@ import javax.swing.JPanel;
 
 import de.propra13.assets.Theme;
 import de.propra13.controllers.GameController;
-import de.propra13.models.Room;
 
 public abstract class AbstractGameView extends JPanel {
 
     private static final long serialVersionUID = 7383103785685757479L;
 
-    protected Room currentRoom;
     protected Theme theme;
 
     private RenderingHints rh;
@@ -54,15 +52,6 @@ public abstract class AbstractGameView extends JPanel {
     public void removeNotify() {
         super.removeNotify();
         controller.stop();
-    }
-
-    public Room getCurrentRoom() {
-        return currentRoom;
-    }
-
-    public void setCurrentRoom(Room room) {
-        this.currentRoom = room;
-        currentRoom.getPlayerObject().setMoved(false);
     }
 
     protected abstract void render(Graphics2D gfx);

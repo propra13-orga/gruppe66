@@ -43,7 +43,8 @@ public class HUDView extends AbstractGameView {
     }
 
     private void drawMana(Graphics2D gfx) {
-        Player player = getCurrentRoom().getPlayerObject().getPlayer();
+        Player player = controller.getCurrentRoom().getPlayerObject()
+                .getPlayer();
         int manaRecHeight = (int) (player.getMana() / Player.MAXMANA * 43);
         gfx.setPaint(new Color(5, 81, 186));
         gfx.fillRect(70, 46 - manaRecHeight, 50, 50);
@@ -51,7 +52,8 @@ public class HUDView extends AbstractGameView {
     }
 
     private void drawLifes(Graphics2D gfx) {
-        Player player = currentRoom.getPlayerObject().getPlayer();
+        Player player = controller.getCurrentRoom().getPlayerObject()
+                .getPlayer();
         Graphics2D gfxCopy = (Graphics2D) gfx.create();
 
         try {

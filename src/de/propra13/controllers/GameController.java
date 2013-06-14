@@ -134,11 +134,11 @@ public class GameController extends Controller implements KeyListener,
             setRoom(currentRoom - 1);
     }
 
-    private Level getCurrentLevel() {
+    public Level getCurrentLevel() {
         return levels.get(currentLevel);
     }
 
-    private Room getCurrentRoom() {
+    public Room getCurrentRoom() {
         return getCurrentLevel().getRooms().get(currentRoom);
     }
 
@@ -158,10 +158,9 @@ public class GameController extends Controller implements KeyListener,
         next.getPlayerObject().setDirection(
                 current.getPlayerObject().getDirection());
 
-        currentRoom = room;
+        next.getPlayerObject().setMoved(false);
 
-        hud.setCurrentRoom(next);
-        game.setCurrentRoom(next);
+        currentRoom = room;
     }
 
     public void checkHealthOfPlayer() {
@@ -266,8 +265,6 @@ public class GameController extends Controller implements KeyListener,
     @Override
     public void componentShown(ComponentEvent event) {
         if (!gameHasStarted) {
-            game.setCurrentRoom(getCurrentRoom());
-            hud.setCurrentRoom(getCurrentRoom());
             gameHasStarted = true;
         }
 
