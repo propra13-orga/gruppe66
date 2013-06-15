@@ -6,9 +6,13 @@ import java.awt.Graphics2D;
 import java.awt.Point;
 import java.awt.RadialGradientPaint;
 import java.awt.Rectangle;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+
+import javax.swing.Timer;
 
 import de.propra13.assets.animations.Animation;
 import de.propra13.assets.animations.AnimationManager;
@@ -120,6 +124,35 @@ public class GameObject {
                 (int) Math.round(y + dy), ob);
         if (debug)
             drawDebug(gfx, ob);
+    }
+
+    public void coroutine(int delay, final Coroutine coroutine) {
+        new Timer(delay, new ActionListener() {
+
+            private long timeStamp = System.currentTimeMillis();
+
+            @Override
+            public void actionPerformed(final ActionEvent e) {
+                if (!coroutine.run((System.currentTimeMillis() - timeStamp) / 1000.0)) {
+                    ((Timer) e.getSource()).stop();
+                }
+            }
+        }).start();
+    }
+
+    public void dimGlowing(final int factor, int delay) {
+        coroutine(delay, new Coroutine() {
+
+            @Override
+            public boolean run(double time) {
+                int radius = getGlowRadius();
+                radius = (int) Math.max(0, radius
+                        - (factor + (Math.random() - 0.5) * 5));
+
+                setGlowRadius(radius);
+                return radius > 0;
+            }
+        });
     }
 
     public void drawDebug(Graphics2D gfx, ImageObserver ob) {

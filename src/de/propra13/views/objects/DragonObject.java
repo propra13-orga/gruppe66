@@ -50,6 +50,7 @@ public class DragonObject extends EnemyObject {
                 public void didEnd() {
                     setCurrentAnimation("dead");
                     setCanAct(false);
+                    dimGlowing(1, 20);
                 }
             });
 
