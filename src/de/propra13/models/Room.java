@@ -13,6 +13,7 @@ import de.propra13.views.objects.HerbObject;
 import de.propra13.views.objects.ItemObject;
 import de.propra13.views.objects.MoneyObject;
 import de.propra13.views.objects.MoveableGameObject;
+import de.propra13.views.objects.NpcObject;
 import de.propra13.views.objects.PlayerObject;
 import de.propra13.views.objects.SkullObject;
 import de.propra13.views.objects.StartObject;
@@ -33,6 +34,7 @@ public class Room extends Model {
     private ArrayList<ItemObject> items;
     private ArrayList<EnemyObject> enemies;
     private ArrayList<MoveableGameObject> magics;
+    private ArrayList<NpcObject> npcs;
 
     public Room(PlayerObject playerObject, ArrayList<WallObject> walls) {
         this.playerObject = playerObject;
@@ -49,6 +51,7 @@ public class Room extends Model {
         items = new ArrayList<>();
         enemies = new ArrayList<>();
         magics = new ArrayList<>();
+        npcs = new ArrayList<>();
 
         String roomString = readStringFromFile(fileName);
 
@@ -83,11 +86,19 @@ public class Room extends Model {
                     break;
                 case 'M':
                     items.add(new MoneyObject(new Money(100), x, y, theme));
+                    break;
+                case 'T':
+                    npcs.add(new NpcObject(x, y, theme));
+                    break;
                 }
                 x++;
             }
             y++;
         }
+    }
+
+    public ArrayList<NpcObject> getNpcs() {
+        return npcs;
     }
 
     public PlayerObject getPlayerObject() {
@@ -159,6 +170,7 @@ public class Room extends Model {
         ArrayList<GameObject> objects = new ArrayList<>();
         objects.add(start);
         objects.add(goal);
+        objects.addAll(npcs);
         objects.add(playerObject);
         objects.addAll(enemies);
         objects.addAll(balls);
@@ -171,6 +183,7 @@ public class Room extends Model {
     public List<MoveableGameObject> getMoveableGameObjects() {
         List<MoveableGameObject> list = new ArrayList<>();
         list.add(getPlayerObject());
+        list.addAll(npcs);
         list.addAll(getBalls());
         list.addAll(getEnemies());
         list.addAll(getMagics());
@@ -201,6 +214,7 @@ public class Room extends Model {
     public List<GameObject> getAnimatables() {
         List<GameObject> animatables = new ArrayList<>();
         animatables.add(playerObject);
+        animatables.addAll(npcs);
         animatables.addAll(items);
         animatables.addAll(balls);
         animatables.addAll(enemies);

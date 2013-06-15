@@ -42,6 +42,9 @@ public class Theme {
     private BufferedImage dragonWalksImage;
     private BufferedImage dragonDiesImage;
     private BufferedImage dragonDeadImage;
+    private BufferedImage salesmanImage;
+    private BufferedImage salesmanCrouchesImage;
+    private BufferedImage salesmanTalksImage;
 
     private String themeName;
 
@@ -78,6 +81,9 @@ public class Theme {
             dragonWalksImage = initBluna("bluna/dragon_walks.png");
             dragonDiesImage = initBluna("bluna/dragon_dies.png");
             dragonDeadImage = initBluna("bluna/dragon_dead.png");
+            salesmanImage = initBluna("bluna/salesman.png");
+            salesmanCrouchesImage = initBluna("bluna/salesman_crouches.png");
+            salesmanTalksImage = initBluna("bluna/salesman_talks.png");
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("dun dun dun");
@@ -90,6 +96,18 @@ public class Theme {
                 + fileName);
         BufferedImage bluna = ImageIO.read(url);
         return bluna;
+    }
+
+    public BufferedImage getSalesmanCrouchesImage() {
+        return salesmanCrouchesImage;
+    }
+
+    public BufferedImage getSalesmanImage() {
+        return salesmanImage;
+    }
+
+    public BufferedImage getSalesmanTalksImage() {
+        return salesmanTalksImage;
     }
 
     public BufferedImage getSpellImage() {

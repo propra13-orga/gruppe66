@@ -18,6 +18,7 @@ import de.propra13.controllers.GameController;
 import de.propra13.models.BioAgressor;
 import de.propra13.models.Club;
 import de.propra13.models.MagicFireball;
+import de.propra13.models.Npc;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
@@ -33,6 +34,7 @@ public class PlayerObject extends BioAgressorObject {
     private static final int SHADOW = 0x271b11;
 
     private Player player;
+    private Npc npc;
     private Theme theme;
 
     public PlayerObject(Player player, int x, int y, Theme theme) {
@@ -62,6 +64,14 @@ public class PlayerObject extends BioAgressorObject {
         setCurrentAnimationType(DEFAULTANIMATIONTYPE);
     }
 
+    public void setNpc(Npc npc) {
+        this.npc = npc;
+    }
+
+    public Npc getNpc() {
+        return npc;
+    }
+
     @Override
     public void act(Dimension size, Room room) {
         super.act(size, room);
@@ -78,7 +88,6 @@ public class PlayerObject extends BioAgressorObject {
         for (ItemObject item : items) {
             player.pickUpItem(item.getItem());
         }
-
         if (isMoving())
             setCurrentAnimation("walks");
         else
@@ -164,6 +173,11 @@ public class PlayerObject extends BioAgressorObject {
             break;
         case KeyEvent.VK_LEFT:
             direction.setVx(-1);
+            break;
+        case KeyEvent.VK_T:
+            if (npc != null) {
+                npc.setTalking(!npc.isTalking());
+            }
             break;
         }
         velocity = 1;

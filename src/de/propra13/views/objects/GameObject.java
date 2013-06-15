@@ -140,6 +140,20 @@ public class GameObject {
         }).start();
     }
 
+    public Direction directionTo(GameObject object) {
+        double nx = object.getCenter().x - getCenter().x;
+        double ny = object.getCenter().y - getCenter().y;
+        return new Direction(nx, ny);
+    }
+
+    public boolean isCloseTo(GameObject object, double maxDistance) {
+        return object.getCenter().distance(getCenter()) < maxDistance;
+    }
+
+    public void lookAt(GameObject object) {
+        setAnimationDirection(directionTo(object));
+    }
+
     public void dimGlowing(final int factor, int delay) {
         coroutine(delay, new Coroutine() {
 

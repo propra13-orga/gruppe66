@@ -1,7 +1,6 @@
 package de.propra13.views.objects;
 
 import java.awt.Dimension;
-import java.awt.geom.Point2D;
 
 import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
@@ -57,10 +56,7 @@ public class DragonObject extends EnemyObject {
             return;
         }
 
-        Point2D.Double playerCenter = room.getPlayerObject().getCenter();
-        direction = new Direction(playerCenter.x - getCenter().x,
-                playerCenter.y - getCenter().y);
-
+        direction = directionTo(room.getPlayerObject());
         if (direction.length() > GameFieldView.GRID * 2) {
             velocity = 1;
             setCurrentAnimation("walking");

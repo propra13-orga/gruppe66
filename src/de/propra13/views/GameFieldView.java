@@ -7,16 +7,12 @@ import java.awt.GraphicsEnvironment;
 import java.awt.Image;
 import java.awt.Transparency;
 import java.awt.image.BufferedImage;
+import java.util.List;
 
 import de.propra13.Main;
 import de.propra13.assets.Theme;
 import de.propra13.controllers.GameController;
-import de.propra13.views.objects.EnemyObject;
 import de.propra13.views.objects.GameObject;
-import de.propra13.views.objects.ItemObject;
-import de.propra13.views.objects.MoveableGameObject;
-import de.propra13.views.objects.SkullObject;
-import de.propra13.views.objects.WallObject;
 
 public class GameFieldView extends AbstractGameView {
 
@@ -55,18 +51,26 @@ public class GameFieldView extends AbstractGameView {
 
         drawStart(gfx);
         drawGoal(gfx);
-        drawWalls(gfx);
+        drawGameObjects(controller.getCurrentRoom().getWalls(), gfx);
 
-        drawBalls(gfx);
-        drawItems(gfx);
-        drawEnemies(gfx);
-        drawMagics(gfx);
+        drawGameObjects(controller.getCurrentRoom().getBalls(), gfx);
+        drawGameObjects(controller.getCurrentRoom().getItems(), gfx);
+        drawGameObjects(controller.getCurrentRoom().getEnemies(), gfx);
+        drawGameObjects(controller.getCurrentRoom().getNpcs(), gfx);
+        drawGameObjects(controller.getCurrentRoom().getMagics(), gfx);
         drawPlayer(gfx);
 
         if (drawsGrid)
             drawGrid(gfx);
 
         drawLightMap(gfx);
+    }
+
+    private void drawGameObjects(List<? extends GameObject> objects,
+            Graphics2D gfx) {
+        for (GameObject object : objects) {
+            object.draw(gfx, this);
+        }
     }
 
     private void drawLightMap(Graphics2D gfx) {
@@ -103,13 +107,6 @@ public class GameFieldView extends AbstractGameView {
         }
     }
 
-    private void drawMagics(Graphics2D gfx) {
-        for (MoveableGameObject magics : controller.getCurrentRoom()
-                .getMagics()) {
-            magics.draw(gfx, this);
-        }
-    }
-
     private void drawStart(Graphics2D gfx) {
         controller.getCurrentRoom().getStart().draw(gfx, this);
     }
@@ -134,30 +131,6 @@ public class GameFieldView extends AbstractGameView {
     private void drawPlayer(Graphics2D gfx) {
         controller.getCurrentRoom().getPlayerObject().draw(gfx, this);
 
-    }
-
-    private void drawWalls(Graphics2D gfx) {
-        for (WallObject wall : controller.getCurrentRoom().getWalls()) {
-            wall.draw(gfx, this);
-        }
-    }
-
-    private void drawBalls(Graphics2D gfx) {
-        for (SkullObject ball : controller.getCurrentRoom().getBalls()) {
-            ball.draw(gfx, this);
-        }
-    }
-
-    private void drawItems(Graphics2D gfx) {
-        for (ItemObject item : controller.getCurrentRoom().getItems()) {
-            item.draw(gfx, this);
-        }
-    }
-
-    private void drawEnemies(Graphics2D gfx) {
-        for (EnemyObject enemy : controller.getCurrentRoom().getEnemies()) {
-            enemy.draw(gfx, this);
-        }
     }
 
     private void drawGrid(Graphics2D gfx) {
