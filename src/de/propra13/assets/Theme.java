@@ -29,6 +29,7 @@ public class Theme {
     private BufferedImage swordPlayerDiesImage;
     private BufferedImage swordPlayerMagicsImage;
     private BufferedImage fireballImage;
+    private BufferedImage spellImage;
     private BufferedImage goldImage;
     private BufferedImage wallImage;
     private BufferedImage floorImage;
@@ -63,6 +64,7 @@ public class Theme {
             swordPlayerDiesImage = initBluna("bluna/sword_player_dies.png");
             swordPlayerMagicsImage = initBluna("bluna/sword_player_magics.png");
             fireballImage = initBluna("bluna/skull.png");
+            spellImage = initBluna("spell.png");
             wallImage = initBluna("wall1.jpg");
             goldImage = initBluna("money.png");
             floorImage = initBluna("floor.jpg");
@@ -86,6 +88,10 @@ public class Theme {
                 + fileName);
         BufferedImage bluna = ImageIO.read(url);
         return bluna;
+    }
+
+    public BufferedImage getSpellImage() {
+        return spellImage;
     }
 
     public BufferedImage getHeartDamagedImage() {

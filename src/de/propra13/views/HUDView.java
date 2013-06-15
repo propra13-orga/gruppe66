@@ -44,36 +44,42 @@ public class HUDView extends AbstractGameView {
         drawLifes(gfx);
         drawMana(gfx);
         drawLevelAndRoomName(gfx);
-        drawUsedWeapon(gfx);
-        drawCurrentGold(gfx);
+        drawCurrentWeapon(gfx);
+        drawCurrentSpell(gfx);
+        drawGold(gfx);
     }
 
-    private void drawCurrentGold(Graphics2D gfx) {
+    private void drawCurrentSpell(Graphics2D gfx) {
+        gfx.drawImage(theme.getSpellImage(),
+                controller.getView().getWidth() - 80, 6, this);
+    }
+
+    private void drawGold(Graphics2D gfx) {
         Player player = controller.getCurrentRoom().getPlayerObject()
                 .getPlayer();
-        BufferedImage currentGold = theme.getGoldImage();
+        BufferedImage goldImage = theme.getGoldImage();
 
-        gfx.drawImage(currentGold, controller.getView().getWidth() - 140, 10,
+        gfx.drawImage(goldImage, controller.getView().getWidth() - 190, 10,
                 this);
         gfx.setPaint(Color.white);
         gfx.setFont(font);
         gfx.drawString("x" + String.valueOf(player.getMoney()), controller
-                .getView().getWidth() - 100, 35);
+                .getView().getWidth() - 150, 35);
 
     }
 
-    private void drawUsedWeapon(Graphics2D gfx) {
+    private void drawCurrentWeapon(Graphics2D gfx) {
         Player player = controller.getCurrentRoom().getPlayerObject()
                 .getPlayer();
-        BufferedImage currentUsedWeapon;
+        BufferedImage currentWeapon;
         Weapon playerWeapon = player.getWeapon();
         if (playerWeapon instanceof Sword) {
-            currentUsedWeapon = theme.getSwordImage();
+            currentWeapon = theme.getSwordImage();
         } else {
-            currentUsedWeapon = theme.getClubImage();
+            currentWeapon = theme.getClubImage();
         }
-        gfx.drawImage(currentUsedWeapon, controller.getView().getWidth() - 30,
-                6, this);
+        gfx.drawImage(currentWeapon, controller.getView().getWidth() - 30, 6,
+                this);
     }
 
     private void drawLevelAndRoomName(Graphics2D gfx) {
