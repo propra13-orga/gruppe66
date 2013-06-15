@@ -197,4 +197,14 @@ public class Room extends Model {
     public void removeMagics(MoveableGameObject magic) {
         magics.remove(magic);
     }
+
+    public List<GameObject> getAnimatables() {
+        List<GameObject> animatables = new ArrayList<>();
+        animatables.add(playerObject);
+        animatables.addAll(items);
+        animatables.addAll(balls);
+        animatables.addAll(enemies);
+        animatables.addAll(magics);
+        return animatables;
+    }
 }

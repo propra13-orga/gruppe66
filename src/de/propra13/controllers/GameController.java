@@ -28,11 +28,8 @@ import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
 import de.propra13.views.HUDView;
-import de.propra13.views.objects.EnemyObject;
 import de.propra13.views.objects.GameObject;
-import de.propra13.views.objects.ItemObject;
 import de.propra13.views.objects.MoveableGameObject;
-import de.propra13.views.objects.SkullObject;
 
 public class GameController extends Controller implements KeyListener,
         ComponentListener, MouseListener, Runnable {
@@ -305,38 +302,8 @@ public class GameController extends Controller implements KeyListener,
     }
 
     public void animate() {
-        animatePlayer();
-        animateItems();
-        animateBalls();
-        animateEnemies();
-        animateMagics();
-    }
-
-    private void animatePlayer() {
-        getCurrentRoom().getPlayerObject().animate();
-    }
-
-    private void animateItems() {
-        for (ItemObject item : getCurrentRoom().getItems()) {
-            item.animate();
-        }
-    }
-
-    private void animateBalls() {
-        for (SkullObject item : getCurrentRoom().getBalls()) {
-            item.animate();
-        }
-    }
-
-    private void animateEnemies() {
-        for (EnemyObject enemy : getCurrentRoom().getEnemies()) {
-            enemy.animate();
-        }
-    }
-
-    private void animateMagics() {
-        for (MoveableGameObject magic : getCurrentRoom().getMagics()) {
-            magic.animate();
+        for (GameObject object : getCurrentRoom().getAnimatables()) {
+            object.animate();
         }
     }
 
