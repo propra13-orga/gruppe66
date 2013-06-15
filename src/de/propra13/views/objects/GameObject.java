@@ -107,8 +107,17 @@ public class GameObject {
             animationManager.setCurrentAnimation(animation);
     }
 
+    public Animation getDefaultAnimation() {
+        return animationManager.getDefaultAnimation();
+    }
+
     public void draw(Graphics2D gfx, ImageObserver ob) {
-        gfx.drawImage(getImage(), (int) x, (int) y, ob);
+        BufferedImage image = getImage();
+        Animation defaultAnimation = getDefaultAnimation();
+        double dx = (defaultAnimation.getSpriteWidth() - image.getWidth()) / 2;
+        double dy = (defaultAnimation.getSpriteHeight() - image.getHeight()) / 2;
+        gfx.drawImage(getImage(), (int) Math.round(x + dx),
+                (int) Math.round(y + dy), ob);
         if (debug)
             drawDebug(gfx, ob);
     }
