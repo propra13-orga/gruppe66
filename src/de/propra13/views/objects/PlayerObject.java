@@ -154,16 +154,16 @@ public class PlayerObject extends BioAgressorObject {
     public void keyPressed(KeyEvent event) {
         super.keyPressed(event);
         switch (event.getKeyCode()) {
-        case KeyEvent.VK_UP:
+        case KeyEvent.VK_W:
             direction.setVy(-1);
             break;
-        case KeyEvent.VK_RIGHT:
+        case KeyEvent.VK_D:
             direction.setVx(1);
             break;
-        case KeyEvent.VK_DOWN:
+        case KeyEvent.VK_S:
             direction.setVy(1);
             break;
-        case KeyEvent.VK_LEFT:
+        case KeyEvent.VK_A:
             direction.setVx(-1);
             break;
         }
@@ -174,19 +174,19 @@ public class PlayerObject extends BioAgressorObject {
     public void keyReleased(KeyEvent event) {
         super.keyReleased(event);
         switch (event.getKeyCode()) {
-        case KeyEvent.VK_UP:
+        case KeyEvent.VK_W:
             if (direction.getVy() == -1)
                 direction.setVy(0);
             break;
-        case KeyEvent.VK_DOWN:
+        case KeyEvent.VK_S:
             if (direction.getVy() == 1)
                 direction.setVy(0);
             break;
-        case KeyEvent.VK_RIGHT:
+        case KeyEvent.VK_D:
             if (direction.getVx() == 1)
                 direction.setVx(0);
             break;
-        case KeyEvent.VK_LEFT:
+        case KeyEvent.VK_A:
             if (direction.getVx() == -1)
                 direction.setVx(0);
             break;
