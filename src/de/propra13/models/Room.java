@@ -11,6 +11,7 @@ import de.propra13.views.objects.GameObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.HerbObject;
 import de.propra13.views.objects.ItemObject;
+import de.propra13.views.objects.MaxObject;
 import de.propra13.views.objects.MoneyObject;
 import de.propra13.views.objects.MoveableGameObject;
 import de.propra13.views.objects.NpcObject;
@@ -88,7 +89,7 @@ public class Room extends Model {
                     items.add(new MoneyObject(new Money(100), x, y, theme));
                     break;
                 case 'T':
-                    npcs.add(new NpcObject(x, y, theme));
+                    npcs.add(new MaxObject(new Max(), x, y, theme));
                     break;
                 }
                 x++;

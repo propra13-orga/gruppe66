@@ -18,7 +18,6 @@ import de.propra13.controllers.GameController;
 import de.propra13.models.BioAgressor;
 import de.propra13.models.Club;
 import de.propra13.models.MagicFireball;
-import de.propra13.models.Npc;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
@@ -34,7 +33,6 @@ public class PlayerObject extends BioAgressorObject {
     private static final int SHADOW = 0x271b11;
 
     private Player player;
-    private Npc npc;
     private Theme theme;
 
     public PlayerObject(Player player, int x, int y, Theme theme) {
@@ -62,14 +60,6 @@ public class PlayerObject extends BioAgressorObject {
                 new Animation(DEFAULTANIMATIONTYPE, theme
                         .getPlayerMagicsBlunaSet(), 8, 7, SHADOW));
         setCurrentAnimationType(DEFAULTANIMATIONTYPE);
-    }
-
-    public void setNpc(Npc npc) {
-        this.npc = npc;
-    }
-
-    public Npc getNpc() {
-        return npc;
     }
 
     @Override
@@ -160,7 +150,9 @@ public class PlayerObject extends BioAgressorObject {
         this.player = player;
     }
 
+    @Override
     public void keyPressed(KeyEvent event) {
+        super.keyPressed(event);
         switch (event.getKeyCode()) {
         case KeyEvent.VK_UP:
             direction.setVy(-1);
@@ -174,16 +166,13 @@ public class PlayerObject extends BioAgressorObject {
         case KeyEvent.VK_LEFT:
             direction.setVx(-1);
             break;
-        case KeyEvent.VK_T:
-            if (npc != null) {
-                npc.setTalking(!npc.isTalking());
-            }
-            break;
         }
         velocity = 1;
     }
 
+    @Override
     public void keyReleased(KeyEvent event) {
+        super.keyReleased(event);
         switch (event.getKeyCode()) {
         case KeyEvent.VK_UP:
             if (direction.getVy() == -1)

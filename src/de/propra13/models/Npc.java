@@ -1,23 +1,32 @@
 package de.propra13.models;
 
-public class Npc {
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
-    private String currentMessage = "Hello";
-    private boolean talking = false;
+public class Npc extends Model {
 
-    public void setTalking(boolean talking) {
-        this.talking = talking;
+    public static List<String> parseDialogue(String fileName)
+            throws IOException {
+        List<String> chapters = new ArrayList<>();
+        Collections.addAll(chapters,
+                readStringFromFile("models/dialogues/" + fileName + ".kdg")
+                        .split("\\s+-\\s+"));
+        return chapters;
     }
 
-    public boolean isTalking() {
-        return talking;
+    private String message;
+
+    public String getMessage() {
+        return message;
     }
 
-    public String getCurrentMessage() {
-        return currentMessage;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public void setCurrentMessage(String currentMessage) {
-        this.currentMessage = currentMessage;
+    public boolean hasMessage() {
+        return message != null;
     }
 }

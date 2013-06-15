@@ -8,6 +8,7 @@ import java.awt.RadialGradientPaint;
 import java.awt.Rectangle;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
@@ -238,5 +239,11 @@ public class GameObject {
 
     public boolean glows() {
         return glowRadius > 0;
+    }
+
+    public void keyPressed(KeyEvent event) {
+    }
+
+    public void keyReleased(KeyEvent event) {
     }
 }

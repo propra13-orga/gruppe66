@@ -13,6 +13,7 @@ import de.propra13.Main;
 import de.propra13.assets.Theme;
 import de.propra13.controllers.GameController;
 import de.propra13.views.objects.GameObject;
+import de.propra13.views.objects.NpcObject;
 
 public class GameFieldView extends AbstractGameView {
 
@@ -64,6 +65,14 @@ public class GameFieldView extends AbstractGameView {
             drawGrid(gfx);
 
         drawLightMap(gfx);
+
+        drawText(gfx);
+    }
+
+    private void drawText(Graphics2D gfx) {
+        for (NpcObject object : controller.getCurrentRoom().getNpcs()) {
+            object.drawText(gfx, this);
+        }
     }
 
     private void drawGameObjects(List<? extends GameObject> objects,

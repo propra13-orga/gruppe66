@@ -228,7 +228,10 @@ public class GameController extends Controller implements KeyListener,
                     getCurrentRoom().getEnemies());
             break;
         default:
-            getCurrentRoom().getPlayerObject().keyPressed(event);
+            for (MoveableGameObject object : getCurrentRoom()
+                    .getMoveableGameObjects()) {
+                object.keyPressed(event);
+            }
         }
     }
 
@@ -238,9 +241,11 @@ public class GameController extends Controller implements KeyListener,
         case KeyEvent.VK_SPACE:
             break;
         default:
-            getCurrentRoom().getPlayerObject().keyReleased(event);
+            for (MoveableGameObject object : getCurrentRoom()
+                    .getMoveableGameObjects()) {
+                object.keyReleased(event);
+            }
         }
-
     }
 
     @Override

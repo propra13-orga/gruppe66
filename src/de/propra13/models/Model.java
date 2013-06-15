@@ -1,26 +1,21 @@
 package de.propra13.models;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
 import java.io.IOException;
+import java.nio.charset.Charset;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 
 public class Model {
 
     protected static String readStringFromFile(String fileName)
             throws IOException {
-        FileReader file = new FileReader("res/" + fileName);
-        BufferedReader reader = new BufferedReader(file);
-
-        String line = reader.readLine();
-
-        StringBuffer buffer = new StringBuffer();
-        while (line != null) {
-            buffer.append(line + "\n");
-            line = reader.readLine();
-        }
-        reader.close();
-
-        return buffer.toString();
+        return new String(Files.readAllBytes(Paths.get("res/" + fileName)));
     }
 
+    protected static List<String> readLinesFromFile(String fileName)
+            throws IOException {
+        return Files.readAllLines(Paths.get("res/" + fileName),
+                Charset.defaultCharset());
+    }
 }

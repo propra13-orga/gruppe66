@@ -1,68 +1,93 @@
 package de.propra13.views.objects;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
-import java.awt.image.ImageObserver;
+import java.awt.geom.Rectangle2D;
 
-import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
-import de.propra13.assets.animations.AnimationManager;
 import de.propra13.models.Npc;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
 
-public class NpcObject extends MoveableGameObject {
+public abstract class NpcObject extends MoveableGameObject {
 
-    private static final int SHADOW = 0x2b1f15;
-    private Npc npc;
-
-    public NpcObject(int x, int y, Theme theme) {
-        super(new Animation(theme.getSalesmanImage(), 8, 1, SHADOW), x, y);
-        addAnimation("crouches", new Animation(
-                theme.getSalesmanCrouchesImage(), 8, 9, SHADOW));
-        addAnimation("talks", new Animation(theme.getSalesmanTalksImage(), 8,
-                9, SHADOW));
-        npc = new Npc();
-        setGlowRadius(100);
-        direction = new Direction(0, 0);
+    public NpcObject(Animation animation, int x, int y) {
+        super(animation, x, y);
     }
 
     @Override
-    public void act(Dimension gameFieldSize, Room room) {
+    public final void act(Dimension gameFieldSize, Room room) {
         super.act(gameFieldSize, room);
-        if (Math.random() > 0.999 && !isCloseToPlayersIn(room)) {
-            triggerAnimation("crouches");
-        } else if (canAct()) {
-            greetPlayersIn(room);
+        if (isCloseToPlayersIn(room) && canAct()) {
+            isNearPlayers(room);
+        } else {
+            idle();
+            if (Math.random() > 0.999) {
+                randomIdle();
+            }
         }
     }
 
-    private boolean isCloseToPlayersIn(Room room) {
+    public abstract void idle();
+
+    public abstract void randomIdle();
+
+    public abstract void isNearPlayers(Room room);
+
+    public abstract Npc getNpc();
+
+    public boolean isCloseToPlayersIn(Room room) {
         return isCloseTo(room.getPlayerObject(), GameFieldView.GRID * 3);
     }
 
-    private void greetPlayersIn(Room room) {
-        if (isCloseToPlayersIn(room)) {
-            lookAt(room.getPlayerObject());
-            setCurrentAnimation("talks");
-            if (room.getPlayerObject().getNpc() == null) {
-                room.getPlayerObject().setNpc(npc);
+    public void drawText(Graphics2D gfx, GameFieldView view) {
+        if (getNpc().hasMessage()) {
+            String[] lines = getNpc().getMessage().split("\\r?\\n");
+            Rectangle2D.Double union = new Rectangle2D.Double();
+
+            for (int i = 0; i < lines.length; i++) {
+                Rectangle2D bounds = gfx.getFontMetrics().getStringBounds(
+                        lines[i], gfx);
+                Rectangle2D.Double translatedBounds = new Rectangle2D.Double(
+                        bounds.getX(), bounds.getY() + bounds.getHeight() * i,
+                        bounds.getWidth(), bounds.getHeight());
+                Rectangle2D.union(union, translatedBounds, union);
             }
-        } else if (room.getPlayerObject().getNpc() == npc) {
-            setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
-            npc.setTalking(false);
-            room.getPlayerObject().setNpc(null);
-        }
-    }
 
-    @Override
-    public void draw(Graphics2D gfx, ImageObserver ob) {
-        super.draw(gfx, ob);
+            double tx = getCenter().x - union.getWidth() / 2;
+            double ty = y - union.getHeight() - 10;
 
-        if (npc.isTalking()) {
-            gfx.setPaint(Color.red);
-            gfx.drawString(npc.getCurrentMessage(), (int) x, (int) y);
+            if (tx + union.getWidth() > view.getWidth()) {
+                tx -= (tx + union.getWidth()) - view.getWidth();
+            } else if (tx < 0) {
+                tx = 0;
+            }
+
+            if (ty + union.getHeight() > view.getHeight()) {
+                ty -= (ty + union.getHeight()) - view.getHeight();
+            } else if (ty < 0) {
+                ty = 0;
+            }
+
+            gfx.setPaint(new Color(255, 243, 215));
+            gfx.setStroke(new BasicStroke(2));
+            gfx.fillRoundRect((int) tx - 10, (int) ty - 25,
+                    (int) union.getWidth() + 20, (int) union.getHeight() + 20,
+                    (int) 25, (int) 25);
+
+            gfx.fillPolygon(new int[] { (int) getCenter().x - 20,
+                    (int) getCenter().x + 5, (int) getCenter().x },
+                    new int[] { (int) (ty + union.getHeight()) + 20 - 27,
+                            (int) (ty + union.getHeight()) + 20 - 27,
+                            (int) (ty + union.getHeight()) + 40 - 27 }, 3);
+
+            gfx.setPaint(new Color(69, 63, 57));
+            for (int i = 0; i < lines.length; i++) {
+                gfx.drawString(lines[i], (int) tx, (int) (-22 + ty + gfx
+                        .getFontMetrics().getHeight() * (i + 1)));
+            }
         }
     }
 }
