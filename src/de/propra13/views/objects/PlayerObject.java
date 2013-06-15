@@ -44,7 +44,7 @@ public class PlayerObject extends BioAgressorObject {
         direction = new Direction(0, 0);
 
         addAnimation(
-                "walking",
+                "walks",
                 new Animation(DEFAULTANIMATIONTYPE, theme
                         .getPlayerWalksBlunaSet(), 8, 9, SHADOW));
         addAnimation(
@@ -80,7 +80,7 @@ public class PlayerObject extends BioAgressorObject {
         }
 
         if (isMoving())
-            setCurrentAnimation("walking");
+            setCurrentAnimation("walks");
         else
             setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
     }
