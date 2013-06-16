@@ -102,7 +102,7 @@ public abstract class MoveableGameObject extends GameObject {
     @Override
     public void animate() {
         if (isMoving())
-            setAnimationDirection(new Direction(direction));
+            setAnimationDirection(direction.getAnimationDirection());
         super.animate();
     }
 

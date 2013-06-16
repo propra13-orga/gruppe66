@@ -152,7 +152,7 @@ public class GameObject {
     }
 
     public void lookAt(GameObject object) {
-        setAnimationDirection(directionTo(object));
+        setAnimationDirection(directionTo(object).getAnimationDirection());
     }
 
     public void dimGlowing(final int factor, int delay) {
