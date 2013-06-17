@@ -34,6 +34,8 @@ public class DragonObject extends EnemyObject {
                 SHADOW));
         addAnimation("attacks", new Animation(theme.getDragonAttacksBluna(), 8,
                 9, SHADOW));
+        addAnimation("takes_hit", new Animation(theme.getDragonTakesHitBluna(),
+                8, 7, SHADOW));
     }
 
     @Override
@@ -77,8 +79,17 @@ public class DragonObject extends EnemyObject {
     }
 
     @Override
-    public void takeHit(double damage) {
-        dragon.sufferDamage(damage);
+    public void takeHit(final double damage) {
+        triggerAnimation("takes_hit", new AnimationStateListener() {
+            @Override
+            public void willStart() {
+            }
+
+            @Override
+            public void didEnd() {
+                dragon.sufferDamage(damage);
+            }
+        });
     }
 
     public void attack(final BioAgressorObject bioAgressor) {

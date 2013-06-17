@@ -52,6 +52,10 @@ public class PlayerObject extends BioAgressorObject {
                 new Animation(DEFAULTANIMATIONTYPE, theme
                         .getPlayerAttacksBlunaSet(), 8, 13, SHADOW));
         addAnimation(
+                "takes_hit",
+                new Animation(DEFAULTANIMATIONTYPE, theme
+                        .getPlayerTakesHitBlunaSet(), 8, 7, SHADOW));
+        addAnimation(
                 "dies",
                 new Animation(DEFAULTANIMATIONTYPE, theme
                         .getPlayerDiesBlunaSet(), 8, 9, SHADOW));
@@ -203,8 +207,11 @@ public class PlayerObject extends BioAgressorObject {
     }
 
     @Override
-    public void takeHit(double damage) {
+    public void takeHit(final double damage) {
         player.sufferDamage(damage);
+        if (!player.isDead()) {
+            triggerAnimation("takes_hit");
+        }
     }
 
     public void attackAll(ArrayList<EnemyObject> enemies) {

@@ -20,6 +20,7 @@ public class Theme {
     private BufferedImage playerImage;
     private BufferedImage playerWalksImage;
     private BufferedImage playerAttacksImage;
+    private BufferedImage playerTakesHitImage;
     private BufferedImage playerDiesImage;
     private BufferedImage playerMagicsImage;
     private BufferedImage magicFireballImage;
@@ -27,6 +28,7 @@ public class Theme {
     private BufferedImage swordPlayerImage;
     private BufferedImage swordPlayerWalksImage;
     private BufferedImage swordPlayerAttacksImage;
+    private BufferedImage swordPlayerTakesHitImage;
     private BufferedImage swordPlayerDiesImage;
     private BufferedImage swordPlayerMagicsImage;
     private BufferedImage fireballImage;
@@ -43,6 +45,7 @@ public class Theme {
     private BufferedImage dragonDiesImage;
     private BufferedImage dragonDeadImage;
     private BufferedImage dragonAttacksImage;
+    private BufferedImage dragonTakesHitImage;
     private BufferedImage salesmanImage;
     private BufferedImage salesmanCrouchesImage;
     private BufferedImage salesmanTalksImage;
@@ -60,12 +63,14 @@ public class Theme {
             playerImage = initBluna("bluna/player.png");
             playerWalksImage = initBluna("bluna/player_walks.png");
             playerAttacksImage = initBluna("bluna/player_attacks.png");
+            playerTakesHitImage = initBluna("bluna/player_takes_hit.png");
             playerDiesImage = initBluna("bluna/player_dies.png");
             playerMagicsImage = initBluna("bluna/player_magics.png");
             magicFireballImage = initBluna("bluna/magic_fireball.png");
             magicFireballExplosionImage = initBluna("bluna/firemagic_explodes.png");
             swordPlayerImage = initBluna("bluna/sword_player.png");
             swordPlayerAttacksImage = initBluna("bluna/sword_player_attacks.png");
+            swordPlayerTakesHitImage = initBluna("bluna/sword_player_takes_hit.png");
             swordPlayerWalksImage = initBluna("bluna/sword_player_walks.png");
             swordPlayerDiesImage = initBluna("bluna/sword_player_dies.png");
             swordPlayerMagicsImage = initBluna("bluna/sword_player_magics.png");
@@ -83,6 +88,7 @@ public class Theme {
             dragonDiesImage = initBluna("bluna/dragon_dies.png");
             dragonDeadImage = initBluna("bluna/dragon_dead.png");
             dragonAttacksImage = initBluna("bluna/dragon_attacks.png");
+            dragonTakesHitImage = initBluna("bluna/dragon_takes_hit.png");
             salesmanImage = initBluna("bluna/salesman.png");
             salesmanCrouchesImage = initBluna("bluna/salesman_crouches.png");
             salesmanTalksImage = initBluna("bluna/salesman_talks.png");
@@ -200,6 +206,10 @@ public class Theme {
         return dragonAttacksImage;
     }
 
+    public BufferedImage getDragonTakesHitBluna() {
+        return dragonTakesHitImage;
+    }
+
     public BufferedImage getSwordPlayerImage() {
         return swordPlayerImage;
     }
@@ -234,6 +244,13 @@ public class Theme {
         HashMap<String, BufferedImage> set = new HashMap<>();
         set.put(Club.class.getSimpleName(), playerAttacksImage);
         set.put(Sword.class.getSimpleName(), swordPlayerAttacksImage);
+        return set;
+    }
+
+    public HashMap<String, BufferedImage> getPlayerTakesHitBlunaSet() {
+        HashMap<String, BufferedImage> set = new HashMap<>();
+        set.put(Club.class.getSimpleName(), playerTakesHitImage);
+        set.put(Sword.class.getSimpleName(), swordPlayerTakesHitImage);
         return set;
     }
 
