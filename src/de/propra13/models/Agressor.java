@@ -23,4 +23,8 @@ public abstract class Agressor {
         t.setRepeats(false);
         t.start();
     }
+
+    public boolean isReloading() {
+        return reloads;
+    }
 }

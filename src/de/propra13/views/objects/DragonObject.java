@@ -8,6 +8,7 @@ import de.propra13.assets.animations.AnimationManager;
 import de.propra13.assets.animations.AnimationStateListener;
 import de.propra13.models.BioAgressor;
 import de.propra13.models.Dragon;
+import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
 
@@ -32,6 +33,8 @@ public class DragonObject extends EnemyObject {
                 SHADOW));
         addAnimation("dead", new Animation(theme.getDragonDeadBluna(), 8, 1,
                 SHADOW));
+        addAnimation("attacks", new Animation(theme.getDragonAttacksBluna(), 8,
+                9, SHADOW));
     }
 
     @Override
@@ -56,14 +59,31 @@ public class DragonObject extends EnemyObject {
             return;
         }
 
-        direction = directionTo(room.getPlayerObject());
-        if (direction.length() > GameFieldView.GRID * 2) {
-            velocity = 1;
-            setCurrentAnimation("walking");
-        } else {
-            velocity = 0;
-            dragon.inflictDamageOn(room.getPlayerObject().getPlayer());
-            setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
+        if (canAct()) {
+            direction = directionTo(room.getPlayerObject());
+            if (direction.length() > GameFieldView.GRID * 2) {
+                velocity = .75;
+                setCurrentAnimation("walking");
+            } else {
+                setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
+                velocity = 0;
+                attack(room.getPlayerObject().getPlayer());
+            }
+        }
+    }
+
+    private void attack(final Player player) {
+        if (!dragon.isReloading()) {
+            triggerAnimation("attacks", new AnimationStateListener() {
+                @Override
+                public void willStart() {
+                }
+
+                @Override
+                public void didEnd() {
+                    dragon.inflictDamageOn(player);
+                }
+            });
         }
     }
 

@@ -42,6 +42,7 @@ public class Theme {
     private BufferedImage dragonWalksImage;
     private BufferedImage dragonDiesImage;
     private BufferedImage dragonDeadImage;
+    private BufferedImage dragonAttacksImage;
     private BufferedImage salesmanImage;
     private BufferedImage salesmanCrouchesImage;
     private BufferedImage salesmanTalksImage;
@@ -81,6 +82,7 @@ public class Theme {
             dragonWalksImage = initBluna("bluna/dragon_walks.png");
             dragonDiesImage = initBluna("bluna/dragon_dies.png");
             dragonDeadImage = initBluna("bluna/dragon_dead.png");
+            dragonAttacksImage = initBluna("bluna/dragon_attacks.png");
             salesmanImage = initBluna("bluna/salesman.png");
             salesmanCrouchesImage = initBluna("bluna/salesman_crouches.png");
             salesmanTalksImage = initBluna("bluna/salesman_talks.png");
@@ -192,6 +194,10 @@ public class Theme {
 
     public BufferedImage getDragonDeadBluna() {
         return dragonDeadImage;
+    }
+
+    public BufferedImage getDragonAttacksBluna() {
+        return dragonAttacksImage;
     }
 
     public BufferedImage getSwordPlayerImage() {
