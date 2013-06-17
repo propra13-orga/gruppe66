@@ -47,11 +47,7 @@ public class Player extends BioAgressor implements ActionListener {
     }
 
     @Override
-    public void inflictDamageOn(BioAgressor opponent) {
-        opponent.sufferDamage(getDamage());
-    }
-
-    private double getDamage() {
+    public double getDamage() {
         return weapon.getDamage();
     }
 

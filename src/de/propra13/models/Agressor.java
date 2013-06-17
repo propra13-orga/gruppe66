@@ -10,9 +10,7 @@ public abstract class Agressor {
     protected int reloadTime = 1;
     protected boolean reloads = false;
 
-    public abstract void inflictDamageOn(BioAgressor opponent);
-
-    protected void reload() {
+    public void reload() {
         reloads = true;
         Timer t = new Timer(reloadTime * 1000, new ActionListener() {
             @Override
@@ -27,4 +25,6 @@ public abstract class Agressor {
     public boolean isReloading() {
         return reloads;
     }
+
+    public abstract double getDamage();
 }

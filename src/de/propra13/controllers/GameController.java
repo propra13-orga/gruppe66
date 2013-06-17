@@ -224,7 +224,7 @@ public class GameController extends Controller implements KeyListener,
             player.addHealth(10);
             break;
         case KeyEvent.VK_SPACE:
-            getCurrentRoom().getPlayerObject().inflictDamageOn(
+            getCurrentRoom().getPlayerObject().attackAll(
                     getCurrentRoom().getEnemies());
             break;
         default:

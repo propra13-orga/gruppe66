@@ -15,10 +15,7 @@ public class Dragon extends BioAgressor {
     }
 
     @Override
-    public void inflictDamageOn(BioAgressor opponent) {
-        if (!reloads) {
-            opponent.sufferDamage(damage);
-            reload();
-        }
+    public double getDamage() {
+        return damage;
     }
 }

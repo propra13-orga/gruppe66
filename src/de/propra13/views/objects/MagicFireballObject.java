@@ -9,7 +9,7 @@ import de.propra13.assets.animations.AnimationStateListener;
 import de.propra13.models.MagicFireball;
 import de.propra13.models.Room;
 
-public class MagicFireballObject extends MoveableGameObject {
+public class MagicFireballObject extends AgressorObject {
 
     private MagicFireball magicFireball;
 
@@ -33,7 +33,7 @@ public class MagicFireballObject extends MoveableGameObject {
         if (magicFireball.isAlive()) {
             for (EnemyObject enemyObject : room.getEnemies()) {
                 if (enemyObject.getBounds().contains(getBounds())) {
-                    magicFireball.inflictDamageOn(enemyObject.getAgressor());
+                    attack(enemyObject);
 
                     triggerAnimation("explodes", new AnimationStateListener() {
 
@@ -79,6 +79,13 @@ public class MagicFireballObject extends MoveableGameObject {
         super.collidedBottom(oldy);
 
         direction.bounceY();
+    }
+
+    public void attack(BioAgressorObject bioAgressor) {
+        if (!magicFireball.isReloading()) {
+            bioAgressor.takeHit(magicFireball.getDamage());
+            magicFireball.reload();
+        }
     }
 
 }

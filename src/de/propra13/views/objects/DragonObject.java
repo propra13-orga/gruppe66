@@ -8,7 +8,6 @@ import de.propra13.assets.animations.AnimationManager;
 import de.propra13.assets.animations.AnimationStateListener;
 import de.propra13.models.BioAgressor;
 import de.propra13.models.Dragon;
-import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
 
@@ -41,7 +40,7 @@ public class DragonObject extends EnemyObject {
     public void act(Dimension gameFieldSize, final Room room) {
         super.act(gameFieldSize, room);
 
-        if (getAgressor().isDead()) {
+        if (getBioAgressor().isDead()) {
             triggerAnimation("dies", new AnimationStateListener() {
 
                 @Override
@@ -67,12 +66,22 @@ public class DragonObject extends EnemyObject {
             } else {
                 setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
                 velocity = 0;
-                attack(room.getPlayerObject().getPlayer());
+                attack(room.getPlayerObject());
             }
         }
     }
 
-    private void attack(final Player player) {
+    @Override
+    protected BioAgressor getBioAgressor() {
+        return dragon;
+    }
+
+    @Override
+    public void takeHit(double damage) {
+        dragon.sufferDamage(damage);
+    }
+
+    public void attack(final BioAgressorObject bioAgressor) {
         if (!dragon.isReloading()) {
             triggerAnimation("attacks", new AnimationStateListener() {
                 @Override
@@ -81,15 +90,11 @@ public class DragonObject extends EnemyObject {
 
                 @Override
                 public void didEnd() {
-                    dragon.inflictDamageOn(player);
+                    bioAgressor.takeHit(dragon.getDamage());
+                    dragon.reload();
                 }
             });
         }
-    }
-
-    @Override
-    protected BioAgressor getAgressor() {
-        return dragon;
     }
 
 }

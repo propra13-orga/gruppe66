@@ -7,7 +7,7 @@ import de.propra13.assets.animations.Animation;
 import de.propra13.models.Room;
 import de.propra13.models.Skull;
 
-public class SkullObject extends MoveableGameObject {
+public class SkullObject extends AgressorObject {
 
     private Skull skull;
 
@@ -32,7 +32,7 @@ public class SkullObject extends MoveableGameObject {
         }
 
         if (room.getPlayerObject().getBounds().contains(getBounds()))
-            skull.inflictDamageOn(room.getPlayerObject().getPlayer());
+            attack(room.getPlayerObject());
     }
 
     @Override
@@ -61,5 +61,12 @@ public class SkullObject extends MoveableGameObject {
         super.collidedBottom(oldy);
 
         direction.bounceY();
+    }
+
+    public void attack(BioAgressorObject bioAgressor) {
+        if (!skull.isReloading()) {
+            bioAgressor.takeHit(skull.getDamage());
+            skull.reload();
+        }
     }
 }

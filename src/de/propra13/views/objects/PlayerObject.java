@@ -97,8 +97,8 @@ public class PlayerObject extends BioAgressorObject {
     }
 
     private void drawArmorBar(Graphics2D gfx) {
-        double armor = ((Player) getAgressor()).getArmor();
-        int width = (int) (getWidth() * (armor / getAgressor().MAXHEALTH));
+        double armor = player.getArmor();
+        int width = (int) (getWidth() * (armor / Player.MAXARMOR));
 
         if (armor < Player.MAXARMOR)
             drawBar(gfx, 2, width, Color.cyan);
@@ -198,19 +198,28 @@ public class PlayerObject extends BioAgressorObject {
     }
 
     @Override
-    protected BioAgressor getAgressor() {
+    protected BioAgressor getBioAgressor() {
         return player;
     }
 
-    public void inflictDamageOn(ArrayList<EnemyObject> enemies) {
+    @Override
+    public void takeHit(double damage) {
+        player.sufferDamage(damage);
+    }
+
+    public void attackAll(ArrayList<EnemyObject> enemies) {
         if (canAct()) {
             triggerAnimation("attacks");
 
             for (EnemyObject enemy : enemies) {
                 if (enemy.getCenter().distance(getCenter()) <= 1.5 * GameFieldView.GRID)
-                    player.inflictDamageOn(enemy.getAgressor());
+                    attack(enemy);
             }
         }
+    }
+
+    public void attack(BioAgressorObject bioAgressor) {
+        bioAgressor.takeHit(player.getDamage());
     }
 
     public void triggerDeath(AnimationStateListener listener) {

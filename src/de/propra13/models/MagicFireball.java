@@ -20,20 +20,17 @@ public class MagicFireball extends Agressor {
         this(DEFAULTPOWER);
     }
 
-    @Override
-    public void inflictDamageOn(BioAgressor enemy) {
-        if (!reloads) {
-            enemy.sufferDamage(power);
-            reload();
-        }
-    }
-
     public boolean isAlive() {
         return System.currentTimeMillis() - birthTime < lifeSpan * 1000;
     }
 
     public static double getManaCost() {
         return manaCost;
+    }
+
+    @Override
+    public double getDamage() {
+        return power;
     }
 
 }

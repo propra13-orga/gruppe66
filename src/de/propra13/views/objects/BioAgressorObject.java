@@ -7,7 +7,7 @@ import java.awt.image.ImageObserver;
 import de.propra13.assets.animations.Animation;
 import de.propra13.models.BioAgressor;
 
-public abstract class BioAgressorObject extends MoveableGameObject {
+public abstract class BioAgressorObject extends AgressorObject {
 
     public BioAgressorObject(Animation defaultAnimation, int x, int y) {
         super(defaultAnimation, x, y);
@@ -16,21 +16,23 @@ public abstract class BioAgressorObject extends MoveableGameObject {
         setGlowRadius(100);
     }
 
+    protected abstract BioAgressor getBioAgressor();
+
+    public abstract void takeHit(double damage);
+
     @Override
     public void draw(Graphics2D gfx, ImageObserver ob) {
         super.draw(gfx, ob);
-        if (getAgressor().isWounded() && !getAgressor().isDead())
+        if (getBioAgressor().isWounded() && !getBioAgressor().isDead())
             drawAgressorHealthBar(gfx);
 
     }
 
-    protected abstract BioAgressor getAgressor();
-
     private void drawAgressorHealthBar(Graphics2D gfx) {
-        double health = getAgressor().getHealth();
-        int width = (int) (getWidth() * (health / getAgressor().MAXHEALTH));
+        double health = getBioAgressor().getHealth();
+        int width = (int) (getWidth() * (health / getBioAgressor().MAXHEALTH));
 
-        drawBar(gfx, 1, width, healthColor(health, getAgressor().MAXHEALTH));
+        drawBar(gfx, 1, width, healthColor(health, getBioAgressor().MAXHEALTH));
     }
 
     protected void drawBar(Graphics2D gfx, int level, int width, Color color) {
