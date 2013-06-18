@@ -1,5 +1,6 @@
 package de.propra13.assets;
 
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -46,12 +47,9 @@ public class Theme {
             goldImage = readImage("money.png");
             floorImage = readImage("floor.jpg");
 
-            goalBluna = BlunaCrateFactory
-                    .getSimpleBlunaCrate(readImage("goal.jpg"));
-            startBluna = BlunaCrateFactory
-                    .getSimpleBlunaCrate(readImage("start.jpg"));
-            wallBluna = BlunaCrateFactory
-                    .getSimpleBlunaCrate(readImage("wall1.jpg"));
+            goalBluna = getSimpleBlunaCrate(readImage("goal.jpg"));
+            startBluna = getSimpleBlunaCrate(readImage("start.jpg"));
+            wallBluna = getSimpleBlunaCrate(readImage("wall1.jpg"));
 
             initPlayerBlunas();
             initDragonBlunas();
@@ -136,12 +134,12 @@ public class Theme {
     }
 
     private void initFlyingObjectBlunas() throws IOException {
-        magicFireballBluna = BlunaCrateFactory.getBlunaCrate(
+        magicFireballBluna = getBlunaCrate(
                 readImage("bluna/magic_fireball.png"), 1, 16, 0);
-        magicFireballExplosionBluna = BlunaCrateFactory.getBlunaCrate(
+        magicFireballExplosionBluna = getBlunaCrate(
                 readImage("bluna/firemagic_explodes.png"), 1, 20, 0);
-        skullBluna = BlunaCrateFactory.getBlunaCrate(
-                readImage("bluna/skull.png"), 8, 10, 0x1f160d);
+        skullBluna = getBlunaCrate(readImage("bluna/skull.png"), 8, 10,
+                0x1f160d);
     }
 
     public BlunaCrate getSkullBluna() {
@@ -157,15 +155,13 @@ public class Theme {
     }
 
     private void initItemBlunas() throws IOException {
-        swordBluna = BlunaCrateFactory
-                .getSimpleBlunaCrate(readImage("sword.png"));
-        clubBluna = BlunaCrateFactory
-                .getSimpleBlunaCrate(readImage("club.png"));
+        swordBluna = getSimpleBlunaCrate(readImage("sword.png"));
+        clubBluna = getSimpleBlunaCrate(readImage("club.png"));
 
-        herbBluna = BlunaCrateFactory.getBlunaCrate(
-                readImage("bluna/herbitem.png"), 1, 8, 0x1f160d);
-        onehundretBluna = BlunaCrateFactory.getBlunaCrate(
-                readImage("bluna/onehundret.png"), 1, 8, 0x1f160d);
+        herbBluna = getBlunaCrate(readImage("bluna/herbitem.png"), 1, 8,
+                0x1f160d);
+        onehundretBluna = getBlunaCrate(readImage("bluna/onehundret.png"), 1,
+                8, 0x1f160d);
     }
 
     public BlunaCrate getHerbBluna() {
@@ -198,8 +194,7 @@ public class Theme {
                         + animation + ".png";
                 BufferedImage image = readImage(fileName.toLowerCase());
                 int frames = image.getWidth() / spriteWidth;
-                set.put(type, BlunaCrateFactory.getBlunaCrate(image, 8, frames,
-                        shadow));
+                set.put(type, getBlunaCrate(image, 8, frames, shadow));
 
                 blunas.put(animation, set);
             }
@@ -219,4 +214,29 @@ public class Theme {
         return bluna;
     }
 
+    private static BlunaCrate getSimpleBlunaCrate(BufferedImage image) {
+        return getBlunaCrate(image, 1, 1, 0);
+    }
+
+    private static BlunaCrate getBlunaCrate(BufferedImage image,
+            int directions, int frames, int shadowRGB) {
+        return getBlunaCrate(image, directions, frames, shadowRGB, null);
+    }
+
+    private static BlunaCrate getBlunaCrate(BufferedImage image,
+            int directions, int frames, int shadowRGB, Rectangle bounds) {
+        return createBlunaCrate(image, directions, frames, shadowRGB, bounds);
+
+    }
+
+    private static BlunaCrate createBlunaCrate(BufferedImage image,
+            int directions, int frames, int shadowRGB, Rectangle bounds) {
+        BlunaCrate blunaCrate = new BlunaCrate(image, directions, frames);
+        if (bounds == null)
+            blunaCrate.calculateBounds(shadowRGB);
+        else
+            blunaCrate.setBounds(bounds);
+
+        return blunaCrate;
+    }
 }
