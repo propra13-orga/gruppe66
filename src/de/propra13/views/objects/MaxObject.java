@@ -11,18 +11,19 @@ import de.propra13.models.Room;
 
 public class MaxObject extends NpcObject {
 
-    private static final int SHADOW = 0x2b1f15;
-
     private Max max;
 
     public MaxObject(Max max, int x, int y, Theme theme) {
-        super(new Animation(theme.getSalesmanImage(), 8, 1, SHADOW), x, y);
+        super(new Animation(theme.getMaxBlunas().get("stands").get("default")),
+                x, y);
 
         this.max = max;
-        addAnimation("crouches", new Animation(
-                theme.getSalesmanCrouchesImage(), 8, 9, SHADOW));
-        addAnimation("talks", new Animation(theme.getSalesmanTalksImage(), 8,
-                9, SHADOW));
+        addAnimation(
+                "crouches",
+                new Animation(theme.getMaxBlunas().get("crouches")
+                        .get("default")));
+        addAnimation("talks", new Animation(theme.getMaxBlunas().get("talks")
+                .get("default")));
 
         setGlowRadius(100);
         direction = new Direction(0, 0);

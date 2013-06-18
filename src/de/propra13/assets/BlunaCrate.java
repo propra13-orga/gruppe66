@@ -11,12 +11,18 @@ public class BlunaCrate {
     private BufferedImage[] blunas;
     private int frames;
     private Rectangle bounds;
+    private boolean directable;
 
     BlunaCrate(BufferedImage image, int directions, int frames) {
         blunas = readBlunas(image, directions, frames);
         spriteWidth = image.getWidth() / frames;
         spriteHeight = image.getHeight() / directions;
         this.frames = frames;
+        directable = checkDirectable(directions);
+    }
+
+    private static boolean checkDirectable(int directions) {
+        return directions == 8;
     }
 
     public int getSpriteHeight() {
@@ -107,6 +113,10 @@ public class BlunaCrate {
 
     public Rectangle getBounds() {
         return bounds;
+    }
+
+    public boolean isDirectable() {
+        return directable;
     }
 
 }

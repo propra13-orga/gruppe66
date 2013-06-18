@@ -12,9 +12,11 @@ import java.awt.event.KeyEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
+import java.util.HashMap;
 
 import javax.swing.Timer;
 
+import de.propra13.assets.BlunaCrate;
 import de.propra13.assets.animations.Animation;
 import de.propra13.assets.animations.AnimationManager;
 import de.propra13.assets.animations.AnimationStateListener;
@@ -92,6 +94,14 @@ public class GameObject {
     public void setCurrentAnimationType(String typ) {
         if (canAct)
             animationManager.setCurrentAnimationType(typ);
+    }
+
+    public void addAnimations(String defaultAnimationType,
+            HashMap<String, HashMap<String, BlunaCrate>> animations) {
+        for (String animationKey : animations.keySet()) {
+            addAnimation(animationKey, new Animation(defaultAnimationType,
+                    animations.get(animationKey)));
+        }
     }
 
     public void addAnimation(String key, Animation animation) {

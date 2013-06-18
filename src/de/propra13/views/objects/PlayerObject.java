@@ -30,39 +30,17 @@ public class PlayerObject extends BioAgressorObject {
     private boolean leftSpawnPoint = false;
     private GameController controller;
 
-    private static final int SHADOW = 0x271b11;
-
     private Player player;
     private Theme theme;
 
     public PlayerObject(Player player, int x, int y, Theme theme) {
-        super(new Animation(DEFAULTANIMATIONTYPE, theme.getPlayerBlunaSet(), 8,
-                1, SHADOW), x, y);
+        super(new Animation(DEFAULTANIMATIONTYPE, theme.getPlayerBlunas().get(
+                "stands")), x, y);
         this.player = player;
         this.theme = theme;
-
         direction = new Direction(0, 0);
 
-        addAnimation(
-                "walks",
-                new Animation(DEFAULTANIMATIONTYPE, theme
-                        .getPlayerWalksBlunaSet(), 8, 9, SHADOW));
-        addAnimation(
-                "attacks",
-                new Animation(DEFAULTANIMATIONTYPE, theme
-                        .getPlayerAttacksBlunaSet(), 8, 13, SHADOW));
-        addAnimation(
-                "takes_hit",
-                new Animation(DEFAULTANIMATIONTYPE, theme
-                        .getPlayerTakesHitBlunaSet(), 8, 7, SHADOW));
-        addAnimation(
-                "dies",
-                new Animation(DEFAULTANIMATIONTYPE, theme
-                        .getPlayerDiesBlunaSet(), 8, 9, SHADOW));
-        addAnimation(
-                "magics",
-                new Animation(DEFAULTANIMATIONTYPE, theme
-                        .getPlayerMagicsBlunaSet(), 8, 7, SHADOW));
+        addAnimations(DEFAULTANIMATIONTYPE, theme.getPlayerBlunas());
         setCurrentAnimationType(DEFAULTANIMATIONTYPE);
     }
 

@@ -6,7 +6,7 @@ import de.propra13.assets.animations.Animation;
 public class WallObject extends GameObject {
 
     public WallObject(int x, int y, Theme theme) {
-        super(new Animation(theme.getWallImage(), 1, 1, 0x1f160d), x, y);
+        super(new Animation(theme.getWallBluna()), x, y);
     }
 
 }

@@ -7,7 +7,7 @@ import de.propra13.models.Money;
 public class MoneyObject extends ItemObject {
 
     public MoneyObject(Money money, int x, int y, Theme theme) {
-        super(new Animation(theme.getOnehundretImage(), 1, 8, 0x1f160d), x, y);
+        super(new Animation(theme.getOnehundretBluna()), x, y);
         this.item = money;
     }
 

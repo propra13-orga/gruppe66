@@ -15,27 +15,13 @@ public class DragonObject extends EnemyObject {
 
     private Dragon dragon;
 
-    private static final int SHADOW = 0x1f160d;
-
     public DragonObject(Dragon dragon, int x, int y, Theme theme) {
-        super(new Animation(theme.getDragonBluna(), 8, 1, SHADOW), x, y);
+        super(new Animation(theme.getDragonBlunas().get("stands")
+                .get("default")), x, y);
         this.dragon = dragon;
 
         direction = new Direction(0, 0);
-        initAnimations(theme);
-    }
-
-    private void initAnimations(Theme theme) {
-        addAnimation("walking", new Animation(theme.getDragonWalksBluna(), 8,
-                9, SHADOW));
-        addAnimation("dies", new Animation(theme.getDragonDiesBluna(), 8, 11,
-                SHADOW));
-        addAnimation("dead", new Animation(theme.getDragonDeadBluna(), 8, 1,
-                SHADOW));
-        addAnimation("attacks", new Animation(theme.getDragonAttacksBluna(), 8,
-                9, SHADOW));
-        addAnimation("takes_hit", new Animation(theme.getDragonTakesHitBluna(),
-                8, 7, SHADOW));
+        addAnimations("default", theme.getDragonBlunas());
     }
 
     @Override
@@ -64,7 +50,7 @@ public class DragonObject extends EnemyObject {
             direction = directionTo(room.getPlayerObject());
             if (direction.length() > GameFieldView.GRID * 2) {
                 velocity = .75;
-                setCurrentAnimation("walking");
+                setCurrentAnimation("walks");
             } else {
                 setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
                 velocity = 0;

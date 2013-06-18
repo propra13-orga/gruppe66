@@ -74,9 +74,9 @@ public class HUDView extends AbstractGameView {
         BufferedImage currentWeapon;
         Weapon playerWeapon = player.getWeapon();
         if (playerWeapon instanceof Sword) {
-            currentWeapon = theme.getSwordImage();
+            currentWeapon = theme.getSwordBluna().getBluna(0);
         } else {
-            currentWeapon = theme.getClubImage();
+            currentWeapon = theme.getClubBluna().getBluna(0);
         }
         gfx.drawImage(currentWeapon, controller.getView().getWidth() - 30, 6,
                 this);

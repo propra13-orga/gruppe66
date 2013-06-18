@@ -1,7 +1,6 @@
 package de.propra13.views.objects;
 
 import java.awt.Dimension;
-import java.awt.Rectangle;
 
 import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
@@ -15,16 +14,15 @@ public class MagicFireballObject extends AgressorObject {
 
     public MagicFireballObject(MagicFireball magicFireball,
             Direction direction, int x, int y, Theme theme) {
-        super(new Animation(theme.getMagicFireballImage(), 1, 16, 0), x, y);
-
-        addAnimation("explodes",
-                new Animation(theme.getMagicFireballExplosionImage(), 1, 20,
-                        new Rectangle(1, 1)));
+        super(new Animation(theme.getMagicFireballBluna()), x, y);
 
         this.magicFireball = magicFireball;
         this.direction = direction;
 
         setGlowRadius(100);
+
+        addAnimation("explodes",
+                new Animation(theme.getMagicFireballExplosionBluna()));
     }
 
     @Override

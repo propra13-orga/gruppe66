@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 
 import de.propra13.assets.BlunaCrate;
-import de.propra13.assets.BlunaCrateFactory;
 
 public class Animation {
 
@@ -20,47 +19,17 @@ public class Animation {
     private boolean directable;
     private AnimationPhaseListener listener;
 
-    public Animation(String defaultAnimationType,
-            HashMap<String, BufferedImage> imageSet, int directions,
-            int frames, int shadowRGB) {
-        for (String key : imageSet.keySet()) {
-            blunaSet.put(key, BlunaCrateFactory.getBlunaCrate(
-                    imageSet.get(key), directions, frames, shadowRGB));
-        }
-        directable = checkDirectable(directions);
-        setDefaultAnimationType(defaultAnimationType);
-    }
-
-    public Animation(String defaultAnimationType,
-            BufferedImage defaultAnimation,
-            HashMap<String, BufferedImage> imageSet, int directions,
-            int frames, Rectangle bounds) {
-        for (String key : imageSet.keySet()) {
-            blunaSet.put(key, BlunaCrateFactory.getBlunaCrate(
-                    imageSet.get(key), directions, frames, bounds));
-        }
-        directable = checkDirectable(directions);
-        setDefaultAnimationType(defaultAnimationType);
-    }
-
-    public Animation(BufferedImage bluna, int directions, int frames,
-            int shadowRGB) {
-        blunaSet.put("default", BlunaCrateFactory.getBlunaCrate(bluna,
-                directions, frames, shadowRGB));
-        directable = checkDirectable(directions);
+    public Animation(BlunaCrate blunaCrate) {
+        blunaSet.put("default", blunaCrate);
+        directable = blunaCrate.isDirectable();
         setDefaultAnimationType("default");
     }
 
-    public Animation(BufferedImage bluna, int directions, int frames,
-            Rectangle bounds) {
-        blunaSet.put("default", BlunaCrateFactory.getBlunaCrate(bluna,
-                directions, frames, bounds));
-        directable = checkDirectable(directions);
-        setDefaultAnimationType("default");
-    }
-
-    private boolean checkDirectable(int directions) {
-        return directions == 8;
+    public Animation(String defaultAnimationType,
+            HashMap<String, BlunaCrate> blunaSet) {
+        this.blunaSet = blunaSet;
+        directable = blunaSet.get(defaultAnimationType).isDirectable();
+        setDefaultAnimationType(defaultAnimationType);
     }
 
     public void setDefaultAnimationType(String defaultAnimationName) {

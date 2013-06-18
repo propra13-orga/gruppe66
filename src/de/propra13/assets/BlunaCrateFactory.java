@@ -5,22 +5,34 @@ import java.awt.image.BufferedImage;
 import java.util.HashMap;
 import java.util.Map;
 
-public class BlunaCrateFactory {
+class BlunaCrateFactory {
 
     private static Map<BufferedImage, BlunaCrate> lorry = new HashMap<>();
 
-    public static BlunaCrate getBlunaCrate(BufferedImage image, int directions,
+    static BlunaCrate getSimpleBlunaCrate(BufferedImage image) {
+        return getBlunaCrate(image, 1, 1, 0);
+    }
+
+    static BlunaCrate getSimpleBlunaCrate(BufferedImage image, Rectangle bounds) {
+        return getBlunaCrate(image, 1, 1, bounds);
+    }
+
+    static BlunaCrate getSimpleBlunaCrate(BufferedImage image, int shadowRGB) {
+        return getBlunaCrate(image, 1, 1, shadowRGB);
+    }
+
+    static BlunaCrate getBlunaCrate(BufferedImage image, int directions,
             int frames, Rectangle bounds) {
         return getBlunaCrate(image, directions, frames, 0, bounds);
     }
 
-    public static BlunaCrate getBlunaCrate(BufferedImage image, int directions,
+    static BlunaCrate getBlunaCrate(BufferedImage image, int directions,
             int frames, int shadowRGB) {
         return getBlunaCrate(image, directions, frames, shadowRGB, null);
     }
 
-    private static BlunaCrate getBlunaCrate(BufferedImage image,
-            int directions, int frames, int shadowRGB, Rectangle bounds) {
+    static BlunaCrate getBlunaCrate(BufferedImage image, int directions,
+            int frames, int shadowRGB, Rectangle bounds) {
         if (!lorry.containsKey(image)) {
             createBlunaCrate(image, directions, frames, shadowRGB, bounds);
         }
@@ -28,17 +40,25 @@ public class BlunaCrateFactory {
         return lorry.get(image);
     }
 
-    public static void createBlunaCrate(BufferedImage image, int directions,
+    static void createSimpleBlunaCrate(BufferedImage image, Rectangle bounds) {
+        createBlunaCrate(image, 1, 1, bounds);
+    }
+
+    static void createSimpleBlunaCrate(BufferedImage image, int shadowRGB) {
+        createBlunaCrate(image, 1, 1, shadowRGB);
+    }
+
+    static void createBlunaCrate(BufferedImage image, int directions,
             int frames, Rectangle bounds) {
         createBlunaCrate(image, directions, frames, 0, bounds);
     }
 
-    public static void createBlunaCrate(BufferedImage image, int directions,
+    static void createBlunaCrate(BufferedImage image, int directions,
             int frames, int shadowRGB) {
         createBlunaCrate(image, directions, frames, shadowRGB, null);
     }
 
-    private static void createBlunaCrate(BufferedImage image, int directions,
+    static void createBlunaCrate(BufferedImage image, int directions,
             int frames, int shadowRGB, Rectangle bounds) {
         BlunaCrate blunaCrate = new BlunaCrate(image, directions, frames);
         if (bounds == null)
@@ -48,7 +68,7 @@ public class BlunaCrateFactory {
         lorry.put(image, blunaCrate);
     }
 
-    public static void clearCache() {
+    static void clearCache() {
         lorry.clear();
     }
 }

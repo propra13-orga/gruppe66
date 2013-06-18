@@ -12,7 +12,7 @@ public class SkullObject extends AgressorObject {
     private Skull skull;
 
     public SkullObject(Skull skull, int x, int y, Theme theme) {
-        super(new Animation(theme.getFireballBluna(), 8, 10, 0x1f160d), x, y);
+        super(new Animation(theme.getSkullBluna()), x, y);
 
         this.skull = skull;
 
