@@ -40,25 +40,7 @@ class BlunaCrateFactory {
         return lorry.get(image);
     }
 
-    static void createSimpleBlunaCrate(BufferedImage image, Rectangle bounds) {
-        createBlunaCrate(image, 1, 1, bounds);
-    }
-
-    static void createSimpleBlunaCrate(BufferedImage image, int shadowRGB) {
-        createBlunaCrate(image, 1, 1, shadowRGB);
-    }
-
-    static void createBlunaCrate(BufferedImage image, int directions,
-            int frames, Rectangle bounds) {
-        createBlunaCrate(image, directions, frames, 0, bounds);
-    }
-
-    static void createBlunaCrate(BufferedImage image, int directions,
-            int frames, int shadowRGB) {
-        createBlunaCrate(image, directions, frames, shadowRGB, null);
-    }
-
-    static void createBlunaCrate(BufferedImage image, int directions,
+    private static void createBlunaCrate(BufferedImage image, int directions,
             int frames, int shadowRGB, Rectangle bounds) {
         BlunaCrate blunaCrate = new BlunaCrate(image, directions, frames);
         if (bounds == null)
