@@ -139,12 +139,9 @@ public class GameObject {
 
     public void coroutine(int delay, final Coroutine coroutine) {
         new Timer(delay, new ActionListener() {
-
-            private long timeStamp = System.currentTimeMillis();
-
             @Override
             public void actionPerformed(final ActionEvent e) {
-                if (!coroutine.run((System.currentTimeMillis() - timeStamp) / 1000.0)) {
+                if (!coroutine.run()) {
                     ((Timer) e.getSource()).stop();
                 }
             }
@@ -169,7 +166,7 @@ public class GameObject {
         coroutine(delay, new Coroutine() {
 
             @Override
-            public boolean run(double time) {
+            public boolean run() {
                 int radius = getGlowRadius();
                 radius = (int) Math.max(0, radius
                         - (factor + (Math.random() - 0.5) * 5));
