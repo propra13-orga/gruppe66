@@ -155,6 +155,8 @@ public class GameController extends Controller implements KeyListener,
 
         next.getPlayerObject().setDirection(
                 current.getPlayerObject().getDirection());
+        next.getPlayerObject().setVelocity(
+                current.getPlayerObject().getVelocity());
 
         next.getPlayerObject().setMoved(false);
 

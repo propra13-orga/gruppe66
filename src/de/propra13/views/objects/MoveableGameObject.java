@@ -126,4 +126,12 @@ public abstract class MoveableGameObject extends GameObject {
         this.direction = direction;
     }
 
+    public double getVelocity() {
+        return velocity;
+    }
+
+    public void setVelocity(double velocity) {
+        this.velocity = velocity;
+    }
+
 }
