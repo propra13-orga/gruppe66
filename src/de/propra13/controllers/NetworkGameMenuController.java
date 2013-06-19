@@ -50,12 +50,4 @@ public class NetworkGameMenuController extends Controller {
         view.add(clientButton);
         view.add(backButton);
     }
-
-    @Override
-    protected void willAppear(Object... params) {
-    }
-
-    @Override
-    protected void willDisappear() {
-    }
 }

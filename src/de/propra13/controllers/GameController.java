@@ -3,8 +3,6 @@ package de.propra13.controllers;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.awt.event.MouseEvent;
@@ -32,7 +30,7 @@ import de.propra13.views.objects.GameObject;
 import de.propra13.views.objects.MoveableGameObject;
 
 public class GameController extends Controller implements KeyListener,
-        ComponentListener, MouseListener, Runnable {
+        MouseListener, Runnable {
 
     private GameFieldView game;
     private HUDView hud;
@@ -81,7 +79,6 @@ public class GameController extends Controller implements KeyListener,
 
         view.add(hud);
         view.add(game);
-        view.addComponentListener(this);
     }
 
     private void initPlayerAndLevels() {
@@ -254,28 +251,6 @@ public class GameController extends Controller implements KeyListener,
     public void keyTyped(KeyEvent event) {
     }
 
-    @Override
-    public void componentHidden(ComponentEvent event) {
-        stop();
-    }
-
-    @Override
-    public void componentMoved(ComponentEvent event) {
-    }
-
-    @Override
-    public void componentResized(ComponentEvent event) {
-    }
-
-    @Override
-    public void componentShown(ComponentEvent event) {
-        if (!gameHasStarted) {
-            gameHasStarted = true;
-        }
-
-        start();
-    }
-
     public void stop() {
         running = false;
         if (gameRunner != null)
@@ -342,11 +317,11 @@ public class GameController extends Controller implements KeyListener,
     }
 
     @Override
-    protected void willAppear(Object... params) {
-    }
-
-    @Override
-    protected void willDisappear() {
+    protected void didAppear(Object... params) {
+        if (!gameHasStarted) {
+            gameHasStarted = true;
+        }
+        start();
     }
 
     @Override

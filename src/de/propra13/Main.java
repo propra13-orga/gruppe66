@@ -24,20 +24,21 @@ public class Main extends JFrame {
 
     public static void main(String args[]) {
         SwingUtilities.invokeLater(new Runnable() {
+            @Override
             public void run() {
-                new Main(new ControllerFactory());
+                Main main = new Main();
+                ControllerFactory factory = new ControllerFactory();
+
+                factory.initControllers(main);
+                factory.appendAllToPanel((JPanel) main.getContentPane());
             }
         });
     }
 
-    public Main(ControllerFactory factory) {
+    public Main() {
         getContentPane().setLayout(new CardLayout());
         getContentPane().setPreferredSize(
                 new Dimension(Main.GAMEFIELDWIDTH, Main.HEIGHT));
-
-        factory.initControllers(this);
-        factory.appendAllToPanel((JPanel) getContentPane());
-
         initRootWindow();
     }
 

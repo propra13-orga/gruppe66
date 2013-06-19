@@ -47,9 +47,14 @@ public abstract class Controller implements ActionListener {
         rootWindow.dispose();
     }
 
-    abstract protected void willAppear(Object... params);
+    protected void willAppear(Object... params) {
+    }
 
-    abstract protected void willDisappear();
+    protected void didAppear(Object... params) {
+    }
+
+    protected void willDisappear() {
+    }
 
     protected void transitionTo(String controller, Object... params) {
         JPanel rootPanel = (JPanel) rootWindow.getContentPane();
@@ -57,6 +62,7 @@ public abstract class Controller implements ActionListener {
         willDisappear();
         getControllerFactory().get(controller).willAppear(params);
         layout.show(rootPanel, controller);
+        getControllerFactory().get(controller).didAppear(params);
     }
 
     public void appendViewTo(JPanel panel) {
