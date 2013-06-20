@@ -13,11 +13,12 @@ import de.propra13.models.Npc;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
 
-public class NpcObject extends MoveableGameObject {
+public class NpcObject<N extends Npc> extends MoveableGameObject {
 
-    private Npc npc;
+    private N npc;
+    private PlayerObject nearPlayer = null;
 
-    public NpcObject(Npc npc, Animation animation, int x, int y) {
+    public NpcObject(N npc, Animation animation, int x, int y) {
         super(animation, x, y);
         this.npc = npc;
 
@@ -38,7 +39,16 @@ public class NpcObject extends MoveableGameObject {
         }
     }
 
+    public boolean isNearPlayer() {
+        return nearPlayer != null;
+    }
+
+    public PlayerObject getNearPlayer() {
+        return nearPlayer;
+    }
+
     public void idle() {
+        nearPlayer = null;
         npc.reset();
         setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
     }
@@ -48,8 +58,8 @@ public class NpcObject extends MoveableGameObject {
     }
 
     @Override
-    public void keyPressed(KeyEvent event) {
-        super.keyPressed(event);
+    public void keyPressed(KeyEvent event, boolean paused) {
+        super.keyPressed(event, paused);
 
         switch (event.getKeyCode()) {
         case KeyEvent.VK_N:
@@ -60,11 +70,11 @@ public class NpcObject extends MoveableGameObject {
 
     public void isNearPlayers(Room room) {
         npc.startTalking();
-        lookAt(room.getPlayerObject());
+        lookAt(nearPlayer = room.getPlayerObject());
         setCurrentAnimation("talks");
     }
 
-    public Npc getNpc() {
+    public N getNpc() {
         return npc;
     }
 

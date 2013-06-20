@@ -72,11 +72,26 @@ public class Player extends BioAgressor implements ActionListener {
         return lifes;
     }
 
+    public void heal(Herb herb) {
+        if (items.contains(herb)) {
+            items.remove(herb);
+        }
+        heal(herb.getHealth());
+    }
+
     public void die() {
         lifes--;
         health = MAXHEALTH;
         armor = MAXARMOR;
         mana = MAXMANA;
+    }
+
+    public boolean pay(int price) {
+        if (!canAfford(price)) {
+            return false;
+        }
+        money -= price;
+        return true;
     }
 
     public void pickUpItem(Item item) {
@@ -137,4 +152,7 @@ public class Player extends BioAgressor implements ActionListener {
             manaTimer.stop();
     }
 
+    public boolean canAfford(int price) {
+        return money >= price;
+    }
 }

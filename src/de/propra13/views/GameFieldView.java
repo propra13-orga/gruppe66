@@ -70,7 +70,7 @@ public class GameFieldView extends AbstractGameView {
     }
 
     private void drawText(Graphics2D gfx) {
-        for (NpcObject object : controller.getCurrentRoom().getNpcs()) {
+        for (NpcObject<?> object : controller.getCurrentRoom().getNpcs()) {
             object.drawText(gfx, this);
         }
     }

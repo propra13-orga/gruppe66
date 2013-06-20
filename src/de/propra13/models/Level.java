@@ -48,9 +48,9 @@ public class Level extends Model {
     private void addRoomFrom(JSONObject roomConfig) throws JSONException,
             IOException {
         String uri = "rooms/" + roomConfig.getString("file");
-        Room room = new Room(player, roomConfig.getString("name"), uri, theme);
+        Room room = new Room(player, roomConfig.getString("name"), uri, theme,
+                controller);
         rooms.add(room);
-        room.getPlayerObject().setController(controller);
     }
 
     public String getName() {

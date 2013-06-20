@@ -19,6 +19,8 @@ public class Theme {
     private BufferedImage spellImage;
     private BufferedImage goldImage;
     private BufferedImage floorImage;
+    private BufferedImage shopHealthImage;
+    private BufferedImage shopManaImage;
 
     private BlunaCrate goalBluna;
     private BlunaCrate startBluna;
@@ -47,6 +49,8 @@ public class Theme {
             spellImage = readImage("spell.png");
             goldImage = readImage("money.png");
             floorImage = readImage("floor.jpg");
+            shopHealthImage = readImage("shop_health.png");
+            shopManaImage = readImage("shop_mana.png");
 
             goalBluna = getSimpleBlunaCrate(readImage("goal.jpg"));
             startBluna = getSimpleBlunaCrate(readImage("start.jpg"));
@@ -61,6 +65,14 @@ public class Theme {
             e.printStackTrace();
             System.exit(-2);
         }
+    }
+
+    public BufferedImage getShopHealthImage() {
+        return shopHealthImage;
+    }
+
+    public BufferedImage getShopManaImage() {
+        return shopManaImage;
     }
 
     public BufferedImage getSpellImage() {

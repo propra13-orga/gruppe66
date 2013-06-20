@@ -58,11 +58,13 @@ public abstract class AbstractGameView extends JPanel {
 
     @Override
     public void paintComponent(Graphics g) {
-        super.paintComponents(g);
+
         if (controller.isRunning()) {
             Graphics2D gfx = (Graphics2D) g;
             clearAndSetRenderingHints(gfx);
             render(gfx);
+
+            super.paintComponents(g);
             Toolkit.getDefaultToolkit().sync();
         }
         g.dispose();

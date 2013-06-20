@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import de.propra13.assets.Theme;
+import de.propra13.controllers.GameController;
 import de.propra13.views.objects.DragonObject;
 import de.propra13.views.objects.EnemyObject;
 import de.propra13.views.objects.GameObject;
@@ -36,15 +37,15 @@ public class Room extends Model {
     private ArrayList<ItemObject> items;
     private ArrayList<EnemyObject> enemies;
     private ArrayList<MoveableGameObject> magics;
-    private ArrayList<NpcObject> npcs;
+    private ArrayList<NpcObject<?>> npcs;
 
     public Room(PlayerObject playerObject, ArrayList<WallObject> walls) {
         this.playerObject = playerObject;
         this.walls = walls;
     }
 
-    public Room(Player player, String name, String fileName, Theme theme)
-            throws IOException {
+    public Room(Player player, String name, String fileName, Theme theme,
+            GameController controller) throws IOException {
         this.name = name;
         this.player = player;
 
@@ -70,7 +71,8 @@ public class Room extends Model {
                     break;
                 case 'S':
                     start = new StartObject(x, y, theme);
-                    playerObject = new PlayerObject(this.player, x, y, theme);
+                    playerObject = new PlayerObject(this.player, x, y, theme,
+                            controller);
                     break;
                 case 'G':
                     goal = new GoalObject(x, y, theme);
@@ -95,7 +97,8 @@ public class Room extends Model {
                     npcs.add(new MaxObject(new Max(), x, y, theme));
                     break;
                 case 't':
-                    npcs.add(new TraderObject(new Trader(), x, y, theme));
+                    npcs.add(new TraderObject(new Trader(), x, y, theme,
+                            controller));
                     break;
                 }
                 x++;
@@ -108,7 +111,7 @@ public class Room extends Model {
         }
     }
 
-    public ArrayList<NpcObject> getNpcs() {
+    public ArrayList<NpcObject<?>> getNpcs() {
         return npcs;
     }
 

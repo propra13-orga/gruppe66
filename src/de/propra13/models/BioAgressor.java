@@ -1,6 +1,5 @@
 package de.propra13.models;
 
-
 public abstract class BioAgressor extends Agressor {
 
     public final double MAXHEALTH;

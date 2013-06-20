@@ -272,9 +272,9 @@ public class GameObject {
         return glowRadius > 0;
     }
 
-    public void keyPressed(KeyEvent event) {
+    public void keyPressed(KeyEvent event, boolean paused) {
     }
 
-    public void keyReleased(KeyEvent event) {
+    public void keyReleased(KeyEvent event, boolean paused) {
     }
 }

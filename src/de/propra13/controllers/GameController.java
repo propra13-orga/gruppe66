@@ -46,6 +46,7 @@ public class GameController extends Controller implements KeyListener,
     private Player player;
 
     private volatile boolean running;
+    private boolean pause = false;
     private Thread gameRunner;
     private Timer objectAnimator;
 
@@ -56,6 +57,18 @@ public class GameController extends Controller implements KeyListener,
 
     public GameController(ControllerFactory cf, JFrame rootWindow) {
         super(cf, rootWindow);
+    }
+
+    public boolean isPaused() {
+        return pause;
+    }
+
+    public void pause() {
+        pause = true;
+    }
+
+    public void remain() {
+        pause = false;
     }
 
     @Override
@@ -222,33 +235,32 @@ public class GameController extends Controller implements KeyListener,
         case KeyEvent.VK_H:
             player.addHealth(10);
             break;
-        case KeyEvent.VK_SPACE:
-            getCurrentRoom().getPlayerObject().attackAll(
-                    getCurrentRoom().getEnemies());
+        case KeyEvent.VK_F3:
+            pause = !pause;
             break;
         default:
             for (MoveableGameObject object : getCurrentRoom()
                     .getMoveableGameObjects()) {
-                object.keyPressed(event);
+                object.keyPressed(event, pause);
             }
         }
     }
 
     @Override
     public void keyReleased(KeyEvent event) {
-        switch (event.getKeyCode()) {
-        case KeyEvent.VK_SPACE:
-            break;
-        default:
-            for (MoveableGameObject object : getCurrentRoom()
-                    .getMoveableGameObjects()) {
-                object.keyReleased(event);
-            }
+        for (MoveableGameObject object : getCurrentRoom()
+                .getMoveableGameObjects()) {
+            object.keyReleased(event, pause);
         }
     }
 
     @Override
     public void keyTyped(KeyEvent event) {
+    }
+
+    @Override
+    protected void willDisappear() {
+        stop();
     }
 
     public void stop() {
@@ -296,7 +308,9 @@ public class GameController extends Controller implements KeyListener,
             SwingUtilities.invokeLater(new Runnable() {
                 @Override
                 public void run() {
-                    turn();
+                    if (!pause) {
+                        turn();
+                    }
                     hud.repaint();
                     game.repaint();
                     checkHealthOfPlayer();

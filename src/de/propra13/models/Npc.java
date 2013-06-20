@@ -35,7 +35,7 @@ public class Npc extends Model {
         return message != null;
     }
 
-    private boolean isTalking() {
+    public boolean isTalking() {
         return monologueIterator != null;
     }
 

@@ -33,11 +33,13 @@ public class PlayerObject extends BioAgressorObject {
     private Player player;
     private Theme theme;
 
-    public PlayerObject(Player player, int x, int y, Theme theme) {
+    public PlayerObject(Player player, int x, int y, Theme theme,
+            GameController controller) {
         super(new Animation(DEFAULTANIMATIONTYPE, theme.getPlayerBlunas().get(
                 "stands")), x, y);
         this.player = player;
         this.theme = theme;
+        this.controller = controller;
         direction = new Direction(0, 0);
 
         addAnimations(DEFAULTANIMATIONTYPE, theme.getPlayerBlunas());
@@ -102,10 +104,6 @@ public class PlayerObject extends BioAgressorObject {
         return items;
     }
 
-    public void setController(GameController controller) {
-        this.controller = controller;
-    }
-
     public void setMoved(boolean moved) {
         this.leftSpawnPoint = moved;
     }
@@ -123,28 +121,35 @@ public class PlayerObject extends BioAgressorObject {
     }
 
     @Override
-    public void keyPressed(KeyEvent event) {
-        super.keyPressed(event);
-        switch (event.getKeyCode()) {
-        case KeyEvent.VK_W:
-            direction.setVy(-1);
-            break;
-        case KeyEvent.VK_D:
-            direction.setVx(1);
-            break;
-        case KeyEvent.VK_S:
-            direction.setVy(1);
-            break;
-        case KeyEvent.VK_A:
-            direction.setVx(-1);
-            break;
+    public void keyPressed(KeyEvent event, boolean paused) {
+        super.keyPressed(event, paused);
+        if (!paused) {
+            switch (event.getKeyCode()) {
+            case KeyEvent.VK_W:
+                direction.setVy(-1);
+                break;
+            case KeyEvent.VK_D:
+                direction.setVx(1);
+                break;
+            case KeyEvent.VK_S:
+                direction.setVy(1);
+                break;
+            case KeyEvent.VK_A:
+                direction.setVx(-1);
+                break;
+            case KeyEvent.VK_SPACE:
+                controller.getCurrentRoom().getPlayerObject()
+                        .attackAll(controller.getCurrentRoom().getEnemies());
+                break;
+            }
+            velocity = 1;
         }
-        velocity = 1;
     }
 
     @Override
-    public void keyReleased(KeyEvent event) {
-        super.keyReleased(event);
+    public void keyReleased(KeyEvent event, boolean paused) {
+        super.keyReleased(event, paused);
+
         switch (event.getKeyCode()) {
         case KeyEvent.VK_W:
             if (direction.getVy() == -1)

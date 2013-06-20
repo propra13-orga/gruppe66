@@ -10,7 +10,10 @@ public class Herb extends Item {
 
     @Override
     public void useOn(Player player) {
-        player.heal(health);
+        player.heal(this);
     }
 
+    public int getHealth() {
+        return health;
+    }
 }
