@@ -60,15 +60,15 @@ public abstract class NpcObject extends MoveableGameObject {
             double ty = y - union.getHeight() - 10;
 
             if (tx + union.getWidth() > view.getWidth()) {
-                tx -= (tx + union.getWidth()) - view.getWidth();
+                tx -= (tx + union.getWidth()) - view.getWidth() + 25;
             } else if (tx < 0) {
-                tx = 0;
+                tx = 25;
             }
 
             if (ty + union.getHeight() > view.getHeight()) {
-                ty -= (ty + union.getHeight()) - view.getHeight();
+                ty -= (ty + union.getHeight()) - view.getHeight() + 25;
             } else if (ty < 0) {
-                ty = 0;
+                ty = 25;
             }
 
             gfx.setPaint(new Color(255, 243, 215));
