@@ -4,17 +4,25 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 
 import de.propra13.assets.animations.Animation;
+import de.propra13.assets.animations.AnimationManager;
 import de.propra13.models.Npc;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
 
-public abstract class NpcObject extends MoveableGameObject {
+public class NpcObject extends MoveableGameObject {
 
-    public NpcObject(Animation animation, int x, int y) {
+    private Npc npc;
+
+    public NpcObject(Npc npc, Animation animation, int x, int y) {
         super(animation, x, y);
+        this.npc = npc;
+
+        setGlowRadius(100);
+        direction = new Direction(0, 0);
     }
 
     @Override
@@ -30,13 +38,35 @@ public abstract class NpcObject extends MoveableGameObject {
         }
     }
 
-    public abstract void idle();
+    public void idle() {
+        npc.reset();
+        setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
+    }
 
-    public abstract void randomIdle();
+    public void randomIdle() {
+        triggerAnimation("idles");
+    }
 
-    public abstract void isNearPlayers(Room room);
+    @Override
+    public void keyPressed(KeyEvent event) {
+        super.keyPressed(event);
 
-    public abstract Npc getNpc();
+        switch (event.getKeyCode()) {
+        case KeyEvent.VK_N:
+            npc.advanceMessage();
+            break;
+        }
+    }
+
+    public void isNearPlayers(Room room) {
+        npc.startTalking();
+        lookAt(room.getPlayerObject());
+        setCurrentAnimation("talks");
+    }
+
+    public Npc getNpc() {
+        return npc;
+    }
 
     public boolean isCloseToPlayersIn(Room room) {
         return isCloseTo(room.getPlayerObject(), GameFieldView.GRID * 3);
