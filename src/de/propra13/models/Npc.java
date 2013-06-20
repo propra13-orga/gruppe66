@@ -7,12 +7,14 @@ import java.util.List;
 
 public class Npc extends Model {
 
+    public static final String PATTERN = "\\s+#{3,}\\s+";
+
     public static List<String> parseDialogue(String fileName)
             throws IOException {
         List<String> chapters = new ArrayList<>();
         Collections.addAll(chapters,
                 readStringFromFile("models/dialogues/" + fileName + ".kdg")
-                        .split("\\s+-\\s+"));
+                        .split(PATTERN));
         return chapters;
     }
 
