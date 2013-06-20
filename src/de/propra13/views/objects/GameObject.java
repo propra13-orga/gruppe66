@@ -10,6 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Point2D;
+import java.awt.geom.Rectangle2D;
 import java.awt.image.BufferedImage;
 import java.awt.image.ImageObserver;
 import java.util.HashMap;
@@ -213,6 +214,21 @@ public class GameObject {
 
     public Rectangle.Double getBounds() {
         return animationManager.getDefaultBounds(x, y);
+    }
+
+    public double getBoundingArea() {
+        Rectangle.Double bounds = getBounds();
+        return bounds.width * bounds.height;
+    }
+
+    public double getInsectionPercentage(GameObject object) {
+        return getIntersectionAreaWith(object) / getBoundingArea() * 100.0;
+    }
+
+    public double getIntersectionAreaWith(GameObject object) {
+        Rectangle2D intersection = object.getBounds().createIntersection(
+                getBounds());
+        return intersection.getWidth() * intersection.getHeight();
     }
 
     public Point2D.Double getCenter() {

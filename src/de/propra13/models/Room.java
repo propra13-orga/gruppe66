@@ -56,6 +56,7 @@ public class Room extends Model {
 
         String roomString = readStringFromFile(fileName);
 
+        boolean isBossRoom = false;
         String[] lines = roomString.split("\\n");
         int y = 0;
         for (String line : lines) {
@@ -84,6 +85,7 @@ public class Room extends Model {
                     break;
                 case 'D':
                     enemies.add(new DragonObject(new Dragon(1000), x, y, theme));
+                    isBossRoom = true;
                     break;
                 case 'M':
                     items.add(new MoneyObject(new Money(100), x, y, theme));
@@ -95,6 +97,10 @@ public class Room extends Model {
                 x++;
             }
             y++;
+        }
+
+        if (isBossRoom) {
+            closeDoors();
         }
     }
 
@@ -221,5 +227,15 @@ public class Room extends Model {
         animatables.addAll(enemies);
         animatables.addAll(magics);
         return animatables;
+    }
+
+    public void openDoors() {
+        start.open();
+        goal.open();
+    }
+
+    public void closeDoors() {
+        start.close();
+        goal.close();
     }
 }

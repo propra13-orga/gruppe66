@@ -40,6 +40,8 @@ public class DragonObject extends EnemyObject {
                     setCurrentAnimation("dead");
                     setCanAct(false);
                     dimGlowing(1, 20);
+
+                    room.openDoors();
                 }
             });
 

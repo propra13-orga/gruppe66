@@ -4,7 +4,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
 import java.awt.Point;
-import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Point2D;
 import java.awt.image.ImageObserver;
@@ -24,6 +23,7 @@ import de.propra13.views.GameFieldView;
 
 public class PlayerObject extends BioAgressorObject {
 
+    public final static double ENTERDOORTHRESHOLD = 75.0;
     private final static String DEFAULTANIMATIONTYPE = Club.class
             .getSimpleName();
 
@@ -48,12 +48,12 @@ public class PlayerObject extends BioAgressorObject {
     public void act(Dimension size, Room room) {
         super.act(size, room);
 
-        if (isOnGoalIn(room) && leftSpawnPoint)
+        if (canEnter(room.getGoal()) && leftSpawnPoint)
             controller.advanceRoom();
-        if (isOnStartIn(room) && leftSpawnPoint)
+        if (canEnter(room.getStart()) && leftSpawnPoint)
             controller.retreatRoom();
 
-        if (!leftSpawnPoint && !isOnStartIn(room) && !isOnGoalIn(room))
+        if (!leftSpawnPoint && !isOn(room.getStart()) && !isOn(room.getGoal()))
             leftSpawnPoint = true;
 
         ArrayList<ItemObject> items = searchItemsIn(room);
@@ -64,6 +64,10 @@ public class PlayerObject extends BioAgressorObject {
             setCurrentAnimation("walks");
         else
             setCurrentAnimation(AnimationManager.DEFAULT_ANIMATION);
+    }
+
+    private boolean canEnter(DoorObject door) {
+        return isOn(door) && door.isOpen();
     }
 
     @Override
@@ -106,22 +110,8 @@ public class PlayerObject extends BioAgressorObject {
         this.leftSpawnPoint = moved;
     }
 
-    private boolean isOnGoalIn(Room room) {
-        Rectangle.Double biggerGoal = room.getGoal().getBounds();
-        biggerGoal.x -= 1;
-        biggerGoal.y -= 1;
-        biggerGoal.width += 2;
-        biggerGoal.height += 2;
-        return biggerGoal.contains(getBounds());
-    }
-
-    private boolean isOnStartIn(Room room) {
-        Rectangle.Double biggerStart = room.getStart().getBounds();
-        biggerStart.x -= 1;
-        biggerStart.y -= 1;
-        biggerStart.width += 2;
-        biggerStart.height += 2;
-        return biggerStart.contains(getBounds());
+    private boolean isOn(DoorObject door) {
+        return getInsectionPercentage(door) >= ENTERDOORTHRESHOLD;
     }
 
     public Player getPlayer() {
