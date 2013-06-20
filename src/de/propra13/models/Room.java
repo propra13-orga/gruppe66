@@ -19,6 +19,7 @@ import de.propra13.views.objects.PlayerObject;
 import de.propra13.views.objects.SkullObject;
 import de.propra13.views.objects.StartObject;
 import de.propra13.views.objects.SwordObject;
+import de.propra13.views.objects.TraderObject;
 import de.propra13.views.objects.WallObject;
 
 public class Room extends Model {
@@ -90,8 +91,11 @@ public class Room extends Model {
                 case 'M':
                     items.add(new MoneyObject(new Money(100), x, y, theme));
                     break;
-                case 'T':
+                case 'm':
                     npcs.add(new MaxObject(new Max(), x, y, theme));
+                    break;
+                case 't':
+                    npcs.add(new TraderObject(new Trader(), x, y, theme));
                     break;
                 }
                 x++;

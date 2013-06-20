@@ -25,6 +25,7 @@ public class Theme {
     private HashMap<String, HashMap<String, BlunaCrate>> playerBlunas;
     private HashMap<String, HashMap<String, BlunaCrate>> dragonBlunas;
     private HashMap<String, HashMap<String, BlunaCrate>> maxBlunas;
+    private HashMap<String, HashMap<String, BlunaCrate>> traderBlunas;
     private BlunaCrate magicFireballBluna;
     private BlunaCrate magicFireballExplosionBluna;
     private BlunaCrate skullBluna;
@@ -124,13 +125,20 @@ public class Theme {
     }
 
     private void initNPCBlunas() throws IOException {
-        String[] animations = new String[] { "stands", "crouches", "talks" };
+        String[] animations = new String[] { "stands", "idles", "talks" };
         maxBlunas = createAnimationsFor("max", animations,
                 new String[] { "default" }, 0x2b1f15, 76);
+
+        traderBlunas = createAnimationsFor("trader", animations,
+                new String[] { "default" }, 0x23180f, 96);
     }
 
     public HashMap<String, HashMap<String, BlunaCrate>> getMaxBlunas() {
         return maxBlunas;
+    }
+
+    public HashMap<String, HashMap<String, BlunaCrate>> getTraderBlunas() {
+        return traderBlunas;
     }
 
     private void initFlyingObjectBlunas() throws IOException {
