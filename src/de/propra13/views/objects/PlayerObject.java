@@ -111,7 +111,7 @@ public class PlayerObject extends BioAgressorObject {
     }
 
     private boolean isOn(DoorObject door) {
-        return getInsectionPercentage(door) >= ENTERDOORTHRESHOLD;
+        return getIntersectionPercentage(door) >= ENTERDOORTHRESHOLD;
     }
 
     public Player getPlayer() {

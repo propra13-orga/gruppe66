@@ -221,13 +221,21 @@ public class GameObject {
         return bounds.width * bounds.height;
     }
 
-    public double getInsectionPercentage(GameObject object) {
-        return getIntersectionAreaWith(object) / getBoundingArea() * 100.0;
+    public double getIntersectionPercentage(GameObject object) {
+        double area = getIntersectionAreaWith(object);
+        if (area == Double.NaN) {
+            return 0;
+        }
+        return area / getBoundingArea() * 100.0;
     }
 
     public double getIntersectionAreaWith(GameObject object) {
-        Rectangle2D intersection = object.getBounds().createIntersection(
-                getBounds());
+        Rectangle2D bounds = getBounds();
+        Rectangle2D otherBounds = object.getBounds();
+        if (!bounds.intersects(otherBounds)) {
+            return Double.NaN;
+        }
+        Rectangle2D intersection = otherBounds.createIntersection(bounds);
         return intersection.getWidth() * intersection.getHeight();
     }
 
