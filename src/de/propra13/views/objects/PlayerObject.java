@@ -58,8 +58,8 @@ public class PlayerObject extends BioAgressorObject {
         if (!leftSpawnPoint && !isOn(room.getStart()) && !isOn(room.getGoal()))
             leftSpawnPoint = true;
 
-        ArrayList<ItemObject> items = searchItemsIn(room);
-        for (ItemObject item : items) {
+        ArrayList<ItemObject<?>> items = searchItemsIn(room);
+        for (ItemObject<?> item : items) {
             player.pickUpItem(item.getItem());
         }
         if (isMoving())
@@ -92,9 +92,9 @@ public class PlayerObject extends BioAgressorObject {
             drawBar(gfx, 2, width, Color.cyan);
     }
 
-    private ArrayList<ItemObject> searchItemsIn(Room room) {
-        ArrayList<ItemObject> items = new ArrayList<ItemObject>();
-        for (ItemObject item : room.getItems()) {
+    private ArrayList<ItemObject<?>> searchItemsIn(Room room) {
+        ArrayList<ItemObject<?>> items = new ArrayList<>();
+        for (ItemObject<?> item : room.getItems()) {
             if (item.getBounds().intersects(getBounds())) {
                 items.add(item);
             }

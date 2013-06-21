@@ -35,7 +35,7 @@ public class Room extends Model {
     private PlayerObject playerObject;
     private ArrayList<WallObject> walls;
     private ArrayList<SkullObject> balls;
-    private ArrayList<ItemObject> items;
+    private ArrayList<ItemObject<?>> items;
     private ArrayList<EnemyObject> enemies;
     private ArrayList<MoveableGameObject> magics;
     private ArrayList<NpcObject<?>> npcs;
@@ -143,7 +143,7 @@ public class Room extends Model {
         this.balls = balls;
     }
 
-    public ArrayList<ItemObject> getItems() {
+    public ArrayList<ItemObject<?>> getItems() {
         return items;
     }
 
@@ -180,7 +180,7 @@ public class Room extends Model {
         playerObject.moveTo(start);
     }
 
-    public void removeItem(ItemObject item) {
+    public void removeItem(ItemObject<?> item) {
         items.remove(item);
     }
 

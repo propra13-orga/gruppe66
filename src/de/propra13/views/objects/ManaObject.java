@@ -4,10 +4,9 @@ import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
 import de.propra13.models.Mana;
 
-public class ManaObject extends ItemObject {
+public class ManaObject extends ItemObject<Mana> {
 
     public ManaObject(Mana mana, int x, int y, Theme theme) {
-        super(new Animation(theme.getManaBluna()), x, y);
-        this.item = mana;
+        super(mana, new Animation(theme.getManaBluna()), x, y);
     }
 }
