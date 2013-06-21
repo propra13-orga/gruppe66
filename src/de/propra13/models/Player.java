@@ -147,12 +147,20 @@ public class Player extends BioAgressor implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        mana = Math.min(MAXMANA, mana + manaIncreaseRate);
+        regainMana(manaIncreaseRate);
         if (mana == MAXMANA)
             manaTimer.stop();
     }
 
     public boolean canAfford(int price) {
         return money >= price;
+    }
+
+    public void regainManaFrom(Mana mana) {
+        regainMana(mana.getMana());
+    }
+
+    private void regainMana(double mana) {
+        this.mana = Math.min(MAXMANA, this.mana + mana);
     }
 }

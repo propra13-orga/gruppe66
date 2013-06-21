@@ -12,6 +12,7 @@ import de.propra13.views.objects.GameObject;
 import de.propra13.views.objects.GoalObject;
 import de.propra13.views.objects.HealthObject;
 import de.propra13.views.objects.ItemObject;
+import de.propra13.views.objects.ManaObject;
 import de.propra13.views.objects.MaxObject;
 import de.propra13.views.objects.MoneyObject;
 import de.propra13.views.objects.MoveableGameObject;
@@ -99,6 +100,9 @@ public class Room extends Model {
                 case 't':
                     npcs.add(new TraderObject(new Trader(), x, y, theme,
                             controller));
+                    break;
+                case 'E':
+                    items.add(new ManaObject(new Mana(33), x, y, theme));
                     break;
                 }
                 x++;

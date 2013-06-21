@@ -35,6 +35,7 @@ public class Theme {
     private BlunaCrate swordBluna;
     private BlunaCrate clubBluna;
     private BlunaCrate healthBluna;
+    private BlunaCrate manaBluna;
     private BlunaCrate onehundretBluna;
 
     private String themeName;
@@ -180,12 +181,18 @@ public class Theme {
 
         healthBluna = getBlunaCrate(readImage("bluna/healthitem.png"), 1, 8,
                 0x1f160d);
+        manaBluna = getBlunaCrate(readImage("bluna/manaitem.png"), 1, 8,
+                0x1f160d);
         onehundretBluna = getBlunaCrate(readImage("bluna/onehundret.png"), 1,
                 8, 0x1f160d);
     }
 
     public BlunaCrate getHealthBluna() {
         return healthBluna;
+    }
+
+    public BlunaCrate getManaBluna() {
+        return manaBluna;
     }
 
     public BlunaCrate getOnehundretBluna() {
