@@ -9,7 +9,7 @@ import java.util.Queue;
 public class Trader extends Npc {
 
     public enum ItemType {
-        ARMOR, MANA, HEALTH
+        ARMOR, MANA, HEALTH, SWORD
     }
 
     class Slot {
@@ -50,9 +50,13 @@ public class Trader extends Npc {
         armors.items.add(new Armor(20));
         armors.items.add(new Armor(20));
 
+        Slot sword = new Slot("Schwert", 150, ItemType.SWORD);
+        sword.items.add(new Sword(100));
+
         slots.add(healthPotions);
         slots.add(manaPotions);
         slots.add(armors);
+        slots.add(sword);
     }
 
     public Item getItemInSlot(int slot) {

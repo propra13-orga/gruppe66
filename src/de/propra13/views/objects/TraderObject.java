@@ -35,6 +35,7 @@ public class TraderObject extends NpcObject<Trader> {
         images.put(Trader.ItemType.HEALTH, theme.getShopHealthImage());
         images.put(Trader.ItemType.MANA, theme.getShopManaImage());
         images.put(Trader.ItemType.ARMOR, theme.getShopArmorImage());
+        images.put(Trader.ItemType.SWORD, theme.getShopSwordImage());
     }
 
     @Override
