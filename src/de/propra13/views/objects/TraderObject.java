@@ -1,10 +1,12 @@
 package de.propra13.views.objects;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
+import java.util.HashMap;
 
 import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
@@ -17,17 +19,22 @@ import de.propra13.views.GameFieldView;
 public class TraderObject extends NpcObject<Trader> {
 
     private GameController controller;
-    private Theme theme;
     private Font shopFont = new Font("Verdana", Font.BOLD, 12);
+
+    private HashMap<Trader.ItemType, BufferedImage> images;
 
     public TraderObject(Trader trader, int x, int y, Theme theme,
             GameController controller) {
         super(trader, new Animation(theme.getTraderBlunas().get("stands")
                 .get("default")), x, y);
 
-        this.theme = theme;
         this.controller = controller;
         addAnimations("default", theme.getTraderBlunas());
+
+        images = new HashMap<>(3);
+        images.put(Trader.ItemType.HEALTH, theme.getShopHealthImage());
+        images.put(Trader.ItemType.MANA, theme.getShopManaImage());
+        images.put(Trader.ItemType.ARMOR, theme.getShopArmorImage());
     }
 
     @Override
@@ -73,39 +80,52 @@ public class TraderObject extends NpcObject<Trader> {
             super.drawText(gfx, view);
         } else {
             gfx.setPaint(new Color(255, 243, 215, 180));
-            gfx.setStroke(new BasicStroke(2));
-            gfx.fillRoundRect(100, 75, 600, 400, 25, 25);
+            Rectangle ground = new Rectangle(100, 75, 600, 360);
+            gfx.fillRoundRect(ground.x, ground.y, ground.width, ground.height,
+                    25, 25);
 
-            gfx.drawImage(theme.getShopHealthImage(), 120, 150, 100, 100, null);
-            gfx.drawImage(theme.getShopManaImage(), 420, 150, 100, 100, null);
-
-            gfx.setPaint(new Color(69, 63, 57));
-            gfx.setFont(shopFont);
-
-            if (getNpc().hasItemsInSlot(0)) {
-                gfx.drawString("Health (" + getNpc().countItemsInSlot(0)
-                        + " übrig)", 235, 170);
-                gfx.drawString("(Drücke 1)   " + getNpc().getSlotPrice(0)
-                        + " Gold", 235, 190);
-            } else {
-                gfx.drawString("Health (ausverkauft)", 235, 170);
-            }
-
-            if (getNpc().hasItemsInSlot(1)) {
-                gfx.drawString("Mana (" + getNpc().countItemsInSlot(1)
-                        + " übrig)", 535, 170);
-                gfx.drawString("(Drücke 2)   " + getNpc().getSlotPrice(1)
-                        + " Gold", 535, 190);
-            } else {
-                gfx.drawString("Mana (ausverkauft)", 535, 170);
-            }
-
-            gfx.drawString("Um zu kaufen, drücke die Zahl neben dem Bild.",
-                    120, 340);
-            gfx.drawString(
-                    "Sofern du genügend Geld hast, erhälts du den Gegenstand.",
-                    120, 360);
-            gfx.drawString("Drücke ENTER um den Shop zu verlassen!", 120, 380);
+            drawInfo(gfx, ground.x + 30, ground.y + 30);
+            drawItems(gfx, view, ground.x + 30, ground.y + 100);
         }
+    }
+
+    private void drawInfo(Graphics2D gfx, int x, int y) {
+        prepareForText(gfx);
+        gfx.setPaint(new Color(69, 63, 57));
+        gfx.setFont(shopFont);
+        gfx.drawString("Um zu kaufen, drücke die Zahl neben dem Bild.", x,
+                y + 5);
+        gfx.drawString(
+                "Sofern du genügend Geld hast, erhälts du den Gegenstand.", x,
+                y + 25);
+        gfx.drawString("Drücke ENTER um den Shop zu verlassen!", x, y + 45);
+    }
+
+    private void drawItems(Graphics2D gfx, GameFieldView view, int x, int y) {
+        prepareForText(gfx);
+        for (int slot = 0; slot < getNpc().activeSlots(); slot++) {
+            BufferedImage image = images.get(getNpc().getSlotType(slot));
+            int slotX = x + (300 * (slot % 2));
+            int slotY = y + (130 * (slot / 2));
+            int width = 100, height = 100;
+            gfx.drawImage(image, slotX, slotY, width, height, view);
+
+            if (getNpc().hasItemsInSlot(slot)) {
+                gfx.drawString(getNpc().getSlotName(slot) + " ("
+                        + getNpc().countItemsInSlot(slot) + " übrig)", slotX
+                        + width + 10, slotY + 20);
+                gfx.drawString("Drücke " + (slot + 1) + "("
+                        + getNpc().getSlotPrice(slot) + " Gold)", slotX + width
+                        + 10, slotY + 35);
+            } else {
+                gfx.drawString(getNpc().getSlotName(slot) + " (ausverkauft)",
+                        slotX + width + 10, slotY + 20);
+            }
+        }
+    }
+
+    private void prepareForText(Graphics2D gfx) {
+        gfx.setPaint(new Color(69, 63, 57));
+        gfx.setFont(shopFont);
     }
 }

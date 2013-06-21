@@ -8,9 +8,21 @@ import java.util.Queue;
 
 public class Trader extends Npc {
 
+    public enum ItemType {
+        ARMOR, MANA, HEALTH
+    }
+
     class Slot {
+        String name;
         int price;
+        ItemType type;
         Queue<Item> items = new LinkedList<>();
+
+        public Slot(String name, int price, ItemType type) {
+            this.name = name;
+            this.price = price;
+            this.type = type;
+        }
     }
 
     private List<Slot> slots = new ArrayList<>();
@@ -19,13 +31,12 @@ public class Trader extends Npc {
 
     public Trader() throws IOException {
         super("trader");
-        Slot healthPotions = new Slot();
+        Slot healthPotions = new Slot("Heiltrank", 40, ItemType.HEALTH);
         healthPotions.items.add(new Health(100));
         healthPotions.items.add(new Health(100));
         healthPotions.items.add(new Health(100));
-        healthPotions.price = 40;
 
-        Slot manaPotions = new Slot();
+        Slot manaPotions = new Slot("Manatrank", 60, ItemType.MANA);
         manaPotions.items.add(new Mana(33));
         manaPotions.items.add(new Mana(33));
         manaPotions.items.add(new Mana(33));
@@ -33,18 +44,35 @@ public class Trader extends Npc {
         manaPotions.items.add(new Mana(33));
         manaPotions.items.add(new Mana(33));
         manaPotions.items.add(new Mana(33));
-        manaPotions.price = 60;
+
+        Slot armors = new Slot("Rüstung", 80, ItemType.ARMOR);
+        armors.items.add(new Armor(20));
+        armors.items.add(new Armor(20));
+        armors.items.add(new Armor(20));
 
         slots.add(healthPotions);
         slots.add(manaPotions);
+        slots.add(armors);
     }
 
     public Item getItemInSlot(int slot) {
         return slots.get(slot).items.poll();
     }
 
+    public ItemType getSlotType(int slot) {
+        return slots.get(slot).type;
+    }
+
+    public String getSlotName(int slot) {
+        return slots.get(slot).name;
+    }
+
     public int getSlotPrice(int slot) {
         return slots.get(slot).price;
+    }
+
+    public int activeSlots() {
+        return slots.size();
     }
 
     public boolean shopIsClosed() {

@@ -21,6 +21,7 @@ public class Theme {
     private BufferedImage floorImage;
     private BufferedImage shopHealthImage;
     private BufferedImage shopManaImage;
+    private BufferedImage shopArmorImage;
 
     private BlunaCrate goalBluna;
     private BlunaCrate startBluna;
@@ -53,6 +54,7 @@ public class Theme {
             floorImage = readImage("floor.jpg");
             shopHealthImage = readImage("shop_health.png");
             shopManaImage = readImage("shop_mana.png");
+            shopArmorImage = readImage("shop_armor.png");
 
             goalBluna = getSimpleBlunaCrate(readImage("goal.jpg"));
             startBluna = getSimpleBlunaCrate(readImage("start.jpg"));
@@ -75,6 +77,10 @@ public class Theme {
 
     public BufferedImage getShopManaImage() {
         return shopManaImage;
+    }
+
+    public BufferedImage getShopArmorImage() {
+        return shopArmorImage;
     }
 
     public BufferedImage getSpellImage() {
