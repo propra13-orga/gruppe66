@@ -1,5 +1,6 @@
 package de.propra13.views.objects;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics2D;
@@ -80,9 +81,13 @@ public class TraderObject extends NpcObject<Trader> {
         if (getNpc().shopIsClosed()) {
             super.drawText(gfx, view);
         } else {
-            gfx.setPaint(new Color(255, 243, 215, 180));
+            gfx.setPaint(new Color(253, 246, 227, 180));
             Rectangle ground = new Rectangle(100, 75, 600, 360);
             gfx.fillRoundRect(ground.x, ground.y, ground.width, ground.height,
+                    25, 25);
+            gfx.setPaint(new Color(105, 93, 105, 230));
+            gfx.setStroke(new BasicStroke(10));
+            gfx.drawRoundRect(ground.x, ground.y, ground.width, ground.height,
                     25, 25);
 
             drawInfo(gfx, ground.x + 30, ground.y + 30);
@@ -91,9 +96,9 @@ public class TraderObject extends NpcObject<Trader> {
     }
 
     private void drawInfo(Graphics2D gfx, int x, int y) {
-        prepareForText(gfx);
-        gfx.setPaint(new Color(69, 63, 57));
-        gfx.setFont(shopFont);
+        gfx.setPaint(new Color(39, 33, 27));
+        gfx.setFont(new Font(shopFont.getFontName(), Font.BOLD, shopFont
+                .getSize()));
         gfx.drawString("Um zu kaufen, drücke die Zahl neben dem Bild.", x,
                 y + 5);
         gfx.drawString(
@@ -103,7 +108,8 @@ public class TraderObject extends NpcObject<Trader> {
     }
 
     private void drawItems(Graphics2D gfx, GameFieldView view, int x, int y) {
-        prepareForText(gfx);
+        gfx.setPaint(new Color(69, 63, 57));
+        gfx.setFont(shopFont);
         for (int slot = 0; slot < getNpc().activeSlots(); slot++) {
             BufferedImage image = images.get(getNpc().getSlotType(slot));
             int slotX = x + (300 * (slot % 2));
@@ -123,10 +129,5 @@ public class TraderObject extends NpcObject<Trader> {
                         slotX + width + 10, slotY + 20);
             }
         }
-    }
-
-    private void prepareForText(Graphics2D gfx) {
-        gfx.setPaint(new Color(69, 63, 57));
-        gfx.setFont(shopFont);
     }
 }
