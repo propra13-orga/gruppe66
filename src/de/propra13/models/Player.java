@@ -157,7 +157,10 @@ public class Player extends BioAgressor implements ActionListener {
     }
 
     public void regainManaFrom(Mana mana) {
-        regainMana(mana.getMana());
+        if (items.contains(mana)) {
+            regainMana(mana.getMana());
+            items.remove(mana);
+        }
     }
 
     private void regainMana(double mana) {
