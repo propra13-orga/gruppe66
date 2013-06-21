@@ -104,6 +104,9 @@ public class Room extends Model {
                 case 'E':
                     items.add(new ManaObject(new Mana(33), x, y, theme));
                     break;
+                case 'A':
+                    items.add(new ArmorObject(new Armor(50), x, y, theme));
+                    break;
                 }
                 x++;
             }

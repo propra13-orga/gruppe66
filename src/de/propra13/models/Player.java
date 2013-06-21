@@ -166,4 +166,11 @@ public class Player extends BioAgressor implements ActionListener {
     private void regainMana(double mana) {
         this.mana = Math.min(MAXMANA, this.mana + mana);
     }
+
+    public void regainArmorFrom(Armor armor) {
+        if (items.contains(armor)) {
+            this.armor = Math.min(MAXARMOR, this.armor + armor.getArmor());
+            items.remove(armor);
+        }
+    }
 }
