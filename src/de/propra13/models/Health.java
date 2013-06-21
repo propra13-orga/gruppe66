@@ -1,10 +1,10 @@
 package de.propra13.models;
 
-public class Herb extends Item {
+public class Health extends Item {
 
     private int health;
 
-    public Herb(int health) {
+    public Health(int health) {
         this.health = health;
     }
 

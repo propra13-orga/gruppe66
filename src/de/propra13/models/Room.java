@@ -10,7 +10,7 @@ import de.propra13.views.objects.DragonObject;
 import de.propra13.views.objects.EnemyObject;
 import de.propra13.views.objects.GameObject;
 import de.propra13.views.objects.GoalObject;
-import de.propra13.views.objects.HerbObject;
+import de.propra13.views.objects.HealthObject;
 import de.propra13.views.objects.ItemObject;
 import de.propra13.views.objects.MaxObject;
 import de.propra13.views.objects.MoneyObject;
@@ -84,7 +84,7 @@ public class Room extends Model {
                     items.add(new SwordObject(new Sword(100), x, y, theme));
                     break;
                 case 'H':
-                    items.add(new HerbObject(new Herb(25), x, y, theme));
+                    items.add(new HealthObject(new Health(25), x, y, theme));
                     break;
                 case 'D':
                     enemies.add(new DragonObject(new Dragon(1000), x, y, theme));

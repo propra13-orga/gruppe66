@@ -307,8 +307,8 @@
       <operations public="true" package="true" protected="true" private="true"/>    
     </display>  
   </class>  
-  <class id="35" language="java" name="de.propra13.views.objects.HerbObject" project="gruppe66" 
-    file="/gruppe66/src/de/propra13/views/objects/HerbObject.java" binary="false" corner="BOTTOM_RIGHT">    
+  <class id="35" language="java" name="de.propra13.views.objects.HealthObject" project="gruppe66" 
+    file="/gruppe66/src/de/propra13/views/objects/HealthObject.java" binary="false" corner="BOTTOM_RIGHT">    
     <position height="-1" width="-1" x="1538" y="1893"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" accessors="true" 
       visibility="true">      

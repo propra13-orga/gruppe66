@@ -22,9 +22,9 @@ public class Trader extends Npc {
 
         for (int i = 0; i < 9; i++) {
             Slot slot = new Slot();
-            slot.items.add(new Herb(100));
-            slot.items.add(new Herb(100));
-            slot.items.add(new Herb(100));
+            slot.items.add(new Health(100));
+            slot.items.add(new Health(100));
+            slot.items.add(new Health(100));
             slot.price = 40;
 
             slots.add(slot);

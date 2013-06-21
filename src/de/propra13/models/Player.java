@@ -72,11 +72,11 @@ public class Player extends BioAgressor implements ActionListener {
         return lifes;
     }
 
-    public void heal(Herb herb) {
-        if (items.contains(herb)) {
-            items.remove(herb);
+    public void heal(Health health) {
+        if (items.contains(health)) {
+            items.remove(health);
         }
-        heal(herb.getHealth());
+        heal(health.getHealth());
     }
 
     public void die() {
