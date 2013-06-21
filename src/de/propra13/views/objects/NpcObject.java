@@ -4,6 +4,7 @@ import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
 import java.awt.geom.Rectangle2D;
 
@@ -84,50 +85,58 @@ public class NpcObject<N extends Npc> extends MoveableGameObject {
 
     public void drawText(Graphics2D gfx, GameFieldView view) {
         if (getNpc().hasMessage()) {
-            String[] lines = getNpc().getMessage().split("\\r?\\n");
-            Rectangle2D.Double union = new Rectangle2D.Double();
+            String message = getNpc().getMessage();
+            Rectangle messageBounds = calculateBoundsFor(message, gfx);
 
-            for (int i = 0; i < lines.length; i++) {
-                Rectangle2D bounds = gfx.getFontMetrics().getStringBounds(
-                        lines[i], gfx);
-                Rectangle2D.Double translatedBounds = new Rectangle2D.Double(
-                        bounds.getX(), bounds.getY() + bounds.getHeight() * i,
-                        bounds.getWidth(), bounds.getHeight());
-                Rectangle2D.union(union, translatedBounds, union);
-            }
-
-            double tx = getCenter().x - union.getWidth() / 2;
-            double ty = y - union.getHeight() - 10;
-
-            if (tx + union.getWidth() > view.getWidth()) {
-                tx -= (tx + union.getWidth()) - view.getWidth() + 25;
-            } else if (tx < 0) {
-                tx = 25;
-            }
-
-            if (ty + union.getHeight() > view.getHeight()) {
-                ty -= (ty + union.getHeight()) - view.getHeight() + 25;
-            } else if (ty < 0) {
-                ty = 25;
-            }
-
-            gfx.setPaint(new Color(255, 243, 215));
-            gfx.setStroke(new BasicStroke(2));
-            gfx.fillRoundRect((int) tx - 10, (int) ty - 25,
-                    (int) union.getWidth() + 20, (int) union.getHeight() + 20,
-                    (int) 25, (int) 25);
-
-            gfx.fillPolygon(new int[] { (int) getCenter().x - 20,
-                    (int) getCenter().x + 5, (int) getCenter().x },
-                    new int[] { (int) (ty + union.getHeight()) + 20 - 27,
-                            (int) (ty + union.getHeight()) + 20 - 27,
-                            (int) (ty + union.getHeight()) + 40 - 27 }, 3);
-
-            gfx.setPaint(new Color(69, 63, 57));
-            for (int i = 0; i < lines.length; i++) {
-                gfx.drawString(lines[i], (int) tx, (int) (-22 + ty + gfx
-                        .getFontMetrics().getHeight() * (i + 1)));
-            }
+            fitBoundsInto(view, messageBounds);
+            drawThoughtBubbleFor(gfx, messageBounds);
+            drawTextInBounds(gfx, message, messageBounds);
         }
+    }
+
+    private Rectangle calculateBoundsFor(String string, Graphics2D gfx) {
+        Rectangle2D.Double union = new Rectangle2D.Double();
+        String[] lines = string.split("\\r?\\n");
+        for (int i = 0; i < lines.length; i++) {
+            Rectangle2D bounds = gfx.getFontMetrics().getStringBounds(lines[i],
+                    gfx);
+            Rectangle2D.Double translatedBounds = new Rectangle2D.Double(
+                    bounds.getX(), bounds.getY() + bounds.getHeight() * i,
+                    bounds.getWidth(), bounds.getHeight());
+            Rectangle2D.union(union, translatedBounds, union);
+        }
+
+        union.x = getCenter().x - union.width / 2;
+        union.y = y - union.height - 10;
+
+        return new Rectangle((int) union.x, (int) union.y, (int) union.width,
+                (int) union.height);
+    }
+
+    private void fitBoundsInto(GameFieldView view, Rectangle bounds) {
+        bounds.x = Math.min(Math.max(bounds.x, 25),
+                (view.getWidth() - 25 - bounds.width));
+        bounds.y = Math.min(Math.max(bounds.y, 25),
+                (view.getHeight() - 25 - bounds.height));
+    }
+
+    private void drawThoughtBubbleFor(Graphics2D gfx, Rectangle bounds) {
+        gfx.setPaint(new Color(255, 243, 215));
+        gfx.fillRoundRect((int) bounds.x - 10, (int) bounds.y - 25,
+                (int) bounds.width + 20, (int) bounds.height + 20, 25, 25);
+        gfx.setPaint(new Color(105, 93, 105));
+        gfx.setStroke(new BasicStroke(4));
+        gfx.drawRoundRect((int) bounds.x - 10, (int) bounds.y - 25,
+                (int) bounds.width + 20, (int) bounds.height + 20, 25, 25);
+    }
+
+    private void drawTextInBounds(Graphics2D gfx, String text, Rectangle bounds) {
+        String[] lines = text.split("\\r?\\n");
+        gfx.setPaint(new Color(69, 63, 57));
+        for (int i = 0; i < lines.length; i++) {
+            gfx.drawString(lines[i], bounds.x, -22 + bounds.y
+                    + gfx.getFontMetrics().getHeight() * (i + 1));
+        }
+
     }
 }
