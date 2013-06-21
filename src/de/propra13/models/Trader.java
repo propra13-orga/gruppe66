@@ -19,16 +19,24 @@ public class Trader extends Npc {
 
     public Trader() throws IOException {
         super("trader");
+        Slot healthPotions = new Slot();
+        healthPotions.items.add(new Health(100));
+        healthPotions.items.add(new Health(100));
+        healthPotions.items.add(new Health(100));
+        healthPotions.price = 40;
 
-        for (int i = 0; i < 9; i++) {
-            Slot slot = new Slot();
-            slot.items.add(new Health(100));
-            slot.items.add(new Health(100));
-            slot.items.add(new Health(100));
-            slot.price = 40;
+        Slot manaPotions = new Slot();
+        manaPotions.items.add(new Mana(33));
+        manaPotions.items.add(new Mana(33));
+        manaPotions.items.add(new Mana(33));
+        manaPotions.items.add(new Mana(33));
+        manaPotions.items.add(new Mana(33));
+        manaPotions.items.add(new Mana(33));
+        manaPotions.items.add(new Mana(33));
+        manaPotions.price = 60;
 
-            slots.add(slot);
-        }
+        slots.add(healthPotions);
+        slots.add(manaPotions);
     }
 
     public Item getItemInSlot(int slot) {
