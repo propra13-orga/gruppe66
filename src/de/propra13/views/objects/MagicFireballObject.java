@@ -29,7 +29,7 @@ public class MagicFireballObject extends AgressorObject {
     public void act(Dimension gameFieldSize, final Room room) {
         super.act(gameFieldSize, room);
         if (magicFireball.isAlive()) {
-            for (EnemyObject enemyObject : room.getEnemies()) {
+            for (EnemyObject<?> enemyObject : room.getEnemies()) {
                 if (enemyObject.getBounds().contains(getBounds())) {
                     attack(enemyObject);
 
@@ -79,7 +79,7 @@ public class MagicFireballObject extends AgressorObject {
         direction.bounceY();
     }
 
-    public void attack(BioAgressorObject bioAgressor) {
+    public void attack(BioAgressorObject<?> bioAgressor) {
         if (!magicFireball.isReloading()) {
             bioAgressor.takeHit(magicFireball.getDamage());
             magicFireball.reload();

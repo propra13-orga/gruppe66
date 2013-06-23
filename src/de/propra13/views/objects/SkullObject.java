@@ -63,7 +63,7 @@ public class SkullObject extends AgressorObject {
         direction.bounceY();
     }
 
-    public void attack(BioAgressorObject bioAgressor) {
+    public void attack(BioAgressorObject<?> bioAgressor) {
         if (!skull.isReloading()) {
             bioAgressor.takeHit(skull.getDamage());
             skull.reload();

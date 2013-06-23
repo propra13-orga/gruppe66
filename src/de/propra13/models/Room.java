@@ -36,7 +36,7 @@ public class Room extends Model {
     private ArrayList<WallObject> walls;
     private ArrayList<SkullObject> balls;
     private ArrayList<ItemObject<?>> items;
-    private ArrayList<EnemyObject> enemies;
+    private ArrayList<EnemyObject<?>> enemies;
     private ArrayList<MoveableGameObject> magics;
     private ArrayList<NpcObject<?>> npcs;
 
@@ -150,7 +150,7 @@ public class Room extends Model {
         return items;
     }
 
-    public ArrayList<EnemyObject> getEnemies() {
+    public ArrayList<EnemyObject<?>> getEnemies() {
         return enemies;
     }
 
@@ -220,7 +220,7 @@ public class Room extends Model {
         return objects;
     }
 
-    public void removeEnemy(EnemyObject enemy) {
+    public void removeEnemy(EnemyObject<?> enemy) {
         enemies.remove(enemy);
     }
 

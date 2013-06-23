@@ -14,14 +14,13 @@ import de.propra13.assets.animations.Animation;
 import de.propra13.assets.animations.AnimationManager;
 import de.propra13.assets.animations.AnimationStateListener;
 import de.propra13.controllers.GameController;
-import de.propra13.models.BioAgressor;
 import de.propra13.models.Club;
 import de.propra13.models.MagicFireball;
 import de.propra13.models.Player;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
 
-public class PlayerObject extends BioAgressorObject {
+public class PlayerObject extends BioAgressorObject<Player> {
 
     public final static double ENTERDOORTHRESHOLD = 75.0;
     private final static String DEFAULTANIMATIONTYPE = Club.class
@@ -31,7 +30,6 @@ public class PlayerObject extends BioAgressorObject {
 
     private GameController controller;
 
-    private Player player;
     private Theme theme;
 
     AnimationStateListener theGrimReaper = new AnimationStateListener() {
@@ -41,16 +39,15 @@ public class PlayerObject extends BioAgressorObject {
 
         @Override
         public void didEnd() {
-            player.die();
+            getBioAgressor().die();
             moveToStart();
         }
     };
 
     public PlayerObject(Player player, int x, int y, Theme theme,
             GameController controller) {
-        super(new Animation(DEFAULTANIMATIONTYPE, theme.getPlayerBlunas().get(
-                "stands")), x, y);
-        this.player = player;
+        super(player, new Animation(DEFAULTANIMATIONTYPE, theme
+                .getPlayerBlunas().get("stands")), x, y);
         this.theme = theme;
         this.controller = controller;
         direction = new Direction(0, 0);
@@ -73,7 +70,7 @@ public class PlayerObject extends BioAgressorObject {
 
         ArrayList<ItemObject<?>> items = searchItemsIn(room);
         for (ItemObject<?> item : items) {
-            player.pickUpItem(item.getItem());
+            getBioAgressor().pickUpItem(item.getItem());
         }
         if (isMoving())
             setCurrentAnimation("walks");
@@ -87,7 +84,8 @@ public class PlayerObject extends BioAgressorObject {
 
     @Override
     public void animate() {
-        setCurrentAnimationType(player.getWeapon().getClass().getSimpleName());
+        setCurrentAnimationType(getBioAgressor().getWeapon().getClass()
+                .getSimpleName());
         super.animate();
     }
 
@@ -98,7 +96,7 @@ public class PlayerObject extends BioAgressorObject {
     }
 
     private void drawArmorBar(Graphics2D gfx) {
-        double armor = player.getArmor();
+        double armor = getBioAgressor().getArmor();
         int width = (int) (getWidth() * (armor / Player.MAXARMOR));
 
         if (armor < Player.MAXARMOR)
@@ -126,11 +124,7 @@ public class PlayerObject extends BioAgressorObject {
     }
 
     public Player getPlayer() {
-        return player;
-    }
-
-    public void setPlayer(Player player) {
-        this.player = player;
+        return getBioAgressor();
     }
 
     @Override
@@ -188,14 +182,9 @@ public class PlayerObject extends BioAgressorObject {
     }
 
     @Override
-    protected BioAgressor getBioAgressor() {
-        return player;
-    }
-
-    @Override
     public void takeHit(final double damage) {
-        player.sufferDamage(damage);
-        if (!player.isDead()) {
+        getBioAgressor().sufferDamage(damage);
+        if (!getBioAgressor().isDead()) {
             triggerAnimation("takes_hit");
         } else {
             triggerAnimation("dies", theGrimReaper);
@@ -206,24 +195,24 @@ public class PlayerObject extends BioAgressorObject {
         controller.getCurrentRoom().movePlayerToStart();
     }
 
-    public void attackAll(ArrayList<EnemyObject> enemies) {
+    public void attackAll(ArrayList<EnemyObject<?>> enemies) {
         if (canAct()) {
             triggerAnimation("attacks");
 
-            for (EnemyObject enemy : enemies) {
+            for (EnemyObject<?> enemy : enemies) {
                 if (enemy.getCenter().distance(getCenter()) <= 1.5 * GameFieldView.GRID)
                     attack(enemy);
             }
         }
     }
 
-    public void attack(BioAgressorObject bioAgressor) {
-        bioAgressor.takeHit(player.getDamage());
+    public void attack(BioAgressorObject<?> bioAgressor) {
+        bioAgressor.takeHit(getBioAgressor().getDamage());
     }
 
     public void performMagicIn(Room room, int x, int y) {
         if (canAct()) {
-            MagicFireball magicFireball = player.createFireball();
+            MagicFireball magicFireball = getBioAgressor().createFireball();
             if (magicFireball != null) {
                 Point gridCenter = getGridCenter();
                 Point2D center = getCenter();

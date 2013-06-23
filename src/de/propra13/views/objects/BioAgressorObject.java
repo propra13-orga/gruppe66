@@ -7,32 +7,39 @@ import java.awt.image.ImageObserver;
 import de.propra13.assets.animations.Animation;
 import de.propra13.models.BioAgressor;
 
-public abstract class BioAgressorObject extends AgressorObject {
+public abstract class BioAgressorObject<B extends BioAgressor> extends
+        AgressorObject {
 
-    public BioAgressorObject(Animation defaultAnimation, int x, int y) {
+    private B bioAgressor;
+
+    public BioAgressorObject(B bioAgressor, Animation defaultAnimation, int x,
+            int y) {
         super(defaultAnimation, x, y);
         velocity = 0;
+        this.bioAgressor = bioAgressor;
 
         setGlowRadius(100);
     }
 
-    protected abstract BioAgressor getBioAgressor();
+    protected B getBioAgressor() {
+        return bioAgressor;
+    }
 
     public abstract void takeHit(double damage);
 
     @Override
     public void draw(Graphics2D gfx, ImageObserver ob) {
         super.draw(gfx, ob);
-        if (getBioAgressor().isWounded() && !getBioAgressor().isDead())
+        if (bioAgressor.isWounded() && !bioAgressor.isDead())
             drawAgressorHealthBar(gfx);
 
     }
 
     private void drawAgressorHealthBar(Graphics2D gfx) {
-        double health = getBioAgressor().getHealth();
-        int width = (int) (getWidth() * (health / getBioAgressor().MAXHEALTH));
+        double health = bioAgressor.getHealth();
+        int width = (int) (getWidth() * (health / bioAgressor.MAXHEALTH));
 
-        drawBar(gfx, 1, width, healthColor(health, getBioAgressor().MAXHEALTH));
+        drawBar(gfx, 1, width, healthColor(health, bioAgressor.MAXHEALTH));
     }
 
     protected void drawBar(Graphics2D gfx, int level, int width, Color color) {

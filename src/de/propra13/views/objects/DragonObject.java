@@ -6,19 +6,15 @@ import de.propra13.assets.Theme;
 import de.propra13.assets.animations.Animation;
 import de.propra13.assets.animations.AnimationManager;
 import de.propra13.assets.animations.AnimationStateListener;
-import de.propra13.models.BioAgressor;
 import de.propra13.models.Dragon;
 import de.propra13.models.Room;
 import de.propra13.views.GameFieldView;
 
-public class DragonObject extends EnemyObject {
-
-    private Dragon dragon;
+public class DragonObject extends EnemyObject<Dragon> {
 
     public DragonObject(Dragon dragon, int x, int y, Theme theme) {
-        super(new Animation(theme.getDragonBlunas().get("stands")
+        super(dragon, new Animation(theme.getDragonBlunas().get("stands")
                 .get("default")), x, y);
-        this.dragon = dragon;
 
         direction = new Direction(0, 0);
         addAnimations("default", theme.getDragonBlunas());
@@ -62,11 +58,6 @@ public class DragonObject extends EnemyObject {
     }
 
     @Override
-    protected BioAgressor getBioAgressor() {
-        return dragon;
-    }
-
-    @Override
     public void takeHit(final double damage) {
         triggerAnimation("takes_hit", new AnimationStateListener() {
             @Override
@@ -75,13 +66,13 @@ public class DragonObject extends EnemyObject {
 
             @Override
             public void didEnd() {
-                dragon.sufferDamage(damage);
+                getBioAgressor().sufferDamage(damage);
             }
         });
     }
 
-    public void attack(final BioAgressorObject bioAgressor) {
-        if (!dragon.isReloading()) {
+    public void attack(final BioAgressorObject<?> bioAgressor) {
+        if (!getBioAgressor().isReloading()) {
             triggerAnimation("attacks", new AnimationStateListener() {
                 @Override
                 public void willStart() {
@@ -89,8 +80,8 @@ public class DragonObject extends EnemyObject {
 
                 @Override
                 public void didEnd() {
-                    bioAgressor.takeHit(dragon.getDamage());
-                    dragon.reload();
+                    bioAgressor.takeHit(getBioAgressor().getDamage());
+                    getBioAgressor().reload();
                 }
             });
         }
