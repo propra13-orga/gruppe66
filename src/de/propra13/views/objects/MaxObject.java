@@ -8,7 +8,7 @@ public class MaxObject extends NpcObject<Max> {
 
     public MaxObject(Max max, int x, int y, Theme theme) {
         super(max, new Animation(theme.getMaxBlunas().get("stands")
-                .get("default")), x, y);
+                .get("default")), x, y, theme.getGameFont());
 
         addAnimations("default", theme.getMaxBlunas());
     }

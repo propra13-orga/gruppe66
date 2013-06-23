@@ -1,5 +1,7 @@
 package de.propra13.assets;
 
+import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -41,6 +43,8 @@ public class Theme {
     private BlunaCrate armorBluna;
     private BlunaCrate onehundretBluna;
 
+    private Font gameFont;
+
     private String themeName;
 
     Theme(String dirName) {
@@ -62,12 +66,17 @@ public class Theme {
             startBluna = getSimpleBlunaCrate(readImage("start.jpg"));
             wallBluna = getSimpleBlunaCrate(readImage("wall1.jpg"));
 
+            gameFont = readFont("Almendra-Bold.ttf");
+
             initPlayerBlunas();
             initDragonBlunas();
             initFlyingObjectBlunas();
             initNPCBlunas();
             initItemBlunas();
         } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-2);
+        } catch (FontFormatException e) {
             e.printStackTrace();
             System.exit(-2);
         }
@@ -123,6 +132,10 @@ public class Theme {
 
     public BufferedImage getGoldImage() {
         return goldImage;
+    }
+
+    public Font getGameFont() {
+        return gameFont;
     }
 
     private void initPlayerBlunas() throws IOException {
@@ -283,5 +296,11 @@ public class Theme {
             blunaCrate.setBounds(bounds);
 
         return blunaCrate;
+    }
+
+    private static Font readFont(String name) throws FontFormatException,
+            IOException {
+        File fontFile = new File("res/fonts/" + name);
+        return Font.createFont(Font.PLAIN, fontFile);
     }
 }

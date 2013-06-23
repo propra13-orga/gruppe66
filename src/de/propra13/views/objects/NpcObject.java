@@ -3,6 +3,8 @@ package de.propra13.views.objects;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.event.KeyEvent;
@@ -19,12 +21,16 @@ public class NpcObject<N extends Npc> extends MoveableGameObject {
     private N npc;
     private PlayerObject nearPlayer = null;
 
-    public NpcObject(N npc, Animation animation, int x, int y) {
+    private Font messageFont;
+
+    public NpcObject(N npc, Animation animation, int x, int y, Font messageFont) {
         super(animation, x, y);
         this.npc = npc;
 
         setGlowRadius(100);
         direction = new Direction(0, 0);
+
+        this.messageFont = messageFont;
     }
 
     @Override
@@ -79,6 +85,10 @@ public class NpcObject<N extends Npc> extends MoveableGameObject {
         return npc;
     }
 
+    public Font getMessageFont() {
+        return messageFont;
+    }
+
     public boolean isCloseToPlayersIn(Room room) {
         return isCloseTo(room.getPlayerObject(), GameFieldView.GRID * 3);
     }
@@ -86,11 +96,13 @@ public class NpcObject<N extends Npc> extends MoveableGameObject {
     public void drawText(Graphics2D gfx, GameFieldView view) {
         if (getNpc().hasMessage()) {
             String message = getNpc().getMessage();
+            gfx.setFont(messageFont.deriveFont(14f));
+
             Rectangle messageBounds = calculateBoundsFor(message, gfx);
 
             fitBoundsInto(view, messageBounds);
-            drawThoughtBubbleFor(gfx, messageBounds);
-            drawTextInBounds(gfx, message, messageBounds);
+            drawThoughtBubbleFor(gfx, messageBounds, 15, 15, 25);
+            drawTextAt(gfx, message, messageBounds.x, messageBounds.y);
         }
     }
 
@@ -100,42 +112,57 @@ public class NpcObject<N extends Npc> extends MoveableGameObject {
         for (int i = 0; i < lines.length; i++) {
             Rectangle2D bounds = gfx.getFontMetrics().getStringBounds(lines[i],
                     gfx);
-            Rectangle2D.Double translatedBounds = new Rectangle2D.Double(
-                    bounds.getX(), bounds.getY() + bounds.getHeight() * i,
-                    bounds.getWidth(), bounds.getHeight());
-            Rectangle2D.union(union, translatedBounds, union);
+            Rectangle2D.union(union, bounds, union);
         }
 
-        union.x = getCenter().x - union.width / 2;
-        union.y = y - union.height - 10;
+        int width = (int) Math.ceil(union.width);
+        int height = (int) Math.ceil(union.height) * lines.length;
+        int x = (int) Math.round(getCenter().x - width / 2);
+        int y = (int) Math.round(this.y - height - 10);
 
-        return new Rectangle((int) union.x, (int) union.y, (int) union.width,
-                (int) union.height);
+        return new Rectangle(x, y, width, height);
     }
 
-    private void fitBoundsInto(GameFieldView view, Rectangle bounds) {
+    private static void fitBoundsInto(GameFieldView view, Rectangle bounds) {
         bounds.x = Math.min(Math.max(bounds.x, 25),
                 (view.getWidth() - 25 - bounds.width));
         bounds.y = Math.min(Math.max(bounds.y, 25),
                 (view.getHeight() - 25 - bounds.height));
     }
 
-    private void drawThoughtBubbleFor(Graphics2D gfx, Rectangle bounds) {
-        gfx.setPaint(new Color(255, 243, 215));
-        gfx.fillRoundRect((int) bounds.x - 10, (int) bounds.y - 25,
-                (int) bounds.width + 20, (int) bounds.height + 20, 25, 25);
-        gfx.setPaint(new Color(105, 93, 105));
-        gfx.setStroke(new BasicStroke(4));
-        gfx.drawRoundRect((int) bounds.x - 10, (int) bounds.y - 25,
-                (int) bounds.width + 20, (int) bounds.height + 20, 25, 25);
+    private static void drawThoughtBubbleFor(Graphics2D gfx, Rectangle bounds,
+            int paddingX, int paddingY, int radius) {
+        drawThoughtBubbleFor(gfx, bounds, paddingX, paddingY, radius, false);
     }
 
-    private void drawTextInBounds(Graphics2D gfx, String text, Rectangle bounds) {
-        String[] lines = text.split("\\r?\\n");
+    private static void drawThoughtBubbleFor(Graphics2D gfx, Rectangle bounds,
+            int paddingX, int paddingY, int radius, boolean debug) {
+        int x = bounds.x - paddingX;
+        int y = bounds.y - paddingY;
+        int width = bounds.width + paddingX * 2;
+        int height = bounds.height + paddingY * 2;
+
+        gfx.setPaint(new Color(255, 243, 215, 180));
+        gfx.fillRoundRect(x, y, width, height, radius, radius);
+
+        gfx.setPaint(new Color(105, 93, 105, 230));
+        gfx.setStroke(new BasicStroke(4));
+        gfx.drawRoundRect(x, y, width, height, radius, radius);
+
+        if (debug) {
+            gfx.setPaint(Color.black);
+            gfx.setStroke(new BasicStroke(1));
+            gfx.drawRect(bounds.x, bounds.y, bounds.width, bounds.height);
+        }
+    }
+
+    private static void drawTextAt(Graphics2D gfx, String text, int x, int y) {
         gfx.setPaint(new Color(69, 63, 57));
+        String[] lines = text.split("\\r?\\n");
         for (int i = 0; i < lines.length; i++) {
-            gfx.drawString(lines[i], bounds.x, -22 + bounds.y
-                    + gfx.getFontMetrics().getHeight() * (i + 1));
+            FontMetrics metrics = gfx.getFontMetrics();
+            int ty = y + metrics.getAscent() + metrics.getHeight() * i;
+            gfx.drawString(lines[i], x, ty);
         }
 
     }

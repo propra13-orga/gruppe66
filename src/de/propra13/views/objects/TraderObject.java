@@ -20,16 +20,17 @@ import de.propra13.views.GameFieldView;
 public class TraderObject extends NpcObject<Trader> {
 
     private GameController controller;
-    private Font shopFont = new Font("Verdana", Font.BOLD, 12);
+    private Font shopFont;
 
     private HashMap<Trader.ItemType, BufferedImage> images;
 
     public TraderObject(Trader trader, int x, int y, Theme theme,
             GameController controller) {
         super(trader, new Animation(theme.getTraderBlunas().get("stands")
-                .get("default")), x, y);
+                .get("default")), x, y, theme.getGameFont());
 
         this.controller = controller;
+        this.shopFont = getMessageFont().deriveFont(14f);
         addAnimations("default", theme.getTraderBlunas());
 
         images = new HashMap<>(3);
