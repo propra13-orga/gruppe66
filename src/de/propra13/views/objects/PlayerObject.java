@@ -28,10 +28,23 @@ public class PlayerObject extends BioAgressorObject {
             .getSimpleName();
 
     private boolean leftSpawnPoint = false;
+
     private GameController controller;
 
     private Player player;
     private Theme theme;
+
+    AnimationStateListener theGrimReaper = new AnimationStateListener() {
+        @Override
+        public void willStart() {
+        }
+
+        @Override
+        public void didEnd() {
+            player.die();
+            moveToStart();
+        }
+    };
 
     public PlayerObject(Player player, int x, int y, Theme theme,
             GameController controller) {
@@ -184,7 +197,13 @@ public class PlayerObject extends BioAgressorObject {
         player.sufferDamage(damage);
         if (!player.isDead()) {
             triggerAnimation("takes_hit");
+        } else {
+            triggerAnimation("dies", theGrimReaper);
         }
+    }
+
+    private void moveToStart() {
+        controller.getCurrentRoom().movePlayerToStart();
     }
 
     public void attackAll(ArrayList<EnemyObject> enemies) {
@@ -200,10 +219,6 @@ public class PlayerObject extends BioAgressorObject {
 
     public void attack(BioAgressorObject bioAgressor) {
         bioAgressor.takeHit(player.getDamage());
-    }
-
-    public void triggerDeath(AnimationStateListener listener) {
-        triggerAnimation("dies", listener);
     }
 
     public void performMagicIn(Room room, int x, int y) {

@@ -65,7 +65,7 @@ public class Player extends BioAgressor implements ActionListener {
     }
 
     public boolean hasLifes() {
-        return lifes > 1;
+        return lifes > 0;
     }
 
     public int getLifes() {

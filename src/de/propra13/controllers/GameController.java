@@ -19,7 +19,6 @@ import org.json.JSONException;
 import de.propra13.Main;
 import de.propra13.assets.Theme;
 import de.propra13.assets.ThemeFactory;
-import de.propra13.assets.animations.AnimationStateListener;
 import de.propra13.models.Club;
 import de.propra13.models.Level;
 import de.propra13.models.Player;
@@ -52,8 +51,6 @@ public class GameController extends Controller implements KeyListener,
 
     private final int runningDelay = 10;
     private final int animationDelay = 45;
-
-    private volatile boolean playerDies;
 
     public GameController(ControllerFactory cf, JFrame rootWindow) {
         super(cf, rootWindow);
@@ -173,30 +170,10 @@ public class GameController extends Controller implements KeyListener,
         currentRoom = room;
     }
 
-    public void checkHealthOfPlayer() {
-        if (player.isDead() && !playerDies) {
-            playerDies = true;
-            getCurrentRoom().getPlayerObject().triggerDeath(
-                    new AnimationStateListener() {
-
-                        @Override
-                        public void willStart() {
-                        }
-
-                        @Override
-                        public void didEnd() {
-                            if (player.hasLifes()) {
-                                player.die();
-                                getCurrentRoom().movePlayerToStart();
-                                playerDies = false;
-                            } else {
-                                resetGame();
-                                transitionTo(LostController.class
-                                        .getSimpleName());
-                            }
-                        }
-
-                    });
+    public void checkLifesOfPlayer() {
+        if (!player.hasLifes()) {
+            resetGame();
+            transitionTo(LostController.class.getSimpleName());
         }
     }
 
@@ -207,7 +184,6 @@ public class GameController extends Controller implements KeyListener,
     private void resetGame() {
         stop();
         gameHasStarted = false;
-        playerDies = false;
         initPlayerAndLevels();
         currentLevel = 0;
         currentRoom = 0;
@@ -313,7 +289,7 @@ public class GameController extends Controller implements KeyListener,
                     }
                     hud.repaint();
                     game.repaint();
-                    checkHealthOfPlayer();
+                    checkLifesOfPlayer();
                 }
 
             });
