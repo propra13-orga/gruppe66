@@ -43,7 +43,7 @@ public class Theme {
     private BlunaCrate armorBluna;
     private BlunaCrate onehundretBluna;
 
-    private Font gameFont;
+    private static Font gameFont;
 
     private String themeName;
 
@@ -66,17 +66,12 @@ public class Theme {
             startBluna = getSimpleBlunaCrate(readImage("start.jpg"));
             wallBluna = getSimpleBlunaCrate(readImage("wall1.jpg"));
 
-            gameFont = readFont("Almendra-Bold.ttf");
-
             initPlayerBlunas();
             initDragonBlunas();
             initFlyingObjectBlunas();
             initNPCBlunas();
             initItemBlunas();
         } catch (IOException e) {
-            e.printStackTrace();
-            System.exit(-2);
-        } catch (FontFormatException e) {
             e.printStackTrace();
             System.exit(-2);
         }
@@ -135,6 +130,14 @@ public class Theme {
     }
 
     public Font getGameFont() {
+        if (null == gameFont) {
+            try {
+                gameFont = readFont("Almendra-Bold.ttf");
+            } catch (FontFormatException | IOException e) {
+                e.printStackTrace();
+                System.exit(-2);
+            }
+        }
         return gameFont;
     }
 
