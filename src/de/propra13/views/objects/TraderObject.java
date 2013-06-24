@@ -98,8 +98,7 @@ public class TraderObject extends NpcObject<Trader> {
 
     private void drawInfo(Graphics2D gfx, int x, int y) {
         gfx.setPaint(new Color(39, 33, 27));
-        gfx.setFont(new Font(shopFont.getFontName(), Font.BOLD, shopFont
-                .getSize()));
+        gfx.setFont(shopFont);
         gfx.drawString("Um zu kaufen, drücke die Zahl neben dem Bild.", x,
                 y + 5);
         gfx.drawString(
